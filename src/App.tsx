@@ -58,7 +58,15 @@ export const App: React.FC = () => {
   }, []);
 
   // View Mode: 'classic' (4 cards) | 'pro' (5 cards)
-  const [viewMode, setViewMode] = useState<'classic' | 'pro'>('classic');
+  const [viewMode, setViewMode] = useState<'classic' | 'pro'>(() => {
+    const saved = localStorage.getItem('pinpin_view_mode');
+    return (saved === 'pro' || saved === 'classic') ? saved : 'classic';
+  });
+
+  const handleSetViewMode = (mode: 'classic' | 'pro') => {
+    setViewMode(mode);
+    localStorage.setItem('pinpin_view_mode', mode);
+  };
 
   // Filters & Sort State
   const [selectedCategory, setSelectedCategory] = useState('Toate');
@@ -289,7 +297,7 @@ export const App: React.FC = () => {
             onSelectDesign={setSelectedDesign}
             onSelectColor={setSelectedColor}
             onSelectSort={setSortBy}
-            onToggleViewMode={(mode) => setViewMode(mode)}
+            onToggleViewMode={handleSetViewMode}
           />
 
           {/* Main Product Grid */}
