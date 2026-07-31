@@ -232,6 +232,7 @@ export const App: React.FC = () => {
             setTimeout(() => setToastMessage(null), 3000);
           }}
           onViewProduct={(p) => setSelectedDetailProduct(p)}
+          userAds={productList}
         />
       ) : currentView === 'publish' ? (
         <PublishListingPage

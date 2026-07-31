@@ -76,12 +76,14 @@ interface UserDashboardPageProps {
   onBackToStore: () => void;
   onLogout: () => void;
   onViewProduct?: (product: Product) => void;
+  userAds?: Product[];
 }
 
 export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
   onBackToStore,
   onLogout,
   onViewProduct,
+  userAds = [],
 }) => {
   const [activeTab, setActiveTab] = useState<'my_ads' | 'messages' | 'favorites' | 'wallet' | 'settings'>('my_ads');
   const [wishlist, setWishlist] = useState<Product[]>([PRODUCTS[1], PRODUCTS[4], PRODUCTS[5]]);
@@ -97,6 +99,20 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
   const removeFromWishlist = (id: string) => {
     setWishlist((prev) => prev.filter((p) => p.id !== id));
   };
+
+  const myAds: MyAd[] = userAds.length > 0 ? userAds.map(p => ({
+    id: p.id,
+    title: p.title,
+    price: p.price,
+    category: p.category,
+    image: p.image,
+    status: 'Activ',
+    views: Math.floor(Math.random() * 500) + 10,
+    favorites: Math.floor(Math.random() * 50) + 1,
+    messages: Math.floor(Math.random() * 10),
+    dateAdded: 'Astăzi',
+    isPromoted: !!p.isPopular
+  })) : MOCK_MY_ADS;
 
   return (
     <div style={{ backgroundColor: '#F9FAFB', minHeight: '80vh', paddingBottom: '80px' }}>
@@ -153,7 +169,7 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                   <LayoutGrid size={20} color={activeTab === 'my_ads' ? 'var(--primary-yellow)' : '#94A3B8'} />
                   Anunțurile Mele
                   <span style={{ marginLeft: 'auto', backgroundColor: activeTab === 'my_ads' ? 'var(--primary-yellow)' : '#F1F5F9', color: activeTab === 'my_ads' ? '#0F172A' : '#64748B', padding: '2px 8px', borderRadius: '12px', fontSize: '12px', fontWeight: 800 }}>
-                    {MOCK_MY_ADS.length}
+                    {myAds.length}
                   </span>
                 </button>
 
@@ -244,7 +260,7 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                  {MOCK_MY_ADS.map((ad) => (
+                  {myAds.map((ad) => (
                     <div key={ad.id} style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', display: 'flex', gap: '24px', border: '1px solid #F1F5F9' }}>
                       <img src={ad.image} alt={ad.title} style={{ width: '180px', height: '140px', objectFit: 'cover', borderRadius: '16px' }} />
                       
