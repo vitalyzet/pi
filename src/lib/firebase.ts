@@ -50,17 +50,53 @@ export async function saveListingToFirebase(product: Product) {
 }
 
 /**
- * Fetch all listings from Firebase Firestore
+ * Fetch all listings from Firebase Firestore (including imoob collections: anuncios, anuncios_auto, anuncios_jobs, anuncios_ambarcatiuni)
  */
 export async function fetchListingsFromFirebase(): Promise<Product[]> {
   try {
-    const q = query(collection(db, "listings"), orderBy("createdAt", "desc"));
-    const querySnapshot = await getDocs(q);
-    const listings: Product[] = [];
-    querySnapshot.forEach((doc) => {
-      listings.push({ id: doc.id, ...doc.data() } as Product);
-    });
-    return listings;
+    const collectionsToFetch = ['listings', 'anuncios', 'anuncios_auto', 'anuncios_jobs', 'anuncios_ambarcatiuni'];
+    const allProducts: Product[] = [];
+
+    for (const colName of collectionsToFetch) {
+      try {
+        const q = query(collection(db, colName));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          const categoryName = data.category || (colName === 'anuncios_auto' ? 'Auto' : colName === 'anuncios_jobs' ? 'Locuri de muncă' : colName === 'anuncios_ambarcatiuni' ? 'Ambarcațiuni' : 'Imobiliare');
+          const titleText = data.title || data.titlu || `${data.marca || ''} ${data.model || ''}`.trim() || 'Anunț fără titlu';
+          const numericPrice = typeof data.price === 'number' ? data.price : parseFloat(data.price || data.pret || '0');
+
+          const mappedProduct: Product = {
+            id: docSnap.id,
+            title: titleText,
+            price: numericPrice || 0,
+            originalPrice: data.originalPrice || Math.round((numericPrice || 100) * 1.15),
+            image: data.image || (data.images && data.images.length > 0 ? data.images[0] : '/images/coches.png'),
+            category: categoryName,
+            feeling: 'Work',
+            design: 'Special',
+            color: 'Multicolor',
+            description: data.description || data.descriere || `Anunț din ${categoryName}`,
+            badges: data.badges || (data.isPromoted ? ['PRO', 'VERIFICAT'] : ['NOU']),
+            specs: data.specs || {
+              year: data.an || data.year,
+              mileage: data.rulaj || data.mileage,
+              fuel: data.combustibil || data.fuel,
+              gearbox: data.transmisie || data.gearbox,
+              caroserie: data.caroserie,
+              brand: data.marca || data.brand,
+              modelName: data.model || data.modelName
+            }
+          };
+          allProducts.push(mappedProduct);
+        });
+      } catch (colErr) {
+        console.warn(`Collection ${colName} fetch skip:`, colErr);
+      }
+    }
+
+    return allProducts;
   } catch (e) {
     console.warn("Firestore fetch warning: ", e);
     return [];
