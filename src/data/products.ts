@@ -12,6 +12,7 @@ export interface Product {
   design: string;
   color: string;
   description: string;
+  createdAt?: string;
   isPopular?: boolean;
   specs?: {
     year?: string;

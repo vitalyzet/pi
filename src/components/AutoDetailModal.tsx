@@ -178,6 +178,14 @@ export const AutoDetailModal: React.FC<AutoDetailModalProps> = ({
                   {product.title}
                 </h2>
 
+                {/* Published Date */}
+                {product.createdAt && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#64748B', fontSize: '13px', fontWeight: 600, marginBottom: '20px' }}>
+                    <Calendar size={14} />
+                    Publicat pe {new Date(product.createdAt).toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  </div>
+                )}
+
                 {/* Price Box */}
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: '20px' }}>
                   <span style={{ fontSize: '28px', fontWeight: 800, color: '#E55B86' }}>
