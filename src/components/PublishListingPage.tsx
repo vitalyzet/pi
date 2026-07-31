@@ -43,7 +43,7 @@ const CATEGORIES_GRID = [
   { id: 'Imobiliare', label: 'Imobiliare', icon: <Home size={22} color="#475569" />, isNew: true },
   { id: 'Auto', label: 'Auto & Moto', icon: <Car size={22} color="#475569" /> },
   { id: 'Locuri de muncă', label: 'Locuri de muncă', icon: <Briefcase size={22} color="#475569" /> },
-  { id: 'Matrimoniale', label: 'Matrimoniale', icon: <Heart size={22} color="#475569" /> },
+  { id: 'Matrimoniale', label: 'Matrimoniale', icon: <Heart size={22} color="#F43F5E" />, isPro: true },
   { id: 'Servicii', label: 'Servicii', icon: <Wrench size={22} color="#475569" /> },
   { id: 'Electronice', label: 'Electronice', icon: <Smartphone size={22} color="#475569" /> },
   { id: 'Modă', label: 'Modă', icon: <Shirt size={22} color="#475569" /> },
@@ -289,6 +289,26 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                               }}
                             >
                               Nou
+                            </span>
+                          )}
+
+                          {/* Yellow "PRO" Badge */}
+                          {cat.isPro && (
+                            <span
+                              style={{
+                                position: 'absolute',
+                                top: '-5px',
+                                right: '-6px',
+                                backgroundColor: 'var(--primary-yellow)',
+                                color: '#0F172A',
+                                fontSize: '9px',
+                                fontWeight: 800,
+                                padding: '1px 6px',
+                                borderRadius: '8px',
+                                boxShadow: '0 2px 6px rgba(248, 210, 71, 0.4)'
+                              }}
+                            >
+                              PRO
                             </span>
                           )}
 
