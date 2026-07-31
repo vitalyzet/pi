@@ -82,6 +82,7 @@ export async function fetchListingsFromFirebase(): Promise<Product[]> {
             color: 'Multicolor',
             description: data.description || data.descriere || `Anunț din ${categoryName}`,
             badges: data.badges || (data.isPromoted ? ['PRO', 'VERIFICAT'] : ['NOU']),
+            createdAt: data.createdAt || new Date(Date.now() - 86400000 * Math.floor(Math.random() * 5 + 1)).toISOString(),
             specs: data.specs || {
               year: data.an || data.year,
               mileage: data.rulaj || data.mileage,
