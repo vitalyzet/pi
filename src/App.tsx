@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { PlusCircle } from 'lucide-react';
 import { Header } from './components/Header';
 import { FilterBar } from './components/FilterBar';
 import { ProductCard } from './components/ProductCard';
@@ -200,8 +201,15 @@ export const App: React.FC = () => {
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenUser={handleUserClick}
         onOpenAdmin={() => setCurrentView('admin')}
-        onGoToStore={() => setCurrentView('store')}
-        onOpenPublish={() => setIsPublishOpen(true)}
+        onGoToStore={() => {
+          setSelectedDetailProduct(null);
+          setCurrentView('store');
+        }}
+        onOpenPublish={() => {
+          setSelectedDetailProduct(null);
+          setCurrentView('store');
+          setIsPublishOpen(true);
+        }}
       />
 
       {/* MAIN VIEW SWITCH */}
@@ -390,6 +398,39 @@ export const App: React.FC = () => {
         onClose={() => setIsAutoPublishOpen(false)}
         onPublishProduct={handlePublishProduct}
       />
+
+      {/* Floating Publish Button */}
+      <button
+        onClick={() => {
+          setSelectedDetailProduct(null);
+          setCurrentView('store');
+          setIsPublishOpen(true);
+        }}
+        style={{
+          position: 'fixed',
+          bottom: '28px',
+          right: '28px',
+          backgroundColor: 'var(--primary-yellow)',
+          color: '#0F172A',
+          border: 'none',
+          borderRadius: '30px',
+          padding: '14px 22px',
+          fontSize: '14px',
+          fontWeight: 800,
+          letterSpacing: '0.5px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          cursor: 'pointer',
+          boxShadow: '0 10px 25px rgba(248, 210, 71, 0.5)',
+          zIndex: 900,
+          transition: 'transform 0.2s ease'
+        }}
+        title="Publică un anunț nou"
+      >
+        <PlusCircle size={20} color="#0F172A" />
+        <span>+ ADAUGĂ ANUNȚ</span>
+      </button>
     </div>
   );
 };
