@@ -81,11 +81,6 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
             </div>
           </div>
 
-          <button onClick={() => onNavigate('add_listing')} style={{ width: '100%', padding: '16px', borderRadius: '16px', border: 'none', backgroundColor: '#0F172A', color: '#FFFFFF', fontSize: '15px', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', cursor: 'pointer', marginBottom: '32px', boxShadow: '0 8px 20px rgba(15, 23, 42, 0.15)' }}>
-            <Plus size={18} />
-            Adaugă Anunț Nou
-          </button>
-
           {/* Navigation Menu */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <button onClick={() => onNavigate('my_ads')} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px', borderRadius: '16px', border: 'none', backgroundColor: '#FFFFFF', cursor: 'pointer', transition: 'background 0.2s' }} onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#F8FAFC'} onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#FFFFFF'}>

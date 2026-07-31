@@ -251,63 +251,52 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
             {/* MY ADS TAB */}
             {activeTab === 'my_ads' && (
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+                <div style={{ marginBottom: '24px' }}>
                   <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#0F172A', margin: 0 }}>Anunțurile Mele</h2>
-                  <button style={{ backgroundColor: '#0F172A', color: '#FFFFFF', border: 'none', padding: '12px 24px', borderRadius: '20px', fontWeight: 800, fontSize: '14px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                    <Plus size={18} />
-                    Adaugă Anunț Nou
-                  </button>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
                   {myAds.map((ad) => (
-                    <div key={ad.id} style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', display: 'flex', gap: '24px', border: '1px solid #F1F5F9' }}>
-                      <img src={ad.image} alt={ad.title} style={{ width: '180px', height: '140px', objectFit: 'cover', borderRadius: '16px' }} />
-                      
-                      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                        <div>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                            <div>
-                              <span style={{ fontSize: '12px', fontWeight: 800, color: '#64748B', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px', display: 'inline-block' }}>
-                                {ad.category}
-                              </span>
-                              <h3 style={{ margin: '0 0 8px 0', fontSize: '20px', fontWeight: 800, color: '#0F172A' }}>
-                                {ad.title}
-                              </h3>
-                            </div>
-                            <div style={{ fontSize: '22px', fontWeight: 900, color: '#E55B86' }}>
-                              {ad.price} €
-                            </div>
-                          </div>
-                          
-                          <div style={{ display: 'flex', gap: '12px', marginTop: '4px' }}>
-                            <span style={{ 
-                              padding: '4px 10px', borderRadius: '8px', fontSize: '12px', fontWeight: 800,
-                              backgroundColor: ad.status === 'Activ' ? '#DCFCE7' : '#F1F5F9',
-                              color: ad.status === 'Activ' ? '#166534' : '#64748B'
-                            }}>
-                              {ad.status}
+                    <div key={ad.id} style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '16px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', gap: '16px', border: '1px solid #F1F5F9' }}>
+                      <div style={{ position: 'relative' }}>
+                        <img src={ad.image} alt={ad.title} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '16px' }} />
+                        <div style={{ position: 'absolute', top: '12px', left: '12px', display: 'flex', gap: '8px' }}>
+                          <span style={{ padding: '6px 12px', borderRadius: '10px', fontSize: '12px', fontWeight: 800, backgroundColor: ad.status === 'Activ' ? '#DCFCE7' : '#F1F5F9', color: ad.status === 'Activ' ? '#166534' : '#64748B', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+                            {ad.status}
+                          </span>
+                          {ad.isPromoted && (
+                            <span style={{ padding: '6px 12px', borderRadius: '10px', fontSize: '12px', fontWeight: 800, backgroundColor: '#FFFDF0', color: '#B45309', border: '1px solid var(--primary-yellow)', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+                              👑 PROMOVAT
                             </span>
-                            {ad.isPromoted && (
-                              <span style={{ padding: '4px 10px', borderRadius: '8px', fontSize: '12px', fontWeight: 800, backgroundColor: '#FFFDF0', color: '#B45309', border: '1px solid var(--primary-yellow)' }}>
-                                PROMOVAT 👑
-                              </span>
-                            )}
+                          )}
+                        </div>
+                      </div>
+                      
+                      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1 }}>
+                        <div>
+                          <span style={{ fontSize: '11px', fontWeight: 800, color: '#64748B', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px', display: 'inline-block' }}>
+                            {ad.category}
+                          </span>
+                          <h3 style={{ margin: '0 0 8px 0', fontSize: '18px', fontWeight: 800, color: '#0F172A', lineHeight: 1.3 }}>
+                            {ad.title}
+                          </h3>
+                          <div style={{ fontSize: '20px', fontWeight: 900, color: '#E55B86', marginBottom: '16px' }}>
+                            {ad.price} €
                           </div>
                         </div>
 
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                          <div style={{ display: 'flex', gap: '20px', color: '#64748B', fontSize: '13px', fontWeight: 600 }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Eye size={16} /> {ad.views} vizualizări</div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Heart size={16} /> {ad.favorites} salvări</div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><MessageCircle size={16} /> {ad.messages} mesaje</div>
+                        <div>
+                          <div style={{ display: 'flex', gap: '16px', color: '#64748B', fontSize: '13px', fontWeight: 700, marginBottom: '16px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Eye size={14} /> {ad.views}</div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Heart size={14} /> {ad.favorites}</div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><MessageCircle size={14} /> {ad.messages}</div>
                           </div>
                           
-                          <div style={{ display: 'flex', gap: '12px' }}>
-                            <button style={{ padding: '10px 20px', borderRadius: '12px', border: '2px solid #E2E8F0', backgroundColor: '#FFFFFF', fontSize: '14px', fontWeight: 700, color: '#0F172A', cursor: 'pointer' }}>
+                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                            <button style={{ padding: '12px', borderRadius: '12px', border: '2px solid #E2E8F0', backgroundColor: '#FFFFFF', fontSize: '14px', fontWeight: 700, color: '#0F172A', cursor: 'pointer' }}>
                               Editează
                             </button>
-                            <button style={{ padding: '10px 20px', borderRadius: '12px', border: 'none', backgroundColor: 'var(--primary-yellow)', fontSize: '14px', fontWeight: 800, color: '#0F172A', cursor: 'pointer' }}>
+                            <button style={{ padding: '12px', borderRadius: '12px', border: 'none', backgroundColor: 'var(--primary-yellow)', fontSize: '14px', fontWeight: 800, color: '#0F172A', cursor: 'pointer' }}>
                               Promovează
                             </button>
                           </div>
