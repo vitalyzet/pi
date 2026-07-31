@@ -16,10 +16,13 @@ import {
   Wrench,
   Shirt,
   Dog,
+  PawPrint,
+  Armchair,
   Home,
   Dumbbell,
   Baby,
   Plane,
+  Gamepad2,
   Calendar,
   Gauge,
   Fuel,
@@ -36,18 +39,19 @@ interface PublishListingPageProps {
 }
 
 const CATEGORIES_GRID = [
-  { id: 'Imobiliare', label: 'Imobiliare', icon: <Building2 size={24} color="#059669" />, circleBg: '#ECFDF5' },
-  { id: 'Auto', label: 'Auto & Moto', icon: <Car size={24} color="#EF4444" />, circleBg: '#FEF2F2' },
-  { id: 'Locuri de muncă', label: 'Locuri de muncă', icon: <Briefcase size={24} color="#0D9488" />, circleBg: '#F0FDFA' },
-  { id: 'Matrimoniale', label: 'Matrimoniale', icon: <Heart size={24} color="#F43F5E" />, circleBg: '#FFF1F2' },
-  { id: 'Servicii', label: 'Servicii', icon: <Wrench size={24} color="#6366F1" />, circleBg: '#EEF2FF' },
-  { id: 'Electronice', label: 'Electronice', icon: <Smartphone size={24} color="#8B5CF6" />, circleBg: '#F5F3FF' },
-  { id: 'Modă', label: 'Modă', icon: <Shirt size={24} color="#EC4899" />, circleBg: '#FDF2F8' },
-  { id: 'Animale', label: 'Animale', icon: <Dog size={24} color="#D97706" />, circleBg: '#FFFBEB' },
-  { id: 'Casă & Grădină', label: 'Casă & Grădină', icon: <Home size={24} color="#10B981" />, circleBg: '#ECFDF5' },
-  { id: 'Sport', label: 'Sport', icon: <Dumbbell size={24} color="#3B82F6" />, circleBg: '#EFF6FF' },
-  { id: 'Copii', label: 'Copii', icon: <Baby size={24} color="#F59E0B" />, circleBg: '#FFFBEB' },
-  { id: 'Turism', label: 'Turism', icon: <Plane size={24} color="#0284C7" />, circleBg: '#F0F9FF' }
+  { id: 'Imobiliare', label: 'Imobiliare', icon: <Home size={28} color="#475569" />, isNew: true },
+  { id: 'Auto', label: 'Auto & Moto', icon: <Car size={28} color="#475569" /> },
+  { id: 'Locuri de muncă', label: 'Locuri de muncă', icon: <Briefcase size={28} color="#475569" /> },
+  { id: 'Matrimoniale', label: 'Matrimoniale', icon: <Heart size={28} color="#475569" /> },
+  { id: 'Servicii', label: 'Servicii', icon: <Wrench size={28} color="#475569" /> },
+  { id: 'Electronice', label: 'Electronice', icon: <Smartphone size={28} color="#475569" /> },
+  { id: 'Modă', label: 'Modă', icon: <Shirt size={28} color="#475569" /> },
+  { id: 'Animale', label: 'Animale', icon: <PawPrint size={28} color="#475569" /> },
+  { id: 'Casă & Grădină', label: 'Casă & Grădină', icon: <Armchair size={28} color="#475569" /> },
+  { id: 'Sport', label: 'Sport', icon: <Dumbbell size={28} color="#475569" /> },
+  { id: 'Copii', label: 'Copii', icon: <Baby size={28} color="#475569" /> },
+  { id: 'Turism', label: 'Turism', icon: <Plane size={28} color="#475569" /> },
+  { id: 'Gaming', label: 'Gaming', icon: <Gamepad2 size={28} color="#475569" /> }
 ];
 
 export const PublishListingPage: React.FC<PublishListingPageProps> = ({
@@ -218,44 +222,69 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                       onClick={() => handleSelectCategory(cat.id)}
                       style={{
                         backgroundColor: '#FFFFFF',
-                        borderRadius: '20px',
-                        padding: '28px 20px',
+                        borderRadius: '24px',
+                        padding: '24px 16px',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        gap: '14px',
+                        gap: '12px',
                         cursor: 'pointer',
-                        boxShadow: '0 2px 10px rgba(15, 23, 42, 0.04)',
+                        boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)',
                         border: '1.5px solid #F1F5F9',
-                        transition: 'all 0.2s ease'
+                        transition: 'all 0.2s ease',
+                        position: 'relative'
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.transform = 'translateY(-4px)';
                         e.currentTarget.style.boxShadow = '0 12px 24px rgba(15, 23, 42, 0.08)';
-                        e.currentTarget.style.borderColor = 'var(--primary-yellow)';
+                        e.currentTarget.style.borderColor = '#CBD5E1';
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = '0 2px 10px rgba(15, 23, 42, 0.04)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(15, 23, 42, 0.04)';
                         e.currentTarget.style.borderColor = '#F1F5F9';
                       }}
                     >
+                      {/* Squircle Icon Box */}
                       <div
                         style={{
-                          width: '56px',
-                          height: '56px',
-                          borderRadius: '50%',
-                          backgroundColor: cat.circleBg,
+                          width: '64px',
+                          height: '64px',
+                          borderRadius: '20px',
+                          backgroundColor: '#FFFFFF',
+                          border: '1.5px solid #F1F5F9',
+                          boxShadow: '0 4px 12px rgba(15, 23, 42, 0.04)',
                           display: 'flex',
                           alignItems: 'center',
-                          justifyContent: 'center'
+                          justifyContent: 'center',
+                          position: 'relative'
                         }}
                       >
                         {cat.icon}
+
+                        {/* Green "Nou" Badge */}
+                        {cat.isNew && (
+                          <span
+                            style={{
+                              position: 'absolute',
+                              top: '-6px',
+                              right: '-8px',
+                              backgroundColor: '#10B981',
+                              color: '#FFFFFF',
+                              fontSize: '10px',
+                              fontWeight: 800,
+                              padding: '2px 8px',
+                              borderRadius: '10px',
+                              boxShadow: '0 2px 6px rgba(16, 185, 129, 0.3)'
+                            }}
+                          >
+                            Nou
+                          </span>
+                        )}
                       </div>
 
-                      <span style={{ fontSize: '14px', fontWeight: 800, color: '#0F172A', textAlign: 'center' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 700, color: '#334155', textAlign: 'center' }}>
                         {cat.label}
                       </span>
                     </div>
