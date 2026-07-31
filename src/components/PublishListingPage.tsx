@@ -79,9 +79,9 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
   // Auto Specific Fields
   const [brand, setBrand] = useState('Volkswagen');
   const [modelName, setModelName] = useState('');
-  const [year, setYear] = useState('2016');
-  const [mileage, setMileage] = useState('145000');
-  const [fuel, setFuel] = useState('Diesel');
+  const [year, setYear] = useState('2012');
+  const [mileage, setMileage] = useState('153694');
+  const [fuel, setFuel] = useState('Gasolina');
   const [gearbox, setGearbox] = useState('Manuală');
 
   const [isSuccess, setIsSuccess] = useState(false);
@@ -134,7 +134,15 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
       feeling: 'Work',
       design: 'Special',
       color: 'Multicolor',
-      description: description || `Anunț publicat în ${city}. Contact: ${phone || 'Nespecificat'}`
+      description: description || `Anunț publicat în ${city}. Contact: ${phone || 'Nespecificat'}`,
+      specs: selectedCategory === 'Auto' ? {
+        year: year || '2012',
+        mileage: mileage ? parseInt(mileage).toLocaleString('ro-RO') : '153.694',
+        fuel: fuel || 'Gasolina',
+        gearbox: gearbox || 'Manuală',
+        brand: brand || 'Volkswagen',
+        modelName: modelName || 'Polo'
+      } : undefined
     };
 
     onPublishProduct(newProduct);
@@ -376,26 +384,36 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                         <div>
                           <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>MARCĂ</label>
-                          <input type="text" value={brand} onChange={(e) => setBrand(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <input type="text" value={brand} placeholder="ex: Volkswagen" onChange={(e) => setBrand(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
                         </div>
                         <div>
                           <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>MODEL</label>
-                          <input type="text" value={modelName} placeholder="ex: Serie 3 M Sport" onChange={(e) => setModelName(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <input type="text" value={modelName} placeholder="ex: Polo / Golf" onChange={(e) => setModelName(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
                         </div>
                       </div>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px' }}>
                         <div>
-                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>AN FABRICAȚIE</label>
-                          <input type="number" value={year} onChange={(e) => setYear(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>AN FABRICAȚIE</label>
+                          <input type="number" value={year} placeholder="2012" onChange={(e) => setYear(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>RULAJ (KM)</label>
-                          <input type="number" value={mileage} onChange={(e) => setMileage(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>RULAJ (KM)</label>
+                          <input type="number" value={mileage} placeholder="153694" onChange={(e) => setMileage(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>CUTIE VITEZE</label>
-                          <select value={gearbox} onChange={(e) => setGearbox(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>COMBUSTIBIL</label>
+                          <select value={fuel} onChange={(e) => setFuel(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                            <option value="Gasolina">Gasolina</option>
+                            <option value="Diesel">Diesel</option>
+                            <option value="Hibrid">Hibrid</option>
+                            <option value="Electric">Electric</option>
+                            <option value="GPL">GPL</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>CUTIE VITEZE</label>
+                          <select value={gearbox} onChange={(e) => setGearbox(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
                             <option value="Manuală">Manuală</option>
                             <option value="Automată">Automată</option>
                           </select>

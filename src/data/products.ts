@@ -12,6 +12,16 @@ export interface Product {
   color: string;
   description: string;
   isPopular?: boolean;
+  specs?: {
+    year?: string;
+    mileage?: string;
+    fuel?: string;
+    gearbox?: string;
+    brand?: string;
+    modelName?: string;
+    power?: string;
+    owners?: string;
+  };
 }
 
 // Initial PRODUCTS list - Empty (0 demo listings)

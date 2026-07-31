@@ -238,25 +238,25 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     </div>
                     <div>
                       <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 500, marginBottom: '2px' }}>
-                        Kilometraje
+                        Kilometraje / Rulaj
                       </div>
                       <div style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A' }}>
-                        86.704 km
+                        {product.specs?.mileage ? `${product.specs.mileage} km` : '153.694 km'}
                       </div>
                     </div>
                   </div>
 
-                  {/* 2. Potencia */}
+                  {/* 2. Combustibil */}
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
                     <div style={{ color: '#EA580C', flexShrink: 0, marginTop: '2px' }}>
                       <Clock size={24} color="#EA580C" />
                     </div>
                     <div>
                       <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 500, marginBottom: '2px' }}>
-                        Potencia
+                        Combustibil
                       </div>
                       <div style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A' }}>
-                        375 kW (510 cv)
+                        {product.specs?.fuel || 'Gasolina'}
                       </div>
                     </div>
                   </div>
@@ -268,40 +268,40 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     </div>
                     <div>
                       <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 500, marginBottom: '2px' }}>
-                        Transmisión
+                        Transmisión / Cutie
                       </div>
                       <div style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A' }}>
-                        Automático
+                        {product.specs?.gearbox || 'Manuală'}
                       </div>
                     </div>
                   </div>
 
-                  {/* 4. Primer registro */}
+                  {/* 4. Primer registro / An */}
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
                     <div style={{ color: '#EA580C', flexShrink: 0, marginTop: '2px' }}>
                       <Calendar size={24} color="#EA580C" />
                     </div>
                     <div>
                       <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 500, marginBottom: '2px' }}>
-                        Primer registro
+                        Primer registro / An
                       </div>
                       <div style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A' }}>
-                        10/2015
+                        {product.specs?.year || '2012'}
                       </div>
                     </div>
                   </div>
 
-                  {/* 5. Propietarios */}
+                  {/* 5. Propietarios / Marcă */}
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
                     <div style={{ color: '#EA580C', flexShrink: 0, marginTop: '2px' }}>
                       <User size={24} color="#EA580C" />
                     </div>
                     <div>
                       <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 500, marginBottom: '2px' }}>
-                        Propietarios
+                        Marcă
                       </div>
                       <div style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A' }}>
-                        1
+                        {product.specs?.brand || 'Volkswagen'}
                       </div>
                     </div>
                   </div>
