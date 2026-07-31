@@ -265,11 +265,11 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                   </div>
                 </div>
 
-                <div style={viewMode === 'grid' ? { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' } : { display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <div style={viewMode === 'grid' ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '16px' } : { display: 'flex', flexDirection: 'column', gap: '20px' }}>
                   {myAds.map((ad) => (
-                    <div key={ad.id} style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: viewMode === 'grid' ? '16px' : '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', display: 'flex', flexDirection: viewMode === 'grid' ? 'column' : 'row', gap: viewMode === 'grid' ? '16px' : '24px', border: '1px solid #F1F5F9' }}>
+                    <div key={ad.id} style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', padding: viewMode === 'grid' ? '12px' : '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', display: 'flex', flexDirection: viewMode === 'grid' ? 'column' : 'row', gap: viewMode === 'grid' ? '12px' : '24px', border: '1px solid #F1F5F9' }}>
                       <div style={{ position: 'relative' }}>
-                        <img src={ad.image} alt={ad.title} style={{ width: viewMode === 'grid' ? '100%' : '180px', height: viewMode === 'grid' ? '180px' : '140px', objectFit: 'cover', borderRadius: '16px' }} />
+                        <img src={ad.image} alt={ad.title} style={{ width: viewMode === 'grid' ? '100%' : '180px', height: viewMode === 'grid' ? '160px' : '140px', objectFit: 'cover', borderRadius: '14px' }} />
                         {viewMode === 'grid' && (
                           <div style={{ position: 'absolute', top: '12px', left: '12px', display: 'flex', gap: '8px' }}>
                             <span style={{ padding: '6px 12px', borderRadius: '10px', fontSize: '12px', fontWeight: 800, backgroundColor: ad.status === 'Activ' ? '#DCFCE7' : '#F1F5F9', color: ad.status === 'Activ' ? '#166534' : '#64748B', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
@@ -291,7 +291,7 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                               <span style={{ fontSize: '11px', fontWeight: 800, color: '#64748B', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px', display: 'inline-block' }}>
                                 {ad.category}
                               </span>
-                              <h3 style={{ margin: '0 0 8px 0', fontSize: viewMode === 'grid' ? '18px' : '20px', fontWeight: 800, color: '#0F172A', lineHeight: 1.3 }}>
+                              <h3 style={{ margin: '0 0 6px 0', fontSize: viewMode === 'grid' ? '16px' : '20px', fontWeight: 800, color: '#0F172A', lineHeight: 1.3 }}>
                                 {ad.title}
                               </h3>
                             </div>
@@ -313,31 +313,31 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                               </span>
                               {ad.isPromoted && (
                                 <span style={{ padding: '4px 10px', borderRadius: '8px', fontSize: '12px', fontWeight: 800, backgroundColor: '#FFFDF0', color: '#B45309', border: '1px solid var(--primary-yellow)' }}>
-                                  PROMOVAT 👑
+                                  PROMOVAT
                                 </span>
                               )}
                             </div>
                           )}
 
                           {viewMode === 'grid' && (
-                            <div style={{ fontSize: '20px', fontWeight: 900, color: '#E55B86', marginBottom: '16px' }}>
+                            <div style={{ fontSize: '18px', fontWeight: 900, color: '#E55B86', marginBottom: '12px' }}>
                               {ad.price} €
                             </div>
                           )}
                         </div>
 
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: viewMode === 'list' ? '0' : 'auto' }}>
-                          <div style={{ display: 'flex', gap: viewMode === 'grid' ? '16px' : '20px', color: '#64748B', fontSize: '13px', fontWeight: viewMode === 'grid' ? 700 : 600, marginBottom: viewMode === 'grid' ? '16px' : '0' }}>
+                          <div style={{ display: 'flex', gap: viewMode === 'grid' ? '12px' : '20px', color: '#64748B', fontSize: '12px', fontWeight: viewMode === 'grid' ? 700 : 600, marginBottom: viewMode === 'grid' ? '12px' : '0' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Eye size={14} /> {ad.views} {viewMode === 'list' && 'vizualizări'}</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Heart size={14} /> {ad.favorites} {viewMode === 'list' && 'salvări'}</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><MessageCircle size={14} /> {ad.messages} {viewMode === 'list' && 'mesaje'}</div>
                           </div>
                           
-                          <div style={{ display: viewMode === 'grid' ? 'grid' : 'flex', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                            <button style={{ padding: viewMode === 'grid' ? '12px' : '10px 20px', borderRadius: '12px', border: '2px solid #E2E8F0', backgroundColor: '#FFFFFF', fontSize: '14px', fontWeight: 700, color: '#0F172A', cursor: 'pointer' }}>
+                          <div style={{ display: viewMode === 'grid' ? 'grid' : 'flex', gridTemplateColumns: '1fr 1fr', gap: '8px', width: viewMode === 'grid' ? '100%' : 'auto' }}>
+                            <button style={{ padding: viewMode === 'grid' ? '10px' : '10px 20px', borderRadius: '10px', border: '2px solid #E2E8F0', backgroundColor: '#FFFFFF', fontSize: '13px', fontWeight: 700, color: '#0F172A', cursor: 'pointer' }}>
                               Editează
                             </button>
-                            <button style={{ padding: viewMode === 'grid' ? '12px' : '10px 20px', borderRadius: '12px', border: 'none', backgroundColor: 'var(--primary-yellow)', fontSize: '14px', fontWeight: 800, color: '#0F172A', cursor: 'pointer' }}>
+                            <button style={{ padding: viewMode === 'grid' ? '10px' : '10px 20px', borderRadius: '10px', border: 'none', backgroundColor: 'var(--primary-yellow)', fontSize: '13px', fontWeight: 800, color: '#0F172A', cursor: 'pointer' }}>
                               Promovează
                             </button>
                           </div>
