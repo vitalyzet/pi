@@ -388,6 +388,11 @@ export const App: React.FC = () => {
       <LoginModal
         isOpen={isLoginOpen}
         onClose={() => setIsLoginOpen(false)}
+        onLoginSuccess={() => {
+          setIsLoggedIn(true);
+          setToastMessage('Te-ai autentificat cu succes!');
+          setTimeout(() => setToastMessage(null), 3000);
+        }}
       />
 
       <PublishModal

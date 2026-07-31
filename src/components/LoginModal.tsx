@@ -4,9 +4,10 @@ import { X, User, Lock, Mail, UserPlus } from 'lucide-react';
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onLoginSuccess: () => void;
 }
 
-export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
+export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess }) => {
   const [mode, setMode] = useState<'login' | 'register'>('login');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -16,11 +17,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (mode === 'login') {
-      alert(`Autentificare reușită pentru ${email}!`);
-    } else {
-      alert(`Cont creat cu succes pentru ${name} (${email})!`);
-    }
+    onLoginSuccess();
     onClose();
   };
 
