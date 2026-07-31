@@ -17,6 +17,7 @@ export interface Product {
     mileage?: string;
     fuel?: string;
     gearbox?: string;
+    caroserie?: string;
     brand?: string;
     modelName?: string;
     power?: string;

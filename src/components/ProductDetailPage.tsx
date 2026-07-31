@@ -19,7 +19,8 @@ import {
   Sparkles,
   Flag,
   Clock,
-  Settings
+  Settings,
+  Car
 } from 'lucide-react';
 import { Product } from '../data/products';
 
@@ -302,6 +303,21 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                       </div>
                       <div style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A' }}>
                         {product.specs?.brand || 'Volkswagen'}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 6. Caroserie */}
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ color: '#EA580C', flexShrink: 0, marginTop: '2px' }}>
+                      <Car size={24} color="#EA580C" />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 500, marginBottom: '2px' }}>
+                        Caroserie
+                      </div>
+                      <div style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A' }}>
+                        {product.specs?.caroserie || 'Sedan'}
                       </div>
                     </div>
                   </div>

@@ -83,6 +83,7 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
   const [mileage, setMileage] = useState('153694');
   const [fuel, setFuel] = useState('Gasolina');
   const [gearbox, setGearbox] = useState('Manuală');
+  const [caroserie, setCaroserie] = useState('Sedan');
 
   // Imobiliare Specific Fields
   const [propType, setPropType] = useState('Apartament');
@@ -179,6 +180,7 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
               mileage: mileage ? parseInt(mileage).toLocaleString('ro-RO') : '153.694',
               fuel: fuel || 'Gasolina',
               gearbox: gearbox || 'Manuală',
+              caroserie: caroserie || 'Sedan',
               brand: brand || 'Volkswagen',
               modelName: modelName || 'Polo'
             };
@@ -468,7 +470,7 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                         SPECIFICAȚII TEHNICE AUTO
                       </span>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
                         <div>
                           <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#1E293B', marginBottom: '8px', letterSpacing: '0.3px' }}>MARCĂ</label>
                           <input type="text" value={brand} placeholder="ex: Volkswagen" onChange={(e) => setBrand(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
@@ -476,6 +478,19 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                         <div>
                           <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#1E293B', marginBottom: '8px', letterSpacing: '0.3px' }}>MODEL</label>
                           <input type="text" value={modelName} placeholder="ex: Polo / Golf" onChange={(e) => setModelName(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#1E293B', marginBottom: '8px', letterSpacing: '0.3px' }}>CAROSERIE *</label>
+                          <select value={caroserie} onChange={(e) => setCaroserie(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
+                            <option value="Sedan">Sedan</option>
+                            <option value="SUV">SUV / Off-Road</option>
+                            <option value="Hatchback">Hatchback</option>
+                            <option value="Break">Break / Kombi</option>
+                            <option value="Cabrio">Cabrio / Roadster</option>
+                            <option value="Coupe">Coupe</option>
+                            <option value="Monovolum">Monovolum / Minivan</option>
+                            <option value="Pickup">Pick-Up</option>
+                          </select>
                         </div>
                       </div>
 
