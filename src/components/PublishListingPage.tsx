@@ -737,9 +737,9 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                     </div>
                   )}
 
-                  {/* STANDARD FIELDS - TALL & SPACIOUS DESIGN */}
+                  {/* STANDARD INPUTS */}
                   <div>
-                    <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#0F172A', marginBottom: '8px', letterSpacing: '0.3px' }}>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
                       TITLU ANUNȚ *
                     </label>
                     <input
@@ -748,13 +748,13 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                       placeholder="ex: BMW Serie 3 M Sport / Garsonieră Ultracentrală"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
-                      style={{ width: '100%', padding: '18px 22px', borderRadius: '16px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none', transition: 'border-color 0.2s ease, box-shadow 0.2s ease' }}
+                      style={{ width: '100%', padding: '14px 18px', borderRadius: '14px', border: '1.5px solid #CBD5E1', fontSize: '15px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                     />
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#0F172A', marginBottom: '8px', letterSpacing: '0.3px' }}>
+                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
                         PREȚ (LEI / €) *
                       </label>
                       <input
@@ -763,12 +763,12 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                         placeholder="18500"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
-                        style={{ width: '100%', padding: '18px 22px', borderRadius: '16px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
+                        style={{ width: '100%', padding: '14px 18px', borderRadius: '14px', border: '1.5px solid #CBD5E1', fontSize: '15px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                       />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#0F172A', marginBottom: '8px', letterSpacing: '0.3px' }}>
+                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
                         PREȚ VECHI (OPȚIONAL)
                       </label>
                       <input
@@ -776,14 +776,14 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                         placeholder="21000"
                         value={originalPrice}
                         onChange={(e) => setOriginalPrice(e.target.value)}
-                        style={{ width: '100%', padding: '18px 22px', borderRadius: '16px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
+                        style={{ width: '100%', padding: '14px 18px', borderRadius: '14px', border: '1.5px solid #CBD5E1', fontSize: '15px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                       />
                     </div>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#0F172A', marginBottom: '8px', letterSpacing: '0.3px' }}>
+                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
                         ORAȘ / LOCAȚIE
                       </label>
                       <input
@@ -791,12 +791,12 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                         placeholder="București / Oradea / Cluj"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
-                        style={{ width: '100%', padding: '18px 22px', borderRadius: '16px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
+                        style={{ width: '100%', padding: '14px 18px', borderRadius: '14px', border: '1.5px solid #CBD5E1', fontSize: '15px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                       />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#0F172A', marginBottom: '8px', letterSpacing: '0.3px' }}>
+                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
                         NUMĂR TELEFON
                       </label>
                       <input
@@ -804,36 +804,59 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                         placeholder="07xx xxx xxx"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        style={{ width: '100%', padding: '18px 22px', borderRadius: '16px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
+                        style={{ width: '100%', padding: '14px 18px', borderRadius: '14px', border: '1.5px solid #CBD5E1', fontSize: '15px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                       />
                     </div>
                   </div>
 
-                  <div>
-                    <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#0F172A', marginBottom: '8px', letterSpacing: '0.3px' }}>
-                      DESCRIERE DETALIATĂ
+                  {/* ONLY DESCRIERE ANUNȚ ENLARGED AS REQUESTED */}
+                  <div style={{ marginTop: '8px' }}>
+                    <label style={{ display: 'block', fontSize: '15px', fontWeight: 800, color: '#0F172A', marginBottom: '10px' }}>
+                      Descriere anunț
                     </label>
                     <textarea
-                      rows={5}
-                      placeholder="Oferă mai multe detalii despre produs sau servicii..."
+                      rows={7}
+                      placeholder={
+                        selectedCategory === 'Auto'
+                          ? 'Descrie mașina ta... (istoric service, defecte optice, piese schimbate)'
+                          : selectedCategory === 'Imobiliare'
+                          ? 'Descrie proprietatea ta... (compartimentare, îmbunătățiri, facilități, zonă)'
+                          : selectedCategory === 'Locuri de muncă'
+                          ? 'Descrie postul oferit... (cerințe, responsabilități, beneficii)'
+                          : 'Descrie anunțul tău... (stare produs, garanție, detalii tehnice)'
+                      }
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
-                      style={{ width: '100%', padding: '18px 22px', borderRadius: '16px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 500, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none', resize: 'vertical' }}
+                      style={{
+                        width: '100%',
+                        minHeight: '220px',
+                        padding: '24px 28px',
+                        borderRadius: '22px',
+                        border: '1.5px solid #CBD5E1',
+                        fontSize: '16px',
+                        fontWeight: 500,
+                        lineHeight: '1.6',
+                        color: '#0F172A',
+                        backgroundColor: '#FFFFFF',
+                        outline: 'none',
+                        resize: 'vertical',
+                        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.02)'
+                      }}
                     />
                   </div>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '24px', paddingTop: '24px', borderTop: '1.5px solid #F1F5F9' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #F1F5F9' }}>
                     <button
                       type="button"
                       onClick={() => setCurrentStep(1)}
-                      style={{ padding: '16px 28px', borderRadius: '14px', border: '2px solid #CBD5E1', backgroundColor: '#FFFFFF', fontSize: '15px', fontWeight: 800, color: '#475569', cursor: 'pointer' }}
+                      style={{ padding: '14px 26px', borderRadius: '14px', border: '1.5px solid #CBD5E1', backgroundColor: '#FFFFFF', fontSize: '14px', fontWeight: 700, color: '#475569', cursor: 'pointer' }}
                     >
                       ← Înapoi la Categorii
                     </button>
 
                     <button
                       type="submit"
-                      style={{ padding: '18px 48px', borderRadius: '30px', border: 'none', backgroundColor: 'var(--primary-yellow)', fontSize: '17px', fontWeight: 900, color: '#0F172A', cursor: 'pointer', boxShadow: '0 10px 25px rgba(248, 210, 71, 0.45)' }}
+                      style={{ padding: '16px 40px', borderRadius: '30px', border: 'none', backgroundColor: 'var(--primary-yellow)', fontSize: '16px', fontWeight: 800, color: '#0F172A', cursor: 'pointer', boxShadow: '0 6px 18px rgba(248, 210, 71, 0.45)' }}
                     >
                       Înainte la Poze →
                     </button>
