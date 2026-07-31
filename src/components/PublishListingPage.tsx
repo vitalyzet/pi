@@ -48,10 +48,10 @@ const CATEGORIES_GRID = [
   { id: 'Modă', label: 'Modă', icon: <Shirt size={22} color="#475569" /> },
   { id: 'Animale', label: 'Animale', icon: <PawPrint size={22} color="#475569" /> },
   { id: 'Casă & Grădină', label: 'Casă & Grădină', icon: <Armchair size={22} color="#475569" /> },
-  { id: 'Sport', label: 'Sport', icon: <Dumbbell size={22} color="#475569" /> },
+  { id: 'Sport', label: 'Sport', icon: <Dumbbell size={22} color="#94A3B8" />, isDisabled: true },
   { id: 'Copii', label: 'Copii', icon: <Baby size={22} color="#475569" /> },
   { id: 'Turism', label: 'Turism', icon: <Plane size={22} color="#475569" /> },
-  { id: 'Gaming', label: 'Gaming', icon: <Gamepad2 size={22} color="#475569" /> }
+  { id: 'Gaming', label: 'Gaming', icon: <Gamepad2 size={22} color="#94A3B8" />, isDisabled: true }
 ];
 
 export const PublishListingPage: React.FC<PublishListingPageProps> = ({
@@ -218,12 +218,18 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                   }}
                 >
                   {CATEGORIES_GRID.map((cat) => {
-                    const isHovered = hoveredCategory === cat.id;
+                    const isHovered = !cat.isDisabled && hoveredCategory === cat.id;
                     return (
                       <div
                         key={cat.id}
-                        onClick={() => handleSelectCategory(cat.id)}
-                        onMouseEnter={() => setHoveredCategory(cat.id)}
+                        onClick={() => {
+                          if (!cat.isDisabled) {
+                            handleSelectCategory(cat.id);
+                          }
+                        }}
+                        onMouseEnter={() => {
+                          if (!cat.isDisabled) setHoveredCategory(cat.id);
+                        }}
                         onMouseLeave={() => setHoveredCategory(null)}
                         style={{
                           backgroundColor: '#FFFFFF',
@@ -234,7 +240,8 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                           alignItems: 'center',
                           justifyContent: 'center',
                           gap: '10px',
-                          cursor: 'pointer',
+                          cursor: cat.isDisabled ? 'not-allowed' : 'pointer',
+                          opacity: cat.isDisabled ? 0.55 : 1,
                           boxShadow: isHovered ? '0 10px 22px rgba(248, 210, 71, 0.25)' : '0 2px 6px rgba(15, 23, 42, 0.03)',
                           border: isHovered ? '1.5px solid var(--primary-yellow)' : '1.5px solid #F1F5F9',
                           transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
@@ -242,7 +249,7 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                           position: 'relative'
                         }}
                       >
-                        {/* Compact Squircle Icon Box - Fills Yellow on Hover */}
+                        {/* Compact Squircle Icon Box */}
                         <div
                           style={{
                             width: '48px',
@@ -259,7 +266,7 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                           }}
                         >
                           {React.cloneElement(cat.icon, {
-                            color: isHovered ? '#0F172A' : '#475569'
+                            color: cat.isDisabled ? '#94A3B8' : (isHovered ? '#0F172A' : '#475569')
                           })}
 
                           {/* Green "Nou" Badge */}
@@ -281,9 +288,30 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                               Nou
                             </span>
                           )}
+
+                          {/* Gray "Indisponibil" Badge */}
+                          {cat.isDisabled && (
+                            <span
+                              style={{
+                                position: 'absolute',
+                                top: '-6px',
+                                right: '-12px',
+                                backgroundColor: '#E2E8F0',
+                                color: '#64748B',
+                                fontSize: '8px',
+                                fontWeight: 800,
+                                padding: '1px 5px',
+                                borderRadius: '6px',
+                                letterSpacing: '0.2px',
+                                whiteSpace: 'nowrap'
+                              }}
+                            >
+                              Indisponibil
+                            </span>
+                          )}
                         </div>
 
-                        <span style={{ fontSize: '12px', fontWeight: isHovered ? 800 : 600, color: isHovered ? '#0F172A' : '#475569', textAlign: 'center', lineHeight: '1.3', transition: 'color 0.2s ease' }}>
+                        <span style={{ fontSize: '12px', fontWeight: isHovered ? 800 : 600, color: cat.isDisabled ? '#94A3B8' : (isHovered ? '#0F172A' : '#475569'), textAlign: 'center', lineHeight: '1.3', transition: 'color 0.2s ease' }}>
                           {cat.label}
                         </span>
                       </div>
