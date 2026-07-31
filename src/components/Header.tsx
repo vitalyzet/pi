@@ -36,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
         <div className="announcement-item">
           <Truck size={16} />
-          <span>Livrare gratuită de la 99 lei</span>
+          <span>Livrare gratuită de la 99 €</span>
         </div>
         <div className="announcement-item">
           <RotateCcw size={16} />

@@ -88,7 +88,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   <img src={product.image} alt={product.title} style={{ width: '48px', height: '48px', borderRadius: '6px', objectFit: 'cover' }} />
                   <div>
                     <h4 style={{ fontSize: '14px', fontWeight: 700 }}>{product.title}</h4>
-                    <span style={{ fontSize: '13px', color: 'var(--pink-accent)', fontWeight: 800 }}>{product.price} lei</span>
+                    <span style={{ fontSize: '13px', color: 'var(--pink-accent)', fontWeight: 800 }}>{product.price} €</span>
                   </div>
                 </div>
               ))

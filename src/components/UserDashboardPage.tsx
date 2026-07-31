@@ -348,7 +348,7 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                             <img src={product.image} alt={product.title} style={{ width: '54px', height: '54px', borderRadius: '8px', objectFit: 'cover' }} />
                             <div>
                               <div style={{ fontSize: '14px', fontWeight: 700 }}>{product.title}</div>
-                              <div style={{ fontSize: '13px', color: '#666', marginTop: '2px' }}>Cantitate: {quantity} • {product.price} lei</div>
+                              <div style={{ fontSize: '13px', color: '#666', marginTop: '2px' }}>Cantitate: {quantity} • {product.price} €</div>
                             </div>
                           </div>
                         ))}
@@ -360,7 +360,7 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                         </span>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                           <span style={{ fontSize: '18px', fontWeight: 800, color: 'var(--pink-accent)' }}>
-                            Total: {order.total} lei
+                            Total: {order.total} €
                           </span>
                           <button
                             className="load-more-btn"
@@ -405,7 +405,7 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                         <div style={{ flex: 1 }}>
                           <h4 style={{ fontSize: '15px', fontWeight: 800 }}>{product.title}</h4>
                           <div style={{ marginTop: '4px', fontSize: '15px', fontWeight: 800, color: 'var(--pink-accent)' }}>
-                            {product.price} lei
+                            {product.price} €
                           </div>
                           <div style={{ marginTop: '12px', display: 'flex', gap: '10px' }}>
                             <button

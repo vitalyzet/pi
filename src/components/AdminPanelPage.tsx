@@ -254,7 +254,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                   <span style={{ fontSize: '13px', fontWeight: 600 }}>Vânzări Luna Aceasta</span>
                   <DollarSign size={20} color="#10B981" />
                 </div>
-                <div style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A' }}>14,850 lei</div>
+                <div style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A' }}>14,850 €</div>
                 <div style={{ fontSize: '12px', color: '#10B981', fontWeight: 700, marginTop: '4px', display: 'flex', alignItems: 'center', gap: '2px' }}>
                   <ArrowUpRight size={14} /> +18.4% față de luna trecută
                 </div>
@@ -318,7 +318,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                           <div style={{ fontSize: '12px', color: '#64748B' }}>{order.email}</div>
                         </td>
                         <td style={{ padding: '14px 12px', color: '#64748B' }}>{order.date}</td>
-                        <td style={{ padding: '14px 12px', fontWeight: 800, color: 'var(--pink-accent)' }}>{order.total} lei</td>
+                        <td style={{ padding: '14px 12px', fontWeight: 800, color: 'var(--pink-accent)' }}>{order.total} €</td>
                         <td style={{ padding: '14px 12px' }}>
                           <span style={{ fontSize: '12px', fontWeight: 700, padding: '4px 10px', borderRadius: '12px', backgroundColor: order.status === 'Livrat' ? '#DCFCE7' : '#FEF3C7', color: order.status === 'Livrat' ? '#166534' : '#92400E' }}>
                             {order.status}
@@ -368,7 +368,7 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                           <div style={{ fontSize: '12px', color: '#64748B' }}>{order.email}</div>
                         </td>
                         <td style={{ padding: '14px 12px', color: '#475569' }}>{order.paymentMethod}</td>
-                        <td style={{ padding: '14px 12px', fontWeight: 800, color: 'var(--pink-accent)' }}>{order.total} lei</td>
+                        <td style={{ padding: '14px 12px', fontWeight: 800, color: 'var(--pink-accent)' }}>{order.total} €</td>
                         <td style={{ padding: '14px 12px' }}>
                           <select
                             value={order.status}
@@ -439,8 +439,8 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                         <h4 style={{ fontSize: '14px', fontWeight: 800 }}>{product.title}</h4>
                         <div style={{ fontSize: '12px', color: '#64748B', marginTop: '2px' }}>Categorie: {product.category}</div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '6px' }}>
-                          <span style={{ fontSize: '14px', fontWeight: 800, color: 'var(--pink-accent)' }}>{product.price} lei</span>
-                          <span style={{ fontSize: '12px', color: '#94A3B8', textDecoration: 'line-through' }}>{product.originalPrice} lei</span>
+                          <span style={{ fontSize: '14px', fontWeight: 800, color: 'var(--pink-accent)' }}>{product.price} €</span>
+                          <span style={{ fontSize: '12px', color: '#94A3B8', textDecoration: 'line-through' }}>{product.originalPrice} €</span>
                         </div>
                       </div>
                     </div>
@@ -467,13 +467,13 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
                       <td style={{ padding: '14px 12px', fontWeight: 800 }}>Elena Popescu</td>
                       <td style={{ padding: '14px 12px', color: '#64748B' }}>elena.popescu@pinpin.ro</td>
                       <td style={{ padding: '14px 12px', fontWeight: 700 }}>6 comenzi</td>
-                      <td style={{ padding: '14px 12px', fontWeight: 800, color: 'var(--pink-accent)' }}>340 lei</td>
+                      <td style={{ padding: '14px 12px', fontWeight: 800, color: 'var(--pink-accent)' }}>340 €</td>
                     </tr>
                     <tr style={{ borderBottom: '1px solid #F1F5F9', fontSize: '14px' }}>
                       <td style={{ padding: '14px 12px', fontWeight: 800 }}>Andrei Ionescu</td>
                       <td style={{ padding: '14px 12px', color: '#64748B' }}>andrei.i@gmail.com</td>
                       <td style={{ padding: '14px 12px', fontWeight: 700 }}>4 comenzi</td>
-                      <td style={{ padding: '14px 12px', fontWeight: 800, color: 'var(--pink-accent)' }}>210 lei</td>
+                      <td style={{ padding: '14px 12px', fontWeight: 800, color: 'var(--pink-accent)' }}>210 €</td>
                     </tr>
                   </tbody>
                 </table>
@@ -531,13 +531,13 @@ export const AdminPanelPage: React.FC<AdminPanelPageProps> = ({
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
-                  <label style={{ fontSize: '12px', fontWeight: 700 }}>Preț Redus (lei)</label>
+                  <label style={{ fontSize: '12px', fontWeight: 700 }}>Preț Redus (€)</label>
                   <div className="newsletter-input-wrapper" style={{ background: '#F8F8F8' }}>
                     <input type="number" required className="newsletter-input" value={newPinPrice} onChange={(e) => setNewPinPrice(Number(e.target.value))} />
                   </div>
                 </div>
                 <div>
-                  <label style={{ fontSize: '12px', fontWeight: 700 }}>Preț Inițial (lei)</label>
+                  <label style={{ fontSize: '12px', fontWeight: 700 }}>Preț Inițial (€)</label>
                   <div className="newsletter-input-wrapper" style={{ background: '#F8F8F8' }}>
                     <input type="number" required className="newsletter-input" value={newPinOriginalPrice} onChange={(e) => setNewPinOriginalPrice(Number(e.target.value))} />
                   </div>

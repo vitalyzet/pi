@@ -205,11 +205,11 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
             {/* Pricing Section */}
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px', marginBottom: '24px' }}>
               <span style={{ fontSize: '36px', fontWeight: 800, color: '#E55B86' }}>
-                {product.price} lei
+                {product.price} €
               </span>
               {product.originalPrice && (
                 <span style={{ fontSize: '20px', color: '#94A3B8', textDecoration: 'line-through', fontWeight: 600 }}>
-                  {product.originalPrice} lei
+                  {product.originalPrice} €
                 </span>
               )}
             </div>
@@ -453,7 +453,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     {relProduct.title}
                   </h4>
                   <div style={{ fontSize: '16px', fontWeight: 800, color: '#E55B86' }}>
-                    {relProduct.price} lei
+                    {relProduct.price} €
                   </div>
                 </div>
               </div>

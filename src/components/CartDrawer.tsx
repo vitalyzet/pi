@@ -49,7 +49,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         <div style={{ padding: '16px 24px', backgroundColor: '#FFFDF0', borderBottom: '1px solid #F8D247' }}>
           {remainingForFreeShipping > 0 ? (
             <p style={{ fontSize: '13px', color: '#333' }}>
-              Mai adaugă produse în valoare de <strong style={{ color: '#E55B86' }}>{remainingForFreeShipping} lei</strong> pentru livrare gratuită!
+              Mai adaugă produse în valoare de <strong style={{ color: '#E55B86' }}>{remainingForFreeShipping} €</strong> pentru livrare gratuită!
             </p>
           ) : (
             <p style={{ fontSize: '13px', color: '#2b8a3e', fontWeight: 'bold' }}>
@@ -72,7 +72,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 <div className="cart-item-details">
                   <div>
                     <h4 className="cart-item-title">{product.title}</h4>
-                    <span className="cart-item-price">{product.price * quantity} lei</span>
+                    <span className="cart-item-price">{product.price * quantity} €</span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div className="quantity-controls">
@@ -99,7 +99,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
               <span style={{ fontSize: '16px', fontWeight: 700 }}>Total</span>
               <span style={{ fontSize: '20px', fontWeight: 800, color: 'var(--pink-accent)' }}>
-                {total} lei
+                {total} €
               </span>
             </div>
             <button className="checkout-btn" onClick={() => alert('Vă mulțumim! Comanda a fost trimisă cu succes.')}>

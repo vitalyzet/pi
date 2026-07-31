@@ -305,7 +305,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
                     <div>
                       <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                        PREȚ (LEI) *
+                        PREȚ (€) *
                       </label>
                       <input
                         type="number"
@@ -428,11 +428,11 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                       </div>
                       <div style={{ textAlign: 'right' }}>
                         <div style={{ fontSize: '18px', fontWeight: 800, color: '#E55B86' }}>
-                          {price || '0'} Lei
+                          {price || '0'} €
                         </div>
                         {originalPrice && (
                           <div style={{ fontSize: '12px', textDecoration: 'line-through', color: '#94A3B8' }}>
-                            {originalPrice} Lei
+                            {originalPrice} €
                           </div>
                         )}
                       </div>

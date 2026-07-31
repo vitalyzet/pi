@@ -328,7 +328,7 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                    PREȚ (LEI / €) *
+                    PREȚ (€) *
                   </label>
                   <input
                     type="number"

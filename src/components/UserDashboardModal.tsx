@@ -295,7 +295,7 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
                           <img src={product.image} alt={product.title} style={{ width: '40px', height: '40px', borderRadius: '6px', objectFit: 'cover' }} />
                           <div>
                             <div style={{ fontSize: '13px', fontWeight: 700 }}>{product.title}</div>
-                            <div style={{ fontSize: '12px', color: '#777' }}>x{quantity} • {product.price} lei</div>
+                            <div style={{ fontSize: '12px', color: '#777' }}>x{quantity} • {product.price} €</div>
                           </div>
                         </div>
                       ))}
@@ -307,7 +307,7 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
                       </span>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                         <span style={{ fontSize: '16px', fontWeight: 800, color: 'var(--pink-accent)' }}>
-                          Total: {order.total} lei
+                          Total: {order.total} €
                         </span>
                         <button
                           className="load-more-btn"
@@ -347,7 +347,7 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
                       <img src={product.image} alt={product.title} style={{ width: '64px', height: '64px', borderRadius: '8px', objectFit: 'cover' }} />
                       <div style={{ flex: 1 }}>
                         <h4 style={{ fontSize: '14px', fontWeight: 700 }}>{product.title}</h4>
-                        <span style={{ fontSize: '14px', fontWeight: 800, color: 'var(--pink-accent)' }}>{product.price} lei</span>
+                        <span style={{ fontSize: '14px', fontWeight: 800, color: 'var(--pink-accent)' }}>{product.price} €</span>
                         <div style={{ marginTop: '8px', display: 'flex', gap: '8px' }}>
                           <button
                             className="checkout-btn"

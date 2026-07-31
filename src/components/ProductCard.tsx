@@ -51,8 +51,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div className="card-details">
         <h3 className="product-title">{product.title}</h3>
         <div className="price-container">
-          <span className="original-price">{product.originalPrice} lei</span>
-          <span className="discounted-price">{product.price} lei</span>
+          <span className="original-price">{product.originalPrice} €</span>
+          <span className="discounted-price">{product.price} €</span>
         </div>
       </div>
     </div>

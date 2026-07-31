@@ -175,11 +175,11 @@ export const AutoDetailModal: React.FC<AutoDetailModalProps> = ({
                 {/* Price Box */}
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: '20px' }}>
                   <span style={{ fontSize: '28px', fontWeight: 800, color: '#E55B86' }}>
-                    {product.price} lei
+                    {product.price} €
                   </span>
                   {product.originalPrice && (
                     <span style={{ fontSize: '16px', color: '#94A3B8', textDecoration: 'line-through', fontWeight: 600 }}>
-                      {product.originalPrice} lei
+                      {product.originalPrice} €
                     </span>
                   )}
                 </div>

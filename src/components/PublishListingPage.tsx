@@ -195,7 +195,7 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
             return {
               jobDomain: jobDomain || 'IT & Software',
               contractType: contractType || 'Full-time',
-              salary: salary ? `${salary} LEI` : '4.500 LEI'
+              salary: salary ? `${salary} €` : '4.500 €'
             };
           case 'Matrimoniale':
             return {
@@ -587,7 +587,7 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                           </select>
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>SALARIU ESTIMAT (LEI)</label>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>SALARIU ESTIMAT (€)</label>
                           <input type="number" value={salary} placeholder="4500" onChange={(e) => setSalary(e.target.value)} style={{ width: '100%', padding: '16px 16px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
                         </div>
                       </div>
@@ -770,7 +770,7 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                     <div>
                       <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
-                        PREȚ (LEI / €) *
+                        PREȚ (€) *
                       </label>
                       <input
                         type="number"
@@ -918,7 +918,7 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                       </span>
                     </div>
                     <div style={{ fontSize: '24px', fontWeight: 800, color: '#E55B86' }}>
-                      {price || '0'} Lei
+                      {price || '0'} €
                     </div>
                   </div>
                 </div>

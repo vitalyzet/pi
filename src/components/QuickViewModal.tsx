@@ -75,8 +75,8 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
             </h2>
 
             <div className="price-container" style={{ marginBottom: '20px', fontSize: '18px' }}>
-              <span className="original-price" style={{ fontSize: '16px' }}>{product.originalPrice} lei</span>
-              <span className="discounted-price" style={{ fontSize: '22px' }}>{product.price} lei</span>
+              <span className="original-price" style={{ fontSize: '16px' }}>{product.originalPrice} €</span>
+              <span className="discounted-price" style={{ fontSize: '22px' }}>{product.price} €</span>
             </div>
 
             <p style={{ fontSize: '14px', color: '#555', lineHeight: '1.6', marginBottom: '24px' }}>
