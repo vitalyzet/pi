@@ -231,7 +231,7 @@ export const App: React.FC = () => {
             setToastMessage('Te-ai deconectat cu succes.');
             setTimeout(() => setToastMessage(null), 3000);
           }}
-          onAddToCart={(p) => handleAddToCart(p, 1)}
+          onViewProduct={(p) => setSelectedDetailProduct(p)}
         />
       ) : currentView === 'publish' ? (
         <PublishListingPage

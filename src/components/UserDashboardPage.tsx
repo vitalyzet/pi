@@ -1,73 +1,97 @@
 import React, { useState } from 'react';
 import {
-  Package,
   Heart,
-  MapPin,
   Settings,
   LogOut,
-  Truck,
-  CheckCircle2,
   Plus,
   Trash2,
-  ShoppingBag,
-  CreditCard,
   ChevronRight,
-  User,
-  ShieldCheck
+  ShieldCheck,
+  LayoutGrid,
+  MessageCircle,
+  Wallet,
+  Eye,
+  TrendingUp,
+  MapPin
 } from 'lucide-react';
 import { Product, PRODUCTS } from '../data/products';
 
-interface Order {
+interface MyAd {
   id: string;
-  date: string;
-  status: 'În revizuire' | 'Activ' | 'Inactiv';
-  total: number;
-  items: { product: Product; quantity: number }[];
-  awb: string;
+  title: string;
+  price: number;
+  category: string;
+  image: string;
+  status: 'Activ' | 'Inactiv' | 'În revizuire';
+  views: number;
+  favorites: number;
+  messages: number;
+  dateAdded: string;
+  isPromoted: boolean;
 }
 
-const MOCK_ORDERS: Order[] = [
+const MOCK_MY_ADS: MyAd[] = [
   {
-    id: 'PIN-94820',
-    date: '28 Iulie 2026',
-    status: 'În revizuire',
-    total: 80,
-    awb: 'EASYBOX-8392019',
-    items: [
-      { product: PRODUCTS[0], quantity: 1 },
-      { product: PRODUCTS[1], quantity: 1 }
-    ]
+    id: 'AD-94820',
+    title: 'BMW Serie 3 M Sport 2018',
+    price: 18500,
+    category: 'Auto & Moto',
+    image: '/images/coches.png',
+    status: 'Activ',
+    views: 342,
+    favorites: 12,
+    messages: 3,
+    dateAdded: '28 Iul 2026',
+    isPromoted: true
   },
   {
-    id: 'PIN-73911',
-    date: '12 Iunie 2026',
+    id: 'AD-73911',
+    title: 'Apartament 2 camere Ultracentral',
+    price: 85000,
+    category: 'Imobiliare',
+    image: '/images/inmobilia.png',
     status: 'Activ',
-    total: 60,
-    awb: 'FAN-4920182',
-    items: [
-      { product: PRODUCTS[2], quantity: 1 },
-      { product: PRODUCTS[3], quantity: 1 }
-    ]
+    views: 890,
+    favorites: 45,
+    messages: 8,
+    dateAdded: '15 Iun 2026',
+    isPromoted: false
+  },
+  {
+    id: 'AD-22910',
+    title: 'IPhone 14 Pro Max 256GB',
+    price: 850,
+    category: 'Electronice',
+    image: '/images/electronica.png',
+    status: 'Inactiv',
+    views: 120,
+    favorites: 5,
+    messages: 0,
+    dateAdded: '10 Mai 2026',
+    isPromoted: false
   }
 ];
 
 interface UserDashboardPageProps {
   onBackToStore: () => void;
   onLogout: () => void;
-  onAddToCart: (product: Product) => void;
+  onViewProduct?: (product: Product) => void;
 }
 
 export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
   onBackToStore,
   onLogout,
-  onAddToCart,
+  onViewProduct,
 }) => {
-  const [activeTab, setActiveTab] = useState<'orders' | 'wishlist' | 'addresses' | 'payments' | 'settings'>('orders');
+  const [activeTab, setActiveTab] = useState<'my_ads' | 'messages' | 'favorites' | 'wallet' | 'settings'>('my_ads');
   const [wishlist, setWishlist] = useState<Product[]>([PRODUCTS[1], PRODUCTS[4], PRODUCTS[5]]);
-  const [userProfile, setUserProfile] = useState({
+  
+  const [userProfile] = useState({
     name: 'Elena Popescu',
     email: 'elena.popescu@pinpin.ro',
-    phone: '+40 722 123 456'
+    phone: '+40 722 123 456',
+    joined: 'Aprilie 2026',
+    credits: 150
   });
 
   const removeFromWishlist = (id: string) => {
@@ -75,21 +99,21 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
   };
 
   return (
-    <div style={{ backgroundColor: '#F9F9F9', minHeight: '80vh', paddingBottom: '80px' }}>
+    <div style={{ backgroundColor: '#F9FAFB', minHeight: '80vh', paddingBottom: '80px' }}>
       {/* Breadcrumb Navigation Bar */}
-      <div style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #EBEBEB', padding: '16px 0' }}>
-        <div style={{ maxWidth: '1300px', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#666' }}>
-          <button onClick={onBackToStore} style={{ border: 'none', background: 'none', color: '#666', cursor: 'pointer', fontWeight: 600 }}>
+      <div style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #F1F5F9', padding: '16px 0' }}>
+        <div style={{ maxWidth: '1300px', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#64748B' }}>
+          <button onClick={onBackToStore} style={{ border: 'none', background: 'none', color: '#64748B', cursor: 'pointer', fontWeight: 600 }}>
             Acasă
           </button>
           <ChevronRight size={14} />
-          <span style={{ color: '#222', fontWeight: 700 }}>Contul Meu</span>
+          <span style={{ color: '#0F172A', fontWeight: 700 }}>Contul Meu</span>
           <ChevronRight size={14} />
-          <span style={{ color: 'var(--pink-accent)', fontWeight: 700, textTransform: 'capitalize' }}>
-            {activeTab === 'orders' && 'Anunțurile Mele'}
-            {activeTab === 'wishlist' && 'Produse Favorite'}
-            {activeTab === 'addresses' && 'Mesaje'}
-            {activeTab === 'payments' && 'Portofel'}
+          <span style={{ color: 'var(--primary-yellow)', fontWeight: 800, textTransform: 'capitalize' }}>
+            {activeTab === 'my_ads' && 'Anunțurile mele'}
+            {activeTab === 'messages' && 'Mesaje'}
+            {activeTab === 'favorites' && 'Anunțuri Favorite'}
+            {activeTab === 'wallet' && 'Portofel & Promovare'}
             {activeTab === 'settings' && 'Setări Cont'}
           </span>
         </div>
@@ -99,279 +123,178 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
       <div style={{ maxWidth: '1300px', margin: '40px auto 0 auto', padding: '0 24px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '32px' }}>
           
-          {/* Left Sidebar Panel */}
-          <aside style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            {/* User Profile Info Card */}
-            <div
-              style={{
-                backgroundColor: '#FFFFFF',
-                borderRadius: '12px',
-                padding: '24px',
-                border: '1px solid #EBEBEB',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
-                textAlign: 'center'
-              }}
-            >
-              <div
-                style={{
-                  width: '72px',
-                  height: '72px',
-                  borderRadius: '50%',
-                  backgroundColor: 'var(--primary-yellow)',
-                  color: '#222',
-                  fontSize: '28px',
-                  fontWeight: 800,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: '0 auto 14px auto',
-                  border: '3px solid #FFF',
-                  boxShadow: '0 4px 12px rgba(248, 210, 71, 0.4)'
-                }}
-              >
-                EP
-              </div>
-              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#222' }}>{userProfile.name}</h3>
-              <p style={{ fontSize: '13px', color: '#777', marginTop: '2px' }}>{userProfile.email}</p>
-
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  backgroundColor: '#FFFDF0',
-                  border: '1px solid var(--primary-yellow)',
-                  padding: '6px 14px',
-                  borderRadius: '20px',
-                  marginTop: '14px',
-                  fontSize: '12px',
-                  fontWeight: 700,
-                  color: '#B8860B'
-                }}
-              >
-                ★ 150 Puncte PinPin
-              </div>
-            </div>
-
-            {/* Navigation Menu Card */}
-            <div
-              style={{
-                backgroundColor: '#FFFFFF',
-                borderRadius: '12px',
-                padding: '12px',
-                border: '1px solid #EBEBEB',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '4px'
-              }}
-            >
-              <button
-                className="dropdown-item"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  borderRadius: '8px',
-                  padding: '14px 16px',
-                  backgroundColor: activeTab === 'orders' ? 'var(--primary-yellow)' : 'transparent',
-                  fontWeight: activeTab === 'orders' ? 800 : 600,
-                  color: activeTab === 'orders' ? '#222' : '#444'
-                }}
-                onClick={() => setActiveTab('orders')}
-              >
-                <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <Package size={18} /> Anunțurile Mele
-                </span>
-                <ChevronRight size={16} />
-              </button>
-
-              <button
-                className="dropdown-item"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  borderRadius: '8px',
-                  padding: '14px 16px',
-                  backgroundColor: activeTab === 'wishlist' ? 'var(--primary-yellow)' : 'transparent',
-                  fontWeight: activeTab === 'wishlist' ? 800 : 600,
-                  color: activeTab === 'wishlist' ? '#222' : '#444'
-                }}
-                onClick={() => setActiveTab('wishlist')}
-              >
-                <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <Heart size={18} /> Favorite ({wishlist.length})
-                </span>
-                <ChevronRight size={16} />
-              </button>
-
-              <button
-                className="dropdown-item"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  borderRadius: '8px',
-                  padding: '14px 16px',
-                  backgroundColor: activeTab === 'addresses' ? 'var(--primary-yellow)' : 'transparent',
-                  fontWeight: activeTab === 'addresses' ? 800 : 600,
-                  color: activeTab === 'addresses' ? '#222' : '#444'
-                }}
-                onClick={() => setActiveTab('addresses')}
-              >
-                <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <MapPin size={18} /> Mesaje
-                </span>
-                <ChevronRight size={16} />
-              </button>
-
-              <button
-                className="dropdown-item"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  borderRadius: '8px',
-                  padding: '14px 16px',
-                  backgroundColor: activeTab === 'payments' ? 'var(--primary-yellow)' : 'transparent',
-                  fontWeight: activeTab === 'payments' ? 800 : 600,
-                  color: activeTab === 'payments' ? '#222' : '#444'
-                }}
-                onClick={() => setActiveTab('payments')}
-              >
-                <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <CreditCard size={18} /> Portofel
-                </span>
-                <ChevronRight size={16} />
-              </button>
-
-              <button
-                className="dropdown-item"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  borderRadius: '8px',
-                  padding: '14px 16px',
-                  backgroundColor: activeTab === 'settings' ? 'var(--primary-yellow)' : 'transparent',
-                  fontWeight: activeTab === 'settings' ? 800 : 600,
-                  color: activeTab === 'settings' ? '#222' : '#444'
-                }}
-                onClick={() => setActiveTab('settings')}
-              >
-                <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <Settings size={18} /> Setări Cont
-                </span>
-                <ChevronRight size={16} />
-              </button>
-
-              <div style={{ height: '1px', backgroundColor: '#EBEBEB', margin: '8px 0' }} />
-
-              <button
-                onClick={onLogout}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
-                  border: 'none',
-                  background: 'none',
-                  color: '#d9534f',
-                  fontSize: '14px',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  padding: '14px 16px'
-                }}
-              >
-                <LogOut size={18} /> Deconectare Din Cont
-              </button>
-            </div>
-          </aside>
-
-          {/* Right Main Content Card */}
-          <main
-            style={{
-              backgroundColor: '#FFFFFF',
-              borderRadius: '12px',
-              padding: '32px',
-              border: '1px solid #EBEBEB',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.03)'
-            }}
-          >
-            {/* TAB 1: ORDERS */}
-            {activeTab === 'orders' && (
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', borderBottom: '2px solid #F0F0F0', paddingBottom: '16px' }}>
-                  <div>
-                    <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#222' }}>Comenzile Mele</h2>
-                    <p style={{ fontSize: '13px', color: '#777', marginTop: '2px' }}>Istoricul și statusul livrărilor tale</p>
+          {/* Sidebar */}
+          <div>
+            <div style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', marginBottom: '24px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+                <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'var(--primary-yellow)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0F172A', fontSize: '24px', fontWeight: 800 }}>
+                  {userProfile.name.charAt(0)}
+                </div>
+                <div>
+                  <h3 style={{ margin: '0 0 4px 0', fontSize: '18px', fontWeight: 800, color: '#0F172A' }}>{userProfile.name}</h3>
+                  <div style={{ fontSize: '13px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <ShieldCheck size={14} color="#10B981" />
+                    Cont Verificat
                   </div>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <button
+                  onClick={() => setActiveTab('my_ads')}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
+                    backgroundColor: activeTab === 'my_ads' ? '#FFFDF0' : 'transparent',
+                    color: activeTab === 'my_ads' ? '#0F172A' : '#64748B',
+                    fontWeight: activeTab === 'my_ads' ? 800 : 600,
+                    fontSize: '15px', transition: 'all 0.2s'
+                  }}
+                >
+                  <LayoutGrid size={20} color={activeTab === 'my_ads' ? 'var(--primary-yellow)' : '#94A3B8'} />
+                  Anunțurile Mele
+                  <span style={{ marginLeft: 'auto', backgroundColor: activeTab === 'my_ads' ? 'var(--primary-yellow)' : '#F1F5F9', color: activeTab === 'my_ads' ? '#0F172A' : '#64748B', padding: '2px 8px', borderRadius: '12px', fontSize: '12px', fontWeight: 800 }}>
+                    {MOCK_MY_ADS.length}
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => setActiveTab('messages')}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
+                    backgroundColor: activeTab === 'messages' ? '#FFFDF0' : 'transparent',
+                    color: activeTab === 'messages' ? '#0F172A' : '#64748B',
+                    fontWeight: activeTab === 'messages' ? 800 : 600,
+                    fontSize: '15px', transition: 'all 0.2s'
+                  }}
+                >
+                  <MessageCircle size={20} color={activeTab === 'messages' ? 'var(--primary-yellow)' : '#94A3B8'} />
+                  Mesaje
+                  <span style={{ marginLeft: 'auto', backgroundColor: '#E55B86', color: '#FFF', padding: '2px 8px', borderRadius: '12px', fontSize: '12px', fontWeight: 800 }}>
+                    2
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => setActiveTab('favorites')}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
+                    backgroundColor: activeTab === 'favorites' ? '#FFFDF0' : 'transparent',
+                    color: activeTab === 'favorites' ? '#0F172A' : '#64748B',
+                    fontWeight: activeTab === 'favorites' ? 800 : 600,
+                    fontSize: '15px', transition: 'all 0.2s'
+                  }}
+                >
+                  <Heart size={20} color={activeTab === 'favorites' ? 'var(--primary-yellow)' : '#94A3B8'} />
+                  Favorite
+                </button>
+
+                <button
+                  onClick={() => setActiveTab('wallet')}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
+                    backgroundColor: activeTab === 'wallet' ? '#FFFDF0' : 'transparent',
+                    color: activeTab === 'wallet' ? '#0F172A' : '#64748B',
+                    fontWeight: activeTab === 'wallet' ? 800 : 600,
+                    fontSize: '15px', transition: 'all 0.2s'
+                  }}
+                >
+                  <Wallet size={20} color={activeTab === 'wallet' ? 'var(--primary-yellow)' : '#94A3B8'} />
+                  Portofel
+                </button>
+
+                <button
+                  onClick={() => setActiveTab('settings')}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
+                    backgroundColor: activeTab === 'settings' ? '#FFFDF0' : 'transparent',
+                    color: activeTab === 'settings' ? '#0F172A' : '#64748B',
+                    fontWeight: activeTab === 'settings' ? 800 : 600,
+                    fontSize: '15px', transition: 'all 0.2s'
+                  }}
+                >
+                  <Settings size={20} color={activeTab === 'settings' ? 'var(--primary-yellow)' : '#94A3B8'} />
+                  Setări
+                </button>
+              </div>
+            </div>
+
+            <button
+              onClick={onLogout}
+              style={{
+                width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', padding: '16px', borderRadius: '16px', border: '2px solid #F1F5F9', backgroundColor: '#FFFFFF', color: '#64748B', fontWeight: 700, fontSize: '15px', cursor: 'pointer', transition: 'all 0.2s'
+              }}
+            >
+              <LogOut size={18} />
+              Deconectare
+            </button>
+          </div>
+
+          {/* Main Content Area */}
+          <div>
+            
+            {/* MY ADS TAB */}
+            {activeTab === 'my_ads' && (
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+                  <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#0F172A', margin: 0 }}>Anunțurile Mele</h2>
+                  <button style={{ backgroundColor: '#0F172A', color: '#FFFFFF', border: 'none', padding: '12px 24px', borderRadius: '20px', fontWeight: 800, fontSize: '14px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                    <Plus size={18} />
+                    Adaugă Anunț Nou
+                  </button>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                  {MOCK_ORDERS.map((order) => (
-                    <div
-                      key={order.id}
-                      style={{
-                        border: '1px solid #EBEBEB',
-                        borderRadius: '12px',
-                        padding: '24px',
-                        backgroundColor: '#FFF'
-                      }}
-                    >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #F0F0F0', paddingBottom: '16px', marginBottom: '20px' }}>
+                  {MOCK_MY_ADS.map((ad) => (
+                    <div key={ad.id} style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', display: 'flex', gap: '24px', border: '1px solid #F1F5F9' }}>
+                      <img src={ad.image} alt={ad.title} style={{ width: '180px', height: '140px', objectFit: 'cover', borderRadius: '16px' }} />
+                      
+                      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                         <div>
-                          <span style={{ fontSize: '16px', fontWeight: 800 }}>ID Anunț: {order.id}</span>
-                          <span style={{ fontSize: '13px', color: '#777', marginLeft: '12px' }}>publicat pe {order.date}</span>
-                        </div>
-                        <span
-                          style={{
-                            fontSize: '13px',
-                            fontWeight: 700,
-                            padding: '6px 16px',
-                            borderRadius: '20px',
-                            backgroundColor: order.status === 'Activ' ? '#E6F4EA' : '#FEF3D6',
-                            color: order.status === 'Activ' ? '#137333' : '#B8860B',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '6px'
-                          }}
-                        >
-                          {order.status === 'Activ' ? <CheckCircle2 size={16} /> : <Truck size={16} />}
-                          {order.status}
-                        </span>
-                      </div>
-
-                      <div style={{ display: 'flex', gap: '16px', marginBottom: '20px', flexWrap: 'wrap' }}>
-                        {order.items.map(({ product, quantity }, index) => {
-                          if (!product) return null;
-                          return (
-                            <div key={product.id || index} style={{ display: 'flex', alignItems: 'center', gap: '12px', background: '#F8F8F8', padding: '12px 16px', borderRadius: '10px', flex: '1', minWidth: '220px' }}>
-                              <img src={product.image} alt={product.title} style={{ width: '54px', height: '54px', borderRadius: '8px', objectFit: 'cover' }} />
-                              <div>
-                                <div style={{ fontSize: '14px', fontWeight: 700 }}>{product.title}</div>
-                                <div style={{ fontSize: '13px', color: '#666', marginTop: '2px' }}>Mesaje/Favs: {quantity} • {product.price} €</div>
-                              </div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                            <div>
+                              <span style={{ fontSize: '12px', fontWeight: 800, color: '#64748B', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px', display: 'inline-block' }}>
+                                {ad.category}
+                              </span>
+                              <h3 style={{ margin: '0 0 8px 0', fontSize: '20px', fontWeight: 800, color: '#0F172A' }}>
+                                {ad.title}
+                              </h3>
                             </div>
-                          );
-                        })}
-                      </div>
+                            <div style={{ fontSize: '22px', fontWeight: 900, color: '#E55B86' }}>
+                              {ad.price} €
+                            </div>
+                          </div>
+                          
+                          <div style={{ display: 'flex', gap: '12px', marginTop: '4px' }}>
+                            <span style={{ 
+                              padding: '4px 10px', borderRadius: '8px', fontSize: '12px', fontWeight: 800,
+                              backgroundColor: ad.status === 'Activ' ? '#DCFCE7' : '#F1F5F9',
+                              color: ad.status === 'Activ' ? '#166534' : '#64748B'
+                            }}>
+                              {ad.status}
+                            </span>
+                            {ad.isPromoted && (
+                              <span style={{ padding: '4px 10px', borderRadius: '8px', fontSize: '12px', fontWeight: 800, backgroundColor: '#FFFDF0', color: '#B45309', border: '1px solid var(--primary-yellow)' }}>
+                                PROMOVAT 👑
+                              </span>
+                            )}
+                          </div>
+                        </div>
 
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '12px', borderTop: '1px solid #F8F8F8' }}>
-                        <span style={{ fontSize: '13px', color: '#555' }}>
-                          Referință: <strong style={{ color: '#222' }}>{order.awb}</strong>
-                        </span>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                          <span style={{ fontSize: '18px', fontWeight: 800, color: 'var(--pink-accent)' }}>
-                            Preț Total: {order.total} €
-                          </span>
-                          <button
-                            className="load-more-btn"
-                            style={{ padding: '10px 20px', fontSize: '12px' }}
-                            onClick={() => alert(`Detalii anunț ${order.awb} pe Easybox!`)}
-                          >
-                            Vezi Anunț
-                          </button>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                          <div style={{ display: 'flex', gap: '20px', color: '#64748B', fontSize: '13px', fontWeight: 600 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Eye size={16} /> {ad.views} vizualizări</div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Heart size={16} /> {ad.favorites} salvări</div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><MessageCircle size={16} /> {ad.messages} mesaje</div>
+                          </div>
+                          
+                          <div style={{ display: 'flex', gap: '12px' }}>
+                            <button style={{ padding: '10px 20px', borderRadius: '12px', border: '2px solid #E2E8F0', backgroundColor: '#FFFFFF', fontSize: '14px', fontWeight: 700, color: '#0F172A', cursor: 'pointer' }}>
+                              Editează
+                            </button>
+                            <button style={{ padding: '10px 20px', borderRadius: '12px', border: 'none', backgroundColor: 'var(--primary-yellow)', fontSize: '14px', fontWeight: 800, color: '#0F172A', cursor: 'pointer' }}>
+                              Promovează
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -380,51 +303,55 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
               </div>
             )}
 
-            {/* TAB 2: WISHLIST */}
-            {activeTab === 'wishlist' && (
-              <div>
-                <div style={{ marginBottom: '24px', borderBottom: '2px solid #F0F0F0', paddingBottom: '16px' }}>
-                  <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#222' }}>Produse Favorite</h2>
-                  <p style={{ fontSize: '13px', color: '#777', marginTop: '2px' }}>Pinurile pe care le-ai salvat pentru mai târziu</p>
+            {/* MESSAGES TAB */}
+            {activeTab === 'messages' && (
+              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '60px 24px', textAlign: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+                <div style={{ width: '80px', height: '80px', borderRadius: '50%', backgroundColor: '#F8FAFC', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px auto' }}>
+                  <MessageCircle size={40} color="#CBD5E1" />
                 </div>
+                <h3 style={{ fontSize: '20px', fontWeight: 800, color: '#0F172A', marginBottom: '12px' }}>Nu ai mesaje noi</h3>
+                <p style={{ color: '#64748B', maxWidth: '400px', margin: '0 auto' }}>Când cumpărătorii te vor contacta în legătură cu anunțurile tale, mesajele vor apărea aici.</p>
+              </div>
+            )}
 
+            {/* FAVORITES TAB */}
+            {activeTab === 'favorites' && (
+              <div>
+                <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#0F172A', marginBottom: '24px' }}>Anunțuri Favorite</h2>
                 {wishlist.length === 0 ? (
-                  <p style={{ color: '#888', textAlign: 'center', padding: '60px 0' }}>Nu ai salvat niciun produs la favorite.</p>
+                  <div style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '60px 24px', textAlign: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+                    <div style={{ width: '80px', height: '80px', borderRadius: '50%', backgroundColor: '#F8FAFC', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px auto' }}>
+                      <Heart size={40} color="#CBD5E1" />
+                    </div>
+                    <h3 style={{ fontSize: '20px', fontWeight: 800, color: '#0F172A', marginBottom: '12px' }}>Lista ta este goală</h3>
+                    <p style={{ color: '#64748B', maxWidth: '400px', margin: '0 auto 24px auto' }}>Salvează anunțurile care te interesează pentru a le găsi mai ușor mai târziu.</p>
+                    <button onClick={onBackToStore} style={{ padding: '14px 28px', borderRadius: '20px', border: 'none', backgroundColor: '#0F172A', color: '#FFF', fontSize: '15px', fontWeight: 800, cursor: 'pointer' }}>
+                      Descoperă Anunțuri
+                    </button>
+                  </div>
                 ) : (
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                     {wishlist.map((product) => (
-                      <div
-                        key={product.id}
-                        style={{
-                          border: '1px solid #EBEBEB',
-                          borderRadius: '12px',
-                          padding: '16px',
-                          display: 'flex',
-                          gap: '16px',
-                          alignItems: 'center'
-                        }}
-                      >
-                        <img src={product.image} alt={product.title} style={{ width: '80px', height: '80px', borderRadius: '8px', objectFit: 'cover' }} />
-                        <div style={{ flex: 1 }}>
-                          <h4 style={{ fontSize: '15px', fontWeight: 800 }}>{product.title}</h4>
-                          <div style={{ marginTop: '4px', fontSize: '15px', fontWeight: 800, color: 'var(--pink-accent)' }}>
-                            {product.price} €
+                      <div key={product.id} style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '16px', display: 'flex', gap: '16px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+                        <div style={{ position: 'relative' }}>
+                          <img src={product.image} alt={product.title} style={{ width: '120px', height: '120px', objectFit: 'cover', borderRadius: '16px' }} />
+                          <button
+                            onClick={() => removeFromWishlist(product.id)}
+                            style={{ position: 'absolute', top: '8px', right: '8px', width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#FFFFFF', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
+                          >
+                            <Trash2 size={16} color="#E55B86" />
+                          </button>
+                        </div>
+                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '4px 0' }}>
+                          <div>
+                            <span style={{ fontSize: '11px', fontWeight: 800, color: '#64748B', textTransform: 'uppercase' }}>{product.category}</span>
+                            <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0F172A', margin: '4px 0 8px 0', lineHeight: 1.3 }}>{product.title}</h3>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: '#64748B' }}>
+                              <MapPin size={12} /> București
+                            </div>
                           </div>
-                          <div style={{ marginTop: '12px', display: 'flex', gap: '10px' }}>
-                            <button
-                              className="checkout-btn"
-                              style={{ padding: '8px 16px', fontSize: '12px', width: 'auto' }}
-                              onClick={() => onAddToCart(product)}
-                            >
-                              <ShoppingBag size={14} style={{ display: 'inline', marginRight: '6px' }} /> Adaugă în Coș
-                            </button>
-                            <button
-                              className="icon-btn"
-                              onClick={() => removeFromWishlist(product.id)}
-                              style={{ color: '#999' }}
-                            >
-                              <Trash2 size={18} />
-                            </button>
+                          <div style={{ fontSize: '18px', fontWeight: 900, color: '#0F172A' }}>
+                            {product.price} €
                           </div>
                         </div>
                       </div>
@@ -434,120 +361,61 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
               </div>
             )}
 
-            {/* TAB 3: ADDRESSES */}
-            {activeTab === 'addresses' && (
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', borderBottom: '2px solid #F0F0F0', paddingBottom: '16px' }}>
-                  <div>
-                    <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#222' }}>Adrese de Livrare</h2>
-                    <p style={{ fontSize: '13px', color: '#777', marginTop: '2px' }}>Gestionează adresele Easybox și de acasă</p>
+            {/* WALLET TAB */}
+            {activeTab === 'wallet' && (
+              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '32px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+                <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#0F172A', marginBottom: '32px' }}>Portofelul Meu</h2>
+                
+                <div style={{ display: 'flex', gap: '24px', marginBottom: '40px' }}>
+                  <div style={{ flex: 1, backgroundColor: '#0F172A', borderRadius: '24px', padding: '32px', color: '#FFFFFF', position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ position: 'relative', zIndex: 2 }}>
+                      <div style={{ fontSize: '14px', fontWeight: 600, color: '#94A3B8', marginBottom: '8px' }}>Credit Disponibil</div>
+                      <div style={{ fontSize: '48px', fontWeight: 900, marginBottom: '24px' }}>{userProfile.credits} <span style={{ fontSize: '24px', color: 'var(--primary-yellow)' }}>monede</span></div>
+                      <button style={{ padding: '12px 24px', borderRadius: '16px', border: 'none', backgroundColor: 'var(--primary-yellow)', color: '#0F172A', fontSize: '15px', fontWeight: 800, cursor: 'pointer' }}>
+                        Cumpără Credit
+                      </button>
+                    </div>
+                    <TrendingUp size={160} color="#1E293B" style={{ position: 'absolute', right: '-20px', bottom: '-40px', zIndex: 1, opacity: 0.5 }} />
                   </div>
-                  <button className="load-more-btn" style={{ padding: '10px 20px', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Plus size={16} /> Adaugă Adresă
-                  </button>
-                </div>
 
-                <div style={{ border: '2px solid var(--primary-yellow)', borderRadius: '12px', padding: '24px', backgroundColor: '#FFFDF5', marginBottom: '20px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-                    <span style={{ fontSize: '16px', fontWeight: 800 }}>Easybox Afi Cotroceni (Implicită)</span>
-                    <span style={{ fontSize: '11px', fontWeight: 800, backgroundColor: 'var(--primary-yellow)', padding: '4px 10px', borderRadius: '4px' }}>EASYBOX</span>
+                  <div style={{ flex: 1, backgroundColor: '#F8FAFC', borderRadius: '24px', padding: '32px', border: '2px dashed #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+                    <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+                      <Eye size={24} color="#E55B86" />
+                    </div>
+                    <h4 style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A', margin: '0 0 8px 0' }}>Promovează-ți anunțurile</h4>
+                    <p style={{ fontSize: '13px', color: '#64748B', margin: 0, maxWidth: '200px' }}>Folosește monedele pentru a ajunge la mai mulți cumpărători.</p>
                   </div>
-                  <p style={{ fontSize: '14px', color: '#555', lineHeight: '1.5' }}>
-                    Bulevardul Vasile Milea 4, București, Sector 6<br />
-                    Telefon de contact: +40 722 123 456
-                  </p>
-                </div>
-
-                <div style={{ border: '1px solid #EBEBEB', borderRadius: '12px', padding: '24px', backgroundColor: '#FFF' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-                    <span style={{ fontSize: '16px', fontWeight: 800 }}>Adresă Domiciul (Curier Rapid)</span>
-                    <span style={{ fontSize: '11px', fontWeight: 800, backgroundColor: '#F0F0F0', padding: '4px 10px', borderRadius: '4px' }}>CURIER</span>
-                  </div>
-                  <p style={{ fontSize: '14px', color: '#555', lineHeight: '1.5' }}>
-                    Strada Lipscani Nr. 15, Ap. 4, București, Sector 3<br />
-                    Telefon de contact: +40 722 123 456
-                  </p>
                 </div>
               </div>
             )}
 
-            {/* TAB 4: PAYMENTS */}
-            {activeTab === 'payments' && (
-              <div>
-                <div style={{ marginBottom: '24px', borderBottom: '2px solid #F0F0F0', paddingBottom: '16px' }}>
-                  <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#222' }}>Metode de Plată</h2>
-                  <p style={{ fontSize: '13px', color: '#777', marginTop: '2px' }}>Cardurile tale salvate pentru checkout rapid</p>
-                </div>
-
-                <div style={{ border: '1px solid #EBEBEB', borderRadius: '12px', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: '500px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                    <div style={{ background: '#1A1F71', color: 'white', fontWeight: 'bold', padding: '10px 14px', borderRadius: '6px', fontSize: '14px' }}>
-                      VISA
-                    </div>
-                    <div>
-                      <div style={{ fontSize: '15px', fontWeight: 800 }}>Visa de la Banca Transilvania</div>
-                      <div style={{ fontSize: '13px', color: '#777' }}>•••• •••• •••• 4242 (Expira 08/28)</div>
-                    </div>
-                  </div>
-                  <span style={{ fontSize: '12px', color: '#2b8a3e', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <ShieldCheck size={16} /> Verificat
-                  </span>
-                </div>
-              </div>
-            )}
-
-            {/* TAB 5: SETTINGS */}
+            {/* SETTINGS TAB */}
             {activeTab === 'settings' && (
-              <div>
-                <div style={{ marginBottom: '24px', borderBottom: '2px solid #F0F0F0', paddingBottom: '16px' }}>
-                  <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#222' }}>Setări Cont</h2>
-                  <p style={{ fontSize: '13px', color: '#777', marginTop: '2px' }}>Editează informațiile personale ale contului</p>
-                </div>
-
-                <form onSubmit={(e) => { e.preventDefault(); alert('Datele au fost salvate cu succes!'); }} style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '450px' }}>
+              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '32px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+                <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#0F172A', marginBottom: '32px' }}>Setări Cont</h2>
+                
+                <div style={{ maxWidth: '500px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
                   <div>
-                    <label style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', color: '#444' }}>Nume complet</label>
-                    <div className="newsletter-input-wrapper" style={{ marginTop: '6px', background: '#F8F8F8' }}>
-                      <input
-                        type="text"
-                        className="newsletter-input"
-                        value={userProfile.name}
-                        onChange={(e) => setUserProfile({ ...userProfile, name: e.target.value })}
-                      />
-                    </div>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#475569', marginBottom: '8px' }}>Nume Complet</label>
+                    <input type="text" defaultValue={userProfile.name} style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '2px solid #E2E8F0', fontSize: '15px', fontWeight: 600, color: '#0F172A', outline: 'none' }} />
                   </div>
-
                   <div>
-                    <label style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', color: '#444' }}>Adresă de e-mail</label>
-                    <div className="newsletter-input-wrapper" style={{ marginTop: '6px', background: '#F8F8F8' }}>
-                      <input
-                        type="email"
-                        className="newsletter-input"
-                        value={userProfile.email}
-                        onChange={(e) => setUserProfile({ ...userProfile, email: e.target.value })}
-                      />
-                    </div>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#475569', marginBottom: '8px' }}>Adresă de Email</label>
+                    <input type="email" defaultValue={userProfile.email} style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '2px solid #E2E8F0', fontSize: '15px', fontWeight: 600, color: '#0F172A', outline: 'none' }} />
                   </div>
-
                   <div>
-                    <label style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', color: '#444' }}>Număr de telefon</label>
-                    <div className="newsletter-input-wrapper" style={{ marginTop: '6px', background: '#F8F8F8' }}>
-                      <input
-                        type="tel"
-                        className="newsletter-input"
-                        value={userProfile.phone}
-                        onChange={(e) => setUserProfile({ ...userProfile, phone: e.target.value })}
-                      />
-                    </div>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#475569', marginBottom: '8px' }}>Număr Telefon</label>
+                    <input type="tel" defaultValue={userProfile.phone} style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '2px solid #E2E8F0', fontSize: '15px', fontWeight: 600, color: '#0F172A', outline: 'none' }} />
                   </div>
-
-                  <button className="checkout-btn" type="submit" style={{ marginTop: '10px' }}>
-                    SALVEAZĂ MODIFICĂRILE
+                  
+                  <button style={{ marginTop: '12px', padding: '16px', borderRadius: '16px', border: 'none', backgroundColor: '#0F172A', color: '#FFFFFF', fontSize: '15px', fontWeight: 800, cursor: 'pointer' }}>
+                    Salvează Modificările
                   </button>
-                </form>
+                </div>
               </div>
             )}
-          </main>
+            
+          </div>
         </div>
       </div>
     </div>
