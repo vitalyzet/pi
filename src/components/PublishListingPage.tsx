@@ -39,6 +39,7 @@ interface PublishListingPageProps {
 }
 
 const CATEGORIES_GRID = [
+  // Available Categories
   { id: 'Imobiliare', label: 'Imobiliare', icon: <Home size={22} color="#475569" />, isNew: true },
   { id: 'Auto', label: 'Auto & Moto', icon: <Car size={22} color="#475569" /> },
   { id: 'Locuri de muncă', label: 'Locuri de muncă', icon: <Briefcase size={22} color="#475569" /> },
@@ -47,10 +48,12 @@ const CATEGORIES_GRID = [
   { id: 'Electronice', label: 'Electronice', icon: <Smartphone size={22} color="#475569" /> },
   { id: 'Modă', label: 'Modă', icon: <Shirt size={22} color="#475569" /> },
   { id: 'Animale', label: 'Animale', icon: <PawPrint size={22} color="#475569" /> },
-  { id: 'Casă & Grădină', label: 'Casă & Grădină', icon: <Armchair size={22} color="#475569" /> },
-  { id: 'Sport', label: 'Sport', icon: <Dumbbell size={22} color="#94A3B8" />, isDisabled: true },
-  { id: 'Copii', label: 'Copii', icon: <Baby size={22} color="#475569" /> },
   { id: 'Turism', label: 'Turism', icon: <Plane size={22} color="#475569" /> },
+
+  // Disabled Categories at the very end
+  { id: 'Casă & Grădină', label: 'Casă & Grădină', icon: <Armchair size={22} color="#94A3B8" />, isDisabled: true },
+  { id: 'Sport', label: 'Sport', icon: <Dumbbell size={22} color="#94A3B8" />, isDisabled: true },
+  { id: 'Copii', label: 'Copii', icon: <Baby size={22} color="#94A3B8" />, isDisabled: true },
   { id: 'Gaming', label: 'Gaming', icon: <Gamepad2 size={22} color="#94A3B8" />, isDisabled: true }
 ];
 
