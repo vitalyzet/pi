@@ -16,6 +16,7 @@ import { AutoPublishModal } from './components/AutoPublishModal';
 import { AutoDetailModal } from './components/AutoDetailModal';
 import { ProductDetailPage } from './components/ProductDetailPage';
 import { PRODUCTS, Product } from './data/products';
+import { saveListingToFirebase, fetchListingsFromFirebase } from './lib/firebase';
 
 export const App: React.FC = () => {
   // Page View Mode: 'store' | 'dashboard' | 'admin'
@@ -38,6 +39,19 @@ export const App: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('pinpin_products', JSON.stringify(productList));
   }, [productList]);
+
+  // Fetch Firebase listings on mount
+  useEffect(() => {
+    fetchListingsFromFirebase().then((firebaseListings) => {
+      if (firebaseListings.length > 0) {
+        setProductList((prev) => {
+          const existingIds = new Set(prev.map((p) => p.id));
+          const newItems = firebaseListings.filter((p) => !existingIds.has(p.id));
+          return [...newItems, ...prev];
+        });
+      }
+    });
+  }, []);
 
   // View Mode: 'classic' (4 cards) | 'pro' (5 cards)
   const [viewMode, setViewMode] = useState<'classic' | 'pro'>('classic');
@@ -67,12 +81,13 @@ export const App: React.FC = () => {
 
   const handlePublishProduct = (newProd: Product) => {
     setProductList((prev) => [newProd, ...prev]);
-    // Reset filters so the new product is visible at the very top
+    saveListingToFirebase(newProd);
+
     setSelectedCategory('Toate');
     setSelectedFeeling('Toate');
     setSelectedDesign('Toate');
     setSelectedColor('Toate');
-    setToastMessage('Anunțul tău a fost publicat și este vizibil acum!');
+    setToastMessage('Anunțul tău a fost publicat și salvat în Firebase!');
     setTimeout(() => setToastMessage(null), 3500);
   };
 
