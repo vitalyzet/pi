@@ -82,7 +82,7 @@ export const App: React.FC = () => {
   const [isAutoPublishOpen, setIsAutoPublishOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [favorites, setFavorites] = useState<Product[]>([PRODUCTS[1], PRODUCTS[4], PRODUCTS[5]]);
+  const [favorites, setFavorites] = useState<Product[]>([]);
 
   const handleToggleFavorite = (product: Product) => {
     setFavorites((prev) => {

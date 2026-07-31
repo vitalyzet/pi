@@ -30,8 +30,11 @@ export const analyticsPromise = isSupported().then(yes => yes ? getAnalytics(app
  */
 export async function saveListingToFirebase(product: Product) {
   try {
+    // Firebase doesn't accept undefined values, so we strip them via JSON serialization
+    const safeProduct = JSON.parse(JSON.stringify(product));
+    
     const savePromise = addDoc(collection(db, "listings"), {
-      ...product,
+      ...safeProduct,
       createdAt: new Date().toISOString()
     });
 
