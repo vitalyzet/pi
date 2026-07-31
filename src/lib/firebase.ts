@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
-import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, setDoc, doc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { Product } from "../data/products";
 
@@ -33,9 +33,9 @@ export async function saveListingToFirebase(product: Product) {
     // Firebase doesn't accept undefined values, so we strip them via JSON serialization
     const safeProduct = JSON.parse(JSON.stringify(product));
     
-    const savePromise = addDoc(collection(db, "listings"), {
+    const savePromise = setDoc(doc(db, "listings", product.id), {
       ...safeProduct,
-      createdAt: new Date().toISOString()
+      createdAt: safeProduct.createdAt || new Date().toISOString()
     });
 
     // Timeout race (3 seconds) to prevent hanging UI on CORS/network block
@@ -43,9 +43,9 @@ export async function saveListingToFirebase(product: Product) {
       setTimeout(() => reject(new Error("Firestore save timeout")), 3000)
     );
 
-    const docRef = (await Promise.race([savePromise, timeoutPromise])) as any;
-    console.log("Listing saved to Firebase with ID: ", docRef?.id);
-    return docRef?.id;
+    await Promise.race([savePromise, timeoutPromise]);
+    console.log("Listing saved to Firebase with ID: ", product.id);
+    return product.id;
   } catch (e) {
     console.warn("Firestore save warning (persisted locally): ", e);
     return null;
