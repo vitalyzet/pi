@@ -1,0 +1,450 @@
+import React, { useState } from 'react';
+import {
+  ArrowLeft,
+  Phone,
+  MessageCircle,
+  ShoppingBag,
+  Calendar,
+  Gauge,
+  Fuel,
+  Sliders,
+  ShieldCheck,
+  MapPin,
+  User,
+  Heart,
+  Share2,
+  CheckCircle,
+  Truck,
+  RotateCcw,
+  Sparkles,
+  Flag,
+  Clock,
+  Settings
+} from 'lucide-react';
+import { Product } from '../data/products';
+
+interface ProductDetailPageProps {
+  product: Product;
+  onBack: () => void;
+  onAddToCart: (product: Product, quantity: number) => void;
+  onSelectProduct: (product: Product) => void;
+  relatedProducts: Product[];
+}
+
+export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
+  product,
+  onBack,
+  onAddToCart,
+  onSelectProduct,
+  relatedProducts,
+}) => {
+  const [quantity, setQuantity] = useState(1);
+  const [showPhone, setShowPhone] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const isAuto = product.category === 'Auto' || product.title.toLowerCase().includes('polo') || product.title.toLowerCase().includes('bmw');
+
+  return (
+    <div className="product-detail-page-container" style={{ maxWidth: '1280px', margin: '0 auto', padding: '24px 24px 60px 24px' }}>
+      {/* Breadcrumb & Back Navigation */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+        <button
+          onClick={onBack}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            background: '#F1F5F9',
+            border: '1px solid #CBD5E1',
+            borderRadius: '12px',
+            padding: '10px 18px',
+            fontSize: '14px',
+            fontWeight: 800,
+            color: '#0F172A',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease'
+          }}
+        >
+          <ArrowLeft size={18} /> Înapoi la Magazin
+        </button>
+
+        <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 600 }}>
+          <span>Acasă</span> &gt; <span style={{ color: '#0F172A', fontWeight: 700 }}>{product.category}</span> &gt; <span>{product.title}</span>
+        </div>
+      </div>
+
+      {/* Main Internal Product Detail Layout */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '40px',
+          backgroundColor: '#FFFFFF',
+          borderRadius: '24px',
+          padding: '32px',
+          border: '1.5px solid #E2E8F0',
+          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)',
+          marginBottom: '50px'
+        }}
+      >
+        {/* Left Column: Gallery & Badges */}
+        <div>
+          <div style={{ position: 'relative', borderRadius: '20px', overflow: 'hidden', backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0' }}>
+            <img
+              src={product.image}
+              alt={product.title}
+              style={{ width: '100%', height: '480px', objectFit: 'cover' }}
+            />
+
+            {/* Discount Tag */}
+            {product.discountPercentage && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '20px',
+                  left: '20px',
+                  backgroundColor: 'var(--pink-accent)',
+                  color: '#FFFFFF',
+                  fontWeight: 800,
+                  fontSize: '14px',
+                  padding: '6px 14px',
+                  borderRadius: '10px',
+                  boxShadow: '0 4px 12px rgba(229, 91, 134, 0.3)'
+                }}
+              >
+                -{product.discountPercentage}%
+              </div>
+            )}
+
+            {/* Verified Badge */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '20px',
+                left: '20px',
+                backgroundColor: '#FFFFFF',
+                color: '#059669',
+                fontWeight: 800,
+                fontSize: '12px',
+                padding: '8px 16px',
+                borderRadius: '20px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                boxShadow: '0 4px 14px rgba(0,0,0,0.1)'
+              }}
+            >
+              <ShieldCheck size={18} color="#059669" />
+              ANUNȚ VERIFICAT PINPIN
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Title, Specs & Purchase Card */}
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div>
+            {/* Category Tag & Actions */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+              <span
+                style={{
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  letterSpacing: '1.5px',
+                  textTransform: 'uppercase',
+                  backgroundColor: '#FFFDF0',
+                  color: '#0F172A',
+                  padding: '6px 12px',
+                  borderRadius: '20px',
+                  border: '1px solid var(--primary-yellow)'
+                }}
+              >
+                {product.category}
+              </span>
+
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  onClick={() => setIsFavorite(!isFavorite)}
+                  style={{
+                    background: '#F1F5F9',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '38px',
+                    height: '38px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <Heart size={20} color={isFavorite ? '#E55B86' : '#64748B'} fill={isFavorite ? '#E55B86' : 'none'} />
+                </button>
+                <button
+                  style={{
+                    background: '#F1F5F9',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '38px',
+                    height: '38px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <Share2 size={20} color="#64748B" />
+                </button>
+              </div>
+            </div>
+
+            {/* Title */}
+            <h1 style={{ fontSize: '32px', fontWeight: 800, color: '#0F172A', margin: '0 0 16px 0', lineHeight: 1.25 }}>
+              {product.title}
+            </h1>
+
+            {/* Pricing Section */}
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px', marginBottom: '24px' }}>
+              <span style={{ fontSize: '36px', fontWeight: 800, color: '#E55B86' }}>
+                {product.price} lei
+              </span>
+              {product.originalPrice && (
+                <span style={{ fontSize: '20px', color: '#94A3B8', textDecoration: 'line-through', fontWeight: 600 }}>
+                  {product.originalPrice} lei
+                </span>
+              )}
+            </div>
+
+            {/* Automotive Specifications Grid (Matching Image 2 Layout) */}
+            {isAuto ? (
+              <div
+                style={{
+                  marginBottom: '28px',
+                  backgroundColor: '#F8FAFC',
+                  padding: '24px',
+                  borderRadius: '20px',
+                  border: '1px solid #E2E8F0'
+                }}
+              >
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: '24px 16px'
+                  }}
+                >
+                  {/* 1. Kilometraje */}
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ color: '#EA580C', flexShrink: 0, marginTop: '2px' }}>
+                      <Flag size={24} color="#EA580C" />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 500, marginBottom: '2px' }}>
+                        Kilometraje
+                      </div>
+                      <div style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A' }}>
+                        86.704 km
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 2. Potencia */}
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ color: '#EA580C', flexShrink: 0, marginTop: '2px' }}>
+                      <Clock size={24} color="#EA580C" />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 500, marginBottom: '2px' }}>
+                        Potencia
+                      </div>
+                      <div style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A' }}>
+                        375 kW (510 cv)
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 3. Transmisión */}
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ color: '#EA580C', flexShrink: 0, marginTop: '2px' }}>
+                      <Settings size={24} color="#EA580C" />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 500, marginBottom: '2px' }}>
+                        Transmisión
+                      </div>
+                      <div style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A' }}>
+                        Automático
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 4. Primer registro */}
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ color: '#EA580C', flexShrink: 0, marginTop: '2px' }}>
+                      <Calendar size={24} color="#EA580C" />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 500, marginBottom: '2px' }}>
+                        Primer registro
+                      </div>
+                      <div style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A' }}>
+                        10/2015
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 5. Propietarios */}
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ color: '#EA580C', flexShrink: 0, marginTop: '2px' }}>
+                      <User size={24} color="#EA580C" />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 500, marginBottom: '2px' }}>
+                        Propietarios
+                      </div>
+                      <div style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A' }}>
+                        1
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* Standard Product Features */
+              <div style={{ display: 'flex', gap: '20px', marginBottom: '28px', backgroundColor: '#F8FAFC', padding: '16px 20px', borderRadius: '16px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <Truck size={20} color="#059669" />
+                  <span style={{ fontSize: '13px', fontWeight: 700, color: '#334155' }}>Livrare Rapidă Easybox</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <RotateCcw size={20} color="#0284C7" />
+                  <span style={{ fontSize: '13px', fontWeight: 700, color: '#334155' }}>Retur Gratuit 14 Zile</span>
+                </div>
+              </div>
+            )}
+
+            {/* Description */}
+            <div style={{ marginBottom: '28px' }}>
+              <span style={{ fontSize: '12px', fontWeight: 800, color: '#64748B', letterSpacing: '1px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+                DESCRIERE DETALIATĂ
+              </span>
+              <p style={{ fontSize: '15px', color: '#334155', lineHeight: 1.6, margin: 0 }}>
+                {product.description || 'Anunț verificat pe platforma PinPin. Produs păstrat în condiții excelente, livrat rapid oriunde în țară cu posibilitate de verificare.'}
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom Seller Card & Contact Buttons */}
+          <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '20px', border: '1px solid #E2E8F0' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ width: '44px', height: '44px', borderRadius: '50%', backgroundColor: '#FEF08A', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: '#0F172A' }}>
+                  <User size={22} />
+                </div>
+                <div>
+                  <div style={{ fontSize: '14px', fontWeight: 800, color: '#0F172A' }}>
+                    Alex M. <CheckCircle size={15} color="#059669" style={{ display: 'inline', verticalAlign: 'middle' }} />
+                  </div>
+                  <div style={{ fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <MapPin size={13} /> București / Oradea
+                  </div>
+                </div>
+              </div>
+
+              <span style={{ fontSize: '12px', fontWeight: 800, color: '#059669', backgroundColor: '#ECFDF5', padding: '6px 12px', borderRadius: '8px' }}>
+                ★ 4.9 Vânzător Top
+              </span>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+              <button
+                onClick={() => setShowPhone(!showPhone)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  padding: '14px',
+                  borderRadius: '14px',
+                  border: '1.5px solid #059669',
+                  backgroundColor: showPhone ? '#ECFDF5' : '#059669',
+                  color: showPhone ? '#059669' : '#FFFFFF',
+                  fontSize: '14px',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                <Phone size={18} />
+                {showPhone ? '0745 123 456' : 'SUNĂ VÂNZĂTOR'}
+              </button>
+
+              <button
+                onClick={() => onAddToCart(product, quantity)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  padding: '14px',
+                  borderRadius: '14px',
+                  border: 'none',
+                  backgroundColor: '#FEA742',
+                  color: '#FFFFFF',
+                  fontSize: '14px',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  boxShadow: '0 6px 16px rgba(254, 167, 66, 0.35)'
+                }}
+              >
+                <ShoppingBag size={18} />
+                ADAUGĂ ÎN COȘ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Related / Similar Products Carousel */}
+      {relatedProducts.length > 0 && (
+        <section>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+            <h3 style={{ fontSize: '22px', fontWeight: 800, color: '#0F172A', margin: 0 }}>
+              Anunțuri Similare Recomandate
+            </h3>
+            <span style={{ fontSize: '14px', color: '#64748B', fontWeight: 600 }}>Vezi mai multe</span>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
+            {relatedProducts.slice(0, 4).map((relProduct) => (
+              <div
+                key={relProduct.id}
+                onClick={() => onSelectProduct(relProduct)}
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                  border: '1px solid #E2E8F0',
+                  cursor: 'pointer',
+                  transition: 'transform 0.2s ease',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.04)'
+                }}
+              >
+                <img src={relProduct.image} alt={relProduct.title} style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
+                <div style={{ padding: '16px' }}>
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--pink-accent)', textTransform: 'uppercase' }}>
+                    {relProduct.category}
+                  </span>
+                  <h4 style={{ fontSize: '15px', fontWeight: 800, color: '#0F172A', margin: '4px 0 8px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {relProduct.title}
+                  </h4>
+                  <div style={{ fontSize: '16px', fontWeight: 800, color: '#E55B86' }}>
+                    {relProduct.price} lei
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  );
+};

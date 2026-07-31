@@ -1,0 +1,380 @@
+import React, { useState, useMemo, useEffect } from 'react';
+import { Header } from './components/Header';
+import { FilterBar } from './components/FilterBar';
+import { ProductCard } from './components/ProductCard';
+import { CartDrawer, CartItem } from './components/CartDrawer';
+import { FeaturesSection } from './components/FeaturesSection';
+import { Footer } from './components/Footer';
+import { QuickViewModal } from './components/QuickViewModal';
+import { SearchModal } from './components/SearchModal';
+import { LoginModal } from './components/LoginModal';
+import { UserDashboardPage } from './components/UserDashboardPage';
+import { AdminPanelPage } from './components/AdminPanelPage';
+import { BrandMarquee } from './components/BrandMarquee';
+import { PublishModal } from './components/PublishModal';
+import { AutoPublishModal } from './components/AutoPublishModal';
+import { AutoDetailModal } from './components/AutoDetailModal';
+import { ProductDetailPage } from './components/ProductDetailPage';
+import { PRODUCTS, Product } from './data/products';
+
+export const App: React.FC = () => {
+  // Page View Mode: 'store' | 'dashboard' | 'admin'
+  const [currentView, setCurrentView] = useState<'store' | 'dashboard' | 'admin'>('store');
+
+  // Dynamic Store Settings
+  const [announcementText, setAnnouncementText] = useState('Livrare la Easybox');
+  const [productList, setProductList] = useState<Product[]>(() => {
+    const saved = localStorage.getItem('pinpin_products');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return PRODUCTS;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('pinpin_products', JSON.stringify(productList));
+  }, [productList]);
+
+  // View Mode: 'classic' (4 cards) | 'pro' (5 cards)
+  const [viewMode, setViewMode] = useState<'classic' | 'pro'>('classic');
+
+  // Filters & Sort State
+  const [selectedCategory, setSelectedCategory] = useState('Toate');
+  const [selectedFeeling, setSelectedFeeling] = useState('Toate');
+  const [selectedDesign, setSelectedDesign] = useState('Toate');
+  const [selectedColor, setSelectedColor] = useState('Toate');
+  const [sortBy, setSortBy] = useState('Recomandate');
+
+  // Pagination / Load More State
+  const [visibleCount, setVisibleCount] = useState(8);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+
+  // Cart & Modal State
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [selectedDetailProduct, setSelectedDetailProduct] = useState<Product | null>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isPublishOpen, setIsPublishOpen] = useState(false);
+  const [isAutoPublishOpen, setIsAutoPublishOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const handlePublishProduct = (newProd: Product) => {
+    setProductList((prev) => [newProd, ...prev]);
+    // Reset filters so the new product is visible at the very top
+    setSelectedCategory('Toate');
+    setSelectedFeeling('Toate');
+    setSelectedDesign('Toate');
+    setSelectedColor('Toate');
+    setToastMessage('Anunțul tău a fost publicat și este vizibil acum!');
+    setTimeout(() => setToastMessage(null), 3500);
+  };
+
+  // Cart Action Handlers
+  const handleAddToCart = (product: Product, quantity: number = 1) => {
+    setCartItems((prev) => {
+      const existing = prev.find((item) => item.product.id === product.id);
+      if (existing) {
+        return prev.map((item) =>
+          item.product.id === product.id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        );
+      }
+      return [...prev, { product, quantity }];
+    });
+
+    setToastMessage(`Adăugat în coș: ${product.title}`);
+    setTimeout(() => setToastMessage(null), 3000);
+  };
+
+  const handleUpdateQuantity = (productId: string, delta: number) => {
+    setCartItems((prev) =>
+      prev
+        .map((item) => {
+          if (item.product.id === productId) {
+            const newQty = item.quantity + delta;
+            return newQty > 0 ? { ...item, quantity: newQty } : null;
+          }
+          return item;
+        })
+        .filter(Boolean) as CartItem[]
+    );
+  };
+
+  const handleRemoveItem = (productId: string) => {
+    setCartItems((prev) => prev.filter((item) => item.product.id !== productId));
+  };
+
+  // Filter & Sort Logic
+  const filteredProducts = useMemo(() => {
+    let result = [...productList];
+
+    if (selectedCategory !== 'Toate') {
+      result = result.filter((p) => p.category === selectedCategory);
+    }
+    if (selectedFeeling !== 'Toate') {
+      result = result.filter((p) => p.feeling === selectedFeeling);
+    }
+    if (selectedDesign !== 'Toate') {
+      result = result.filter((p) => p.design === selectedDesign);
+    }
+    if (selectedColor !== 'Toate') {
+      result = result.filter((p) => p.color === selectedColor);
+    }
+
+    if (sortBy === 'Preț: Mic la Mare') {
+      result.sort((a, b) => a.price - b.price);
+    } else if (sortBy === 'Preț: Mare la Mic') {
+      result.sort((a, b) => b.price - a.price);
+    }
+
+    return result;
+  }, [productList, selectedCategory, selectedFeeling, selectedDesign, selectedColor, sortBy]);
+
+  const displayedProducts = filteredProducts.slice(0, visibleCount);
+  const totalCount = 157 + (productList.length - PRODUCTS.length);
+  const displayedCount = Math.min(totalCount, Math.max(40, displayedProducts.length * 5));
+
+  const totalCartItemsCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  const handleUserClick = () => {
+    if (isLoggedIn) {
+      setCurrentView('dashboard');
+    } else {
+      setIsLoginOpen(true);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-white flex flex-col">
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div
+          style={{
+            position: 'fixed',
+            bottom: '24px',
+            right: '24px',
+            backgroundColor: '#222',
+            color: '#fff',
+            padding: '14px 24px',
+            borderRadius: '8px',
+            zIndex: 1000,
+            fontSize: '14px',
+            fontWeight: 600,
+            boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
+            animation: 'fadeIn 0.3s ease'
+          }}
+        >
+          ✓ {toastMessage}
+        </div>
+      )}
+
+      {/* Header */}
+      <Header
+        cartCount={totalCartItemsCount}
+        isLoggedIn={isLoggedIn}
+        announcementText={announcementText}
+        onOpenCart={() => setIsCartOpen(true)}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenUser={handleUserClick}
+        onOpenAdmin={() => setCurrentView('admin')}
+        onGoToStore={() => setCurrentView('store')}
+        onOpenPublish={() => setIsPublishOpen(true)}
+      />
+
+      {/* MAIN VIEW SWITCH */}
+      {currentView === 'admin' ? (
+        <AdminPanelPage
+          onBackToStore={() => setCurrentView('store')}
+          announcementText={announcementText}
+          onUpdateAnnouncement={(text) => setAnnouncementText(text)}
+          onAddProduct={(newProd) => setProductList([newProd, ...productList])}
+        />
+      ) : currentView === 'dashboard' ? (
+        <UserDashboardPage
+          onBackToStore={() => setCurrentView('store')}
+          onLogout={() => {
+            setIsLoggedIn(false);
+            setCurrentView('store');
+            setToastMessage('Te-ai deconectat cu succes.');
+            setTimeout(() => setToastMessage(null), 3000);
+          }}
+          onAddToCart={(p) => handleAddToCart(p, 1)}
+        />
+      ) : selectedDetailProduct ? (
+        <ProductDetailPage
+          product={selectedDetailProduct}
+          onBack={() => setSelectedDetailProduct(null)}
+          onAddToCart={(p, qty) => handleAddToCart(p, qty)}
+          onSelectProduct={(p) => setSelectedDetailProduct(p)}
+          relatedProducts={productList.filter(
+            (p) => p.id !== selectedDetailProduct.id && p.category === selectedDetailProduct.category
+          )}
+        />
+      ) : (
+        <>
+          {/* Category Header */}
+          <section className="category-header-section">
+            <h1 className="category-main-title">Pinuri colorate</h1>
+          </section>
+
+          {/* Filter Bar */}
+          <FilterBar
+            selectedCategory={selectedCategory}
+            selectedFeeling={selectedFeeling}
+            selectedDesign={selectedDesign}
+            selectedColor={selectedColor}
+            sortBy={sortBy}
+            productCount={displayedProducts.length}
+            viewMode={viewMode}
+            onSelectCategory={(val) => {
+              setSelectedCategory(val);
+              setVisibleCount(8);
+            }}
+            onSelectFeeling={setSelectedFeeling}
+            onSelectDesign={setSelectedDesign}
+            onSelectColor={setSelectedColor}
+            onSelectSort={setSortBy}
+            onToggleViewMode={(mode) => setViewMode(mode)}
+          />
+
+          {/* Main Product Grid */}
+          <main className="product-grid-container">
+            <div className={`product-grid ${viewMode === 'pro' ? 'pro-mode' : ''}`}>
+              {displayedProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onAddToCart={(p) => handleAddToCart(p, 1)}
+                  onQuickView={(p) => setSelectedDetailProduct(p)}
+                />
+              ))}
+            </div>
+
+            {/* Load More & Viewing Progress Section */}
+            <div className="load-more-section">
+              <div className="progress-text">
+                Ai vizualizat {displayedCount} din {totalCount} produse
+              </div>
+              <div className="progress-bar-track">
+                <div
+                  className="progress-bar-fill"
+                  style={{ width: `${(displayedCount / totalCount) * 100}%` }}
+                />
+              </div>
+              {displayedCount < totalCount && (
+                <button
+                  className="load-more-btn"
+                  disabled={isLoadingMore}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}
+                  onClick={() => {
+                    setIsLoadingMore(true);
+                    setTimeout(() => {
+                      setVisibleCount((prev) => prev + 4);
+                      setIsLoadingMore(false);
+                    }, 800);
+                  }}
+                >
+                  {isLoadingMore ? (
+                    <>
+                      <span className="spinner" /> SE ÎNCARCĂ...
+                    </>
+                  ) : (
+                    'ÎNCARCĂ MAI MULTE'
+                  )}
+                </button>
+              )}
+            </div>
+          </main>
+
+          {/* Features Section */}
+          <FeaturesSection />
+
+          {/* Car Brands Infinite Auto-Slider Marquee */}
+          <BrandMarquee onSelectBrand={(brandName) => {
+            setSelectedCategory('Auto');
+            setToastMessage(`Filtrat după marca ${brandName}`);
+            setTimeout(() => setToastMessage(null), 2500);
+          }} />
+
+          {/* Recommendations Section */}
+          <section className="recommendations-section">
+            <h2 className="section-heading" style={{ textAlign: 'center', marginBottom: '40px' }}>
+              Recomandările noastre
+            </h2>
+            <div className="product-grid">
+              {productList.slice(0, 4).map((product) => (
+                <ProductCard
+                  key={`rec-${product.id}`}
+                  product={product}
+                  onAddToCart={(p) => handleAddToCart(p, 1)}
+                  onQuickView={(p) => setQuickViewProduct(p)}
+                />
+              ))}
+            </div>
+          </section>
+        </>
+      )}
+
+      {/* Footer */}
+      <Footer />
+
+      {/* Modals & Drawers */}
+      <CartDrawer
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        items={cartItems}
+        onUpdateQuantity={handleUpdateQuantity}
+        onRemoveItem={handleRemoveItem}
+      />
+
+      {quickViewProduct && (quickViewProduct.category === 'Auto' || quickViewProduct.title.toLowerCase().includes('polo') || quickViewProduct.title.toLowerCase().includes('bmw')) ? (
+        <AutoDetailModal
+          product={quickViewProduct}
+          onClose={() => setQuickViewProduct(null)}
+          onAddToCart={(product, qty) => handleAddToCart(product, qty)}
+        />
+      ) : (
+        <QuickViewModal
+          product={quickViewProduct}
+          onClose={() => setQuickViewProduct(null)}
+          onAddToCart={(product, qty) => handleAddToCart(product, qty)}
+        />
+      )}
+
+      <SearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        onSelectProduct={(p) => setSelectedDetailProduct(p)}
+      />
+
+      <LoginModal
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+      />
+
+      <PublishModal
+        isOpen={isPublishOpen}
+        onClose={() => setIsPublishOpen(false)}
+        onPublishProduct={handlePublishProduct}
+        onOpenAutoPublish={() => {
+          setIsPublishOpen(false);
+          setIsAutoPublishOpen(true);
+        }}
+      />
+
+      <AutoPublishModal
+        isOpen={isAutoPublishOpen}
+        onClose={() => setIsAutoPublishOpen(false)}
+        onPublishProduct={handlePublishProduct}
+      />
+    </div>
+  );
+};
