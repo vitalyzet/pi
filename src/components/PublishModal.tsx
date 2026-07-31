@@ -137,11 +137,14 @@ export const PublishModal: React.FC<PublishModalProps> = ({
     <div
       style={{
         position: 'fixed',
-        inset: 0,
-        backgroundColor: 'rgba(15, 23, 42, 0.75)',
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)',
-        zIndex: 9999,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(15, 23, 42, 0.85)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        zIndex: 99999,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -157,9 +160,9 @@ export const PublishModal: React.FC<PublishModalProps> = ({
           overflow: 'hidden',
           backgroundColor: '#FFFFFF',
           opacity: 1,
-          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.35)',
+          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.45)',
           position: 'relative',
-          zIndex: 10000
+          zIndex: 100000
         }}
       >
         {/* Header */}
@@ -254,9 +257,6 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                           key={cat.id}
                           onClick={() => {
                             setCategory(cat.id);
-                            if (cat.id === 'Auto' && onOpenAutoPublish) {
-                              onOpenAutoPublish();
-                            }
                           }}
                           style={{
                             display: 'flex',
@@ -264,8 +264,8 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                             gap: '12px',
                             padding: '12px 16px',
                             borderRadius: '16px',
-                            border: isSelected ? '2px solid #E55B86' : '1.5px solid #E2E8F0',
-                            backgroundColor: isSelected ? '#FFFDF0' : '#F8FAFC',
+                            border: isSelected ? '2px solid #E55B86' : '1.5px solid #CBD5E1',
+                            backgroundColor: isSelected ? '#FFF0F5' : '#FFFFFF',
                             cursor: 'pointer',
                             transition: 'all 0.2s ease',
                             boxShadow: isSelected ? '0 4px 14px rgba(229, 91, 134, 0.18)' : 'none'

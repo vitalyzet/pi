@@ -106,11 +106,14 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
     <div
       style={{
         position: 'fixed',
-        inset: 0,
-        backgroundColor: 'rgba(15, 23, 42, 0.75)',
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)',
-        zIndex: 9999,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(15, 23, 42, 0.85)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        zIndex: 99999,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -125,9 +128,9 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
           overflow: 'hidden',
           backgroundColor: '#FFFFFF',
           opacity: 1,
-          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.35)',
+          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.45)',
           position: 'relative',
-          zIndex: 10000
+          zIndex: 100000
         }}
       >
         {/* Header */}
