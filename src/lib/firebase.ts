@@ -76,6 +76,7 @@ export async function fetchListingsFromFirebase(): Promise<Product[]> {
             price: numericPrice || 0,
             originalPrice: data.originalPrice || Math.round((numericPrice || 100) * 1.15),
             image: data.image || (data.images && data.images.length > 0 ? data.images[0] : '/images/coches.png'),
+            images: data.images,
             category: categoryName,
             feeling: 'Work',
             design: 'Special',
@@ -101,7 +102,17 @@ export async function fetchListingsFromFirebase(): Promise<Product[]> {
       }
     }
 
-    return allProducts;
+    // Deduplicate by title to prevent same ad from multiple collections showing up twice
+    const uniqueMap = new Map<string, Product>();
+    allProducts.forEach(p => {
+      const key = `${p.title.toLowerCase().trim()}-${p.price}`;
+      // Prefer the one that has images array populated
+      if (!uniqueMap.has(key) || (p.images && p.images.length > 1)) {
+        uniqueMap.set(key, p);
+      }
+    });
+
+    return Array.from(uniqueMap.values());
   } catch (e) {
     console.warn("Firestore fetch warning: ", e);
     return [];
