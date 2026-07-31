@@ -39,19 +39,19 @@ interface PublishListingPageProps {
 }
 
 const CATEGORIES_GRID = [
-  { id: 'Imobiliare', label: 'Imobiliare', icon: <Home size={28} color="#475569" />, isNew: true },
-  { id: 'Auto', label: 'Auto & Moto', icon: <Car size={28} color="#475569" /> },
-  { id: 'Locuri de muncă', label: 'Locuri de muncă', icon: <Briefcase size={28} color="#475569" /> },
-  { id: 'Matrimoniale', label: 'Matrimoniale', icon: <Heart size={28} color="#475569" /> },
-  { id: 'Servicii', label: 'Servicii', icon: <Wrench size={28} color="#475569" /> },
-  { id: 'Electronice', label: 'Electronice', icon: <Smartphone size={28} color="#475569" /> },
-  { id: 'Modă', label: 'Modă', icon: <Shirt size={28} color="#475569" /> },
-  { id: 'Animale', label: 'Animale', icon: <PawPrint size={28} color="#475569" /> },
-  { id: 'Casă & Grădină', label: 'Casă & Grădină', icon: <Armchair size={28} color="#475569" /> },
-  { id: 'Sport', label: 'Sport', icon: <Dumbbell size={28} color="#475569" /> },
-  { id: 'Copii', label: 'Copii', icon: <Baby size={28} color="#475569" /> },
-  { id: 'Turism', label: 'Turism', icon: <Plane size={28} color="#475569" /> },
-  { id: 'Gaming', label: 'Gaming', icon: <Gamepad2 size={28} color="#475569" /> }
+  { id: 'Imobiliare', label: 'Imobiliare', icon: <Home size={22} color="#475569" />, isNew: true },
+  { id: 'Auto', label: 'Auto & Moto', icon: <Car size={22} color="#475569" /> },
+  { id: 'Locuri de muncă', label: 'Locuri de muncă', icon: <Briefcase size={22} color="#475569" /> },
+  { id: 'Matrimoniale', label: 'Matrimoniale', icon: <Heart size={22} color="#475569" /> },
+  { id: 'Servicii', label: 'Servicii', icon: <Wrench size={22} color="#475569" /> },
+  { id: 'Electronice', label: 'Electronice', icon: <Smartphone size={22} color="#475569" /> },
+  { id: 'Modă', label: 'Modă', icon: <Shirt size={22} color="#475569" /> },
+  { id: 'Animale', label: 'Animale', icon: <PawPrint size={22} color="#475569" /> },
+  { id: 'Casă & Grădină', label: 'Casă & Grădină', icon: <Armchair size={22} color="#475569" /> },
+  { id: 'Sport', label: 'Sport', icon: <Dumbbell size={22} color="#475569" /> },
+  { id: 'Copii', label: 'Copii', icon: <Baby size={22} color="#475569" /> },
+  { id: 'Turism', label: 'Turism', icon: <Plane size={22} color="#475569" /> },
+  { id: 'Gaming', label: 'Gaming', icon: <Gamepad2 size={22} color="#475569" /> }
 ];
 
 export const PublishListingPage: React.FC<PublishListingPageProps> = ({
@@ -212,8 +212,8 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                 <div
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(4, 1fr)',
-                    gap: '20px'
+                    gridTemplateColumns: 'repeat(5, 1fr)',
+                    gap: '14px'
                   }}
                 >
                   {CATEGORIES_GRID.map((cat) => (
@@ -222,39 +222,39 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                       onClick={() => handleSelectCategory(cat.id)}
                       style={{
                         backgroundColor: '#FFFFFF',
-                        borderRadius: '24px',
-                        padding: '24px 16px',
+                        borderRadius: '18px',
+                        padding: '16px 12px',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        gap: '12px',
+                        gap: '10px',
                         cursor: 'pointer',
-                        boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)',
+                        boxShadow: '0 2px 6px rgba(15, 23, 42, 0.03)',
                         border: '1.5px solid #F1F5F9',
                         transition: 'all 0.2s ease',
                         position: 'relative'
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-4px)';
-                        e.currentTarget.style.boxShadow = '0 12px 24px rgba(15, 23, 42, 0.08)';
+                        e.currentTarget.style.transform = 'translateY(-3px)';
+                        e.currentTarget.style.boxShadow = '0 8px 18px rgba(15, 23, 42, 0.08)';
                         e.currentTarget.style.borderColor = '#CBD5E1';
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(15, 23, 42, 0.04)';
+                        e.currentTarget.style.boxShadow = '0 2px 6px rgba(15, 23, 42, 0.03)';
                         e.currentTarget.style.borderColor = '#F1F5F9';
                       }}
                     >
-                      {/* Squircle Icon Box */}
+                      {/* Compact Squircle Icon Box */}
                       <div
                         style={{
-                          width: '64px',
-                          height: '64px',
-                          borderRadius: '20px',
+                          width: '48px',
+                          height: '48px',
+                          borderRadius: '14px',
                           backgroundColor: '#FFFFFF',
                           border: '1.5px solid #F1F5F9',
-                          boxShadow: '0 4px 12px rgba(15, 23, 42, 0.04)',
+                          boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -268,15 +268,15 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                           <span
                             style={{
                               position: 'absolute',
-                              top: '-6px',
-                              right: '-8px',
+                              top: '-5px',
+                              right: '-6px',
                               backgroundColor: '#10B981',
                               color: '#FFFFFF',
-                              fontSize: '10px',
+                              fontSize: '9px',
                               fontWeight: 800,
-                              padding: '2px 8px',
-                              borderRadius: '10px',
-                              boxShadow: '0 2px 6px rgba(16, 185, 129, 0.3)'
+                              padding: '1px 6px',
+                              borderRadius: '8px',
+                              boxShadow: '0 2px 4px rgba(16, 185, 129, 0.3)'
                             }}
                           >
                             Nou
@@ -284,7 +284,7 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                         )}
                       </div>
 
-                      <span style={{ fontSize: '13px', fontWeight: 700, color: '#334155', textAlign: 'center' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 600, color: '#475569', textAlign: 'center', lineHeight: '1.3' }}>
                         {cat.label}
                       </span>
                     </div>
