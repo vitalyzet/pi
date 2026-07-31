@@ -30,6 +30,8 @@ interface ProductDetailPageProps {
   onAddToCart: (product: Product, quantity: number) => void;
   onSelectProduct: (product: Product) => void;
   relatedProducts: Product[];
+  favorites?: Product[];
+  onToggleFavorite?: (product: Product) => void;
 }
 
 export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
@@ -38,10 +40,13 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   onAddToCart,
   onSelectProduct,
   relatedProducts,
+  favorites = [],
+  onToggleFavorite,
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [showPhone, setShowPhone] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
+
+  const isFavorite = favorites.some((p) => p.id === product.id);
 
   const isAuto = product.category === 'Auto' || product.title.toLowerCase().includes('polo') || product.title.toLowerCase().includes('bmw');
 
@@ -164,7 +169,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
               <div style={{ display: 'flex', gap: '10px' }}>
                 <button
-                  onClick={() => setIsFavorite(!isFavorite)}
+                  onClick={() => onToggleFavorite && onToggleFavorite(product)}
                   style={{
                     background: '#F1F5F9',
                     border: 'none',

@@ -78,6 +78,8 @@ interface UserDashboardPageProps {
   onLogout: () => void;
   onViewProduct?: (product: Product) => void;
   userAds?: Product[];
+  favorites?: Product[];
+  onToggleFavorite?: (product: Product) => void;
 }
 
 export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
@@ -85,10 +87,11 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
   onLogout,
   onViewProduct,
   userAds = [],
+  favorites = [],
+  onToggleFavorite,
 }) => {
   const [activeTab, setActiveTab] = useState<'my_ads' | 'messages' | 'favorites' | 'wallet' | 'settings'>('my_ads');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [wishlist, setWishlist] = useState<Product[]>([PRODUCTS[1], PRODUCTS[4], PRODUCTS[5]]);
   
   const [userProfile] = useState({
     name: 'Alexandru B.',
@@ -98,8 +101,8 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
     credits: 150
   });
 
-  const removeFromWishlist = (id: string) => {
-    setWishlist((prev) => prev.filter((p) => p.id !== id));
+  const removeFromWishlist = (product: Product) => {
+    if (onToggleFavorite) onToggleFavorite(product);
   };
 
   const myAds: MyAd[] = userAds.length > 0 ? userAds.map(p => ({
@@ -320,27 +323,39 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                           )}
 
                           {viewMode === 'grid' && (
-                            <div style={{ fontSize: '18px', fontWeight: 900, color: '#E55B86', marginBottom: '12px' }}>
-                              {ad.price} €
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                              <div style={{ fontSize: '18px', fontWeight: 900, color: '#E55B86' }}>
+                                {ad.price} €
+                              </div>
+                              <div style={{ display: 'flex', gap: '8px' }}>
+                                <button style={{ padding: '8px 12px', borderRadius: '10px', border: '2px solid #E2E8F0', backgroundColor: '#FFFFFF', fontSize: '12px', fontWeight: 700, color: '#0F172A', cursor: 'pointer' }}>
+                                  Editează
+                                </button>
+                                <button style={{ padding: '8px 12px', borderRadius: '10px', border: 'none', backgroundColor: 'var(--primary-yellow)', fontSize: '12px', fontWeight: 800, color: '#0F172A', cursor: 'pointer' }}>
+                                  Promovează
+                                </button>
+                              </div>
                             </div>
                           )}
                         </div>
 
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: viewMode === 'list' ? '0' : 'auto' }}>
-                          <div style={{ display: 'flex', gap: viewMode === 'grid' ? '12px' : '20px', color: '#64748B', fontSize: '12px', fontWeight: viewMode === 'grid' ? 700 : 600, marginBottom: viewMode === 'grid' ? '12px' : '0' }}>
+                          <div style={{ display: 'flex', gap: viewMode === 'grid' ? '12px' : '20px', color: '#64748B', fontSize: '12px', fontWeight: viewMode === 'grid' ? 700 : 600 }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Eye size={14} /> {ad.views} {viewMode === 'list' && 'vizualizări'}</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Heart size={14} /> {ad.favorites} {viewMode === 'list' && 'salvări'}</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><MessageCircle size={14} /> {ad.messages} {viewMode === 'list' && 'mesaje'}</div>
                           </div>
                           
-                          <div style={{ display: viewMode === 'grid' ? 'grid' : 'flex', gridTemplateColumns: '1fr 1fr', gap: '8px', width: viewMode === 'grid' ? '100%' : 'auto' }}>
-                            <button style={{ padding: viewMode === 'grid' ? '10px' : '10px 20px', borderRadius: '10px', border: '2px solid #E2E8F0', backgroundColor: '#FFFFFF', fontSize: '13px', fontWeight: 700, color: '#0F172A', cursor: 'pointer' }}>
-                              Editează
-                            </button>
-                            <button style={{ padding: viewMode === 'grid' ? '10px' : '10px 20px', borderRadius: '10px', border: 'none', backgroundColor: 'var(--primary-yellow)', fontSize: '13px', fontWeight: 800, color: '#0F172A', cursor: 'pointer' }}>
-                              Promovează
-                            </button>
-                          </div>
+                          {viewMode === 'list' && (
+                            <div style={{ display: 'flex', gap: '12px' }}>
+                              <button style={{ padding: '10px 20px', borderRadius: '12px', border: '2px solid #E2E8F0', backgroundColor: '#FFFFFF', fontSize: '14px', fontWeight: 700, color: '#0F172A', cursor: 'pointer' }}>
+                                Editează
+                              </button>
+                              <button style={{ padding: '10px 20px', borderRadius: '12px', border: 'none', backgroundColor: 'var(--primary-yellow)', fontSize: '14px', fontWeight: 800, color: '#0F172A', cursor: 'pointer' }}>
+                                Promovează
+                              </button>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -364,7 +379,7 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
             {activeTab === 'favorites' && (
               <div>
                 <h2 style={{ fontSize: '24px', fontWeight: 900, color: '#0F172A', marginBottom: '24px' }}>Anunțuri Favorite</h2>
-                {wishlist.length === 0 ? (
+                {favorites.length === 0 ? (
                   <div style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '60px 24px', textAlign: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
                     <div style={{ width: '80px', height: '80px', borderRadius: '50%', backgroundColor: '#F8FAFC', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px auto' }}>
                       <Heart size={40} color="#CBD5E1" />
@@ -377,12 +392,12 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                   </div>
                 ) : (
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                    {wishlist.map((product) => (
+                    {favorites.map((product) => (
                       <div key={product.id} style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '16px', display: 'flex', gap: '16px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
                         <div style={{ position: 'relative' }}>
                           <img src={product.image} alt={product.title} style={{ width: '120px', height: '120px', objectFit: 'cover', borderRadius: '16px' }} />
                           <button
-                            onClick={() => removeFromWishlist(product.id)}
+                            onClick={() => removeFromWishlist(product)}
                             style={{ position: 'absolute', top: '8px', right: '8px', width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#FFFFFF', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
                           >
                             <Trash2 size={16} color="#E55B86" />

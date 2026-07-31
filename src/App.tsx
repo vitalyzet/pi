@@ -82,6 +82,18 @@ export const App: React.FC = () => {
   const [isAutoPublishOpen, setIsAutoPublishOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [favorites, setFavorites] = useState<Product[]>([PRODUCTS[1], PRODUCTS[4], PRODUCTS[5]]);
+
+  const handleToggleFavorite = (product: Product) => {
+    setFavorites((prev) => {
+      const exists = prev.some(p => p.id === product.id);
+      if (exists) {
+        return prev.filter(p => p.id !== product.id);
+      } else {
+        return [...prev, product];
+      }
+    });
+  };
 
   const handlePublishProduct = (newProd: Product) => {
     setProductList((prev) => [newProd, ...prev]);
@@ -233,6 +245,8 @@ export const App: React.FC = () => {
           }}
           onViewProduct={(p) => setSelectedDetailProduct(p)}
           userAds={productList}
+          favorites={favorites}
+          onToggleFavorite={handleToggleFavorite}
         />
       ) : currentView === 'publish' ? (
         <PublishListingPage
@@ -245,6 +259,8 @@ export const App: React.FC = () => {
           onBack={() => setSelectedDetailProduct(null)}
           onAddToCart={(p, qty) => handleAddToCart(p, qty)}
           onSelectProduct={(p) => setSelectedDetailProduct(p)}
+          favorites={favorites}
+          onToggleFavorite={handleToggleFavorite}
           relatedProducts={productList.filter(
             (p) => p.id !== selectedDetailProduct.id && p.category === selectedDetailProduct.category
           )}
@@ -371,6 +387,8 @@ export const App: React.FC = () => {
           product={quickViewProduct}
           onClose={() => setQuickViewProduct(null)}
           onAddToCart={(product, qty) => handleAddToCart(product, qty)}
+          favorites={favorites}
+          onToggleFavorite={handleToggleFavorite}
         />
       ) : (
         <QuickViewModal

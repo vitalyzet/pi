@@ -21,17 +21,23 @@ interface AutoDetailModalProps {
   product: Product | null;
   onClose: () => void;
   onAddToCart: (product: Product, quantity: number) => void;
+  favorites?: Product[];
+  onToggleFavorite?: (product: Product) => void;
 }
 
 export const AutoDetailModal: React.FC<AutoDetailModalProps> = ({
   product,
   onClose,
   onAddToCart,
+  favorites = [],
+  onToggleFavorite,
 }) => {
+  const [quantity, setQuantity] = useState(1);
   const [showPhone, setShowPhone] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   if (!product) return null;
+
+  const isFavorite = favorites.some((p) => p.id === product.id);
 
   // Mock car spec defaults if not present
   const isAuto = product.category === 'Auto' || product.title.toLowerCase().includes('polo') || product.title.toLowerCase().includes('bmw');
@@ -154,7 +160,7 @@ export const AutoDetailModal: React.FC<AutoDetailModalProps> = ({
                   </span>
                   <div style={{ display: 'flex', gap: '8px' }}>
                     <button
-                      onClick={() => setIsFavorite(!isFavorite)}
+                      onClick={() => onToggleFavorite && onToggleFavorite(product)}
                       style={{ background: '#F1F5F9', border: 'none', borderRadius: '50%', width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
                     >
                       <Heart size={18} color={isFavorite ? '#E55B86' : '#64748B'} fill={isFavorite ? '#E55B86' : 'none'} />
