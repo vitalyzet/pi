@@ -30,12 +30,14 @@ export const App: React.FC = () => {
     const saved = localStorage.getItem('pinpin_products');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed: Product[] = JSON.parse(saved);
+        // Filter out old demo products
+        return parsed.filter(p => !['auto-1', 'auto-2', '1', '2', '3', '4', '5', '6', '7', '8'].includes(p.id));
       } catch (e) {
         console.error(e);
       }
     }
-    return PRODUCTS;
+    return [];
   });
 
   useEffect(() => {
