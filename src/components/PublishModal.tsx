@@ -17,6 +17,7 @@ import {
   Image as ImageIcon
 } from 'lucide-react';
 import { Product } from '../data/products';
+import { uploadImageFile } from '../lib/storage';
 
 interface PublishModalProps {
   isOpen: boolean;
@@ -74,9 +75,18 @@ export const PublishModal: React.FC<PublishModalProps> = ({
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title || !price) return;
+
+    setIsUploading(true);
+    let uploadedImageUrl = imagePreview;
+    if (imageFile) {
+      uploadedImageUrl = await uploadImageFile(imageFile);
+    }
 
     const numericPrice = parseFloat(price);
     const numericOriginalPrice = originalPrice ? parseFloat(originalPrice) : numericPrice * 1.25;
@@ -89,7 +99,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
       originalPrice: Math.round(numericOriginalPrice),
       discountPercentage: discount > 0 ? discount : undefined,
       badges: discount > 0 ? [`${discount}%`] : ['NOU'],
-      image: imagePreview,
+      image: uploadedImageUrl,
       category,
       feeling: 'Cute',
       design: 'Special',
@@ -98,6 +108,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
     };
 
     onPublishProduct(newProduct);
+    setIsUploading(false);
     setIsSuccess(true);
     setTimeout(() => {
       setIsSuccess(false);
@@ -109,12 +120,14 @@ export const PublishModal: React.FC<PublishModalProps> = ({
       setOriginalPrice('');
       setDescription('');
       setPhone('');
+      setImageFile(null);
     }, 1800);
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setImageFile(file);
       const url = URL.createObjectURL(file);
       setImagePreview(url);
     }

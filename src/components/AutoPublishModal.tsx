@@ -13,6 +13,7 @@ import {
   Euro
 } from 'lucide-react';
 import { Product } from '../data/products';
+import { uploadImageFile } from '../lib/storage';
 
 interface AutoPublishModalProps {
   isOpen: boolean;
@@ -44,13 +45,19 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
   const [phone, setPhone] = useState('');
   const [description, setDescription] = useState('');
   const [imagePreview, setImagePreview] = useState('/images/c1.png');
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!modelName || !price) return;
+
+    let uploadedImageUrl = imagePreview;
+    if (imageFile) {
+      uploadedImageUrl = await uploadImageFile(imageFile);
+    }
 
     const title = `${brand} ${modelName}`;
     const numericPrice = parseFloat(price);
@@ -64,7 +71,7 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
       originalPrice: Math.round(numericOriginalPrice),
       discountPercentage: discount > 0 ? discount : undefined,
       badges: ['AUTO', discount > 0 ? `${discount}%` : 'VERIFICAT'],
-      image: imagePreview,
+      image: uploadedImageUrl,
       category: 'Auto',
       feeling: 'Work',
       design: 'Special',
@@ -82,12 +89,14 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
       setPrice('');
       setOriginalPrice('');
       setDescription('');
+      setImageFile(null);
     }, 1800);
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setImageFile(file);
       const url = URL.createObjectURL(file);
       setImagePreview(url);
     }
