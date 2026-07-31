@@ -290,15 +290,18 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
                     </div>
 
                     <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
-                      {order.items.map(({ product, quantity }) => (
-                        <div key={product.id} style={{ display: 'flex', alignItems: 'center', gap: '10px', background: '#F9F9F9', padding: '8px 12px', borderRadius: '8px' }}>
-                          <img src={product.image} alt={product.title} style={{ width: '40px', height: '40px', borderRadius: '6px', objectFit: 'cover' }} />
-                          <div>
-                            <div style={{ fontSize: '13px', fontWeight: 700 }}>{product.title}</div>
-                            <div style={{ fontSize: '12px', color: '#777' }}>x{quantity} • {product.price} €</div>
+                      {order.items.map(({ product, quantity }, index) => {
+                        if (!product) return null;
+                        return (
+                          <div key={product.id || index} style={{ display: 'flex', alignItems: 'center', gap: '10px', background: '#F9F9F9', padding: '8px 12px', borderRadius: '8px' }}>
+                            <img src={product.image} alt={product.title} style={{ width: '40px', height: '40px', borderRadius: '6px', objectFit: 'cover' }} />
+                            <div>
+                              <div style={{ fontSize: '13px', fontWeight: 700 }}>{product.title}</div>
+                              <div style={{ fontSize: '12px', color: '#777' }}>x{quantity} • {product.price} €</div>
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '8px' }}>

@@ -343,15 +343,18 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                       </div>
 
                       <div style={{ display: 'flex', gap: '16px', marginBottom: '20px', flexWrap: 'wrap' }}>
-                        {order.items.map(({ product, quantity }) => (
-                          <div key={product.id} style={{ display: 'flex', alignItems: 'center', gap: '12px', background: '#F8F8F8', padding: '12px 16px', borderRadius: '10px', flex: '1', minWidth: '220px' }}>
-                            <img src={product.image} alt={product.title} style={{ width: '54px', height: '54px', borderRadius: '8px', objectFit: 'cover' }} />
-                            <div>
-                              <div style={{ fontSize: '14px', fontWeight: 700 }}>{product.title}</div>
-                              <div style={{ fontSize: '13px', color: '#666', marginTop: '2px' }}>Cantitate: {quantity} • {product.price} €</div>
+                        {order.items.map(({ product, quantity }, index) => {
+                          if (!product) return null;
+                          return (
+                            <div key={product.id || index} style={{ display: 'flex', alignItems: 'center', gap: '12px', background: '#F8F8F8', padding: '12px 16px', borderRadius: '10px', flex: '1', minWidth: '220px' }}>
+                              <img src={product.image} alt={product.title} style={{ width: '54px', height: '54px', borderRadius: '8px', objectFit: 'cover' }} />
+                              <div>
+                                <div style={{ fontSize: '14px', fontWeight: 700 }}>{product.title}</div>
+                                <div style={{ fontSize: '13px', color: '#666', marginTop: '2px' }}>Cantitate: {quantity} • {product.price} €</div>
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
 
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '12px', borderTop: '1px solid #F8F8F8' }}>
