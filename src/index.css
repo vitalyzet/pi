@@ -934,18 +934,35 @@ body {
 }
 
 /* Modals & Drawers */
-.drawer-backdrop, .modal-backdrop {
+.drawer-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(3px);
-  z-index: 200;
+  backdrop-filter: blur(4px);
+  z-index: 990;
   display: flex;
   justify-content: flex-end;
   animation: fadeIn 0.2s ease;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease;
 }
 
 .cart-drawer-content {

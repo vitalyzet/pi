@@ -206,7 +206,7 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
                   <select
                     value={brand}
                     onChange={(e) => setBrand(e.target.value)}
-                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, backgroundColor: '#FFF', outline: 'none' }}
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                   >
                     {CAR_BRANDS.map((b) => (
                       <option key={b} value={b}>{b}</option>
@@ -224,7 +224,7 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
                     placeholder="ex: Polo 1.2 TSI / Golf 7 / Serie 3"
                     value={modelName}
                     onChange={(e) => setModelName(e.target.value)}
-                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, outline: 'none' }}
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                   />
                 </div>
               </div>
@@ -240,7 +240,7 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
                     placeholder="2016"
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
-                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, outline: 'none' }}
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                   />
                 </div>
 
@@ -253,7 +253,7 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
                     placeholder="145000"
                     value={mileage}
                     onChange={(e) => setMileage(e.target.value)}
-                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, outline: 'none' }}
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                   />
                 </div>
               </div>
@@ -267,7 +267,7 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
                   <select
                     value={fuel}
                     onChange={(e) => setFuel(e.target.value)}
-                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, backgroundColor: '#FFF', outline: 'none' }}
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                   >
                     <option value="Benzină">Benzină</option>
                     <option value="Diesel">Diesel</option>
@@ -284,7 +284,7 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
                   <select
                     value={gearbox}
                     onChange={(e) => setGearbox(e.target.value)}
-                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, backgroundColor: '#FFF', outline: 'none' }}
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                   >
                     <option value="Manuală">Manuală</option>
                     <option value="Automată">Automată</option>
@@ -303,7 +303,7 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
                     placeholder="1598"
                     value={engineSize}
                     onChange={(e) => setEngineSize(e.target.value)}
-                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, outline: 'none' }}
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                   />
                 </div>
 
@@ -316,7 +316,7 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
                     placeholder="110"
                     value={power}
                     onChange={(e) => setPower(e.target.value)}
-                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, outline: 'none' }}
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                   />
                 </div>
               </div>
@@ -333,7 +333,7 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
                     placeholder="3000"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
-                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, outline: 'none' }}
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                   />
                 </div>
 
@@ -346,7 +346,7 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
                     placeholder="București / Oradea / Cluj"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, outline: 'none' }}
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                   />
                 </div>
               </div>
@@ -361,7 +361,7 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
                   placeholder="Scrie detalii despre stare, dotări, istoric de service..."
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 500, outline: 'none', resize: 'vertical' }}
+                  style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 500, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none', resize: 'vertical' }}
                 />
               </div>
 

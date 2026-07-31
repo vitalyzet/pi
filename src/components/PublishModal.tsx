@@ -299,7 +299,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                       placeholder="ex: Pin Metalic Vintage BMW / Garsonieră Ultracentrală"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
-                      style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, outline: 'none' }}
+                      style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                     />
                   </div>
 
@@ -315,7 +315,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                         placeholder="45"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
-                        style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, outline: 'none' }}
+                        style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                       />
                     </div>
                     <div>
@@ -327,7 +327,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                         placeholder="60"
                         value={originalPrice}
                         onChange={(e) => setOriginalPrice(e.target.value)}
-                        style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, outline: 'none' }}
+                        style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                       />
                     </div>
                   </div>
@@ -341,7 +341,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                       <select
                         value={condition}
                         onChange={(e) => setCondition(e.target.value)}
-                        style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, backgroundColor: '#FFF', outline: 'none' }}
+                        style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                       >
                         <option value="Nou">Nou (Sigilat)</option>
                         <option value="Ca nou">Ca Nou</option>
@@ -357,7 +357,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                         placeholder="București / Cluj / Timișoara"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
-                        style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, outline: 'none' }}
+                        style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                       />
                     </div>
                   </div>
@@ -372,7 +372,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                       placeholder="07xx xxx xxx"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 600, outline: 'none' }}
+                      style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                     />
                   </div>
 
@@ -386,7 +386,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                       placeholder="Oferă mai multe detalii despre produsul sau serviciul oferit..."
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
-                      style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #E2E8F0', fontSize: '14px', fontWeight: 500, outline: 'none', resize: 'vertical' }}
+                      style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 500, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none', resize: 'vertical' }}
                     />
                   </div>
                 </div>
