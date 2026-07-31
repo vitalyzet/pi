@@ -20,7 +20,7 @@ import { Product, PRODUCTS } from '../data/products';
 interface Order {
   id: string;
   date: string;
-  status: 'În livrare' | 'Livrat' | 'În procesare';
+  status: 'În revizuire' | 'Activ' | 'Inactiv';
   total: number;
   items: { product: Product; quantity: number }[];
   awb: string;
@@ -30,7 +30,7 @@ const MOCK_ORDERS: Order[] = [
   {
     id: 'PIN-94820',
     date: '28 Iulie 2026',
-    status: 'În livrare',
+    status: 'În revizuire',
     total: 80,
     awb: 'EASYBOX-8392019',
     items: [
@@ -41,7 +41,7 @@ const MOCK_ORDERS: Order[] = [
   {
     id: 'PIN-73911',
     date: '12 Iunie 2026',
-    status: 'Livrat',
+    status: 'Activ',
     total: 60,
     awb: 'FAN-4920182',
     items: [
@@ -86,10 +86,10 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
           <span style={{ color: '#222', fontWeight: 700 }}>Contul Meu</span>
           <ChevronRight size={14} />
           <span style={{ color: 'var(--pink-accent)', fontWeight: 700, textTransform: 'capitalize' }}>
-            {activeTab === 'orders' && 'Comenzile Mele'}
+            {activeTab === 'orders' && 'Anunțurile Mele'}
             {activeTab === 'wishlist' && 'Produse Favorite'}
-            {activeTab === 'addresses' && 'Adrese de Livrare'}
-            {activeTab === 'payments' && 'Metode de Plată'}
+            {activeTab === 'addresses' && 'Mesaje'}
+            {activeTab === 'payments' && 'Portofel'}
             {activeTab === 'settings' && 'Setări Cont'}
           </span>
         </div>
@@ -181,7 +181,7 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                 onClick={() => setActiveTab('orders')}
               >
                 <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <Package size={18} /> Comenzile Mele
+                  <Package size={18} /> Anunțurile Mele
                 </span>
                 <ChevronRight size={16} />
               </button>
@@ -221,7 +221,7 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                 onClick={() => setActiveTab('addresses')}
               >
                 <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <MapPin size={18} /> Adrese de Livrare
+                  <MapPin size={18} /> Mesaje
                 </span>
                 <ChevronRight size={16} />
               </button>
@@ -241,7 +241,7 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                 onClick={() => setActiveTab('payments')}
               >
                 <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <CreditCard size={18} /> Metode de Plată
+                  <CreditCard size={18} /> Portofel
                 </span>
                 <ChevronRight size={16} />
               </button>
@@ -321,8 +321,8 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #F0F0F0', paddingBottom: '16px', marginBottom: '20px' }}>
                         <div>
-                          <span style={{ fontSize: '16px', fontWeight: 800 }}>Comanda {order.id}</span>
-                          <span style={{ fontSize: '13px', color: '#777', marginLeft: '12px' }}>plasată pe {order.date}</span>
+                          <span style={{ fontSize: '16px', fontWeight: 800 }}>ID Anunț: {order.id}</span>
+                          <span style={{ fontSize: '13px', color: '#777', marginLeft: '12px' }}>publicat pe {order.date}</span>
                         </div>
                         <span
                           style={{
@@ -330,14 +330,14 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                             fontWeight: 700,
                             padding: '6px 16px',
                             borderRadius: '20px',
-                            backgroundColor: order.status === 'Livrat' ? '#E6F4EA' : '#FEF3D6',
-                            color: order.status === 'Livrat' ? '#137333' : '#B8860B',
+                            backgroundColor: order.status === 'Activ' ? '#E6F4EA' : '#FEF3D6',
+                            color: order.status === 'Activ' ? '#137333' : '#B8860B',
                             display: 'flex',
                             alignItems: 'center',
                             gap: '6px'
                           }}
                         >
-                          {order.status === 'Livrat' ? <CheckCircle2 size={16} /> : <Truck size={16} />}
+                          {order.status === 'Activ' ? <CheckCircle2 size={16} /> : <Truck size={16} />}
                           {order.status}
                         </span>
                       </div>
@@ -350,7 +350,7 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                               <img src={product.image} alt={product.title} style={{ width: '54px', height: '54px', borderRadius: '8px', objectFit: 'cover' }} />
                               <div>
                                 <div style={{ fontSize: '14px', fontWeight: 700 }}>{product.title}</div>
-                                <div style={{ fontSize: '13px', color: '#666', marginTop: '2px' }}>Cantitate: {quantity} • {product.price} €</div>
+                                <div style={{ fontSize: '13px', color: '#666', marginTop: '2px' }}>Mesaje/Favs: {quantity} • {product.price} €</div>
                               </div>
                             </div>
                           );
@@ -359,18 +359,18 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
 
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '12px', borderTop: '1px solid #F8F8F8' }}>
                         <span style={{ fontSize: '13px', color: '#555' }}>
-                          AWB AWB Easybox: <strong style={{ color: '#222' }}>{order.awb}</strong>
+                          Referință: <strong style={{ color: '#222' }}>{order.awb}</strong>
                         </span>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                           <span style={{ fontSize: '18px', fontWeight: 800, color: 'var(--pink-accent)' }}>
-                            Total: {order.total} €
+                            Preț Total: {order.total} €
                           </span>
                           <button
                             className="load-more-btn"
                             style={{ padding: '10px 20px', fontSize: '12px' }}
-                            onClick={() => alert(`Urmărire colet AWB ${order.awb} pe Easybox!`)}
+                            onClick={() => alert(`Detalii anunț ${order.awb} pe Easybox!`)}
                           >
-                            Urmărește Colet
+                            Vezi Anunț
                           </button>
                         </div>
                       </div>

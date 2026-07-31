@@ -19,7 +19,7 @@ import { Product, PRODUCTS } from '../data/products';
 interface Order {
   id: string;
   date: string;
-  status: 'În livrare' | 'Livrat' | 'În procesare';
+  status: 'În revizuire' | 'Activ' | 'Inactiv';
   total: number;
   items: { product: Product; quantity: number }[];
   awb: string;
@@ -29,7 +29,7 @@ const MOCK_ORDERS: Order[] = [
   {
     id: 'PIN-94820',
     date: '28 Iulie 2026',
-    status: 'În livrare',
+    status: 'În revizuire',
     total: 80,
     awb: 'EASYBOX-8392019',
     items: [
@@ -40,7 +40,7 @@ const MOCK_ORDERS: Order[] = [
   {
     id: 'PIN-73911',
     date: '12 Iunie 2026',
-    status: 'Livrat',
+    status: 'Activ',
     total: 60,
     awb: 'FAN-4920182',
     items: [
@@ -174,7 +174,7 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
                 }}
                 onClick={() => setActiveTab('orders')}
               >
-                <Package size={18} /> Comenzile Mele
+                <Package size={18} /> Anunțurile Mele
               </button>
 
               <button
@@ -208,7 +208,7 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
                 }}
                 onClick={() => setActiveTab('addresses')}
               >
-                <MapPin size={18} /> Adrese de Livrare
+                <MapPin size={18} /> Mesaje
               </button>
 
               <button
@@ -277,14 +277,14 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
                           fontWeight: 700,
                           padding: '4px 12px',
                           borderRadius: '20px',
-                          backgroundColor: order.status === 'Livrat' ? '#E6F4EA' : '#FEF3D6',
-                          color: order.status === 'Livrat' ? '#137333' : '#B8860B',
+                          backgroundColor: order.status === 'Activ' ? '#E6F4EA' : '#FEF3D6',
+                          color: order.status === 'Activ' ? '#137333' : '#B8860B',
                           display: 'flex',
                           alignItems: 'center',
                           gap: '6px'
                         }}
                       >
-                        {order.status === 'Livrat' ? <CheckCircle2 size={14} /> : <Truck size={14} />}
+                        {order.status === 'Activ' ? <CheckCircle2 size={14} /> : <Truck size={14} />}
                         {order.status}
                       </span>
                     </div>
@@ -306,18 +306,18 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '8px' }}>
                       <span style={{ fontSize: '13px', color: '#666' }}>
-                        AWB: <strong>{order.awb}</strong>
+                        Referință: <strong>{order.awb}</strong>
                       </span>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                         <span style={{ fontSize: '16px', fontWeight: 800, color: 'var(--pink-accent)' }}>
-                          Total: {order.total} €
+                          Preț Total: {order.total} €
                         </span>
                         <button
                           className="load-more-btn"
                           style={{ padding: '8px 16px', fontSize: '11px' }}
-                          onClick={() => alert(`Urmărire colet AWB ${order.awb} pe Easybox!`)}
+                          onClick={() => alert(`Detalii anunț ${order.awb} pe Easybox!`)}
                         >
-                          Urmărește Colet
+                          Vezi Anunț
                         </button>
                       </div>
                     </div>
