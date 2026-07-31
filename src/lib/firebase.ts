@@ -26,18 +26,26 @@ export const storage = getStorage(app);
 export const analyticsPromise = isSupported().then(yes => yes ? getAnalytics(app) : null);
 
 /**
- * Save new listing to Firebase Firestore cloud database
+ * Save new listing to Firebase Firestore cloud database safely
  */
 export async function saveListingToFirebase(product: Product) {
   try {
-    const docRef = await addDoc(collection(db, "listings"), {
+    const savePromise = addDoc(collection(db, "listings"), {
       ...product,
       createdAt: new Date().toISOString()
     });
-    console.log("Listing saved to Firebase with ID: ", docRef.id);
-    return docRef.id;
+
+    // Timeout race (3 seconds) to prevent hanging UI on CORS/network block
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("Firestore save timeout")), 3000)
+    );
+
+    const docRef = (await Promise.race([savePromise, timeoutPromise])) as any;
+    console.log("Listing saved to Firebase with ID: ", docRef?.id);
+    return docRef?.id;
   } catch (e) {
-    console.error("Error adding document to Firebase: ", e);
+    console.warn("Firestore save warning (persisted locally): ", e);
+    return null;
   }
 }
 
@@ -54,7 +62,7 @@ export async function fetchListingsFromFirebase(): Promise<Product[]> {
     });
     return listings;
   } catch (e) {
-    console.error("Error fetching listings from Firebase: ", e);
+    console.warn("Firestore fetch warning: ", e);
     return [];
   }
 }
