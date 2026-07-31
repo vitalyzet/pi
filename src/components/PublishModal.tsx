@@ -53,6 +53,8 @@ export const PublishModal: React.FC<PublishModalProps> = ({
   const [phone, setPhone] = useState('');
   const [description, setDescription] = useState('');
   const [imagePreview, setImagePreview] = useState('/images/coches.png');
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
   if (!isOpen) return null;
@@ -74,9 +76,6 @@ export const PublishModal: React.FC<PublishModalProps> = ({
       setCurrentStep((prev) => (prev - 1) as 1 | 2 | 3);
     }
   };
-
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [isUploading, setIsUploading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
