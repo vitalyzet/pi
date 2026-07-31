@@ -178,11 +178,21 @@ export const AutoDetailModal: React.FC<AutoDetailModalProps> = ({
                   {product.title}
                 </h2>
 
-                {/* Published Date */}
-                {product.createdAt && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#64748B', fontSize: '13px', fontWeight: 600, marginBottom: '20px' }}>
-                    <Calendar size={14} />
-                    Publicat pe {new Date(product.createdAt).toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })}
+                {/* Published Date & Location */}
+                {(product.createdAt || product.location) && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px', color: '#64748B', fontSize: '13px', fontWeight: 600, marginBottom: '20px' }}>
+                    {product.createdAt && (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Calendar size={14} />
+                        Publicat pe {new Date(product.createdAt).toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })}
+                      </div>
+                    )}
+                    {product.location && (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <MapPin size={14} />
+                        {product.location}
+                      </div>
+                    )}
                   </div>
                 )}
 

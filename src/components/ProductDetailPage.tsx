@@ -238,11 +238,21 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               {product.title}
             </h1>
 
-            {/* Published Date */}
-            {product.createdAt && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#64748B', fontSize: '14px', fontWeight: 600, marginBottom: '24px' }}>
-                <Calendar size={16} />
-                Publicat pe {new Date(product.createdAt).toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })}
+            {/* Published Date & Location */}
+            {(product.createdAt || product.location) && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', color: '#64748B', fontSize: '14px', fontWeight: 600, marginBottom: '24px' }}>
+                {product.createdAt && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Calendar size={16} />
+                    Publicat pe {new Date(product.createdAt).toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  </div>
+                )}
+                {product.location && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <MapPin size={16} />
+                    {product.location}
+                  </div>
+                )}
               </div>
             )}
 

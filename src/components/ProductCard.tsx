@@ -69,10 +69,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           )}
           <span className="discounted-price">{product.price} €</span>
         </div>
-        {product.createdAt && (
+        {(product.createdAt || product.location) && (
           <div style={{ fontSize: '12px', color: '#94A3B8', marginTop: '8px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#10B981' }}></span>
-            {timeAgo(product.createdAt)}
+            {product.createdAt && <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#10B981' }}></span>}
+            {product.createdAt ? timeAgo(product.createdAt) : ''}
+            {product.createdAt && product.location ? ' • ' : ''}
+            {product.location ? product.location : ''}
           </div>
         )}
       </div>

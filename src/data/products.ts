@@ -11,6 +11,7 @@ export interface Product {
   feeling: string;
   design: string;
   color: string;
+  location?: string;
   description: string;
   createdAt?: string;
   isPopular?: boolean;

@@ -80,6 +80,7 @@ export async function fetchListingsFromFirebase(): Promise<Product[]> {
             feeling: 'Work',
             design: 'Special',
             color: 'Multicolor',
+            location: data.location || data.oras || data.city || 'România',
             description: data.description || data.descriere || `Anunț din ${categoryName}`,
             badges: data.badges || (data.isPromoted ? ['PRO', 'VERIFICAT'] : ['NOU']),
             createdAt: data.createdAt || new Date(Date.now() - 86400000 * Math.floor(Math.random() * 5 + 1)).toISOString(),

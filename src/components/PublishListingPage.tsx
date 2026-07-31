@@ -177,6 +177,7 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
       feeling: 'Work',
       design: 'Special',
       color: 'Multicolor',
+      location: city || 'București',
       createdAt: new Date().toISOString(),
       description: description || `Anunț publicat în ${city}. Contact: ${phone || 'Nespecificat'}`,
       specs: (() => {
