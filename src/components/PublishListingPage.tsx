@@ -84,6 +84,42 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
   const [fuel, setFuel] = useState('Gasolina');
   const [gearbox, setGearbox] = useState('Manuală');
 
+  // Imobiliare Specific Fields
+  const [propType, setPropType] = useState('Apartament');
+  const [operation, setOperation] = useState('Vânzare');
+  const [rooms, setRooms] = useState('2');
+  const [area, setArea] = useState('65');
+
+  // Locuri de muncă Specific Fields
+  const [jobDomain, setJobDomain] = useState('IT & Software');
+  const [contractType, setContractType] = useState('Full-time');
+  const [salary, setSalary] = useState('4500');
+
+  // Matrimoniale (PRO) Specific Fields
+  const [age, setAge] = useState('28');
+  const [gender, setGender] = useState('Femeie');
+  const [relationshipType, setRelationshipType] = useState('Relație serioasă');
+
+  // Servicii Specific Fields
+  const [serviceType, setServiceType] = useState('Construcții & Amenajări');
+  const [rateType, setRateType] = useState('Pe oră');
+
+  // Electronice Specific Fields
+  const [subCategory, setSubCategory] = useState('Telefoane');
+  const [electronicBrand, setElectronicBrand] = useState('Apple');
+
+  // Modă Specific Fields
+  const [genderSection, setGenderSection] = useState('Femei');
+  const [clothingSize, setClothingSize] = useState('M');
+
+  // Animale Specific Fields
+  const [animalType, setAnimalType] = useState('Câini');
+  const [breed, setBreed] = useState('Beagle');
+
+  // Turism Specific Fields
+  const [accommodationType, setAccommodationType] = useState('Pensiune');
+  const [guestsCount, setGuestsCount] = useState('2');
+
   const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -128,21 +164,72 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
       price: numericPrice,
       originalPrice: Math.round(numericOriginalPrice),
       discountPercentage: discount > 0 ? discount : undefined,
-      badges: selectedCategory === 'Auto' ? ['AUTO', 'VERIFICAT'] : (discount > 0 ? [`${discount}%`] : ['NOU']),
+      badges: selectedCategory === 'Auto' ? ['AUTO', 'VERIFICAT'] : (selectedCategory === 'Matrimoniale' ? ['PRO', 'VERIFICAT'] : (discount > 0 ? [`${discount}%`] : ['NOU'])),
       image: uploadedImageUrl,
       category: selectedCategory,
       feeling: 'Work',
       design: 'Special',
       color: 'Multicolor',
       description: description || `Anunț publicat în ${city}. Contact: ${phone || 'Nespecificat'}`,
-      specs: selectedCategory === 'Auto' ? {
-        year: year || '2012',
-        mileage: mileage ? parseInt(mileage).toLocaleString('ro-RO') : '153.694',
-        fuel: fuel || 'Gasolina',
-        gearbox: gearbox || 'Manuală',
-        brand: brand || 'Volkswagen',
-        modelName: modelName || 'Polo'
-      } : undefined
+      specs: (() => {
+        switch (selectedCategory) {
+          case 'Auto':
+            return {
+              year: year || '2012',
+              mileage: mileage ? parseInt(mileage).toLocaleString('ro-RO') : '153.694',
+              fuel: fuel || 'Gasolina',
+              gearbox: gearbox || 'Manuală',
+              brand: brand || 'Volkswagen',
+              modelName: modelName || 'Polo'
+            };
+          case 'Imobiliare':
+            return {
+              propType: propType || 'Apartament',
+              operation: operation || 'Vânzare',
+              rooms: rooms || '2',
+              area: area ? `${area} m²` : '65 m²'
+            };
+          case 'Locuri de muncă':
+            return {
+              jobDomain: jobDomain || 'IT & Software',
+              contractType: contractType || 'Full-time',
+              salary: salary ? `${salary} LEI` : '4.500 LEI'
+            };
+          case 'Matrimoniale':
+            return {
+              age: age || '28 ani',
+              gender: gender || 'Femeie',
+              relationshipType: relationshipType || 'Relație serioasă'
+            };
+          case 'Servicii':
+            return {
+              serviceType: serviceType || 'Construcții & Amenajări',
+              rateType: rateType || 'Pe oră'
+            };
+          case 'Electronice':
+            return {
+              subCategory: subCategory || 'Telefoane',
+              electronicBrand: electronicBrand || 'Apple'
+            };
+          case 'Modă':
+            return {
+              genderSection: genderSection || 'Femei',
+              clothingSize: clothingSize || 'M'
+            };
+          case 'Animale':
+            return {
+              animalType: animalType || 'Câini',
+              breed: breed || 'Beagle'
+            };
+          case 'Turism':
+            return {
+              accommodationType: accommodationType || 'Pensiune',
+              guestsCount: guestsCount || '2 persoane'
+            };
+          default:
+            return undefined;
+        }
+      })()
     };
 
     onPublishProduct(newProduct);
@@ -417,6 +504,234 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                             <option value="Manuală">Manuală</option>
                             <option value="Automată">Automată</option>
                           </select>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* IMOBILIARE SPECIAL FIELDS */}
+                  {selectedCategory === 'Imobiliare' && (
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#059669', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                        DETALII PROPRIETATE IMOBILIARĂ
+                      </span>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px' }}>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>TIP IMOBIL</label>
+                          <select value={propType} onChange={(e) => setPropType(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                            <option value="Apartament">Apartament</option>
+                            <option value="Casă">Casă / Vilă</option>
+                            <option value="Teren">Teren</option>
+                            <option value="Spațiu comercial">Spațiu comercial</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>OPERAȚIUNE</label>
+                          <select value={operation} onChange={(e) => setOperation(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                            <option value="Vânzare">Vânzare</option>
+                            <option value="Închiriere">Închiriere</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>CAMERE</label>
+                          <input type="number" value={rooms} onChange={(e) => setRooms(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>SUPRAFAȚĂ (M²)</label>
+                          <input type="number" value={area} placeholder="65" onChange={(e) => setArea(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* LOCURI DE MUNCĂ SPECIAL FIELDS */}
+                  {selectedCategory === 'Locuri de muncă' && (
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#0D9488', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                        DETALII LOC DE MUNCĂ
+                      </span>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px' }}>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>DOMENIU ACTIVITATE</label>
+                          <select value={jobDomain} onChange={(e) => setJobDomain(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                            <option value="IT & Software">IT & Software</option>
+                            <option value="Vânzări & Comercial">Vânzări & Comercial</option>
+                            <option value="Construcții">Construcții</option>
+                            <option value="HORECA">HORECA</option>
+                            <option value="Transport & Logistică">Transport & Logistică</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>TIP CONTRACT</label>
+                          <select value={contractType} onChange={(e) => setContractType(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                            <option value="Full-time">Full-time</option>
+                            <option value="Part-time">Part-time</option>
+                            <option value="Proiect / Freelance">Proiect / Freelance</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>SALARIU ESTIMAT (LEI)</label>
+                          <input type="number" value={salary} placeholder="4500" onChange={(e) => setSalary(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* MATRIMONIALE (PRO) SPECIAL FIELDS */}
+                  {selectedCategory === 'Matrimoniale' && (
+                    <div style={{ backgroundColor: '#FFF1F2', padding: '20px', borderRadius: '16px', border: '1.5px solid #F43F5E', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#F43F5E', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                        CĂUTARE MATRIMONIALĂ PRO 👑
+                      </span>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px' }}>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>VÂRSTĂ</label>
+                          <input type="number" value={age} placeholder="28" onChange={(e) => setAge(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>GEN</label>
+                          <select value={gender} onChange={(e) => setGender(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                            <option value="Femeie">Femeie</option>
+                            <option value="Bărbat">Bărbat</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>SCOP RELAȚIE</label>
+                          <select value={relationshipType} onChange={(e) => setRelationshipType(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                            <option value="Relație serioasă">Relație serioasă</option>
+                            <option value="Prietenie & Socializare">Prietenie & Socializare</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* SERVICII SPECIAL FIELDS */}
+                  {selectedCategory === 'Servicii' && (
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#6366F1', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                        DETALII SERVICIU PROFESIONAL
+                      </span>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>TIP SERVICIU</label>
+                          <select value={serviceType} onChange={(e) => setServiceType(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                            <option value="Construcții & Amenajări">Construcții & Amenajări</option>
+                            <option value="Transport & Mutații">Transport & Mutații</option>
+                            <option value="Reparații Auto">Reparații Auto</option>
+                            <option value="Curățenie">Curățenie</option>
+                            <option value="Evenimente">Evenimente</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>MOD TARIF</label>
+                          <select value={rateType} onChange={(e) => setRateType(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                            <option value="Pe oră">Pe oră</option>
+                            <option value="Pe lucrare / proiect">Pe lucrare / proiect</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ELECTRONICE SPECIAL FIELDS */}
+                  {selectedCategory === 'Electronice' && (
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#8B5CF6', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                        DETALII PRODUS ELECTRONIC
+                      </span>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>SUBCATEGORIE</label>
+                          <select value={subCategory} onChange={(e) => setSubCategory(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                            <option value="Telefoane">Telefoane</option>
+                            <option value="Laptop-uri & PC">Laptop-uri & PC</option>
+                            <option value="TV & Audio">TV & Audio</option>
+                            <option value="Console & Jocuri">Console & Jocuri</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>BRAND / PRODUCĂTOR</label>
+                          <input type="text" value={electronicBrand} placeholder="ex: Apple / Samsung" onChange={(e) => setElectronicBrand(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* MODĂ SPECIAL FIELDS */}
+                  {selectedCategory === 'Modă' && (
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#EC4899', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                        DETALII ARTICOL MODĂ
+                      </span>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>SECȚIUNE</label>
+                          <select value={genderSection} onChange={(e) => setGenderSection(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                            <option value="Femei">Femei</option>
+                            <option value="Bărbați">Bărbați</option>
+                            <option value="Unisex">Unisex</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>MĂRIME</label>
+                          <input type="text" value={clothingSize} placeholder="ex: S, M, L, 40, 42" onChange={(e) => setClothingSize(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ANIMALE SPECIAL FIELDS */}
+                  {selectedCategory === 'Animale' && (
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#D97706', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                        DETALII ANIMALE DE COMPANIE
+                      </span>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>TIP ANIMAL</label>
+                          <select value={animalType} onChange={(e) => setAnimalType(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                            <option value="Câini">Câini</option>
+                            <option value="Pisici">Pisici</option>
+                            <option value="Păsări">Păsări</option>
+                            <option value="Accesorii">Accesorii & Hrană</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>RASĂ / BREED</label>
+                          <input type="text" value={breed} placeholder="ex: Beagle / Labrador" onChange={(e) => setBreed(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* TURISM SPECIAL FIELDS */}
+                  {selectedCategory === 'Turism' && (
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#0284C7', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                        DETALII CAZARE & TURISM
+                      </span>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>TIP CAZARE</label>
+                          <select value={accommodationType} onChange={(e) => setAccommodationType(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                            <option value="Pensiune">Pensiune</option>
+                            <option value="Hotel">Hotel</option>
+                            <option value="Cabană">Cabană</option>
+                            <option value="Garsonieră regim hotelier">Garsonieră regim hotelier</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>CAPACITATE (PERSOANE)</label>
+                          <input type="number" value={guestsCount} placeholder="2" onChange={(e) => setGuestsCount(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
                         </div>
                       </div>
                     </div>
