@@ -60,6 +60,7 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
 }) => {
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1);
   const [selectedCategory, setSelectedCategory] = useState<string>('Auto');
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
   // Form Fields
   const [title, setTitle] = useState('');
@@ -216,79 +217,78 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                     gap: '14px'
                   }}
                 >
-                  {CATEGORIES_GRID.map((cat) => (
-                    <div
-                      key={cat.id}
-                      onClick={() => handleSelectCategory(cat.id)}
-                      style={{
-                        backgroundColor: '#FFFFFF',
-                        borderRadius: '18px',
-                        padding: '16px 12px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '10px',
-                        cursor: 'pointer',
-                        boxShadow: '0 2px 6px rgba(15, 23, 42, 0.03)',
-                        border: '1.5px solid #F1F5F9',
-                        transition: 'all 0.2s ease',
-                        position: 'relative'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-3px)';
-                        e.currentTarget.style.boxShadow = '0 8px 18px rgba(15, 23, 42, 0.08)';
-                        e.currentTarget.style.borderColor = '#CBD5E1';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = '0 2px 6px rgba(15, 23, 42, 0.03)';
-                        e.currentTarget.style.borderColor = '#F1F5F9';
-                      }}
-                    >
-                      {/* Compact Squircle Icon Box */}
+                  {CATEGORIES_GRID.map((cat) => {
+                    const isHovered = hoveredCategory === cat.id;
+                    return (
                       <div
+                        key={cat.id}
+                        onClick={() => handleSelectCategory(cat.id)}
+                        onMouseEnter={() => setHoveredCategory(cat.id)}
+                        onMouseLeave={() => setHoveredCategory(null)}
                         style={{
-                          width: '48px',
-                          height: '48px',
-                          borderRadius: '14px',
                           backgroundColor: '#FFFFFF',
-                          border: '1.5px solid #F1F5F9',
-                          boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)',
+                          borderRadius: '18px',
+                          padding: '16px 12px',
                           display: 'flex',
+                          flexDirection: 'column',
                           alignItems: 'center',
                           justifyContent: 'center',
+                          gap: '10px',
+                          cursor: 'pointer',
+                          boxShadow: isHovered ? '0 10px 22px rgba(248, 210, 71, 0.25)' : '0 2px 6px rgba(15, 23, 42, 0.03)',
+                          border: isHovered ? '1.5px solid var(--primary-yellow)' : '1.5px solid #F1F5F9',
+                          transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+                          transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
                           position: 'relative'
                         }}
                       >
-                        {cat.icon}
+                        {/* Compact Squircle Icon Box - Fills Yellow on Hover */}
+                        <div
+                          style={{
+                            width: '48px',
+                            height: '48px',
+                            borderRadius: '14px',
+                            backgroundColor: isHovered ? 'var(--primary-yellow)' : '#FFFFFF',
+                            border: isHovered ? '1.5px solid var(--primary-yellow)' : '1.5px solid #F1F5F9',
+                            boxShadow: isHovered ? '0 4px 12px rgba(248, 210, 71, 0.5)' : '0 2px 8px rgba(15, 23, 42, 0.04)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            position: 'relative',
+                            transition: 'all 0.25s ease'
+                          }}
+                        >
+                          {React.cloneElement(cat.icon, {
+                            color: isHovered ? '#0F172A' : '#475569'
+                          })}
 
-                        {/* Green "Nou" Badge */}
-                        {cat.isNew && (
-                          <span
-                            style={{
-                              position: 'absolute',
-                              top: '-5px',
-                              right: '-6px',
-                              backgroundColor: '#10B981',
-                              color: '#FFFFFF',
-                              fontSize: '9px',
-                              fontWeight: 800,
-                              padding: '1px 6px',
-                              borderRadius: '8px',
-                              boxShadow: '0 2px 4px rgba(16, 185, 129, 0.3)'
-                            }}
-                          >
-                            Nou
-                          </span>
-                        )}
+                          {/* Green "Nou" Badge */}
+                          {cat.isNew && (
+                            <span
+                              style={{
+                                position: 'absolute',
+                                top: '-5px',
+                                right: '-6px',
+                                backgroundColor: '#10B981',
+                                color: '#FFFFFF',
+                                fontSize: '9px',
+                                fontWeight: 800,
+                                padding: '1px 6px',
+                                borderRadius: '8px',
+                                boxShadow: '0 2px 4px rgba(16, 185, 129, 0.3)'
+                              }}
+                            >
+                              Nou
+                            </span>
+                          )}
+                        </div>
+
+                        <span style={{ fontSize: '12px', fontWeight: isHovered ? 800 : 600, color: isHovered ? '#0F172A' : '#475569', textAlign: 'center', lineHeight: '1.3', transition: 'color 0.2s ease' }}>
+                          {cat.label}
+                        </span>
                       </div>
-
-                      <span style={{ fontSize: '12px', fontWeight: 600, color: '#475569', textAlign: 'center', lineHeight: '1.3' }}>
-                        {cat.label}
-                      </span>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}
