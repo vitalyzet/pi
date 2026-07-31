@@ -441,56 +441,56 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
 
             {/* STEP 2: LISTING DETAILS */}
             {currentStep === 2 && (
-              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '36px', border: '1px solid #E2E8F0', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid #F1F5F9' }}>
+              <div style={{ backgroundColor: '#FFFFFF', borderRadius: '28px', padding: '48px', border: '1.5px solid #E2E8F0', boxShadow: '0 12px 35px rgba(15, 23, 42, 0.04)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px', paddingBottom: '20px', borderBottom: '1.5px solid #F1F5F9' }}>
                   <div>
-                    <span style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', color: '#0F172A', backgroundColor: '#FFFDF0', padding: '4px 12px', borderRadius: '20px', border: '1px solid var(--primary-yellow)' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1.2px', color: '#0F172A', backgroundColor: '#FFFDF0', padding: '6px 16px', borderRadius: '24px', border: '1.5px solid var(--primary-yellow)' }}>
                       CATEGORIE: {selectedCategory}
                     </span>
-                    <h2 style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A', marginTop: '8px', margin: 0 }}>
+                    <h2 style={{ fontSize: '28px', fontWeight: 900, color: '#0F172A', marginTop: '12px', margin: 0, letterSpacing: '-0.5px' }}>
                       Completează detaliile anunțului
                     </h2>
                   </div>
 
                   <button
                     onClick={() => setCurrentStep(1)}
-                    style={{ background: 'none', border: 'none', color: '#E55B86', fontWeight: 700, fontSize: '14px', cursor: 'pointer' }}
+                    style={{ background: 'none', border: 'none', color: '#E55B86', fontWeight: 800, fontSize: '15px', cursor: 'pointer' }}
                   >
                     Schimbă Categoria
                   </button>
                 </div>
 
-                <form onSubmit={(e) => { e.preventDefault(); setCurrentStep(3); }} style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+                <form onSubmit={(e) => { e.preventDefault(); setCurrentStep(3); }} style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
                   {/* AUTO SPECIAL FIELDS */}
                   {selectedCategory === 'Auto' && (
-                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#64748B', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '28px', borderRadius: '20px', border: '1.5px solid #CBD5E1', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 900, color: '#64748B', letterSpacing: '1.2px', textTransform: 'uppercase' }}>
                         SPECIFICAȚII TEHNICE AUTO
                       </span>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                         <div>
-                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>MARCĂ</label>
-                          <input type="text" value={brand} placeholder="ex: Volkswagen" onChange={(e) => setBrand(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#1E293B', marginBottom: '8px', letterSpacing: '0.3px' }}>MARCĂ</label>
+                          <input type="text" value={brand} placeholder="ex: Volkswagen" onChange={(e) => setBrand(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>MODEL</label>
-                          <input type="text" value={modelName} placeholder="ex: Polo / Golf" onChange={(e) => setModelName(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#1E293B', marginBottom: '8px', letterSpacing: '0.3px' }}>MODEL</label>
+                          <input type="text" value={modelName} placeholder="ex: Polo / Golf" onChange={(e) => setModelName(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
                         </div>
                       </div>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '16px' }}>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>AN FABRICAȚIE</label>
-                          <input type="number" value={year} placeholder="2012" onChange={(e) => setYear(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>AN FABRICAȚIE</label>
+                          <input type="number" value={year} placeholder="2012" onChange={(e) => setYear(e.target.value)} style={{ width: '100%', padding: '16px 16px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>RULAJ (KM)</label>
-                          <input type="number" value={mileage} placeholder="153694" onChange={(e) => setMileage(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>RULAJ (KM)</label>
+                          <input type="number" value={mileage} placeholder="153694" onChange={(e) => setMileage(e.target.value)} style={{ width: '100%', padding: '16px 16px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>COMBUSTIBIL</label>
-                          <select value={fuel} onChange={(e) => setFuel(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>COMBUSTIBIL</label>
+                          <select value={fuel} onChange={(e) => setFuel(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
                             <option value="Gasolina">Gasolina</option>
                             <option value="Diesel">Diesel</option>
                             <option value="Hibrid">Hibrid</option>
@@ -499,8 +499,8 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                           </select>
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>CUTIE VITEZE</label>
-                          <select value={gearbox} onChange={(e) => setGearbox(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>CUTIE VITEZE</label>
+                          <select value={gearbox} onChange={(e) => setGearbox(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
                             <option value="Manuală">Manuală</option>
                             <option value="Automată">Automată</option>
                           </select>
@@ -511,15 +511,15 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
 
                   {/* IMOBILIARE SPECIAL FIELDS */}
                   {selectedCategory === 'Imobiliare' && (
-                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#059669', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '28px', borderRadius: '20px', border: '1.5px solid #CBD5E1', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 900, color: '#059669', letterSpacing: '1.2px', textTransform: 'uppercase' }}>
                         DETALII PROPRIETATE IMOBILIARĂ
                       </span>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '16px' }}>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>TIP IMOBIL</label>
-                          <select value={propType} onChange={(e) => setPropType(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>TIP IMOBIL</label>
+                          <select value={propType} onChange={(e) => setPropType(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
                             <option value="Apartament">Apartament</option>
                             <option value="Casă">Casă / Vilă</option>
                             <option value="Teren">Teren</option>
@@ -527,19 +527,19 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                           </select>
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>OPERAȚIUNE</label>
-                          <select value={operation} onChange={(e) => setOperation(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>OPERAȚIUNE</label>
+                          <select value={operation} onChange={(e) => setOperation(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
                             <option value="Vânzare">Vânzare</option>
                             <option value="Închiriere">Închiriere</option>
                           </select>
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>CAMERE</label>
-                          <input type="number" value={rooms} onChange={(e) => setRooms(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>CAMERE</label>
+                          <input type="number" value={rooms} onChange={(e) => setRooms(e.target.value)} style={{ width: '100%', padding: '16px 16px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>SUPRAFAȚĂ (M²)</label>
-                          <input type="number" value={area} placeholder="65" onChange={(e) => setArea(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>SUPRAFAȚĂ (M²)</label>
+                          <input type="number" value={area} placeholder="65" onChange={(e) => setArea(e.target.value)} style={{ width: '100%', padding: '16px 16px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
                         </div>
                       </div>
                     </div>
@@ -547,15 +547,15 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
 
                   {/* LOCURI DE MUNCĂ SPECIAL FIELDS */}
                   {selectedCategory === 'Locuri de muncă' && (
-                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#0D9488', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '28px', borderRadius: '20px', border: '1.5px solid #CBD5E1', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 900, color: '#0D9488', letterSpacing: '1.2px', textTransform: 'uppercase' }}>
                         DETALII LOC DE MUNCĂ
                       </span>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '18px' }}>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>DOMENIU ACTIVITATE</label>
-                          <select value={jobDomain} onChange={(e) => setJobDomain(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>DOMENIU ACTIVITATE</label>
+                          <select value={jobDomain} onChange={(e) => setJobDomain(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
                             <option value="IT & Software">IT & Software</option>
                             <option value="Vânzări & Comercial">Vânzări & Comercial</option>
                             <option value="Construcții">Construcții</option>
@@ -564,16 +564,16 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                           </select>
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>TIP CONTRACT</label>
-                          <select value={contractType} onChange={(e) => setContractType(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>TIP CONTRACT</label>
+                          <select value={contractType} onChange={(e) => setContractType(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
                             <option value="Full-time">Full-time</option>
                             <option value="Part-time">Part-time</option>
                             <option value="Proiect / Freelance">Proiect / Freelance</option>
                           </select>
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>SALARIU ESTIMAT (LEI)</label>
-                          <input type="number" value={salary} placeholder="4500" onChange={(e) => setSalary(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>SALARIU ESTIMAT (LEI)</label>
+                          <input type="number" value={salary} placeholder="4500" onChange={(e) => setSalary(e.target.value)} style={{ width: '100%', padding: '16px 16px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
                         </div>
                       </div>
                     </div>
@@ -581,26 +581,26 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
 
                   {/* MATRIMONIALE (PRO) SPECIAL FIELDS */}
                   {selectedCategory === 'Matrimoniale' && (
-                    <div style={{ backgroundColor: '#FFF1F2', padding: '20px', borderRadius: '16px', border: '1.5px solid #F43F5E', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#F43F5E', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    <div style={{ backgroundColor: '#FFF1F2', padding: '28px', borderRadius: '20px', border: '2px solid #F43F5E', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 900, color: '#F43F5E', letterSpacing: '1.2px', textTransform: 'uppercase' }}>
                         CĂUTARE MATRIMONIALĂ PRO 👑
                       </span>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '18px' }}>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>VÂRSTĂ</label>
-                          <input type="number" value={age} placeholder="28" onChange={(e) => setAge(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>VÂRSTĂ</label>
+                          <input type="number" value={age} placeholder="28" onChange={(e) => setAge(e.target.value)} style={{ width: '100%', padding: '16px 16px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>GEN</label>
-                          <select value={gender} onChange={(e) => setGender(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>GEN</label>
+                          <select value={gender} onChange={(e) => setGender(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
                             <option value="Femeie">Femeie</option>
                             <option value="Bărbat">Bărbat</option>
                           </select>
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>SCOP RELAȚIE</label>
-                          <select value={relationshipType} onChange={(e) => setRelationshipType(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>SCOP RELAȚIE</label>
+                          <select value={relationshipType} onChange={(e) => setRelationshipType(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
                             <option value="Relație serioasă">Relație serioasă</option>
                             <option value="Prietenie & Socializare">Prietenie & Socializare</option>
                           </select>
@@ -611,15 +611,15 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
 
                   {/* SERVICII SPECIAL FIELDS */}
                   {selectedCategory === 'Servicii' && (
-                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#6366F1', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '28px', borderRadius: '20px', border: '1.5px solid #CBD5E1', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 900, color: '#6366F1', letterSpacing: '1.2px', textTransform: 'uppercase' }}>
                         DETALII SERVICIU PROFESIONAL
                       </span>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>TIP SERVICIU</label>
-                          <select value={serviceType} onChange={(e) => setServiceType(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>TIP SERVICIU</label>
+                          <select value={serviceType} onChange={(e) => setServiceType(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
                             <option value="Construcții & Amenajări">Construcții & Amenajări</option>
                             <option value="Transport & Mutații">Transport & Mutații</option>
                             <option value="Reparații Auto">Reparații Auto</option>
@@ -628,8 +628,8 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                           </select>
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>MOD TARIF</label>
-                          <select value={rateType} onChange={(e) => setRateType(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>MOD TARIF</label>
+                          <select value={rateType} onChange={(e) => setRateType(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
                             <option value="Pe oră">Pe oră</option>
                             <option value="Pe lucrare / proiect">Pe lucrare / proiect</option>
                           </select>
@@ -640,15 +640,15 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
 
                   {/* ELECTRONICE SPECIAL FIELDS */}
                   {selectedCategory === 'Electronice' && (
-                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#8B5CF6', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '28px', borderRadius: '20px', border: '1.5px solid #CBD5E1', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 900, color: '#8B5CF6', letterSpacing: '1.2px', textTransform: 'uppercase' }}>
                         DETALII PRODUS ELECTRONIC
                       </span>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>SUBCATEGORIE</label>
-                          <select value={subCategory} onChange={(e) => setSubCategory(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>SUBCATEGORIE</label>
+                          <select value={subCategory} onChange={(e) => setSubCategory(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
                             <option value="Telefoane">Telefoane</option>
                             <option value="Laptop-uri & PC">Laptop-uri & PC</option>
                             <option value="TV & Audio">TV & Audio</option>
@@ -656,8 +656,8 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                           </select>
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>BRAND / PRODUCĂTOR</label>
-                          <input type="text" value={electronicBrand} placeholder="ex: Apple / Samsung" onChange={(e) => setElectronicBrand(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>BRAND / PRODUCĂTOR</label>
+                          <input type="text" value={electronicBrand} placeholder="ex: Apple / Samsung" onChange={(e) => setElectronicBrand(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
                         </div>
                       </div>
                     </div>
@@ -665,23 +665,23 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
 
                   {/* MODĂ SPECIAL FIELDS */}
                   {selectedCategory === 'Modă' && (
-                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#EC4899', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '28px', borderRadius: '20px', border: '1.5px solid #CBD5E1', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 900, color: '#EC4899', letterSpacing: '1.2px', textTransform: 'uppercase' }}>
                         DETALII ARTICOL MODĂ
                       </span>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>SECȚIUNE</label>
-                          <select value={genderSection} onChange={(e) => setGenderSection(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>SECȚIUNE</label>
+                          <select value={genderSection} onChange={(e) => setGenderSection(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
                             <option value="Femei">Femei</option>
                             <option value="Bărbați">Bărbați</option>
                             <option value="Unisex">Unisex</option>
                           </select>
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>MĂRIME</label>
-                          <input type="text" value={clothingSize} placeholder="ex: S, M, L, 40, 42" onChange={(e) => setClothingSize(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>MĂRIME</label>
+                          <input type="text" value={clothingSize} placeholder="ex: S, M, L, 40, 42" onChange={(e) => setClothingSize(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
                         </div>
                       </div>
                     </div>
@@ -689,15 +689,15 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
 
                   {/* ANIMALE SPECIAL FIELDS */}
                   {selectedCategory === 'Animale' && (
-                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#D97706', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '28px', borderRadius: '20px', border: '1.5px solid #CBD5E1', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 900, color: '#D97706', letterSpacing: '1.2px', textTransform: 'uppercase' }}>
                         DETALII ANIMALE DE COMPANIE
                       </span>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>TIP ANIMAL</label>
-                          <select value={animalType} onChange={(e) => setAnimalType(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>TIP ANIMAL</label>
+                          <select value={animalType} onChange={(e) => setAnimalType(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
                             <option value="Câini">Câini</option>
                             <option value="Pisici">Pisici</option>
                             <option value="Păsări">Păsări</option>
@@ -705,8 +705,8 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                           </select>
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>RASĂ / BREED</label>
-                          <input type="text" value={breed} placeholder="ex: Beagle / Labrador" onChange={(e) => setBreed(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>RASĂ / BREED</label>
+                          <input type="text" value={breed} placeholder="ex: Beagle / Labrador" onChange={(e) => setBreed(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
                         </div>
                       </div>
                     </div>
@@ -714,15 +714,15 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
 
                   {/* TURISM SPECIAL FIELDS */}
                   {selectedCategory === 'Turism' && (
-                    <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '16px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                      <span style={{ fontSize: '12px', fontWeight: 800, color: '#0284C7', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    <div style={{ backgroundColor: '#F8FAFC', padding: '28px', borderRadius: '20px', border: '1.5px solid #CBD5E1', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 900, color: '#0284C7', letterSpacing: '1.2px', textTransform: 'uppercase' }}>
                         DETALII CAZARE & TURISM
                       </span>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>TIP CAZARE</label>
-                          <select value={accommodationType} onChange={(e) => setAccommodationType(e.target.value)} style={{ width: '100%', padding: '12px 10px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '13px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }}>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>TIP CAZARE</label>
+                          <select value={accommodationType} onChange={(e) => setAccommodationType(e.target.value)} style={{ width: '100%', padding: '16px 14px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '15px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}>
                             <option value="Pensiune">Pensiune</option>
                             <option value="Hotel">Hotel</option>
                             <option value="Cabană">Cabană</option>
@@ -730,16 +730,16 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                           </select>
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>CAPACITATE (PERSOANE)</label>
-                          <input type="number" value={guestsCount} placeholder="2" onChange={(e) => setGuestsCount(e.target.value)} style={{ width: '100%', padding: '12px 12px', borderRadius: '12px', border: '1.5px solid #CBD5E1', fontSize: '14px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF' }} />
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>CAPACITATE (PERSOANE)</label>
+                          <input type="number" value={guestsCount} placeholder="2" onChange={(e) => setGuestsCount(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
                         </div>
                       </div>
                     </div>
                   )}
 
-                  {/* STANDARD FIELDS */}
+                  {/* STANDARD FIELDS - TALL & SPACIOUS DESIGN */}
                   <div>
-                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
+                    <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#0F172A', marginBottom: '8px', letterSpacing: '0.3px' }}>
                       TITLU ANUNȚ *
                     </label>
                     <input
@@ -748,13 +748,13 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                       placeholder="ex: BMW Serie 3 M Sport / Garsonieră Ultracentrală"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
-                      style={{ width: '100%', padding: '14px 18px', borderRadius: '14px', border: '1.5px solid #CBD5E1', fontSize: '15px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
+                      style={{ width: '100%', padding: '18px 22px', borderRadius: '16px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none', transition: 'border-color 0.2s ease, box-shadow 0.2s ease' }}
                     />
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
+                      <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#0F172A', marginBottom: '8px', letterSpacing: '0.3px' }}>
                         PREȚ (LEI / €) *
                       </label>
                       <input
@@ -763,12 +763,12 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                         placeholder="18500"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
-                        style={{ width: '100%', padding: '14px 18px', borderRadius: '14px', border: '1.5px solid #CBD5E1', fontSize: '15px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
+                        style={{ width: '100%', padding: '18px 22px', borderRadius: '16px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                       />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
+                      <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#0F172A', marginBottom: '8px', letterSpacing: '0.3px' }}>
                         PREȚ VECHI (OPȚIONAL)
                       </label>
                       <input
@@ -776,14 +776,14 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                         placeholder="21000"
                         value={originalPrice}
                         onChange={(e) => setOriginalPrice(e.target.value)}
-                        style={{ width: '100%', padding: '14px 18px', borderRadius: '14px', border: '1.5px solid #CBD5E1', fontSize: '15px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
+                        style={{ width: '100%', padding: '18px 22px', borderRadius: '16px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                       />
                     </div>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
+                      <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#0F172A', marginBottom: '8px', letterSpacing: '0.3px' }}>
                         ORAȘ / LOCAȚIE
                       </label>
                       <input
@@ -791,12 +791,12 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                         placeholder="București / Oradea / Cluj"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
-                        style={{ width: '100%', padding: '14px 18px', borderRadius: '14px', border: '1.5px solid #CBD5E1', fontSize: '15px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
+                        style={{ width: '100%', padding: '18px 22px', borderRadius: '16px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                       />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
+                      <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#0F172A', marginBottom: '8px', letterSpacing: '0.3px' }}>
                         NUMĂR TELEFON
                       </label>
                       <input
@@ -804,36 +804,36 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                         placeholder="07xx xxx xxx"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        style={{ width: '100%', padding: '14px 18px', borderRadius: '14px', border: '1.5px solid #CBD5E1', fontSize: '15px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
+                        style={{ width: '100%', padding: '18px 22px', borderRadius: '16px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 600, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }}
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
+                    <label style={{ display: 'block', fontSize: '14px', fontWeight: 800, color: '#0F172A', marginBottom: '8px', letterSpacing: '0.3px' }}>
                       DESCRIERE DETALIATĂ
                     </label>
                     <textarea
-                      rows={4}
+                      rows={5}
                       placeholder="Oferă mai multe detalii despre produs sau servicii..."
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
-                      style={{ width: '100%', padding: '14px 18px', borderRadius: '14px', border: '1.5px solid #CBD5E1', fontSize: '15px', fontWeight: 500, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none', resize: 'vertical' }}
+                      style={{ width: '100%', padding: '18px 22px', borderRadius: '16px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 500, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none', resize: 'vertical' }}
                     />
                   </div>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #F1F5F9' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '24px', paddingTop: '24px', borderTop: '1.5px solid #F1F5F9' }}>
                     <button
                       type="button"
                       onClick={() => setCurrentStep(1)}
-                      style={{ padding: '12px 24px', borderRadius: '12px', border: '1.5px solid #CBD5E1', backgroundColor: '#FFFFFF', fontSize: '14px', fontWeight: 700, color: '#475569', cursor: 'pointer' }}
+                      style={{ padding: '16px 28px', borderRadius: '14px', border: '2px solid #CBD5E1', backgroundColor: '#FFFFFF', fontSize: '15px', fontWeight: 800, color: '#475569', cursor: 'pointer' }}
                     >
                       ← Înapoi la Categorii
                     </button>
 
                     <button
                       type="submit"
-                      style={{ padding: '14px 32px', borderRadius: '30px', border: 'none', backgroundColor: 'var(--primary-yellow)', fontSize: '15px', fontWeight: 800, color: '#0F172A', cursor: 'pointer', boxShadow: '0 4px 14px rgba(248, 210, 71, 0.4)' }}
+                      style={{ padding: '18px 48px', borderRadius: '30px', border: 'none', backgroundColor: 'var(--primary-yellow)', fontSize: '17px', fontWeight: 900, color: '#0F172A', cursor: 'pointer', boxShadow: '0 10px 25px rgba(248, 210, 71, 0.45)' }}
                     >
                       Înainte la Poze →
                     </button>
