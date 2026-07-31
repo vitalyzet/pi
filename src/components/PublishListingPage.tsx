@@ -167,6 +167,12 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
       discountPercentage: discount > 0 ? discount : undefined,
       badges: selectedCategory === 'Auto' ? ['AUTO', 'VERIFICAT'] : (selectedCategory === 'Matrimoniale' ? ['PRO', 'VERIFICAT'] : (discount > 0 ? [`${discount}%`] : ['NOU'])),
       image: uploadedImageUrl,
+      images: [
+        uploadedImageUrl,
+        'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=800&q=80',
+        'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80',
+        'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80'
+      ],
       category: selectedCategory,
       feeling: 'Work',
       design: 'Special',

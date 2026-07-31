@@ -6,6 +6,7 @@ export interface Product {
   discountPercentage?: number;
   badges?: string[];
   image: string;
+  images?: string[];
   category: string;
   feeling: string;
   design: string;

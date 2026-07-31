@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ArrowLeft,
   Phone,
@@ -45,8 +45,14 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [showPhone, setShowPhone] = useState(false);
+  const [activeImage, setActiveImage] = useState(product.image);
+
+  useEffect(() => {
+    setActiveImage(product.image);
+  }, [product.image]);
 
   const isFavorite = favorites.some((p) => p.id === product.id);
+  const allImages = Array.from(new Set([product.image, ...(product.images || [])]));
 
   const isAuto = product.category === 'Auto' || product.title.toLowerCase().includes('polo') || product.title.toLowerCase().includes('bmw');
 
@@ -97,7 +103,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
         <div>
           <div style={{ position: 'relative', borderRadius: '20px', overflow: 'hidden', backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0' }}>
             <img
-              src={product.image}
+              src={activeImage}
               alt={product.title}
               style={{ width: '100%', height: '480px', objectFit: 'cover' }}
             />
@@ -144,6 +150,31 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               ANUNȚ VERIFICAT PINPIN
             </div>
           </div>
+          
+          {/* Thumbnails Gallery */}
+          {allImages.length > 1 && (
+            <div style={{ display: 'flex', gap: '12px', marginTop: '16px', overflowX: 'auto', paddingBottom: '8px' }}>
+              {allImages.map((img, idx) => (
+                <img
+                  key={idx}
+                  src={img}
+                  alt={`${product.title} - Foto ${idx + 1}`}
+                  onClick={() => setActiveImage(img)}
+                  style={{
+                    width: '80px',
+                    height: '80px',
+                    objectFit: 'cover',
+                    borderRadius: '12px',
+                    cursor: 'pointer',
+                    border: activeImage === img ? '3px solid var(--primary-yellow)' : '1px solid #E2E8F0',
+                    opacity: activeImage === img ? 1 : 0.6,
+                    transition: 'all 0.2s',
+                    flexShrink: 0
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Right Column: Title, Specs & Purchase Card */}
