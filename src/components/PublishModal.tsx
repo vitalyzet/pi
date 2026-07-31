@@ -159,20 +159,21 @@ export const PublishModal: React.FC<PublishModalProps> = ({
           overflow: 'hidden',
           backgroundColor: '#FFFFFF',
           opacity: 1,
-          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.45)',
+          boxShadow: '0 25px 60px rgba(15, 23, 42, 0.18)',
+          border: '1.5px solid #F1F5F9',
           position: 'relative',
           zIndex: 100000
         }}
       >
         {/* Header */}
-        <div style={{ background: 'linear-gradient(135deg, #FEF08A 0%, #F8D247 100%)', padding: '24px 28px', position: 'relative' }}>
+        <div style={{ backgroundColor: '#FFFFFF', padding: '24px 28px', borderBottom: '1px solid #F1F5F9', position: 'relative' }}>
           <button
             onClick={onClose}
             style={{
               position: 'absolute',
               top: '20px',
               right: '20px',
-              background: 'rgba(0,0,0,0.1)',
+              background: '#F1F5F9',
               border: 'none',
               borderRadius: '50%',
               width: '36px',
@@ -183,17 +184,16 @@ export const PublishModal: React.FC<PublishModalProps> = ({
               cursor: 'pointer'
             }}
           >
-            <X size={20} color="#0F172A" />
+            <X size={18} color="#64748B" />
           </button>
           
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
-            <Sparkles size={22} color="#0F172A" />
-            <span style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '1.2px', textTransform: 'uppercase', color: '#0F172A' }}>
-              PUBLICARE ÎN 3 PAȘI
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+            <span style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', backgroundColor: '#FFFDF0', color: '#0F172A', padding: '4px 12px', borderRadius: '20px', border: '1px solid var(--primary-yellow)' }}>
+              PUBLICARE ANUNȚ
             </span>
           </div>
 
-          <h2 style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A', margin: 0 }}>
+          <h2 style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.5px' }}>
             {currentStep === 1 && 'Pasul 1: Alege Categoria'}
             {currentStep === 2 && 'Pasul 2: Detaliile Anunțului'}
             {currentStep === 3 && 'Pasul 3: Poze & Confirmare'}
@@ -202,29 +202,28 @@ export const PublishModal: React.FC<PublishModalProps> = ({
           {/* Stepper Progress Indicator */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '18px' }}>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: currentStep >= 1 ? '#0F172A' : 'rgba(0,0,0,0.15)', color: '#FFF', fontSize: '13px', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: currentStep >= 1 ? '#E55B86' : '#F1F5F9', color: currentStep >= 1 ? '#FFF' : '#64748B', fontSize: '13px', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 1
               </div>
-              <span style={{ fontSize: '13px', fontWeight: 700, color: currentStep >= 1 ? '#0F172A' : 'rgba(0,0,0,0.5)' }}>Categorie</span>
+              <span style={{ fontSize: '13px', fontWeight: 700, color: currentStep >= 1 ? '#0F172A' : '#94A3B8' }}>Categorie</span>
             </div>
 
-            <div style={{ width: '30px', height: '2px', background: currentStep >= 2 ? '#0F172A' : 'rgba(0,0,0,0.15)' }} />
+            <div style={{ width: '30px', height: '2px', background: currentStep >= 2 ? '#E55B86' : '#F1F5F9' }} />
 
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: currentStep >= 2 ? '#0F172A' : 'rgba(0,0,0,0.15)', color: '#FFF', fontSize: '13px', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: currentStep >= 2 ? '#E55B86' : '#F1F5F9', color: currentStep >= 2 ? '#FFF' : '#64748B', fontSize: '13px', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 2
               </div>
-              <span style={{ fontSize: '13px', fontWeight: 700, color: currentStep >= 2 ? '#0F172A' : 'rgba(0,0,0,0.5)' }}>Detalii</span>
+              <span style={{ fontSize: '13px', fontWeight: 700, color: currentStep >= 2 ? '#0F172A' : '#94A3B8' }}>Detalii</span>
             </div>
 
-            <div style={{ width: '30px', height: '2px', background: currentStep >= 3 ? '#0F172A' : 'rgba(0,0,0,0.15)' }} />
+            <div style={{ width: '30px', height: '2px', background: currentStep >= 3 ? '#E55B86' : '#F1F5F9' }} />
 
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: currentStep >= 3 ? '#0F172A' : 'rgba(0,0,0,0.15)', color: '#FFF', fontSize: '13px', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: currentStep >= 3 ? '#E55B86' : '#F1F5F9', color: currentStep >= 3 ? '#FFF' : '#64748B', fontSize: '13px', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 3
               </div>
-              <span style={{ fontSize: '13px', fontWeight: 700, color: currentStep >= 3 ? '#0F172A' : 'rgba(0,0,0,0.5)' }}>Publicare</span>
-            </div>
+              <span style={{ fontSize: '13px', fontWeight: 700, color: currentStep >= 3 ? '#0F172A' : '#94A3B8' }}>Publicare</span>
           </div>
         </div>
 
@@ -514,5 +513,6 @@ export const PublishModal: React.FC<PublishModalProps> = ({
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 };

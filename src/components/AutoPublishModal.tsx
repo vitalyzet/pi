@@ -128,20 +128,21 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
           overflow: 'hidden',
           backgroundColor: '#FFFFFF',
           opacity: 1,
-          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.45)',
+          boxShadow: '0 25px 60px rgba(15, 23, 42, 0.18)',
+          border: '1.5px solid #F1F5F9',
           position: 'relative',
           zIndex: 100000
         }}
       >
         {/* Header */}
-        <div style={{ background: 'linear-gradient(135deg, #1E293B 0%, #0F172A 100%)', padding: '24px 28px', color: '#FFFFFF', position: 'relative' }}>
+        <div style={{ backgroundColor: '#FFFFFF', padding: '24px 28px', borderBottom: '1px solid #F1F5F9', position: 'relative' }}>
           <button
             onClick={onClose}
             style={{
               position: 'absolute',
               top: '20px',
               right: '20px',
-              background: 'rgba(255,255,255,0.15)',
+              background: '#F1F5F9',
               border: 'none',
               borderRadius: '50%',
               width: '36px',
@@ -152,17 +153,16 @@ export const AutoPublishModal: React.FC<AutoPublishModalProps> = ({
               cursor: 'pointer'
             }}
           >
-            <X size={20} color="#FFFFFF" />
+            <X size={18} color="#64748B" />
           </button>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
-            <Car size={24} color="var(--primary-yellow)" />
-            <span style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'var(--primary-yellow)' }}>
-              PUBLICĂ ANUNȚ AUTO
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+            <span style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', backgroundColor: '#FFFDF0', color: '#0F172A', padding: '4px 12px', borderRadius: '20px', border: '1px solid var(--primary-yellow)' }}>
+              AUTO
             </span>
           </div>
 
-          <h2 style={{ fontSize: '24px', fontWeight: 800, margin: 0 }}>
+          <h2 style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.5px' }}>
             Adaugă Mașina Ta Pe PinPin Auto
           </h2>
         </div>
