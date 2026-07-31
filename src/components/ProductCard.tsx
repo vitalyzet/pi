@@ -7,6 +7,19 @@ interface ProductCardProps {
   onQuickView: (product: Product) => void;
 }
 
+const timeAgo = (dateStr: string) => {
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const minutes = Math.floor(diff / 60000);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  if (minutes < 1) return 'Acum câteva secunde';
+  if (minutes < 60) return `Acum ${minutes} min`;
+  if (hours < 24) return `Acum ${hours} ore`;
+  if (days === 1) return `Ieri`;
+  return `Acum ${days} zile`;
+};
+
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   onAddToCart,
@@ -51,9 +64,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div className="card-details">
         <h3 className="product-title">{product.title}</h3>
         <div className="price-container">
-          <span className="original-price">{product.originalPrice} €</span>
+          {product.originalPrice && (
+            <span className="original-price">{product.originalPrice} €</span>
+          )}
           <span className="discounted-price">{product.price} €</span>
         </div>
+        {product.createdAt && (
+          <div style={{ fontSize: '12px', color: '#94A3B8', marginTop: '8px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#10B981' }}></span>
+            {timeAgo(product.createdAt)}
+          </div>
+        )}
       </div>
     </div>
   );
