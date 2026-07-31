@@ -89,8 +89,8 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
   const [wishlist, setWishlist] = useState<Product[]>([PRODUCTS[1], PRODUCTS[4], PRODUCTS[5]]);
   
   const [userProfile] = useState({
-    name: 'Elena Popescu',
-    email: 'elena.popescu@pinpin.ro',
+    name: 'Alexandru B.',
+    email: 'alexandru.b@pinpin.ro',
     phone: '+40 722 123 456',
     joined: 'Aprilie 2026',
     credits: 150
@@ -144,7 +144,7 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
             <div style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', marginBottom: '24px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
                 <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'var(--primary-yellow)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0F172A', fontSize: '24px', fontWeight: 800 }}>
-                  {userProfile.name.charAt(0)}
+                  {userProfile.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
                 </div>
                 <div>
                   <h3 style={{ margin: '0 0 4px 0', fontSize: '18px', fontWeight: 800, color: '#0F172A' }}>{userProfile.name}</h3>

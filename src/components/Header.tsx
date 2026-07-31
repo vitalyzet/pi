@@ -142,7 +142,7 @@ export const Header: React.FC<HeaderProps> = ({
               }}
             >
               {isLoggedIn ? (
-                <span style={{ fontSize: '12px', fontWeight: 800, color: '#222', padding: '0 2px' }}>EP</span>
+                <span style={{ fontSize: '12px', fontWeight: 800, color: '#222', padding: '0 2px' }}>AB</span>
               ) : (
                 <User size={22} />
               )}

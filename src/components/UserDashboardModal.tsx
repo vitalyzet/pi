@@ -23,8 +23,8 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
   onLogout,
 }) => {
   const userProfile = {
-    name: 'Elena Popescu',
-    email: 'elena.popescu@pinpin.ro',
+    name: 'Alexandru B.',
+    email: 'alexandru.b@pinpin.ro',
     credits: 150,
     activeAds: 2,
     unreadMessages: 2,
@@ -56,7 +56,7 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
           {/* User Profile Summary */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px' }}>
             <div style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: 'var(--primary-yellow)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0F172A', fontSize: '28px', fontWeight: 900 }}>
-              {userProfile.name.charAt(0)}
+              {userProfile.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
             </div>
             <div>
               <h3 style={{ margin: '0 0 4px 0', fontSize: '18px', fontWeight: 800, color: '#0F172A' }}>{userProfile.name}</h3>
