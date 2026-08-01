@@ -1,6 +1,6 @@
 import React from 'react';
 import { Product } from '../data/products';
-import { Heart } from 'lucide-react';
+import { Heart, MapPin, Star } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -40,6 +40,43 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onToggleFavorite,
 }) => {
   const isAuto = product.category === 'Auto' || product.category === 'Auto & Moto' || product.category === 'Vehicule';
+  const isTurism = product.category === 'Turism' || product.category === 'Cazare';
+
+  if (isTurism) {
+    return (
+      <div className="product-card turism-card" onClick={() => onQuickView(product)}>
+        <div className="card-image-wrapper">
+          {product.discountPercentage ? (
+            <div className="turism-badge discount">{product.discountPercentage}%</div>
+          ) : (
+            <div className="turism-badge">OFERTA</div>
+          )}
+          <img src={product.image} alt={product.title} className="card-image" loading="lazy" />
+        </div>
+        
+        <div className="turism-details">
+          <div className="turism-title">{product.title}</div>
+          <div className="turism-rating">
+            <Star fill="#94A3B8" color="#94A3B8" size={12} /> 4.7 (89)
+          </div>
+          
+          <div className="turism-tags">
+            <span className="turism-tag">Cazare</span>
+            <span className="turism-tag">2 pers.</span>
+          </div>
+
+          <div className="turism-footer">
+            <div className="turism-price">
+              {product.price} € <span className="turism-price-suffix">/ noapte</span>
+            </div>
+            <div className="turism-location">
+              <MapPin size={13} /> {product.location || 'București'}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (isAuto && viewMode === 'pro') {
     return (

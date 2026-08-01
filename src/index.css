@@ -1458,3 +1458,119 @@ body {
   color: #1E293B;
   white-space: nowrap;
 }
+
+/* Turism Card Design */
+.product-card.turism-card {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  position: relative;
+  border: 1px solid #E2E8F0;
+}
+
+.product-card.turism-card:hover {
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+  transform: translateY(-4px);
+}
+
+.turism-card .card-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+}
+
+.turism-card .card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.turism-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #333333;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 8px;
+  text-transform: uppercase;
+}
+
+.turism-badge.discount {
+  background: #E55B86;
+}
+
+.turism-details {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.turism-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #1E293B;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.turism-rating {
+  font-size: 13px;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.turism-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.turism-tag {
+  background: #F1F5F9;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.turism-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #F1F5F9;
+}
+
+.turism-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #A855F7; /* Purple for price */
+}
+
+.turism-price-suffix {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.turism-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #94A3B8;
+  font-weight: 500;
+}
