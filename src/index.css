@@ -626,7 +626,7 @@ body {
   bottom: -22px; /* Pulls it down halfway outside the image */
   right: 16px;
   background: #FFFFFF;
-  border: none;
+  border: 1px solid #E2E8F0;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -634,15 +634,17 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.06);
   z-index: 10;
-  color: #0F172A;
-  transition: transform 0.2s, color 0.2s;
+  color: #475569;
+  transition: transform 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
 .product-card.auto-card .favorite-icon-btn:hover {
   transform: scale(1.1);
   color: #E55B86;
+  border-color: #E55B86;
+  box-shadow: 0 8px 20px rgba(229, 91, 134, 0.2);
 }
 
 .product-card.auto-card .auto-details {
