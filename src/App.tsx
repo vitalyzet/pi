@@ -319,6 +319,7 @@ export const App: React.FC = () => {
                 <ProductCard
                   key={product.id}
                   product={product}
+                  viewMode={viewMode}
                   onAddToCart={(p) => handleAddToCart(p, 1)}
                   onQuickView={(p) => setSelectedDetailProduct(p)}
                 />

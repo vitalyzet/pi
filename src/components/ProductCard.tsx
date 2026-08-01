@@ -4,6 +4,7 @@ import { Heart } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
+  viewMode?: 'classic' | 'pro';
   onAddToCart: (product: Product, e: React.MouseEvent) => void;
   onQuickView: (product: Product) => void;
 }
@@ -30,12 +31,13 @@ const formatDateAuto = (dateStr: string) => {
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
+  viewMode = 'classic',
   onAddToCart,
   onQuickView,
 }) => {
   const isAuto = product.category === 'Auto' || product.category === 'Auto & Moto' || product.category === 'Vehicule';
 
-  if (isAuto) {
+  if (isAuto && viewMode === 'pro') {
     return (
       <div className="product-card auto-card" onClick={() => onQuickView(product)}>
         <div className="card-image-wrapper">
