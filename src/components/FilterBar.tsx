@@ -213,37 +213,39 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             )}
           </div>
 
-          {/* Category Filter */}
-          <div className="filter-group">
-            <button
-              className="filter-btn"
-              onClick={() => toggleDropdown('category')}
-            >
-              CATEGORY {selectedCategory !== 'Toate' && `(${selectedCategory})`}{' '}
-              {activeDropdown === 'category' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-            </button>
-            {activeDropdown === 'category' && (
-              <div className="category-popup-card" style={{ width: '480px', padding: '16px' }}>
-                <div className="category-pill-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
-                  {CATEGORY_PILL_ITEMS.map((cat) => (
-                    <button
-                      key={cat.name}
-                      className={`category-pill-card ${selectedCategory === cat.name ? 'selected' : ''}`}
-                      onClick={() => {
-                        onSelectCategory(cat.name);
-                        setActiveDropdown(null);
-                      }}
-                    >
-                      <div className="category-pill-badge" style={{ backgroundColor: cat.badgeBg }}>
-                        {cat.icon}
-                      </div>
-                      <span className="category-pill-title">{cat.label}</span>
-                    </button>
-                  ))}
+          {/* Category Filter - Only visible in Classic Mode */}
+          {viewMode === 'classic' && (
+            <div className="filter-group">
+              <button
+                className="filter-btn"
+                onClick={() => toggleDropdown('category')}
+              >
+                CATEGORII {selectedCategory !== 'Toate' && `(${selectedCategory})`}{' '}
+                {activeDropdown === 'category' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              </button>
+              {activeDropdown === 'category' && (
+                <div className="category-popup-card" style={{ width: '480px', padding: '16px' }}>
+                  <div className="category-pill-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
+                    {CATEGORY_PILL_ITEMS.map((cat) => (
+                      <button
+                        key={cat.name}
+                        className={`category-pill-card ${selectedCategory === cat.name ? 'selected' : ''}`}
+                        onClick={() => {
+                          onSelectCategory(cat.name);
+                          setActiveDropdown(null);
+                        }}
+                      >
+                        <div className="category-pill-badge" style={{ backgroundColor: cat.badgeBg }}>
+                          {cat.icon}
+                        </div>
+                        <span className="category-pill-title">{cat.label}</span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
 

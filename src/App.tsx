@@ -1,7 +1,9 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { PlusCircle } from 'lucide-react';
 import { Header } from './components/Header';
+
 import { FilterBar } from './components/FilterBar';
+import { ProCategoryBar } from './components/ProCategoryBar';
 import { ProductCard } from './components/ProductCard';
 import { CartDrawer, CartItem } from './components/CartDrawer';
 import { FeaturesSection } from './components/FeaturesSection';
@@ -299,6 +301,16 @@ export const App: React.FC = () => {
             onSelectSort={setSortBy}
             onToggleViewMode={handleSetViewMode}
           />
+
+          {viewMode === 'pro' && (
+            <ProCategoryBar
+              selectedCategory={selectedCategory}
+              onSelectCategory={(val) => {
+                setSelectedCategory(val);
+                setVisibleCount(8);
+              }}
+            />
+          )}
 
           {/* Main Product Grid */}
           <main className="product-grid-container">
