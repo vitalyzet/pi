@@ -56,31 +56,16 @@ export const ProCategoryBar: React.FC<ProCategoryBarProps> = ({
               <button
                 key={cat.id}
                 onClick={() => onSelectCategory(cat.id)}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '12px',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  width: '90px',
-                  position: 'relative'
-                }}
+                className="pro-category-btn"
               >
-                <div style={{
-                  width: '76px',
-                  height: '76px',
-                  borderRadius: '24px',
-                  backgroundColor: '#FFFFFF',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: isSelected ? '2px solid #F8D247' : '1.5px solid #E2E8F0',
-                  boxShadow: isSelected ? '0 8px 16px rgba(248, 210, 71, 0.25)' : '0 4px 10px rgba(226, 232, 240, 0.5)',
-                  transition: 'all 0.2s ease-in-out',
-                  color: isSelected ? '#F8D247' : '#475569'
-                }}>
+                <div 
+                  className="pro-category-icon-wrapper"
+                  style={{
+                    border: isSelected ? '2px solid #F8D247' : '1.5px solid #E2E8F0',
+                    boxShadow: isSelected ? '0 8px 16px rgba(248, 210, 71, 0.25)' : '0 4px 10px rgba(226, 232, 240, 0.5)',
+                    color: isSelected ? '#F8D247' : '#475569'
+                  }}
+                >
                   <Icon size={32} strokeWidth={1.5} />
                   
                   {cat.isNew && (
@@ -102,13 +87,17 @@ export const ProCategoryBar: React.FC<ProCategoryBarProps> = ({
                   )}
                 </div>
                 
-                <span style={{
-                  fontSize: '13px',
-                  fontWeight: isSelected ? 700 : 600,
-                  color: isSelected ? '#0F172A' : '#475569',
-                  textAlign: 'center',
-                  lineHeight: 1.2
-                }}>
+                <span 
+                  className="pro-category-label"
+                  style={{
+                    fontSize: '13px',
+                    fontWeight: isSelected ? 700 : 600,
+                    color: isSelected ? '#0F172A' : '#475569',
+                    textAlign: 'center',
+                    lineHeight: 1.2,
+                    transition: 'color 0.2s ease-in-out'
+                  }}
+                >
                   {cat.label}
                 </span>
               </button>
