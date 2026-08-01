@@ -176,6 +176,16 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               ))}
             </div>
           )}
+
+          {/* Description (Moved here) */}
+          <div style={{ marginTop: '32px' }}>
+            <span style={{ fontSize: '12px', fontWeight: 800, color: '#64748B', letterSpacing: '1px', textTransform: 'uppercase', display: 'block', marginBottom: '12px' }}>
+              DESCRIERE DETALIATĂ
+            </span>
+            <p style={{ fontSize: '15px', color: '#334155', lineHeight: 1.6, margin: 0 }}>
+              {product.description || 'Anunț verificat pe platforma PinPin. Produs păstrat în condiții excelente, livrat rapid oriunde în țară cu posibilitate de verificare.'}
+            </p>
+          </div>
         </div>
 
         {/* Right Column: Title, Specs & Purchase Card */}
@@ -392,15 +402,6 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               </div>
             )}
 
-            {/* Description */}
-            <div style={{ marginBottom: '28px' }}>
-              <span style={{ fontSize: '12px', fontWeight: 800, color: '#64748B', letterSpacing: '1px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-                DESCRIERE DETALIATĂ
-              </span>
-              <p style={{ fontSize: '15px', color: '#334155', lineHeight: 1.6, margin: 0 }}>
-                {product.description || 'Anunț verificat pe platforma PinPin. Produs păstrat în condiții excelente, livrat rapid oriunde în țară cu posibilitate de verificare.'}
-              </p>
-            </div>
           </div>
 
           {/* Bottom Seller Card & Contact Buttons */}
