@@ -49,7 +49,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
   useEffect(() => {
     setActiveImage(product.image);
-  }, [product.image]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [product.image, product.id]);
 
   const isFavorite = favorites.some((p) => p.id === product.id);
   const allImages = Array.from(new Set([product.image, ...(product.images || [])]));
