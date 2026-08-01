@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, User, ShoppingBag, Menu, X, Truck, RotateCcw, PackageCheck, Shield, PlusCircle } from 'lucide-react';
+import { Search, User, ShoppingBag, Menu, X, Truck, RotateCcw, PackageCheck, Shield, PlusCircle, Heart } from 'lucide-react';
 
 interface HeaderProps {
   cartCount: number;
@@ -10,6 +10,7 @@ interface HeaderProps {
   onOpenUser: () => void;
   onOpenAdmin: () => void;
   onGoToStore: () => void;
+  onOpenFavorites: () => void;
   onOpenPublish?: () => void;
 }
 
@@ -22,6 +23,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenUser,
   onOpenAdmin,
   onGoToStore,
+  onOpenFavorites,
   onOpenPublish,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -146,6 +148,10 @@ export const Header: React.FC<HeaderProps> = ({
               ) : (
                 <User size={22} />
               )}
+            </button>
+
+            <button className="icon-btn" onClick={onOpenFavorites} title="Anunțuri salvate">
+              <Heart size={22} />
             </button>
 
             <button className="icon-btn" onClick={onOpenCart} title="Coșul de cumpărături">

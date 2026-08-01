@@ -6,6 +6,7 @@ import { FilterBar } from './components/FilterBar';
 import { ProCategoryBar } from './components/ProCategoryBar';
 import { ProductCard } from './components/ProductCard';
 import { CartDrawer, CartItem } from './components/CartDrawer';
+import { FavoritesDrawer } from './components/FavoritesDrawer';
 import { FeaturesSection } from './components/FeaturesSection';
 import { Footer } from './components/Footer';
 import { QuickViewModal } from './components/QuickViewModal';
@@ -84,6 +85,7 @@ export const App: React.FC = () => {
   // Cart & Modal State
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const [selectedDetailProduct, setSelectedDetailProduct] = useState<Product | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -223,6 +225,7 @@ export const App: React.FC = () => {
         isLoggedIn={isLoggedIn}
         announcementText={announcementText}
         onOpenCart={() => setIsCartOpen(true)}
+        onOpenFavorites={() => setIsFavoritesOpen(true)}
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenUser={handleUserClick}
         onOpenAdmin={() => setCurrentView('admin')}
@@ -397,6 +400,13 @@ export const App: React.FC = () => {
         items={cartItems}
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
+      />
+
+      <FavoritesDrawer
+        isOpen={isFavoritesOpen}
+        onClose={() => setIsFavoritesOpen(false)}
+        favorites={favorites}
+        onRemoveFavorite={handleToggleFavorite}
       />
 
       {quickViewProduct && (quickViewProduct.category === 'Auto' || quickViewProduct.title.toLowerCase().includes('polo') || quickViewProduct.title.toLowerCase().includes('bmw')) ? (
