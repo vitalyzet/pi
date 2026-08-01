@@ -1,6 +1,6 @@
 import React from 'react';
 import { Product } from '../data/products';
-import { MapPin, Heart } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -39,6 +39,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     return (
       <div className="product-card auto-card" onClick={() => onQuickView(product)}>
         <div className="card-image-wrapper">
+          <div className="auto-category-badge">Auto & Moto</div>
+          <div className="auto-location-overlay">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span style={{ marginTop: '2px' }}>{product.location || 'slatina'}</span>
+          </div>
+          
           <img
             src={product.image}
             alt={product.title}
@@ -52,28 +61,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               // Placeholder for favorite action
             }}
           >
-            <Heart size={20} strokeWidth={2} />
+            <Heart size={20} strokeWidth={2.5} />
           </button>
         </div>
         
         <div className="auto-details">
+          <span className="auto-price">{product.price.toLocaleString('ro-RO')} €</span>
           <h3 className="auto-title">{product.title}</h3>
-          
-          <div className="auto-location">
-            <MapPin size={14} /> 
-            {product.location || 'Buzău'}
-          </div>
-          
-          <div className="auto-specs">
-            {product.specs?.year || '2009'} • {product.specs?.mileage || '336.702'} km • {product.specs?.fuel || 'Diesel'} • {product.specs?.gearbox || 'Automată'}
-          </div>
-          
-          <div className="auto-divider"></div>
-          
-          <div className="auto-footer">
-            <span className="auto-price">{product.price.toLocaleString('ro-RO')} €</span>
-            <span className="auto-date">{product.createdAt ? formatDateAuto(product.createdAt) : '3 iun. 2026'}</span>
-          </div>
         </div>
       </div>
     );
