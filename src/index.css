@@ -641,10 +641,13 @@ body {
 }
 
 .product-card.auto-card .favorite-icon-btn:hover {
-  transform: scale(1.1);
-  color: #E55B86;
-  border-color: #E55B86;
-  box-shadow: 0 8px 20px rgba(229, 91, 134, 0.2);
+  transform: scale(1.05);
+  color: #E63946; /* Hot red color for the heart */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.product-card.auto-card .favorite-icon-btn:hover svg {
+  fill: #E63946;
 }
 
 .product-card.auto-card .auto-details {
