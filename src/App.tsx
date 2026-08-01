@@ -277,19 +277,15 @@ export const App: React.FC = () => {
         />
       ) : (
         <>
-          {/* Category Header (Mod Pro) */}
+          {/* Category Header */}
           <section className="category-header-section" style={{ padding: '0 0 20px 0' }}>
-            {viewMode === 'pro' ? (
-              <ProCategoryBar
-                selectedCategory={selectedCategory}
-                onSelectCategory={(val) => {
-                  setSelectedCategory(val);
-                  setVisibleCount(8);
-                }}
-              />
-            ) : (
-              <h1 className="category-main-title">Pinuri colorate</h1>
-            )}
+            <ProCategoryBar
+              selectedCategory={selectedCategory}
+              onSelectCategory={(val) => {
+                setSelectedCategory(val);
+                setVisibleCount(8);
+              }}
+            />
           </section>
 
           {/* Filter Bar */}
