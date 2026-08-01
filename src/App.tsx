@@ -78,7 +78,7 @@ export const App: React.FC = () => {
   const [sortBy, setSortBy] = useState('Recomandate');
 
   // Pagination / Load More State
-  const [visibleCount, setVisibleCount] = useState(8);
+  const [visibleCount, setVisibleCount] = useState(19);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   // Cart & Modal State
@@ -283,7 +283,7 @@ export const App: React.FC = () => {
               selectedCategory={selectedCategory}
               onSelectCategory={(val) => {
                 setSelectedCategory(val);
-                setVisibleCount(8);
+                setVisibleCount(19);
               }}
             />
           </section>
@@ -299,7 +299,7 @@ export const App: React.FC = () => {
             viewMode={viewMode}
             onSelectCategory={(val) => {
               setSelectedCategory(val);
-              setVisibleCount(8);
+              setVisibleCount(19);
             }}
             onSelectFeeling={setSelectedFeeling}
             onSelectDesign={setSelectedDesign}
@@ -341,7 +341,7 @@ export const App: React.FC = () => {
                   onClick={() => {
                     setIsLoadingMore(true);
                     setTimeout(() => {
-                      setVisibleCount((prev) => prev + 4);
+                      setVisibleCount((prev) => prev + 20);
                       setIsLoadingMore(false);
                     }, 800);
                   }}
