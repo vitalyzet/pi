@@ -623,7 +623,7 @@ body {
 /* Overlapping Favorite Button */
 .product-card.auto-card .favorite-icon-btn {
   position: absolute;
-  bottom: -22px; /* Pulls it down halfway outside the image */
+  top: -22px; /* Pulls it up halfway over the image */
   right: 16px;
   background: #FFFFFF;
   border: 1px solid #E2E8F0;

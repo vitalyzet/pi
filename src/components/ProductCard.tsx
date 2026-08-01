@@ -56,6 +56,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             className="card-image"
             loading="lazy"
           />
+        </div>
+        
+        <div className="auto-details">
           <button 
             className="favorite-icon-btn"
             onClick={(e) => {
@@ -65,9 +68,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           >
             <Heart size={20} strokeWidth={2.5} />
           </button>
-        </div>
-        
-        <div className="auto-details">
+          
           <span className="auto-price">{product.price.toLocaleString('ro-RO')} €</span>
           <h3 className="auto-title">{product.title}</h3>
         </div>
