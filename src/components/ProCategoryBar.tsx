@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import {
   Home,
   Car,
@@ -40,57 +40,20 @@ export const ProCategoryBar: React.FC<ProCategoryBarProps> = ({
   selectedCategory,
   onSelectCategory
 }) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  // Mouse drag to scroll
-  const [isDragging, setIsDragging] = React.useState(false);
-  const [startX, setStartX] = React.useState(0);
-  const [scrollLeft, setScrollLeft] = React.useState(0);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    if (scrollRef.current) {
-      setStartX(e.pageX - scrollRef.current.offsetLeft);
-      setScrollLeft(scrollRef.current.scrollLeft);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    if (scrollRef.current) {
-      const x = e.pageX - scrollRef.current.offsetLeft;
-      const walk = (x - startX) * 2; // Scroll-fast
-      scrollRef.current.scrollLeft = scrollLeft - walk;
-    }
-  };
-
   return (
-    <div style={{ width: '100%', overflow: 'hidden', padding: '24px 0', backgroundColor: '#FFFFFF', marginBottom: '24px' }}>
+    <div style={{ width: '100%', padding: '10px 0', backgroundColor: 'transparent', marginBottom: '10px' }}>
       <div className="container" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px' }}>
+        <h2 style={{ textAlign: 'center', color: '#0F172A', fontSize: '28px', fontWeight: 800, marginBottom: '30px' }}>
+          Categorii principale
+        </h2>
         <div 
-          ref={scrollRef}
-          onMouseDown={handleMouseDown}
-          onMouseLeave={handleMouseLeave}
-          onMouseUp={handleMouseUp}
-          onMouseMove={handleMouseMove}
           style={{ 
             display: 'flex', 
-            gap: '24px', 
-            overflowX: 'auto', 
-            scrollbarWidth: 'none', // Firefox
-            msOverflowStyle: 'none',  // IE and Edge
-            cursor: isDragging ? 'grabbing' : 'grab',
-            paddingBottom: '8px',
-            WebkitOverflowScrolling: 'touch'
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '24px 32px', 
+            maxWidth: '1100px',
+            margin: '0 auto'
           }}
         >
           {CATEGORIES.map((cat) => {
@@ -109,24 +72,24 @@ export const ProCategoryBar: React.FC<ProCategoryBarProps> = ({
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  minWidth: '90px',
+                  width: '90px',
                   position: 'relative'
                 }}
               >
                 <div style={{
-                  width: '72px',
-                  height: '72px',
+                  width: '76px',
+                  height: '76px',
                   borderRadius: '24px',
                   backgroundColor: '#FFFFFF',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: isSelected ? '2px solid #10B981' : '1px solid #E2E8F0',
-                  boxShadow: isSelected ? '0 8px 16px rgba(16, 185, 129, 0.15)' : '0 4px 6px rgba(226, 232, 240, 0.4)',
+                  border: isSelected ? '2px solid #10B981' : '1.5px solid #E2E8F0',
+                  boxShadow: isSelected ? '0 8px 16px rgba(16, 185, 129, 0.15)' : '0 4px 10px rgba(226, 232, 240, 0.5)',
                   transition: 'all 0.2s ease-in-out',
-                  color: isSelected ? '#10B981' : '#64748B'
+                  color: isSelected ? '#10B981' : '#475569'
                 }}>
-                  <Icon size={30} strokeWidth={1.5} />
+                  <Icon size={32} strokeWidth={1.5} />
                   
                   {cat.isNew && (
                     <div style={{
@@ -139,7 +102,8 @@ export const ProCategoryBar: React.FC<ProCategoryBarProps> = ({
                       fontWeight: 800,
                       padding: '4px 8px',
                       borderRadius: '12px',
-                      letterSpacing: '0.5px'
+                      letterSpacing: '0.5px',
+                      boxShadow: '0 2px 4px rgba(16, 185, 129, 0.4)'
                     }}>
                       Nou
                     </div>
@@ -149,7 +113,7 @@ export const ProCategoryBar: React.FC<ProCategoryBarProps> = ({
                 <span style={{
                   fontSize: '13px',
                   fontWeight: isSelected ? 700 : 600,
-                  color: isSelected ? '#0F172A' : '#64748B',
+                  color: isSelected ? '#0F172A' : '#475569',
                   textAlign: 'center',
                   lineHeight: 1.2
                 }}>

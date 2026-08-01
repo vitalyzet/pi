@@ -277,9 +277,19 @@ export const App: React.FC = () => {
         />
       ) : (
         <>
-          {/* Category Header */}
-          <section className="category-header-section">
-            <h1 className="category-main-title">Pinuri colorate</h1>
+          {/* Category Header (Mod Pro) */}
+          <section className="category-header-section" style={{ padding: '0 0 20px 0' }}>
+            {viewMode === 'pro' ? (
+              <ProCategoryBar
+                selectedCategory={selectedCategory}
+                onSelectCategory={(val) => {
+                  setSelectedCategory(val);
+                  setVisibleCount(8);
+                }}
+              />
+            ) : (
+              <h1 className="category-main-title">Pinuri colorate</h1>
+            )}
           </section>
 
           {/* Filter Bar */}
@@ -301,16 +311,6 @@ export const App: React.FC = () => {
             onSelectSort={setSortBy}
             onToggleViewMode={handleSetViewMode}
           />
-
-          {viewMode === 'pro' && (
-            <ProCategoryBar
-              selectedCategory={selectedCategory}
-              onSelectCategory={(val) => {
-                setSelectedCategory(val);
-                setVisibleCount(8);
-              }}
-            />
-          )}
 
           {/* Main Product Grid */}
           <main className="product-grid-container">
