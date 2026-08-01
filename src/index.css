@@ -299,7 +299,7 @@ body {
 /* Pro Mode Product Grid (5 columns) */
 .product-grid.pro-mode {
   grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
+  gap: 10px;
 }
 
 /* Dropdown Backdrop Blur Overlay */
@@ -539,7 +539,7 @@ body {
 .product-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px; /* Reduced gap between cards to bring them closer together */
+  gap: 10px; /* Reduced gap between cards to bring them closer together */
 }
 
 /* Product Card */
