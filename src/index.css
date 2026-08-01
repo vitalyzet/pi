@@ -694,8 +694,8 @@ body {
 }
 
 .product-card.auto-card .auto-price {
-  font-size: 24px;
-  font-weight: 900;
+  font-size: 20px;
+  font-weight: 800;
   color: #1E2026;
   line-height: 1.2;
 }
@@ -773,7 +773,7 @@ body {
 }
 
 .product-card.auto-card-classic .classic-price {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 800;
   color: #0F172A;
 }

@@ -96,7 +96,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
           
           <div className="classic-footer">
-            <span className="classic-price">{(product.price * 5).toLocaleString('ro-RO')} lei</span>
+            <span className="classic-price">{product.price.toLocaleString('ro-RO')} €</span>
             <button 
               className="classic-favorite-btn"
               onClick={(e) => {
