@@ -4,13 +4,9 @@ import {
   Car,
   Briefcase,
   Heart,
-  Wrench,
   Smartphone,
   Shirt,
   PawPrint,
-  Sofa,
-  Dumbbell,
-  Baby,
   Plane,
   Gamepad2
 } from 'lucide-react';
@@ -25,13 +21,9 @@ const CATEGORIES = [
   { id: 'Auto', label: 'Auto & Moto', icon: Car },
   { id: 'Locuri de muncă', label: 'Locuri de muncă', icon: Briefcase },
   { id: 'Matrimoniale', label: 'Matrimoniale', icon: Heart },
-  { id: 'Servicii', label: 'Servicii', icon: Wrench },
   { id: 'Electronice', label: 'Electronice', icon: Smartphone },
   { id: 'Modă', label: 'Modă', icon: Shirt },
   { id: 'Animale', label: 'Animale', icon: PawPrint },
-  { id: 'Casă & Grădină', label: 'Casă & Grădină', icon: Sofa },
-  { id: 'Timp liber', label: 'Sport', icon: Dumbbell },
-  { id: 'Copii', label: 'Copii', icon: Baby },
   { id: 'Cazare', label: 'Turism', icon: Plane },
   { id: 'Gaming', label: 'Gaming', icon: Gamepad2 }
 ];
