@@ -76,10 +76,10 @@ export const ProCategoryBar: React.FC<ProCategoryBarProps> = ({
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: isSelected ? '2px solid #10B981' : '1.5px solid #E2E8F0',
-                  boxShadow: isSelected ? '0 8px 16px rgba(16, 185, 129, 0.15)' : '0 4px 10px rgba(226, 232, 240, 0.5)',
+                  border: isSelected ? '2px solid #F8D247' : '1.5px solid #E2E8F0',
+                  boxShadow: isSelected ? '0 8px 16px rgba(248, 210, 71, 0.25)' : '0 4px 10px rgba(226, 232, 240, 0.5)',
                   transition: 'all 0.2s ease-in-out',
-                  color: isSelected ? '#10B981' : '#475569'
+                  color: isSelected ? '#F8D247' : '#475569'
                 }}>
                   <Icon size={32} strokeWidth={1.5} />
                   
@@ -88,14 +88,14 @@ export const ProCategoryBar: React.FC<ProCategoryBarProps> = ({
                       position: 'absolute',
                       top: '-6px',
                       right: '0px',
-                      backgroundColor: '#10B981',
+                      backgroundColor: '#E55B86',
                       color: '#FFFFFF',
                       fontSize: '10px',
                       fontWeight: 800,
                       padding: '4px 8px',
                       borderRadius: '12px',
                       letterSpacing: '0.5px',
-                      boxShadow: '0 2px 4px rgba(16, 185, 129, 0.4)'
+                      boxShadow: '0 2px 4px rgba(229, 91, 134, 0.4)'
                     }}>
                       Nou
                     </div>

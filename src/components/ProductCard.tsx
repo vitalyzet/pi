@@ -1,5 +1,6 @@
 import React from 'react';
 import { Product } from '../data/products';
+import { MapPin, Heart } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -20,11 +21,64 @@ const timeAgo = (dateStr: string) => {
   return `Acum ${days} zile`;
 };
 
+// Auto date formatting (e.g., "3 iun. 2026")
+const formatDateAuto = (dateStr: string) => {
+  const date = new Date(dateStr);
+  const months = ['ian.', 'feb.', 'mar.', 'apr.', 'mai', 'iun.', 'iul.', 'aug.', 'sep.', 'oct.', 'nov.', 'dec.'];
+  return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+};
+
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   onAddToCart,
   onQuickView,
 }) => {
+  const isAuto = product.category === 'Auto' || product.category === 'Auto & Moto' || product.category === 'Vehicule';
+
+  if (isAuto) {
+    return (
+      <div className="product-card auto-card" onClick={() => onQuickView(product)}>
+        <div className="card-image-wrapper">
+          <img
+            src={product.image}
+            alt={product.title}
+            className="card-image"
+            loading="lazy"
+          />
+          <button 
+            className="favorite-icon-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              // Placeholder for favorite action
+            }}
+          >
+            <Heart size={20} strokeWidth={2} />
+          </button>
+        </div>
+        
+        <div className="auto-details">
+          <h3 className="auto-title">{product.title}</h3>
+          
+          <div className="auto-location">
+            <MapPin size={14} /> 
+            {product.location || 'Buzău'}
+          </div>
+          
+          <div className="auto-specs">
+            {product.specs?.year || '2009'} • {product.specs?.mileage || '336.702'} km • {product.specs?.fuel || 'Diesel'} • {product.specs?.gearbox || 'Automată'}
+          </div>
+          
+          <div className="auto-divider"></div>
+          
+          <div className="auto-footer">
+            <span className="auto-price">{product.price.toLocaleString('ro-RO')} €</span>
+            <span className="auto-date">{product.createdAt ? formatDateAuto(product.createdAt) : '3 iun. 2026'}</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="product-card" onClick={() => onQuickView(product)}>
       <div className="card-image-wrapper">
