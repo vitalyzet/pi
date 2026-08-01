@@ -539,7 +539,7 @@ body {
 .product-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 32px; /* Increased from 24px to leave more space between cards */
+  gap: 16px; /* Reduced gap between cards to bring them closer together */
 }
 
 /* Product Card */
