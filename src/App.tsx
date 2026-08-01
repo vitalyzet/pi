@@ -102,7 +102,10 @@ export const App: React.FC = () => {
       if (exists) {
         return prev.filter(p => p.id !== product.id);
       } else {
-        return [...prev, product];
+        const nextFavorites = [...prev, product];
+        setToastMessage(`Salvat! Acum ai ${nextFavorites.length} anunțuri salvate.`);
+        setTimeout(() => setToastMessage(null), 3000);
+        return nextFavorites;
       }
     });
   };
@@ -222,6 +225,7 @@ export const App: React.FC = () => {
       {/* Header */}
       <Header
         cartCount={totalCartItemsCount}
+        favoritesCount={favorites.length}
         isLoggedIn={isLoggedIn}
         announcementText={announcementText}
         onOpenCart={() => setIsCartOpen(true)}

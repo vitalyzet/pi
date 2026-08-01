@@ -3,6 +3,7 @@ import { Search, User, ShoppingBag, Menu, X, Truck, RotateCcw, PackageCheck, Shi
 
 interface HeaderProps {
   cartCount: number;
+  favoritesCount: number;
   isLoggedIn: boolean;
   announcementText?: string;
   onOpenCart: () => void;
@@ -16,6 +17,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({
   cartCount,
+  favoritesCount,
   isLoggedIn,
   announcementText,
   onOpenCart,
@@ -150,8 +152,9 @@ export const Header: React.FC<HeaderProps> = ({
               )}
             </button>
 
-            <button className="icon-btn" onClick={onOpenFavorites} title="Anunțuri salvate">
+            <button className="icon-btn" onClick={onOpenFavorites} title="Anunțuri salvate" style={{ position: 'relative' }}>
               <Heart size={22} />
+              {favoritesCount > 0 && <span className="cart-count-badge" style={{ backgroundColor: '#E55B86' }}>{favoritesCount}</span>}
             </button>
 
             <button className="icon-btn" onClick={onOpenCart} title="Coșul de cumpărături">
