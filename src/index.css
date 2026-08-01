@@ -711,6 +711,92 @@ body {
   text-overflow: ellipsis;
 }
 
+/* Auto Card - Classic Mode */
+.product-card.auto-card-classic {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  position: relative;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.product-card.auto-card-classic:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.product-card.auto-card-classic .classic-image-wrapper {
+  padding: 12px;
+  padding-bottom: 0;
+}
+
+.product-card.auto-card-classic .classic-image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.product-card.auto-card-classic .classic-details {
+  padding: 16px 16px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-card.auto-card-classic .classic-title {
+  font-size: 18px;
+  font-weight: 400;
+  color: #0F172A;
+  margin: 0 0 24px 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-card.auto-card-classic .classic-location-date {
+  font-size: 14px;
+  color: #64748B;
+  margin-top: auto; /* Pushes to bottom */
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.product-card.auto-card-classic .classic-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-card.auto-card-classic .classic-price {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0F172A;
+}
+
+.product-card.auto-card-classic .classic-favorite-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #0F172A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.product-card.auto-card-classic .classic-favorite-btn:hover,
+.product-card.auto-card-classic .classic-favorite-btn:hover svg {
+  color: #E63946;
+  fill: #E63946;
+}
+
 .card-image {
   width: 100%;
   height: 100%;

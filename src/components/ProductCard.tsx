@@ -76,6 +76,41 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     );
   }
 
+  if (isAuto && viewMode === 'classic') {
+    return (
+      <div className="product-card auto-card-classic" onClick={() => onQuickView(product)}>
+        <div className="classic-image-wrapper">
+          <img
+            src={product.image}
+            alt={product.title}
+            className="classic-image"
+            loading="lazy"
+          />
+        </div>
+        
+        <div className="classic-details">
+          <h3 className="classic-title">{product.title}</h3>
+          
+          <div className="classic-location-date">
+            {product.location || 'Bucuresti, Sectorul 4'} - Reactualizat la {product.createdAt ? formatDateAuto(product.createdAt) : '30 iulie 2026'}
+          </div>
+          
+          <div className="classic-footer">
+            <span className="classic-price">{(product.price * 5).toLocaleString('ro-RO')} lei</span>
+            <button 
+              className="classic-favorite-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <Heart size={24} strokeWidth={2} />
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="product-card" onClick={() => onQuickView(product)}>
       <div className="card-image-wrapper">
