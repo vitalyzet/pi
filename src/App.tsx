@@ -321,6 +321,8 @@ export const App: React.FC = () => {
                   viewMode={viewMode}
                   onAddToCart={(p) => handleAddToCart(p, 1)}
                   onQuickView={(p) => setSelectedDetailProduct(p)}
+                  isFavorite={favorites.some((f) => f.id === product.id)}
+                  onToggleFavorite={handleToggleFavorite}
                 />
               ))}
             </div>
@@ -383,6 +385,8 @@ export const App: React.FC = () => {
                   product={product}
                   onAddToCart={(p) => handleAddToCart(p, 1)}
                   onQuickView={(p) => setQuickViewProduct(p)}
+                  isFavorite={favorites.some((f) => f.id === product.id)}
+                  onToggleFavorite={handleToggleFavorite}
                 />
               ))}
             </div>

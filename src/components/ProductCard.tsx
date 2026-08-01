@@ -7,6 +7,8 @@ interface ProductCardProps {
   viewMode?: 'classic' | 'pro';
   onAddToCart: (product: Product, e: React.MouseEvent) => void;
   onQuickView: (product: Product) => void;
+  isFavorite?: boolean;
+  onToggleFavorite?: (product: Product) => void;
 }
 
 const timeAgo = (dateStr: string) => {
@@ -34,6 +36,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   viewMode = 'classic',
   onAddToCart,
   onQuickView,
+  isFavorite = false,
+  onToggleFavorite,
 }) => {
   const isAuto = product.category === 'Auto' || product.category === 'Auto & Moto' || product.category === 'Vehicule';
 
@@ -63,10 +67,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             className="favorite-icon-btn"
             onClick={(e) => {
               e.stopPropagation();
-              // Placeholder for favorite action
+              onToggleFavorite?.(product);
             }}
           >
-            <Heart size={20} strokeWidth={2.5} />
+            <Heart size={20} strokeWidth={2.5} fill={isFavorite ? "#E63946" : "none"} color={isFavorite ? "#E63946" : "currentColor"} />
           </button>
           
           <span className="auto-price">{product.price.toLocaleString('ro-RO')} €</span>
@@ -101,9 +105,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               className="classic-favorite-btn"
               onClick={(e) => {
                 e.stopPropagation();
+                onToggleFavorite?.(product);
               }}
             >
-              <Heart size={24} strokeWidth={2} />
+              <Heart size={24} strokeWidth={2} fill={isFavorite ? "#E63946" : "none"} color={isFavorite ? "#E63946" : "currentColor"} />
             </button>
           </div>
         </div>
@@ -134,6 +139,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             ))}
           </div>
         )}
+
+        {/* Favorite Button */}
+        <button 
+          className="favorite-icon-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleFavorite?.(product);
+          }}
+        >
+          <Heart size={20} strokeWidth={2.5} fill={isFavorite ? "#E63946" : "none"} color={isFavorite ? "#E63946" : "currentColor"} />
+        </button>
 
         {/* Add to Cart Hover Button */}
         <button
