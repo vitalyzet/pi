@@ -24,7 +24,7 @@ const CATEGORIES = [
   { id: 'Electronice', label: 'Electronice', icon: Smartphone },
   { id: 'Modă', label: 'Modă', icon: Shirt },
   { id: 'Animale', label: 'Animale', icon: PawPrint },
-  { id: 'Cazare', label: 'Turism', icon: Plane },
+  { id: 'Turism', label: 'Turism', icon: Plane },
   { id: 'Gaming', label: 'Gaming', icon: Gamepad2 }
 ];
 
