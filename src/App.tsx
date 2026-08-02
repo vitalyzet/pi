@@ -20,13 +20,14 @@ import { AutoPublishModal } from './components/AutoPublishModal';
 import { AutoDetailModal } from './components/AutoDetailModal';
 import { ProductDetailPage } from './components/ProductDetailPage';
 import { PublishListingPage } from './components/PublishListingPage';
+import { ReviewsPage } from './components/ReviewsPage';
 import { PRODUCTS, Product } from './data/products';
 import { saveListingToFirebase, fetchListingsFromFirebase } from './lib/firebase';
 import { AVATARS } from './components/AvatarSelectionModal';
 
 export const App: React.FC = () => {
-  // Page View Mode: 'store' | 'dashboard' | 'admin' | 'publish'
-  const [currentView, setCurrentView] = useState<'store' | 'dashboard' | 'admin' | 'publish'>('store');
+  // Page View Mode: 'store' | 'dashboard' | 'admin' | 'publish' | 'reviews'
+  const [currentView, setCurrentView] = useState<'store' | 'dashboard' | 'admin' | 'publish' | 'reviews'>('store');
 
   // Dynamic Store Settings
   const [announcementText, setAnnouncementText] = useState('Livrare la Easybox');
@@ -252,6 +253,10 @@ export const App: React.FC = () => {
           setSelectedDetailProduct(null);
           setCurrentView('publish');
         }}
+        onOpenReviews={() => {
+          setSelectedDetailProduct(null);
+          setCurrentView('reviews');
+        }}
       />
 
       {/* MAIN VIEW SWITCH */}
@@ -283,6 +288,8 @@ export const App: React.FC = () => {
           onBackToStore={() => setCurrentView('store')}
           onPublishProduct={handlePublishProduct}
         />
+      ) : currentView === 'reviews' ? (
+        <ReviewsPage />
       ) : selectedDetailProduct ? (
         <ProductDetailPage
           product={selectedDetailProduct}

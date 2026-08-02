@@ -13,6 +13,7 @@ interface HeaderProps {
   onGoToStore: () => void;
   onOpenFavorites: () => void;
   onOpenPublish?: () => void;
+  onOpenReviews?: () => void;
   userAvatar?: string;
 }
 
@@ -28,6 +29,7 @@ export const Header: React.FC<HeaderProps> = ({
   onGoToStore,
   onOpenFavorites,
   onOpenPublish,
+  onOpenReviews,
   userAvatar = 'initials',
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -77,7 +79,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <a href="#" className="nav-link">ÎMPACHETARE</a>
               </li>
               <li>
-                <a href="#" className="nav-link">RECENZII</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); onOpenReviews?.(); }} className="nav-link">RECENZII</a>
               </li>
               <li>
                 <a href="#" className="nav-link">CONTACT</a>
