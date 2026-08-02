@@ -15,6 +15,7 @@ interface ProductCardProps {
   onQuickView: (product: Product) => void;
   isFavorite?: boolean;
   onToggleFavorite?: (product: Product) => void;
+  onGoToProfile?: (sellerName: string) => void;
 }
 
 const timeAgo = (dateStr: string) => {
@@ -44,6 +45,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onQuickView,
   isFavorite = false,
   onToggleFavorite,
+  onGoToProfile,
 }) => {
   const isAuto = product.category === 'Auto' || product.category === 'Auto & Moto' || product.category === 'Vehicule';
   const isTurism = product.category === 'Turism' || product.category === 'Cazare';
@@ -119,7 +121,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div className="product-card auto-card-new" onClick={() => onQuickView(product)}>
         <div className="auto-new-image-wrapper">
           <img src={product.image} alt={product.title} className="auto-new-image" loading="lazy" />
-          <div className="auto-new-avatar-badge">
+          <div 
+            className="auto-new-avatar-badge"
+            onClick={(e) => {
+              e.stopPropagation();
+              onGoToProfile?.('Alexandru B.');
+            }}
+            title="Vezi profilul vânzătorului"
+            style={{ cursor: 'pointer' }}
+          >
             <img src={getSellerAvatar(product)} alt="Seller Avatar" />
           </div>
         </div>

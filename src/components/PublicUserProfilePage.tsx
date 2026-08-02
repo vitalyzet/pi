@@ -111,6 +111,9 @@ export const PublicUserProfilePage: React.FC<PublicUserProfilePageProps> = ({
                 onQuickView={() => onViewProduct(product)}
                 isFavorite={favorites.some((f) => f.id === product.id)}
                 onToggleFavorite={onToggleFavorite}
+                onGoToProfile={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
               />
             ))}
             {userAds.length === 0 && (

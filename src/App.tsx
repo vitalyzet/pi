@@ -367,6 +367,10 @@ export const App: React.FC = () => {
                   onQuickView={(p) => setSelectedDetailProduct(p)}
                   isFavorite={favorites.some((f) => f.id === product.id)}
                   onToggleFavorite={handleToggleFavorite}
+                  onGoToProfile={(sellerName) => {
+                    setPublicProfileName(sellerName);
+                    setCurrentView('public_profile');
+                  }}
                 />
               ))}
             </div>
@@ -431,6 +435,10 @@ export const App: React.FC = () => {
                   onQuickView={(p) => setQuickViewProduct(p)}
                   isFavorite={favorites.some((f) => f.id === product.id)}
                   onToggleFavorite={handleToggleFavorite}
+                  onGoToProfile={(sellerName) => {
+                    setPublicProfileName(sellerName);
+                    setCurrentView('public_profile');
+                  }}
                 />
               ))}
             </div>
