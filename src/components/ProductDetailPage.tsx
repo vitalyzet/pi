@@ -216,7 +216,86 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
         {/* Right Column: Title, Specs & Purchase Card */}
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div>
+          {isModa ? (
+            /* Moda Specific Right Column */
+            <div style={{ padding: '0 20px' }}>
+              {/* Title */}
+              <h1 style={{ fontFamily: '"Times New Roman", Times, serif', fontSize: '24px', fontWeight: 700, color: '#0F172A', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                {product.title}
+              </h1>
+              
+              {/* Price */}
+              <div style={{ marginBottom: '4px' }}>
+                <span style={{ fontSize: '26px', fontWeight: 800, color: '#0F172A' }}>
+                  {product.price} lei
+                </span>
+              </div>
+              <div style={{ fontSize: '13px', color: '#94A3B8', fontFamily: '"Times New Roman", Times, serif', marginBottom: '32px' }}>
+                cu TVA
+              </div>
+
+              {/* Code */}
+              <div style={{ fontSize: '15px', color: '#334155', fontFamily: '"Times New Roman", Times, serif', marginBottom: '24px' }}>
+                Code: {product.id || '2610825'}
+              </div>
+
+              {/* Collection */}
+              <div style={{ fontSize: '15px', color: '#334155', fontFamily: '"Times New Roman", Times, serif', marginBottom: '32px', textTransform: 'uppercase' }}>
+                {product.specs?.collection || 'COLECȚIA PRIMĂVARĂ/VARĂ 2026'}
+              </div>
+
+              {/* Size Selector */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', fontFamily: '"Times New Roman", Times, serif', color: '#334155' }}>
+                <span style={{ fontSize: '14px', textTransform: 'uppercase' }}>MĂRIME</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '48px', cursor: 'pointer' }}>
+                  <span style={{ fontSize: '14px', textTransform: 'uppercase' }}>{product.specs?.modelSize || 'S'}</span>
+                  <span style={{ fontSize: '10px' }}>▼</span>
+                </div>
+              </div>
+
+              <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', marginBottom: '24px' }} />
+
+              {/* Add to Cart Row */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '24px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #CBD5E1', padding: '12px 16px', gap: '24px', width: 'fit-content' }}>
+                  <span style={{ cursor: 'pointer', color: '#94A3B8' }} onClick={() => setQuantity(Math.max(1, quantity - 1))}>−</span>
+                  <span style={{ fontSize: '15px', color: '#0F172A', minWidth: '12px', textAlign: 'center' }}>{quantity}</span>
+                  <span style={{ cursor: 'pointer', color: '#94A3B8' }} onClick={() => setQuantity(quantity + 1)}>+</span>
+                </div>
+                
+                <button
+                  onClick={() => onAddToCart(product, quantity)}
+                  style={{
+                    flex: 1,
+                    backgroundColor: '#263238',
+                    color: '#FFFFFF',
+                    border: 'none',
+                    padding: '16px 24px',
+                    fontSize: '13px',
+                    fontFamily: '"Times New Roman", Times, serif',
+                    fontWeight: 700,
+                    letterSpacing: '1.5px',
+                    textTransform: 'uppercase',
+                    cursor: 'pointer'
+                  }}
+                >
+                  ADAUGA IN C...
+                </button>
+
+                <button 
+                  onClick={() => onToggleFavorite && onToggleFavorite(product)}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                >
+                  <Heart size={24} color={isFavorite ? '#E55B86' : '#94A3B8'} fill={isFavorite ? '#E55B86' : '#94A3B8'} />
+                </button>
+              </div>
+
+              <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', marginBottom: '24px' }} />
+            </div>
+          ) : (
+            /* Standard / Auto Right Column */
+            <>
+              <div>
             {/* Category Tag & Actions */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
               <span
@@ -498,8 +577,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               </button>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
+    </div>
+  </div>
 
       {/* Related / Similar Products Carousel */}
       {relatedProducts.length > 0 && (
