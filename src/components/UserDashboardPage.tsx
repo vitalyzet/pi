@@ -85,6 +85,8 @@ interface UserDashboardPageProps {
   userAds?: Product[];
   favorites?: Product[];
   onToggleFavorite?: (product: Product) => void;
+  userAvatarIndex?: number;
+  onAvatarChange?: (index: number) => void;
 }
 
 export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
@@ -94,10 +96,11 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
   userAds = [],
   favorites = [],
   onToggleFavorite,
+  userAvatarIndex = 0,
+  onAvatarChange,
 }) => {
   const [activeTab, setActiveTab] = useState<'my_ads' | 'messages' | 'favorites' | 'wallet' | 'settings'>('my_ads');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [currentAvatarIndex, setCurrentAvatarIndex] = useState(0);
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
 
   const handleAvatarClick = () => {
@@ -163,10 +166,10 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                   onClick={handleAvatarClick}
                   style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'var(--primary-yellow)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0F172A', fontSize: '24px', fontWeight: 800, cursor: 'pointer', overflow: 'hidden' }}
                 >
-                  {AVATARS[currentAvatarIndex] === 'initials' ? (
+                  {AVATARS[userAvatarIndex] === 'initials' ? (
                     userProfile.name.split(' ').map(n => n[0]).join('').substring(0, 2)
                   ) : (
-                    <img src={AVATARS[currentAvatarIndex]} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={AVATARS[userAvatarIndex]} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   )}
                 </div>
                 <div>
@@ -501,10 +504,12 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
       <AvatarSelectionModal 
         isOpen={isAvatarModalOpen} 
         onClose={() => setIsAvatarModalOpen(false)} 
-        currentAvatar={AVATARS[currentAvatarIndex]} 
+        currentAvatar={AVATARS[userAvatarIndex]} 
         onSelectAvatar={(avatarPath) => {
           const newIndex = AVATARS.indexOf(avatarPath);
-          if (newIndex !== -1) setCurrentAvatarIndex(newIndex);
+          if (newIndex !== -1 && onAvatarChange) {
+            onAvatarChange(newIndex);
+          }
           setIsAvatarModalOpen(false);
         }} 
       />

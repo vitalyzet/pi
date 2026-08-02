@@ -22,6 +22,7 @@ import { ProductDetailPage } from './components/ProductDetailPage';
 import { PublishListingPage } from './components/PublishListingPage';
 import { PRODUCTS, Product } from './data/products';
 import { saveListingToFirebase, fetchListingsFromFirebase } from './lib/firebase';
+import { AVATARS } from './components/AvatarSelectionModal';
 
 export const App: React.FC = () => {
   // Page View Mode: 'store' | 'dashboard' | 'admin' | 'publish'
@@ -95,6 +96,7 @@ export const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [favorites, setFavorites] = useState<Product[]>([]);
+  const [userAvatarIndex, setUserAvatarIndex] = useState(0);
 
   const handleToggleFavorite = (product: Product) => {
     setFavorites((prev) => {
@@ -228,6 +230,7 @@ export const App: React.FC = () => {
         favoritesCount={favorites.length}
         isLoggedIn={isLoggedIn}
         announcementText={announcementText}
+        userAvatar={AVATARS[userAvatarIndex]}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenFavorites={() => setIsFavoritesOpen(true)}
         onOpenSearch={() => setIsSearchOpen(true)}
@@ -264,6 +267,8 @@ export const App: React.FC = () => {
           userAds={productList}
           favorites={favorites}
           onToggleFavorite={handleToggleFavorite}
+          userAvatarIndex={userAvatarIndex}
+          onAvatarChange={setUserAvatarIndex}
         />
       ) : currentView === 'publish' ? (
         <PublishListingPage
@@ -281,6 +286,8 @@ export const App: React.FC = () => {
           relatedProducts={productList.filter(
             (p) => p.id !== selectedDetailProduct.id && p.category === selectedDetailProduct.category
           )}
+          userAvatarIndex={userAvatarIndex}
+          onAvatarChange={setUserAvatarIndex}
         />
       ) : (
         <>

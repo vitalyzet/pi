@@ -13,6 +13,7 @@ interface HeaderProps {
   onGoToStore: () => void;
   onOpenFavorites: () => void;
   onOpenPublish?: () => void;
+  userAvatar?: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -27,6 +28,7 @@ export const Header: React.FC<HeaderProps> = ({
   onGoToStore,
   onOpenFavorites,
   onOpenPublish,
+  userAvatar = 'initials',
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -142,11 +144,17 @@ export const Header: React.FC<HeaderProps> = ({
               title={isLoggedIn ? 'Panou Cont Utilizator' : 'Autentificare'}
               style={{
                 backgroundColor: isLoggedIn ? '#FFFDF0' : 'transparent',
-                border: isLoggedIn ? '1px solid var(--primary-yellow)' : 'none'
+                border: isLoggedIn ? '1px solid var(--primary-yellow)' : 'none',
+                overflow: 'hidden',
+                padding: userAvatar !== 'initials' && isLoggedIn ? '0' : '8px'
               }}
             >
               {isLoggedIn ? (
-                <span style={{ fontSize: '12px', fontWeight: 800, color: '#222', padding: '0 2px' }}>AB</span>
+                userAvatar === 'initials' ? (
+                  <span style={{ fontSize: '12px', fontWeight: 800, color: '#222' }}>AB</span>
+                ) : (
+                  <img src={userAvatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                )
               ) : (
                 <User size={22} />
               )}

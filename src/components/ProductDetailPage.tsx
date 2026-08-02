@@ -33,6 +33,8 @@ interface ProductDetailPageProps {
   relatedProducts: Product[];
   favorites?: Product[];
   onToggleFavorite?: (product: Product) => void;
+  userAvatarIndex?: number;
+  onAvatarChange?: (index: number) => void;
 }
 
 export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
@@ -43,11 +45,12 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   relatedProducts,
   favorites = [],
   onToggleFavorite,
+  userAvatarIndex = 0,
+  onAvatarChange,
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [showPhone, setShowPhone] = useState(false);
   const [activeImage, setActiveImage] = useState(product.image);
-  const [currentAvatarIndex, setCurrentAvatarIndex] = useState(0);
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
 
   const handleAvatarClick = () => {
@@ -547,10 +550,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   onClick={handleAvatarClick}
                   style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#FCD34D', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: '#0F172A', fontSize: '20px', cursor: 'pointer', overflow: 'hidden' }}
                 >
-                  {AVATARS[currentAvatarIndex] === 'initials' ? (
+                  {AVATARS[userAvatarIndex] === 'initials' ? (
                     'AB'
                   ) : (
-                    <img src={AVATARS[currentAvatarIndex]} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={AVATARS[userAvatarIndex]} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   )}
                 </div>
                 <div>
@@ -667,10 +670,12 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
       <AvatarSelectionModal 
         isOpen={isAvatarModalOpen} 
         onClose={() => setIsAvatarModalOpen(false)} 
-        currentAvatar={AVATARS[currentAvatarIndex]} 
+        currentAvatar={AVATARS[userAvatarIndex]} 
         onSelectAvatar={(avatarPath) => {
           const newIndex = AVATARS.indexOf(avatarPath);
-          if (newIndex !== -1) setCurrentAvatarIndex(newIndex);
+          if (newIndex !== -1 && onAvatarChange) {
+            onAvatarChange(newIndex);
+          }
           setIsAvatarModalOpen(false);
         }} 
       />
