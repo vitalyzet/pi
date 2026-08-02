@@ -206,7 +206,7 @@ body {
 
 /* Filter Bar */
 .filter-bar-container {
-  max-width: 1300px;
+  max-width: 1050px;
   margin: 0 auto;
   padding: 0 24px 30px 24px;
 }
@@ -490,7 +490,7 @@ body {
 
 /* Product Toolbar */
 .product-toolbar {
-  max-width: 1300px;
+  max-width: 1050px;
   margin: 0 auto;
   padding: 0 24px 24px 24px;
   display: flex;
