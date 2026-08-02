@@ -167,8 +167,8 @@ export const Header: React.FC<HeaderProps> = ({
                   <User size={22} />
                 )}
               </button>
-              <span style={{ position: 'absolute', bottom: '-16px', fontSize: '10px', fontWeight: 600, color: '#64748B', pointerEvents: 'none' }}>
-                Profil
+              <span style={{ position: 'absolute', bottom: '-16px', fontSize: '10px', fontWeight: 600, color: '#64748B', pointerEvents: 'none', whiteSpace: 'nowrap' }}>
+                Alexandru.B
               </span>
             </div>
 
