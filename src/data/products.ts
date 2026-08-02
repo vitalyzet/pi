@@ -80,6 +80,26 @@ export const PRODUCTS: Product[] = [
     location: 'ACHARNES 13677',
     description: 'Angajăm electrician și mecanic pentru utilaje de ridicat.',
     createdAt: new Date(Date.now() - 41 * 60000).toISOString()
+  },
+  {
+    id: 'imob-1',
+    title: 'Apartament 92 mp de vânzare',
+    price: 192000,
+    originalPrice: 192000,
+    image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=80&w=600',
+    category: 'Imobiliare',
+    feeling: 'Vânzare',
+    design: 'Apartament',
+    color: 'Toate',
+    location: 'Salonic - Municipalități suburbane » Ampelokipoi',
+    description: 'Apartament spațios, complet utilat.',
+    createdAt: new Date(Date.now() - 24 * 60000).toISOString(),
+    specs: {
+      length: '92 mp',
+      modelSize: '2 dormitoare',
+      collection: 'Primul',
+      style: '1993'
+    }
   }
 ];
 

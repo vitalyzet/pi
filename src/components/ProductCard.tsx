@@ -1,6 +1,6 @@
 import React from 'react';
 import { Product } from '../data/products';
-import { Heart, MapPin, Star, Clock } from 'lucide-react';
+import { Heart, MapPin, Star, Clock, BedDouble, Maximize2, Layers, Hammer } from 'lucide-react';
 import { AVATARS } from './AvatarSelectionModal';
 
 const getSellerAvatar = (product: Product) => {
@@ -51,6 +51,84 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const isTurism = product.category === 'Turism' || product.category === 'Cazare';
   const isModa = product.category === 'Modă';
   const isJob = product.category === 'Locuri de muncă' || product.category === 'Servicii';
+  const isImobiliare = product.category === 'Imobiliare';
+
+  if (isImobiliare) {
+    // Determine mock attributes if not provided. In a real app these would be on `product`.
+    const isSale = product.title.toLowerCase().includes('vânzare') || product.feeling === 'Vânzare';
+    const surface = product.specs?.length || (isSale ? '92 mp' : '45 mp');
+    const rooms = product.specs?.modelSize || '2 dormitoare';
+    const floor = product.specs?.collection || 'Primul';
+    const year = product.specs?.style || '1993';
+
+    return (
+      <div className="product-card imobiliare-card" onClick={() => onQuickView(product)}>
+        <div className="imobiliare-image-wrapper">
+          <img src={product.image} alt={product.title} className="imobiliare-image" loading="lazy" />
+        </div>
+        
+        <div className="imobiliare-details">
+          <h3 className="imobiliare-title">{product.title}</h3>
+          
+          <div className="imobiliare-price">
+            {product.price.toLocaleString('ro-RO')} €
+          </div>
+          
+          <div className="imobiliare-attributes">
+            <div className="imobiliare-attr">
+              <BedDouble size={16} />
+              <span>{rooms}</span>
+            </div>
+            <div className="imobiliare-attr">
+              <Maximize2 size={16} />
+              <span>{surface}</span>
+            </div>
+            <div className="imobiliare-attr">
+              <Layers size={16} />
+              <span>{floor}</span>
+            </div>
+            <div className="imobiliare-attr">
+              <Hammer size={16} />
+              <span>{year}</span>
+            </div>
+          </div>
+          
+          <div className="imobiliare-footer">
+            <div className="imobiliare-footer-left">
+              <div className="imobiliare-footer-item">
+                <MapPin size={12} /> {product.location || 'București - Ilfov'}
+              </div>
+              <div className="imobiliare-footer-item">
+                <Clock size={12} /> {product.createdAt ? timeAgo(product.createdAt) : 'Acum 24 de minute'}
+              </div>
+            </div>
+            <div className="imobiliare-footer-right">
+              <div 
+                className="imobiliare-icon-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onGoToProfile?.('Alexandru B.');
+                }}
+                title="Vezi profilul utilizatorului"
+              >
+                P
+              </div>
+              <div 
+                className="imobiliare-icon-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onQuickView(product);
+                }}
+                title="Extinde"
+              >
+                <Maximize2 size={14} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (isJob) {
     // Determine badge type based on feeling/status or a generic rule. 
