@@ -112,6 +112,14 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
   // Modă Specific Fields
   const [genderSection, setGenderSection] = useState('Femei');
   const [clothingSize, setClothingSize] = useState('M');
+  const [clothingMaterial, setClothingMaterial] = useState('');
+  const [clothingType, setClothingType] = useState('');
+  const [clothingDetails, setClothingDetails] = useState('');
+  const [clothingStyle, setClothingStyle] = useState('');
+  const [clothingSleeve, setClothingSleeve] = useState('');
+  const [clothingColor, setClothingColor] = useState('');
+  const [clothingModelSize, setClothingModelSize] = useState('');
+  const [clothingCollection, setClothingCollection] = useState('');
 
   // Animale Specific Fields
   const [animalType, setAnimalType] = useState('Câini');
@@ -705,6 +713,38 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
                         <div>
                           <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>MĂRIME</label>
                           <input type="text" value={clothingSize} placeholder="ex: S, M, L, 40, 42" onChange={(e) => setClothingSize(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>MATERIE</label>
+                          <input type="text" value={clothingMaterial} placeholder="ex: 87% Bumbac, 11% Poliester" onChange={(e) => setClothingMaterial(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>TIP</label>
+                          <input type="text" value={clothingType} placeholder="ex: Oversize" onChange={(e) => setClothingType(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>DETALII</label>
+                          <input type="text" value={clothingDetails} placeholder="ex: Broderie, Înscrisuri" onChange={(e) => setClothingDetails(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>STIL</label>
+                          <input type="text" value={clothingStyle} placeholder="ex: Stil urban, Sport" onChange={(e) => setClothingStyle(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>MÂNECĂ</label>
+                          <input type="text" value={clothingSleeve} placeholder="ex: Scurtă" onChange={(e) => setClothingSleeve(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>CULOARE</label>
+                          <input type="text" value={clothingColor} placeholder="ex: Gri" onChange={(e) => setClothingColor(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>DIMENSIUNEA FOTOGRAFIEI MODELULUI</label>
+                          <input type="text" value={clothingModelSize} placeholder="ex: S" onChange={(e) => setClothingModelSize(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', fontSize: '13px', fontWeight: 800, color: '#1E293B', marginBottom: '8px' }}>COLECȚIE</label>
+                          <input type="text" value={clothingCollection} placeholder="ex: COLECȚIA PRIMAVARA/ VARA 2026" onChange={(e) => setClothingCollection(e.target.value)} style={{ width: '100%', padding: '16px 20px', borderRadius: '14px', border: '2px solid #CBD5E1', fontSize: '16px', fontWeight: 700, color: '#0F172A', backgroundColor: '#FFFFFF', outline: 'none' }} />
                         </div>
                       </div>
                     </div>
