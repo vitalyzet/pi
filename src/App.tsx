@@ -295,7 +295,7 @@ export const App: React.FC = () => {
       ) : currentView === 'public_profile' && publicProfileName ? (
         <PublicUserProfilePage
           sellerName={publicProfileName}
-          userAds={productList.filter(p => p.id === 'AD-73911' || p.id === 'AD-22910' || p.id === 'AD-99120')} // Mocked list of ads for this public profile
+          userAds={productList.slice(0, 3)} // Show some ads from the store as a demo
           onBack={() => setCurrentView('store')}
           onViewProduct={(p) => setSelectedDetailProduct(p)}
           favorites={favorites}
