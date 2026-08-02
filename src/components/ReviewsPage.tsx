@@ -117,26 +117,26 @@ const MOCK_REVIEWS = [
 ];
 
 const MOCK_PLATFORM_REVIEWS = [
-  { id: 101, product: "Platforma Pi", rating: 5, date: '04/15/2026', author: 'Elena G.', verified: true, title: 'Super experiență', content: 'Platforma se mișcă foarte repede și am putut publica anunțul imediat. Foarte ușor de folosit!' },
-  { id: 102, product: "Platforma Pi", rating: 5, date: '04/10/2026', author: 'Marius Stan', verified: true, title: 'Foarte intuitiv', content: 'Recomand cu încredere, designul este foarte modern și clean.' },
-  { id: 103, product: "Platforma Pi", rating: 4, date: '04/02/2026', author: 'Ioana R.', verified: true, title: 'Bravo echipa Pi', content: 'O experiență plăcută de cumpărături, voi mai reveni.' },
-  { id: 104, product: "Platforma Pi", rating: 5, date: '03/28/2026', author: 'Andrei Popescu', verified: false, title: 'Rapid și eficient', content: 'Am găsit exact ce căutam în câteva secunde.' },
-  { id: 105, product: "Platforma Pi", rating: 5, date: '03/25/2026', author: 'Maria D.', verified: true, title: 'Cea mai bună platformă', content: 'Ador cum arată și cum se mișcă. Pin-urile sunt superbe!' },
-  { id: 106, product: "Platforma Pi", rating: 4, date: '03/20/2026', author: 'Alexandru V.', verified: false, title: '', content: 'E ok, dar aș vrea mai multe filtre de căutare.' },
-  { id: 107, product: "Platforma Pi", rating: 5, date: '03/15/2026', author: 'Cristina M.', verified: true, title: 'Excepțional', content: 'Totul a decurs perfect de la plasarea comenzii până la livrare.' },
-  { id: 108, product: "Platforma Pi", rating: 5, date: '03/10/2026', author: 'Radu Ionescu', verified: true, title: 'Simplu de folosit', content: 'Interfața este foarte prietenoasă, chiar și pentru cineva care nu cumpără des online.' },
-  { id: 109, product: "Platforma Pi", rating: 3, date: '03/05/2026', author: 'Simona B.', verified: false, title: 'Merge bine', content: 'A durat un pic să mă obișnuiesc cu meniurile, dar per total e bine.' },
-  { id: 110, product: "Platforma Pi", rating: 5, date: '02/28/2026', author: 'George C.', verified: true, title: 'Recomand!', content: 'Fără probleme tehnice, plata sigură și rapidă.' },
-  { id: 111, product: "Platforma Pi", rating: 5, date: '02/20/2026', author: 'Alina F.', verified: true, title: 'Design superb', content: 'Îmi place foarte mult tema site-ului și culorile calde.' },
-  { id: 112, product: "Platforma Pi", rating: 4, date: '02/15/2026', author: 'Sorin A.', verified: false, title: 'Aplicație bună', content: 'E bună, dar pe mobil uneori imaginile se încarcă puțin mai greu pe 3G.' },
-  { id: 113, product: "Platforma Pi", rating: 5, date: '02/10/2026', author: 'Dana T.', verified: true, title: '', content: 'Super platforma! 5 stele.' },
-  { id: 114, product: "Platforma Pi", rating: 5, date: '02/05/2026', author: 'Bogdan N.', verified: true, title: 'Profesioniști', content: 'Platformă stabilă, nu s-a blocat niciodată când am adăugat produse.' },
-  { id: 115, product: "Platforma Pi", rating: 4, date: '01/28/2026', author: 'Mihaela P.', verified: false, title: '', content: 'Îmi place!' },
-  { id: 116, product: "Platforma Pi", rating: 5, date: '01/20/2026', author: 'Vlad D.', verified: true, title: 'Excelent', content: 'Totul a funcționat impecabil.' },
-  { id: 117, product: "Platforma Pi", rating: 5, date: '01/15/2026', author: 'Oana S.', verified: true, title: 'Foarte mulțumită', content: 'Am putut urmări comanda direct din cont, foarte util.' },
-  { id: 118, product: "Platforma Pi", rating: 3, date: '01/10/2026', author: 'Cosmin R.', verified: false, title: '', content: 'Interfața de pe tabletă mai poate fi îmbunătățită.' },
-  { id: 119, product: "Platforma Pi", rating: 5, date: '01/05/2026', author: 'Ana Maria', verified: true, title: 'Cel mai tare site', content: 'Felicitări dezvoltatorilor!' },
-  { id: 120, product: "Platforma Pi", rating: 5, date: '12/28/2025', author: 'Iulian G.', verified: true, title: 'Perfect', content: 'Recomand cu mare drag.' }
+  { id: 101, product: "Platforma Pi", rating: 5, date: '04/15/2026', author: 'Elena G.', verified: true, title: 'Super experiență', content: 'Am postat mașina la vânzare și a doua zi m-a sunat cineva. E mult mai ieftin ca pe OLX și ai vizibilitate mare. Recomand Pi!' },
+  { id: 102, product: "Platforma Pi", rating: 5, date: '04/10/2026', author: 'Marius Stan', verified: true, title: 'Excelent pentru imobiliare', content: 'E nouă, dar deja văd o groază de anunțuri imobiliare bune. Interfața e genială și fără zeci de reclame invazive.' },
+  { id: 103, product: "Platforma Pi", rating: 5, date: '04/02/2026', author: 'Ioana R.', verified: true, title: 'Adio Publi24', content: 'Am lăsat Publi24 pentru voi. Prețurile de promovare sunt super decente și chiar funcționează. Mult noroc!' },
+  { id: 104, product: "Platforma Pi", rating: 5, date: '03/28/2026', author: 'Andrei Popescu', verified: false, title: 'Rapid și eficient', content: 'Platforma e super intuitivă, am pus un anunț cu apartamentul spre închiriere în fix 2 minute.' },
+  { id: 105, product: "Platforma Pi", rating: 5, date: '03/25/2026', author: 'Maria D.', verified: true, title: 'Cea mai bună alternativă', content: 'Cea mai bună alternativă apărută până acum. Taxele sunt mult mai mici și suportul răspunde imediat.' },
+  { id: 106, product: "Platforma Pi", rating: 4, date: '03/20/2026', author: 'Alexandru V.', verified: false, title: '', content: 'Aplicație curată, merge brici. Am vândut niște mobilă rapid.' },
+  { id: 107, product: "Platforma Pi", rating: 4, date: '03/15/2026', author: 'Cristina M.', verified: true, title: 'Început promițător', content: 'Mai aveți de lucrat un pic la filtrele pentru mașini (lipsesc câteva modele mai vechi), dar per total e super ok și mult mai ieftină.' },
+  { id: 108, product: "Platforma Pi", rating: 5, date: '03/10/2026', author: 'Radu Ionescu', verified: true, title: 'Concurență reală!', content: 'Excelentă inițiativă! Eram sătui de monopol. Felicitări, platforma se mișcă impecabil.' },
+  { id: 109, product: "Platforma Pi", rating: 5, date: '03/05/2026', author: 'Simona B.', verified: false, title: 'Promovare ieftină', content: 'Promovarea unui anunț costă la jumătate față de competiție, iar rezultatele sunt aceleași. Bravo!' },
+  { id: 110, product: "Platforma Pi", rating: 5, date: '02/28/2026', author: 'George C.', verified: true, title: 'Recomand!', content: 'Mă bucur că a apărut o concurență reală în România pentru site-urile de anunțuri. Mult succes!' },
+  { id: 111, product: "Platforma Pi", rating: 5, date: '02/20/2026', author: 'Alina F.', verified: true, title: 'Chiriași găsiți rapid', content: 'Am găsit chiriași pentru garsonieră în doar câteva zile, fără să cheltui o avere pe promovare.' },
+  { id: 112, product: "Platforma Pi", rating: 5, date: '02/15/2026', author: 'Sorin A.', verified: false, title: 'Design modern', content: 'Design modern și fresh, nu te pierzi prin zeci de meniuri complicate. OLX are de învățat.' },
+  { id: 113, product: "Platforma Pi", rating: 5, date: '02/10/2026', author: 'Dana T.', verified: true, title: '', content: 'Mă bucur că se pot adăuga multe poze la anunț fără costuri ascunse. 5 stele!' },
+  { id: 114, product: "Platforma Pi", rating: 4, date: '02/05/2026', author: 'Bogdan N.', verified: true, title: 'Mai ieftin', content: 'Am cumpărat o mașină listată aici. Vânzătorul mi-a zis că a ales Pi pentru că era mai ieftin să dea anunțul.' },
+  { id: 115, product: "Platforma Pi", rating: 4, date: '01/28/2026', author: 'Mihaela P.', verified: false, title: '', content: 'Mai trebuie strânsă comunitatea, unele categorii au puține anunțuri momentan, dar e de înțeles fiind platformă nouă.' },
+  { id: 116, product: "Platforma Pi", rating: 5, date: '01/20/2026', author: 'Vlad D.', verified: true, title: 'Fără probleme', content: 'Sistemul de mesagerie din platformă e excelent și nu se blochează absolut deloc.' },
+  { id: 117, product: "Platforma Pi", rating: 5, date: '01/15/2026', author: 'Oana S.', verified: true, title: 'Foarte mulțumită', content: 'Mult mai ieftin decât Publi24. Am promovat un anunț cu prestări servicii și m-au sunat deja 3 clienți azi.' },
+  { id: 118, product: "Platforma Pi", rating: 5, date: '01/10/2026', author: 'Cosmin R.', verified: false, title: 'Clean', content: 'În sfârșit o platformă unde nu trebuie să dai click pe 5 reclame ca să vezi un număr de telefon.' },
+  { id: 119, product: "Platforma Pi", rating: 5, date: '01/05/2026', author: 'Ana Maria', verified: true, title: 'Cel mai tare site', content: 'Văd că se dezvoltă frumos. Merge perfect din browser și de pe mobil. Felicitări dezvoltatorilor!' },
+  { id: 120, product: "Platforma Pi", rating: 5, date: '12/28/2025', author: 'Iulian G.', verified: true, title: 'Perfect', content: 'Nota 10 echipei. Ați adus o gură de aer proaspăt în piața de anunțuri din Ro!' }
 ];
 
 export const ReviewsPage: React.FC = () => {
