@@ -138,32 +138,37 @@ export const Header: React.FC<HeaderProps> = ({
               <Search size={22} />
             </button>
             
-            <button
-              className="icon-btn"
-              onClick={onOpenUser}
-              title={isLoggedIn ? 'Panou Cont Utilizator' : 'Autentificare'}
-              style={{
-                backgroundColor: isLoggedIn ? '#FFFDF0' : 'transparent',
-                border: isLoggedIn ? '1px solid var(--primary-yellow)' : 'none',
-                overflow: 'hidden',
-                padding: '2px',
-                width: '36px',
-                height: '36px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              {isLoggedIn ? (
-                userAvatar === 'initials' ? (
-                  <span style={{ fontSize: '13px', fontWeight: 800, color: '#222' }}>AB</span>
+            <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <button
+                className="icon-btn"
+                onClick={onOpenUser}
+                title={isLoggedIn ? 'Panou Cont Utilizator' : 'Autentificare'}
+                style={{
+                  backgroundColor: isLoggedIn ? '#FFFDF0' : 'transparent',
+                  border: isLoggedIn ? '1px solid var(--primary-yellow)' : 'none',
+                  overflow: 'hidden',
+                  padding: '2px',
+                  width: '36px',
+                  height: '36px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                {isLoggedIn ? (
+                  userAvatar === 'initials' ? (
+                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#222' }}>AB</span>
+                  ) : (
+                    <img src={userAvatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', transform: 'scale(1.35)' }} />
+                  )
                 ) : (
-                  <img src={userAvatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', transform: 'scale(1.35)' }} />
-                )
-              ) : (
-                <User size={22} />
-              )}
-            </button>
+                  <User size={22} />
+                )}
+              </button>
+              <span style={{ position: 'absolute', bottom: '-16px', fontSize: '10px', fontWeight: 600, color: '#64748B', pointerEvents: 'none' }}>
+                Profil
+              </span>
+            </div>
 
             <button className="icon-btn" onClick={onOpenFavorites} title="Anunțuri salvate" style={{ position: 'relative' }}>
               <Heart size={22} />
