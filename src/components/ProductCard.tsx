@@ -50,6 +50,61 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const isAuto = product.category === 'Auto' || product.category === 'Auto & Moto' || product.category === 'Vehicule';
   const isTurism = product.category === 'Turism' || product.category === 'Cazare';
   const isModa = product.category === 'Modă';
+  const isJob = product.category === 'Locuri de muncă' || product.category === 'Servicii';
+
+  if (isJob) {
+    // Determine badge type based on feeling/status or a generic rule. 
+    // Usually "Caut loc de muncă" -> Loc de muncă căutat (blue). "Ofer loc de muncă" -> Se caută muncitor (red).
+    // Let's use a simple fallback if no feeling is provided.
+    const isSeeking = product.feeling === 'Caut de muncă' || product.title.toLowerCase().includes('caut');
+    const badgeClass = isSeeking ? 'seeking' : 'offering';
+    const badgeText = isSeeking ? 'Loc de muncă căutat' : 'Se caută muncitor';
+
+    return (
+      <div className="product-card job-card" onClick={() => onQuickView(product)}>
+        <div className="job-image-wrapper">
+          <img src={product.image} alt={product.title} className="job-image" loading="lazy" />
+        </div>
+        
+        <div className="job-details">
+          <div className={`job-badge ${badgeClass}`}>{badgeText}</div>
+          <h3 className="job-title">{product.title}</h3>
+          
+          {product.price > 0 && (
+            <div className="job-price">
+              {product.price.toLocaleString('ro-RO')} € {product.price === 800 ? 'până la 1.800 € / lunar' : ''}
+            </div>
+          )}
+          
+          <div className="job-subtitle">
+            {product.design || product.category}
+          </div>
+          
+          <div className="job-footer">
+            <div className="job-footer-left">
+              <div className="job-footer-item">
+                <MapPin size={12} /> {product.location || 'București'}
+              </div>
+              <div className="job-footer-item">
+                <Clock size={12} /> {product.createdAt ? timeAgo(product.createdAt) : 'Acum 31 de minute'}
+              </div>
+            </div>
+            <div 
+              className="job-p-badge"
+              onClick={(e) => {
+                e.stopPropagation();
+                onGoToProfile?.('Alexandru B.');
+              }}
+              title="Vezi profilul utilizatorului"
+              style={{ cursor: 'pointer' }}
+            >
+              P
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (isModa && viewMode === 'classic') {
     return (

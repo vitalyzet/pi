@@ -1562,6 +1562,125 @@ body {
   font-weight: 500;
 }
 
+/* Job Card Design */
+.product-card.job-card {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border-radius: 8px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  position: relative;
+  border: 1px solid #E2E8F0;
+}
+
+.product-card.job-card:hover {
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+  transform: translateY(-4px);
+}
+
+.job-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3.5;
+  background-color: #F5F5F5;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+
+.job-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.job-details {
+  padding: 24px 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.job-badge {
+  position: absolute;
+  top: -12px;
+  left: 16px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #FFFFFF;
+  z-index: 2;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.job-badge.seeking {
+  background-color: #105B9C;
+}
+
+.job-badge.offering {
+  background-color: #FF4D4D;
+}
+
+.job-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.job-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #000000;
+  margin: 0 0 8px 0;
+}
+
+.job-subtitle {
+  font-size: 13px;
+  color: #64748B;
+  margin: 0 0 24px 0;
+}
+
+.job-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 16px;
+}
+
+.job-footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.job-footer-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #888888;
+  font-weight: 500;
+}
+
+.job-p-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1.5px solid #105B9C;
+  border-radius: 6px;
+  color: #105B9C;
+  font-weight: 900;
+  font-size: 14px;
+}
+
 /* Turism Card Design */
 .product-card.turism-card {
   display: flex;

@@ -37,13 +37,16 @@ export const App: React.FC = () => {
     if (saved) {
       try {
         const parsed: Product[] = JSON.parse(saved);
-        // Filter out old demo products
-        return parsed.filter(p => !['auto-1', 'auto-2', '1', '2', '3', '4', '5', '6', '7', '8'].includes(p.id));
+        const valid = parsed.filter(p => !['auto-1', 'auto-2', '1', '2', '3', '4', '5', '6', '7', '8'].includes(p.id));
+        // Merge PRODUCTS to ensure demo items load even if cache exists
+        const existingIds = new Set(valid.map(p => p.id));
+        const newDemos = PRODUCTS.filter(p => !existingIds.has(p.id));
+        return [...newDemos, ...valid];
       } catch (e) {
         console.error(e);
       }
     }
-    return [];
+    return PRODUCTS;
   });
 
   useEffect(() => {
