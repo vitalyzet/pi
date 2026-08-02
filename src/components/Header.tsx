@@ -158,7 +158,7 @@ export const Header: React.FC<HeaderProps> = ({
                 userAvatar === 'initials' ? (
                   <span style={{ fontSize: '13px', fontWeight: 800, color: '#222' }}>AB</span>
                 ) : (
-                  <img src={userAvatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+                  <img src={userAvatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', transform: 'scale(1.15)' }} />
                 )
               ) : (
                 <User size={22} />
