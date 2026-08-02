@@ -1,6 +1,6 @@
 import React from 'react';
 import { Product } from '../data/products';
-import { Heart, MapPin, Star, Clock, BedDouble, Maximize2, Layers, Hammer } from 'lucide-react';
+import { Heart, MapPin, Star, Clock, BedDouble, Maximize2, Layers, Hammer, Bath } from 'lucide-react';
 import { AVATARS } from './AvatarSelectionModal';
 
 const getSellerAvatar = (product: Product) => {
@@ -60,6 +60,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     const rooms = product.specs?.modelSize || '2 dormitoare';
     const floor = product.specs?.collection || 'Primul';
     const year = product.specs?.style || '1993';
+    const baths = product.specs?.bathrooms || '1 baie';
 
     return (
       <div className="product-card imobiliare-card" onClick={() => onQuickView(product)}>
@@ -78,6 +79,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <div className="imobiliare-attr">
               <BedDouble size={16} />
               <span>{rooms}</span>
+            </div>
+            <div className="imobiliare-attr">
+              <Bath size={16} />
+              <span>{baths}</span>
             </div>
             <div className="imobiliare-attr">
               <Maximize2 size={16} />

@@ -34,6 +34,7 @@ export interface Product {
     color?: string;
     modelSize?: string;
     collection?: string;
+    bathrooms?: string;
   };
 }
 
@@ -98,7 +99,8 @@ export const PRODUCTS: Product[] = [
       length: '92 mp',
       modelSize: '2 dormitoare',
       collection: 'Primul',
-      style: '1993'
+      style: '1993',
+      bathrooms: '1 baie'
     }
   }
 ];
