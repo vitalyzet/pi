@@ -92,6 +92,19 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<'my_ads' | 'messages' | 'favorites' | 'wallet' | 'settings'>('my_ads');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [currentAvatarIndex, setCurrentAvatarIndex] = useState(0);
+
+  const avatars = [
+    'initials',
+    '/an32.png', '/an53.png', '/an54.png', '/an55.png', '/an57.png', 
+    '/an61.png', '/an62.png', '/an70.png', '/an71-1.png', '/an71.png', 
+    '/an74.png', '/an75.png', '/an86.png', '/an87.png', '/an89.png', 
+    '/an91.png', '/an94.png', '/an95.png', '/an97.png'
+  ];
+
+  const handleAvatarClick = () => {
+    setCurrentAvatarIndex((prev) => (prev + 1) % avatars.length);
+  };
   
   const [userProfile] = useState({
     name: 'Alexandru B.',
@@ -148,8 +161,15 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
           <div>
             <div style={{ backgroundColor: '#FFFFFF', borderRadius: '24px', padding: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', marginBottom: '24px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-                <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'var(--primary-yellow)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0F172A', fontSize: '24px', fontWeight: 800 }}>
-                  {userProfile.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
+                <div 
+                  onClick={handleAvatarClick}
+                  style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'var(--primary-yellow)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0F172A', fontSize: '24px', fontWeight: 800, cursor: 'pointer', overflow: 'hidden' }}
+                >
+                  {avatars[currentAvatarIndex] === 'initials' ? (
+                    userProfile.name.split(' ').map(n => n[0]).join('').substring(0, 2)
+                  ) : (
+                    <img src={avatars[currentAvatarIndex]} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  )}
                 </div>
                 <div>
                   <h3 style={{ margin: '0 0 4px 0', fontSize: '18px', fontWeight: 800, color: '#0F172A' }}>{userProfile.name}</h3>
