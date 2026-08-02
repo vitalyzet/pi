@@ -12,6 +12,7 @@ interface PublicUserProfilePageProps {
   onViewProduct: (product: Product) => void;
   favorites: Product[];
   onToggleFavorite: (product: Product) => void;
+  userAvatarIndex?: number;
 }
 
 export const PublicUserProfilePage: React.FC<PublicUserProfilePageProps> = ({
@@ -20,7 +21,8 @@ export const PublicUserProfilePage: React.FC<PublicUserProfilePageProps> = ({
   onBack,
   onViewProduct,
   favorites,
-  onToggleFavorite
+  onToggleFavorite,
+  userAvatarIndex = 0
 }) => {
   const [activeTab, setActiveTab] = useState<'anunturi' | 'recenzii'>('anunturi');
   const reviews = generateSellerReviews(sellerName);
@@ -39,8 +41,12 @@ export const PublicUserProfilePage: React.FC<PublicUserProfilePageProps> = ({
           </button>
 
           <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
-            <div style={{ width: '80px', height: '80px', borderRadius: '50%', backgroundColor: '#FCD34D', overflow: 'hidden' }}>
-              <img src={AVATARS[0]} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <div style={{ width: '80px', height: '80px', borderRadius: '50%', backgroundColor: '#FCD34D', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: '#0F172A', fontSize: '32px', overflow: 'hidden' }}>
+              {AVATARS[userAvatarIndex] === 'initials' ? (
+                'AB'
+              ) : (
+                <img src={AVATARS[userAvatarIndex]} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              )}
             </div>
             
             <div style={{ flex: 1 }}>

@@ -300,6 +300,7 @@ export const App: React.FC = () => {
           onViewProduct={(p) => setSelectedDetailProduct(p)}
           favorites={favorites}
           onToggleFavorite={handleToggleFavorite}
+          userAvatarIndex={userAvatarIndex}
         />
       ) : currentView === 'reviews' ? (
         <ReviewsPage sellerName={selectedSellerForReviews} />
