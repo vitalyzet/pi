@@ -79,6 +79,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
           gap: '40px',
+          alignItems: 'start',
           backgroundColor: '#FFFFFF',
           borderRadius: '24px',
           padding: '32px',
@@ -233,7 +234,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
         </div>
 
         {/* Right Column: Title, Specs & Purchase Card */}
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'sticky', top: '24px' }}>
           {isModa ? (
             /* Moda Specific Right Column */
             <div style={{ padding: '0 20px' }}>
@@ -534,21 +535,21 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               </div>
             ) : isImobiliare ? (
               /* Imobiliare Quick Features */
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginBottom: '28px', backgroundColor: '#F8FAFC', padding: '16px 20px', borderRadius: '16px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <BedDouble size={20} color="#3b82f6" />
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '28px', backgroundColor: '#F8FAFC', padding: '12px 16px', borderRadius: '16px', border: '1px solid #F1F5F9' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <BedDouble size={18} color="#3b82f6" />
                   <span style={{ fontSize: '13px', fontWeight: 700, color: '#334155' }}>{product.specs?.modelSize || '2 dormitoare'}</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <Bath size={20} color="#3b82f6" />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Bath size={18} color="#3b82f6" />
                   <span style={{ fontSize: '13px', fontWeight: 700, color: '#334155' }}>{product.specs?.bathrooms || '1 baie'}</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <Maximize2 size={20} color="#3b82f6" />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Maximize2 size={18} color="#3b82f6" />
                   <span style={{ fontSize: '13px', fontWeight: 700, color: '#334155' }}>{product.specs?.length || '92 mp'}</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <Layers size={20} color="#3b82f6" />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Layers size={18} color="#3b82f6" />
                   <span style={{ fontSize: '13px', fontWeight: 700, color: '#334155' }}>Etajul {product.specs?.collection || '1'}</span>
                 </div>
               </div>
