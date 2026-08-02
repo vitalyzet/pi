@@ -64,6 +64,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
   const isAuto = product.category === 'Auto' || product.title.toLowerCase().includes('polo') || product.title.toLowerCase().includes('bmw');
   const isModa = product.category === 'Modă';
+  const isImobiliare = product.category === 'Imobiliare';
 
   return (
     <div className="product-detail-page-container" style={{ maxWidth: '1280px', margin: '0 auto', padding: '24px 24px 60px 24px' }}>
@@ -213,6 +214,29 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     {row.label}
                   </div>
                   <div style={{ backgroundColor: '#F4F4F4', padding: '16px 20px', fontSize: '15px', fontWeight: 400, color: '#333333', fontFamily: '"Times New Roman", Times, serif' }}>
+                    {row.value}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {isImobiliare && (
+            /* Imobiliare Specifications Grid */
+            <div style={{ marginTop: '32px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              {[
+                { label: 'TIP PROPRIETATE', value: product.design || 'Apartament' },
+                { label: 'SUPRAFAȚĂ', value: product.specs?.length || '92 mp' },
+                { label: 'COMPARTIMENTARE', value: product.specs?.modelSize || '2 dormitoare' },
+                { label: 'BĂI', value: product.specs?.bathrooms || '1 baie' },
+                { label: 'ETAJ', value: product.specs?.collection || 'Primul' },
+                { label: 'ANUL CONSTRUCȚIEI', value: product.specs?.style || '1993' },
+              ].map((row, idx) => (
+                <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px' }}>
+                  <div style={{ backgroundColor: '#F8FAFC', padding: '16px 20px', fontSize: '14px', fontWeight: 700, color: '#334155' }}>
+                    {row.label}
+                  </div>
+                  <div style={{ backgroundColor: '#F1F5F9', padding: '16px 20px', fontSize: '15px', fontWeight: 500, color: '#0F172A' }}>
                     {row.value}
                   </div>
                 </div>
