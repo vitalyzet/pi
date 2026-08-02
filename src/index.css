@@ -1540,7 +1540,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: auto;
+  margin-top: 16px;
 }
 
 .auto-new-footer-item {
