@@ -97,6 +97,7 @@ export const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [favorites, setFavorites] = useState<Product[]>([]);
+  const [selectedSellerForReviews, setSelectedSellerForReviews] = useState<string | null>(null);
   const [userAvatarIndex, setUserAvatarIndex] = useState(() => {
     const saved = localStorage.getItem('pinpin_avatar_index');
     return saved ? parseInt(saved, 10) : 0;
@@ -255,6 +256,7 @@ export const App: React.FC = () => {
         }}
         onOpenReviews={() => {
           setSelectedDetailProduct(null);
+          setSelectedSellerForReviews(null);
           setCurrentView('reviews');
         }}
       />
@@ -289,7 +291,7 @@ export const App: React.FC = () => {
           onPublishProduct={handlePublishProduct}
         />
       ) : currentView === 'reviews' ? (
-        <ReviewsPage />
+        <ReviewsPage sellerName={selectedSellerForReviews} />
       ) : selectedDetailProduct ? (
         <ProductDetailPage
           product={selectedDetailProduct}
@@ -303,7 +305,10 @@ export const App: React.FC = () => {
           )}
           userAvatarIndex={userAvatarIndex}
           onAvatarChange={handleAvatarChange}
-          onShowReviews={() => setCurrentView('reviews')}
+          onShowReviews={(sellerName) => {
+            setSelectedSellerForReviews(sellerName || 'Alexandru B.');
+            setCurrentView('reviews');
+          }}
         />
       ) : (
         <>

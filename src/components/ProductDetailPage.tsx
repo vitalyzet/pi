@@ -35,7 +35,7 @@ interface ProductDetailPageProps {
   onToggleFavorite?: (product: Product) => void;
   userAvatarIndex?: number;
   onAvatarChange?: (index: number) => void;
-  onShowReviews?: () => void;
+  onShowReviews?: (sellerName: string) => void;
 }
 
 export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
@@ -563,7 +563,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               </div>
 
               <button 
-                onClick={onShowReviews}
+                onClick={() => onShowReviews && onShowReviews('Alexandru B.')}
                 style={{ 
                   fontSize: '12px', 
                   fontWeight: 800, 

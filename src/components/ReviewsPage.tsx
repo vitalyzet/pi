@@ -139,11 +139,23 @@ const MOCK_PLATFORM_REVIEWS = [
   { id: 120, product: "Platforma Pi", rating: 5, date: '12/28/2025', author: 'Iulian G.', verified: true, title: 'Perfect', content: 'Nota 10 echipei. Ați adus o gură de aer proaspăt în piața de anunțuri din Ro!' }
 ];
 
-export const ReviewsPage: React.FC = () => {
+interface ReviewsPageProps {
+  sellerName?: string | null;
+}
+
+const generateSellerReviews = (sellerName: string) => [
+  { id: 201, product: "Diverse Produse", rating: 5, date: '04/12/2026', author: 'Mihai T.', verified: true, title: 'Vânzător de încredere', content: `Am colaborat excelent cu ${sellerName}. Recomand cu încredere.` },
+  { id: 202, product: "Auto / Imobiliare", rating: 5, date: '03/25/2026', author: 'Andreea P.', verified: true, title: 'Super', content: 'Totul a decurs conform descrierii din anunț. Comunicare perfectă!' },
+  { id: 203, product: "Anunț general", rating: 4, date: '02/10/2026', author: 'Ionel S.', verified: false, title: 'Ok', content: 'Tranzacție rapidă și fără probleme.' }
+];
+
+export const ReviewsPage: React.FC<ReviewsPageProps> = ({ sellerName }) => {
   const [activeTab, setActiveTab] = useState<'produse' | 'magazin'>('produse');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const displayedReviews = activeTab === 'produse' ? MOCK_REVIEWS : MOCK_PLATFORM_REVIEWS;
+  const displayedReviews = sellerName
+    ? generateSellerReviews(sellerName)
+    : (activeTab === 'produse' ? MOCK_REVIEWS : MOCK_PLATFORM_REVIEWS);
 
   return (
     <div style={{ backgroundColor: '#F8FAFC', minHeight: '100vh', paddingBottom: '60px' }}>
@@ -152,7 +164,7 @@ export const ReviewsPage: React.FC = () => {
       <div style={{ backgroundColor: '#fff', borderBottom: '1px solid #EBEBEB', padding: '40px 24px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <h1 style={{ fontSize: '28px', fontWeight: 800, textAlign: 'center', marginBottom: '40px', color: '#222' }}>
-            Recenzii
+            {sellerName ? `Recenzii - ${sellerName}` : 'Recenzii'}
           </h1>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '40px' }}>
@@ -222,34 +234,37 @@ export const ReviewsPage: React.FC = () => {
         
         {/* Tabs & Sort */}
         <div style={{ backgroundColor: '#fff', borderRadius: '4px', border: '1px solid #EBEBEB', padding: '16px 24px', marginBottom: '24px' }}>
-          <div style={{ display: 'flex', gap: '24px', borderBottom: '1px solid #F0F0F0', paddingBottom: '16px', marginBottom: '16px' }}>
-            <button 
-              onClick={() => setActiveTab('produse')}
-              style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                fontSize: '15px', fontWeight: activeTab === 'produse' ? 600 : 400,
-                color: activeTab === 'produse' ? '#FEA742' : '#666',
-                padding: '8px 16px',
-                backgroundColor: activeTab === 'produse' ? '#FFF9F0' : 'transparent',
-                borderRadius: '4px'
-              }}
-            >
-              Recenzii Utilizatori (2179)
-            </button>
-            <button 
-              onClick={() => setActiveTab('magazin')}
-              style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                fontSize: '15px', fontWeight: activeTab === 'magazin' ? 600 : 400,
-                color: activeTab === 'magazin' ? '#FEA742' : '#666',
-                padding: '8px 16px',
-                backgroundColor: activeTab === 'magazin' ? '#FFF9F0' : 'transparent',
-                borderRadius: '4px'
-              }}
-            >
-              Recenzii Platforma Pi (47)
-            </button>
-          </div>
+          
+          {!sellerName && (
+            <div style={{ display: 'flex', gap: '24px', borderBottom: '1px solid #F0F0F0', paddingBottom: '16px', marginBottom: '16px' }}>
+              <button 
+                onClick={() => setActiveTab('produse')}
+                style={{
+                  background: 'none', border: 'none', cursor: 'pointer',
+                  fontSize: '15px', fontWeight: activeTab === 'produse' ? 600 : 400,
+                  color: activeTab === 'produse' ? '#FEA742' : '#666',
+                  padding: '8px 16px',
+                  backgroundColor: activeTab === 'produse' ? '#FFF9F0' : 'transparent',
+                  borderRadius: '4px'
+                }}
+              >
+                Recenzii Utilizatori (2179)
+              </button>
+              <button 
+                onClick={() => setActiveTab('magazin')}
+                style={{
+                  background: 'none', border: 'none', cursor: 'pointer',
+                  fontSize: '15px', fontWeight: activeTab === 'magazin' ? 600 : 400,
+                  color: activeTab === 'magazin' ? '#FEA742' : '#666',
+                  padding: '8px 16px',
+                  backgroundColor: activeTab === 'magazin' ? '#FFF9F0' : 'transparent',
+                  borderRadius: '4px'
+                }}
+              >
+                Recenzii Platforma Pi (47)
+              </button>
+            </div>
+          )}
           
           <div style={{ display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', width: 'fit-content' }}>
             <span style={{ fontSize: '14px', color: '#444' }}>Cele mai recente</span>
@@ -274,7 +289,7 @@ export const ReviewsPage: React.FC = () => {
               display: 'inline-block',
               width: '100%'
             }}>
-              {activeTab === 'produse' && (
+              {(!sellerName && activeTab === 'produse') && (
                 <div style={{ fontSize: '13px', color: '#666', marginBottom: '12px' }}>
                   despre <span style={{ color: '#FEA742', textDecoration: 'underline', cursor: 'pointer' }}>{review.product}</span>
                 </div>
