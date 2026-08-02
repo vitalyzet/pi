@@ -96,7 +96,15 @@ export const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [favorites, setFavorites] = useState<Product[]>([]);
-  const [userAvatarIndex, setUserAvatarIndex] = useState(0);
+  const [userAvatarIndex, setUserAvatarIndex] = useState(() => {
+    const saved = localStorage.getItem('pinpin_avatar_index');
+    return saved ? parseInt(saved, 10) : 0;
+  });
+
+  const handleAvatarChange = (index: number) => {
+    setUserAvatarIndex(index);
+    localStorage.setItem('pinpin_avatar_index', index.toString());
+  };
 
   const handleToggleFavorite = (product: Product) => {
     setFavorites((prev) => {
@@ -268,7 +276,7 @@ export const App: React.FC = () => {
           favorites={favorites}
           onToggleFavorite={handleToggleFavorite}
           userAvatarIndex={userAvatarIndex}
-          onAvatarChange={setUserAvatarIndex}
+          onAvatarChange={handleAvatarChange}
         />
       ) : currentView === 'publish' ? (
         <PublishListingPage
@@ -287,7 +295,7 @@ export const App: React.FC = () => {
             (p) => p.id !== selectedDetailProduct.id && p.category === selectedDetailProduct.category
           )}
           userAvatarIndex={userAvatarIndex}
-          onAvatarChange={setUserAvatarIndex}
+          onAvatarChange={handleAvatarChange}
         />
       ) : (
         <>
