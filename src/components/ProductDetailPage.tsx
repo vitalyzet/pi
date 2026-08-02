@@ -234,7 +234,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
         </div>
 
         {/* Right Column: Title, Specs & Purchase Card */}
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'sticky', top: '24px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'sticky', top: '120px' }}>
           {isModa ? (
             /* Moda Specific Right Column */
             <div style={{ padding: '0 20px' }}>
