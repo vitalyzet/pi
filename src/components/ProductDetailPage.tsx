@@ -1,31 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  ArrowLeft,
-  Phone,
-  MessageCircle,
-  ShoppingBag,
-  Calendar,
-  Gauge,
-  Fuel,
-  Sliders,
-  ShieldCheck,
-  MapPin,
-  User,
-  Heart,
-  Share2,
-  CheckCircle,
-  Truck,
-  RotateCcw,
-  Sparkles,
-  Flag,
-  Clock,
-  Settings,
-  Car,
-  BedDouble,
-  Bath,
-  Maximize2,
-  Layers
-} from 'lucide-react';
+import { ChevronLeft, ChevronRight, Share2, Heart, Shield, RotateCcw, Truck, MessageCircle, Phone, ArrowLeft, Star, Clock, MapPin, Search, Calendar, Gauge, Fuel, Type, Palette, User, Car, BedDouble, Bath, Maximize2, Layers, CheckCircle2, Home, Store, ShieldCheck, Flag, Settings, ShoppingBag } from 'lucide-react';
 import { Product } from '../data/products';
 import { AvatarSelectionModal, AVATARS } from './AvatarSelectionModal';
 
@@ -190,8 +164,40 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
             </div>
           )}
 
+          {/* Imobiliare 4-column Specifications Grid */}
+          {isImobiliare && (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px 16px', marginTop: '32px', marginBottom: '32px', paddingBottom: '32px', borderBottom: '1px solid #E2E8F0', alignItems: 'start' }}>
+              {[
+                { icon: <Store size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Categorie', value: product.design || 'Apartament' },
+                { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Regiune', value: product.location?.split(' ')[0] || 'București' },
+                { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Preț', value: `${product.price.toLocaleString('ro-RO')} €` },
+                { icon: <Home size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Zonă', value: product.specs?.length || '92 mp' },
+                { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Preț pe metru pătrat.', value: `${Math.round(product.price / (parseInt(product.specs?.length || '92') || 1))} € / mp` },
+                { icon: <BedDouble size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Dormitoare', value: product.specs?.modelSize || '2 dormitoare' },
+                { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Sistem de încălzire', value: 'Încălzire centrală' },
+                { icon: <Bath size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Băi', value: product.specs?.bathrooms?.split(' ')[0] || '1' },
+                { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Camere de zi', value: '1' },
+                { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Bucătării', value: '1' },
+              ].map((item, idx) => (
+                <div key={idx} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                  <div style={{ flexShrink: 0, marginTop: '2px' }}>
+                    {item.icon}
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    <div style={{ fontSize: '14px', color: '#64748B', fontWeight: 500 }}>
+                      {item.label}
+                    </div>
+                    <div style={{ fontSize: '15px', color: '#0F172A', fontWeight: 700 }}>
+                      {item.value}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
           {/* Description (Moved here) */}
-          <div style={{ marginTop: '32px' }}>
+          <div style={{ marginTop: isImobiliare ? '0' : '32px' }}>
             <span style={{ fontSize: '12px', fontWeight: 800, color: '#64748B', letterSpacing: '1px', textTransform: 'uppercase', display: 'block', marginBottom: '12px' }}>
               DESCRIERE DETALIATĂ
             </span>
@@ -218,29 +224,6 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     {row.label}
                   </div>
                   <div style={{ backgroundColor: '#F4F4F4', padding: '16px 20px', fontSize: '15px', fontWeight: 400, color: '#333333', fontFamily: '"Times New Roman", Times, serif' }}>
-                    {row.value}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {isImobiliare && (
-            /* Imobiliare Specifications Grid */
-            <div style={{ marginTop: '32px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              {[
-                { label: 'TIP PROPRIETATE', value: product.design || 'Apartament' },
-                { label: 'SUPRAFAȚĂ', value: product.specs?.length || '92 mp' },
-                { label: 'COMPARTIMENTARE', value: product.specs?.modelSize || '2 dormitoare' },
-                { label: 'BĂI', value: product.specs?.bathrooms || '1 baie' },
-                { label: 'ETAJ', value: product.specs?.collection || 'Primul' },
-                { label: 'ANUL CONSTRUCȚIEI', value: product.specs?.style || '1993' },
-              ].map((row, idx) => (
-                <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px' }}>
-                  <div style={{ backgroundColor: '#F8FAFC', padding: '16px 20px', fontSize: '14px', fontWeight: 700, color: '#334155' }}>
-                    {row.label}
-                  </div>
-                  <div style={{ backgroundColor: '#F1F5F9', padding: '16px 20px', fontSize: '15px', fontWeight: 500, color: '#0F172A' }}>
                     {row.value}
                   </div>
                 </div>
