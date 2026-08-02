@@ -51,11 +51,6 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   const [quantity, setQuantity] = useState(1);
   const [showPhone, setShowPhone] = useState(false);
   const [activeImage, setActiveImage] = useState(product.image);
-  const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
-
-  const handleAvatarClick = () => {
-    setIsAvatarModalOpen(true);
-  };
 
   useEffect(() => {
     setActiveImage(product.image);
@@ -547,8 +542,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div 
-                  onClick={handleAvatarClick}
-                  style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#FCD34D', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: '#0F172A', fontSize: '20px', cursor: 'pointer', overflow: 'hidden' }}
+                  style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#FCD34D', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: '#0F172A', fontSize: '20px', overflow: 'hidden' }}
                 >
                   {AVATARS[userAvatarIndex] === 'initials' ? (
                     'AB'
@@ -666,19 +660,6 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
           </div>
         </section>
       )}
-
-      <AvatarSelectionModal 
-        isOpen={isAvatarModalOpen} 
-        onClose={() => setIsAvatarModalOpen(false)} 
-        currentAvatar={AVATARS[userAvatarIndex]} 
-        onSelectAvatar={(avatarPath) => {
-          const newIndex = AVATARS.indexOf(avatarPath);
-          if (newIndex !== -1 && onAvatarChange) {
-            onAvatarChange(newIndex);
-          }
-          setIsAvatarModalOpen(false);
-        }} 
-      />
     </div>
   );
 };
