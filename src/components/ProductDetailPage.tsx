@@ -641,7 +641,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               </button>
 
               <button
-                onClick={() => onAddToCart(product, quantity)}
+                onClick={() => isModa ? onAddToCart(product, quantity) : alert('Funcționalitate Chat/Mesaje indisponibilă în demo.')}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -658,8 +658,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   boxShadow: '0 6px 16px rgba(254, 167, 66, 0.35)'
                 }}
               >
-                <ShoppingBag size={18} />
-                ADAUGĂ ÎN COȘ
+                {isModa ? <ShoppingBag size={18} /> : <MessageCircle size={18} />}
+                {isModa ? 'ADAUGĂ ÎN COȘ' : 'MESAJ'}
               </button>
             </div>
           </div>
