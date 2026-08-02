@@ -1459,6 +1459,99 @@ body {
   white-space: nowrap;
 }
 
+/* New Auto Card */
+.product-card.auto-card-new {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #EBEBEB;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.product-card.auto-card-new:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+
+.auto-new-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+}
+
+.auto-new-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auto-new-p-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #FFFFFF;
+  color: #0056b3;
+  font-weight: 900;
+  font-size: 18px;
+  padding: 6px 14px;
+  border-top-left-radius: 8px;
+  border-top: 1px solid #EBEBEB;
+  border-left: 1px solid #EBEBEB;
+  box-shadow: -2px -2px 6px rgba(0,0,0,0.05);
+}
+
+.auto-new-details {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.auto-new-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.auto-new-price {
+  font-size: 20px;
+  font-weight: 800;
+  color: #000000;
+  margin: 0 0 16px 0;
+}
+
+.auto-new-specs {
+  font-size: 13px;
+  color: #64748B;
+  margin: 0 0 24px 0;
+}
+
+.auto-new-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.auto-new-footer-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #64748B;
+  font-weight: 500;
+}
+
 /* Turism Card Design */
 .product-card.turism-card {
   display: flex;

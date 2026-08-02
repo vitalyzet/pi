@@ -1,6 +1,6 @@
 import React from 'react';
 import { Product } from '../data/products';
-import { Heart, MapPin, Star } from 'lucide-react';
+import { Heart, MapPin, Star, Clock } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -108,75 +108,29 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     );
   }
 
-  if (isAuto && viewMode === 'pro') {
+  if (isAuto) {
     return (
-      <div className="product-card auto-card" onClick={() => onQuickView(product)}>
-        <div className="card-image-wrapper">
-          <div className="auto-category-badge">Auto & Moto</div>
-          <div className="auto-location-overlay">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            <span style={{ marginTop: '2px' }}>{product.location || 'slatina'}</span>
-          </div>
-          
-          <img
-            src={product.image}
-            alt={product.title}
-            className="card-image"
-            loading="lazy"
-          />
+      <div className="product-card auto-card-new" onClick={() => onQuickView(product)}>
+        <div className="auto-new-image-wrapper">
+          <img src={product.image} alt={product.title} className="auto-new-image" loading="lazy" />
+          <div className="auto-new-p-badge">P</div>
         </div>
         
-        <div className="auto-details">
-          <button 
-            className="favorite-icon-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              onToggleFavorite?.(product);
-            }}
-          >
-            <Heart size={20} strokeWidth={2.5} fill={isFavorite ? "#E63946" : "none"} color={isFavorite ? "#E63946" : "currentColor"} />
-          </button>
+        <div className="auto-new-details">
+          <h3 className="auto-new-title">{product.title}</h3>
+          <div className="auto-new-price">{product.price.toLocaleString('ro-RO')} €</div>
           
-          <span className="auto-price">{product.price.toLocaleString('ro-RO')} €</span>
-          <h3 className="auto-title">{product.title}</h3>
-        </div>
-      </div>
-    );
-  }
-
-  if (isAuto && viewMode === 'classic') {
-    return (
-      <div className="product-card auto-card-classic" onClick={() => onQuickView(product)}>
-        <div className="classic-image-wrapper">
-          <img
-            src={product.image}
-            alt={product.title}
-            className="classic-image"
-            loading="lazy"
-          />
-        </div>
-        
-        <div className="classic-details">
-          <h3 className="classic-title">{product.title}</h3>
-          
-          <div className="classic-location-date">
-            {product.location || 'Bucuresti, Sectorul 4'} - Reactualizat la {product.createdAt ? formatDateAuto(product.createdAt) : '30 iulie 2026'}
+          <div className="auto-new-specs">
+            {product.specs?.modelSize || product.specs?.year || '2018'} • {product.specs?.mileage || '150.000'} km
           </div>
           
-          <div className="classic-footer">
-            <span className="classic-price">{product.price.toLocaleString('ro-RO')} €</span>
-            <button 
-              className="classic-favorite-btn"
-              onClick={(e) => {
-                e.stopPropagation();
-                onToggleFavorite?.(product);
-              }}
-            >
-              <Heart size={24} strokeWidth={2} fill={isFavorite ? "#E63946" : "none"} color={isFavorite ? "#E63946" : "currentColor"} />
-            </button>
+          <div className="auto-new-footer">
+            <div className="auto-new-footer-item">
+              <MapPin size={14} /> {product.location || 'Bucuresti, Sectorul 1'}
+            </div>
+            <div className="auto-new-footer-item">
+              <Clock size={14} /> {product.createdAt ? timeAgo(product.createdAt) : 'Acum 5 luni'}
+            </div>
           </div>
         </div>
       </div>
