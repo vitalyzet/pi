@@ -1600,3 +1600,51 @@ body {
 .line-heading::after {
   margin-left: 24px;
 }
+
+/* Moda Card - Classic Mode */
+.product-card.moda-card-classic {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border-radius: 0;
+  overflow: hidden;
+  transition: opacity 0.2s ease;
+  position: relative;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.product-card.moda-card-classic:hover {
+  opacity: 0.85;
+}
+
+.moda-classic-image {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  background: #F8FAFC;
+}
+
+.moda-classic-details {
+  padding: 20px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.moda-classic-title {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #1A1A1A;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.moda-classic-price {
+  font-size: 18px;
+  color: #333333;
+}

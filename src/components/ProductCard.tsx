@@ -41,6 +41,24 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const isAuto = product.category === 'Auto' || product.category === 'Auto & Moto' || product.category === 'Vehicule';
   const isTurism = product.category === 'Turism' || product.category === 'Cazare';
+  const isModa = product.category === 'Modă';
+
+  if (isModa && viewMode === 'classic') {
+    return (
+      <div className="product-card moda-card-classic" onClick={() => onQuickView(product)}>
+        <img
+          src={product.image}
+          alt={product.title}
+          className="moda-classic-image"
+          loading="lazy"
+        />
+        <div className="moda-classic-details">
+          <h3 className="moda-classic-title">{product.title}</h3>
+          <div className="moda-classic-price">{product.price.toLocaleString('ro-RO')} lei</div>
+        </div>
+      </div>
+    );
+  }
 
   if (isTurism) {
     return (
