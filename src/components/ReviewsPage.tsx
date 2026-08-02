@@ -117,36 +117,26 @@ const MOCK_REVIEWS = [
 ];
 
 const MOCK_PLATFORM_REVIEWS = [
-  {
-    id: 101,
-    product: "Platforma Pi",
-    rating: 5,
-    date: '04/15/2026',
-    author: 'Elena G.',
-    verified: true,
-    title: 'Super experiență',
-    content: 'Platforma se mișcă foarte repede și am putut publica anunțul imediat. Foarte ușor de folosit!'
-  },
-  {
-    id: 102,
-    product: "Platforma Pi",
-    rating: 5,
-    date: '04/10/2026',
-    author: 'Marius Stan',
-    verified: true,
-    title: 'Foarte intuitiv',
-    content: 'Recomand cu încredere, designul este foarte modern și clean.'
-  },
-  {
-    id: 103,
-    product: "Platforma Pi",
-    rating: 4,
-    date: '04/02/2026',
-    author: 'Ioana R.',
-    verified: true,
-    title: 'Bravo echipa Pi',
-    content: 'O experiență plăcută de cumpărături, voi mai reveni.'
-  }
+  { id: 101, product: "Platforma Pi", rating: 5, date: '04/15/2026', author: 'Elena G.', verified: true, title: 'Super experiență', content: 'Platforma se mișcă foarte repede și am putut publica anunțul imediat. Foarte ușor de folosit!' },
+  { id: 102, product: "Platforma Pi", rating: 5, date: '04/10/2026', author: 'Marius Stan', verified: true, title: 'Foarte intuitiv', content: 'Recomand cu încredere, designul este foarte modern și clean.' },
+  { id: 103, product: "Platforma Pi", rating: 4, date: '04/02/2026', author: 'Ioana R.', verified: true, title: 'Bravo echipa Pi', content: 'O experiență plăcută de cumpărături, voi mai reveni.' },
+  { id: 104, product: "Platforma Pi", rating: 5, date: '03/28/2026', author: 'Andrei Popescu', verified: false, title: 'Rapid și eficient', content: 'Am găsit exact ce căutam în câteva secunde.' },
+  { id: 105, product: "Platforma Pi", rating: 5, date: '03/25/2026', author: 'Maria D.', verified: true, title: 'Cea mai bună platformă', content: 'Ador cum arată și cum se mișcă. Pin-urile sunt superbe!' },
+  { id: 106, product: "Platforma Pi", rating: 4, date: '03/20/2026', author: 'Alexandru V.', verified: false, title: '', content: 'E ok, dar aș vrea mai multe filtre de căutare.' },
+  { id: 107, product: "Platforma Pi", rating: 5, date: '03/15/2026', author: 'Cristina M.', verified: true, title: 'Excepțional', content: 'Totul a decurs perfect de la plasarea comenzii până la livrare.' },
+  { id: 108, product: "Platforma Pi", rating: 5, date: '03/10/2026', author: 'Radu Ionescu', verified: true, title: 'Simplu de folosit', content: 'Interfața este foarte prietenoasă, chiar și pentru cineva care nu cumpără des online.' },
+  { id: 109, product: "Platforma Pi", rating: 3, date: '03/05/2026', author: 'Simona B.', verified: false, title: 'Merge bine', content: 'A durat un pic să mă obișnuiesc cu meniurile, dar per total e bine.' },
+  { id: 110, product: "Platforma Pi", rating: 5, date: '02/28/2026', author: 'George C.', verified: true, title: 'Recomand!', content: 'Fără probleme tehnice, plata sigură și rapidă.' },
+  { id: 111, product: "Platforma Pi", rating: 5, date: '02/20/2026', author: 'Alina F.', verified: true, title: 'Design superb', content: 'Îmi place foarte mult tema site-ului și culorile calde.' },
+  { id: 112, product: "Platforma Pi", rating: 4, date: '02/15/2026', author: 'Sorin A.', verified: false, title: 'Aplicație bună', content: 'E bună, dar pe mobil uneori imaginile se încarcă puțin mai greu pe 3G.' },
+  { id: 113, product: "Platforma Pi", rating: 5, date: '02/10/2026', author: 'Dana T.', verified: true, title: '', content: 'Super platforma! 5 stele.' },
+  { id: 114, product: "Platforma Pi", rating: 5, date: '02/05/2026', author: 'Bogdan N.', verified: true, title: 'Profesioniști', content: 'Platformă stabilă, nu s-a blocat niciodată când am adăugat produse.' },
+  { id: 115, product: "Platforma Pi", rating: 4, date: '01/28/2026', author: 'Mihaela P.', verified: false, title: '', content: 'Îmi place!' },
+  { id: 116, product: "Platforma Pi", rating: 5, date: '01/20/2026', author: 'Vlad D.', verified: true, title: 'Excelent', content: 'Totul a funcționat impecabil.' },
+  { id: 117, product: "Platforma Pi", rating: 5, date: '01/15/2026', author: 'Oana S.', verified: true, title: 'Foarte mulțumită', content: 'Am putut urmări comanda direct din cont, foarte util.' },
+  { id: 118, product: "Platforma Pi", rating: 3, date: '01/10/2026', author: 'Cosmin R.', verified: false, title: '', content: 'Interfața de pe tabletă mai poate fi îmbunătățită.' },
+  { id: 119, product: "Platforma Pi", rating: 5, date: '01/05/2026', author: 'Ana Maria', verified: true, title: 'Cel mai tare site', content: 'Felicitări dezvoltatorilor!' },
+  { id: 120, product: "Platforma Pi", rating: 5, date: '12/28/2025', author: 'Iulian G.', verified: true, title: 'Perfect', content: 'Recomand cu mare drag.' }
 ];
 
 export const ReviewsPage: React.FC = () => {
@@ -302,13 +292,17 @@ export const ReviewsPage: React.FC = () => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
                 <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#F5F5F5', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
                   <img src={AVATARS[index % AVATARS.length]} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <div style={{ position: 'absolute', bottom: '0', right: '0', backgroundColor: '#fff', borderRadius: '50%', width: '14px', height: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', transform: 'translate(25%, 25%)' }}>
-                    <CheckCircle size={12} color="#FEA742" fill="#FEA742" style={{ color: '#fff' }} />
-                  </div>
+                  {review.verified && (
+                    <div style={{ position: 'absolute', bottom: '0', right: '0', backgroundColor: '#fff', borderRadius: '50%', width: '14px', height: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', transform: 'translate(25%, 25%)' }}>
+                      <CheckCircle size={12} color="#FEA742" fill="#FEA742" style={{ color: '#fff' }} />
+                    </div>
+                  )}
                 </div>
                 <div>
                   <div style={{ fontSize: '14px', fontWeight: 600, color: '#222' }}>{review.author}</div>
-                  <div style={{ fontSize: '11px', color: '#fff', backgroundColor: '#FEA742', padding: '2px 6px', borderRadius: '2px', display: 'inline-block', marginTop: '2px', fontWeight: 600 }}>Verificat</div>
+                  {review.verified && (
+                    <div style={{ fontSize: '11px', color: '#fff', backgroundColor: '#FEA742', padding: '2px 6px', borderRadius: '2px', display: 'inline-block', marginTop: '2px', fontWeight: 600 }}>Verificat</div>
+                  )}
                 </div>
               </div>
 
