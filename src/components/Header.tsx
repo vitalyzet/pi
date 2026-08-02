@@ -148,8 +148,8 @@ export const Header: React.FC<HeaderProps> = ({
                   border: isLoggedIn ? '1px solid var(--primary-yellow)' : 'none',
                   overflow: 'hidden',
                   padding: '2px',
-                  width: '36px',
-                  height: '36px',
+                  width: '40px',
+                  height: '40px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
@@ -159,7 +159,7 @@ export const Header: React.FC<HeaderProps> = ({
                   userAvatar === 'initials' ? (
                     <span style={{ fontSize: '13px', fontWeight: 800, color: '#222' }}>AB</span>
                   ) : (
-                    <img src={userAvatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', transform: 'scale(1.35)' }} />
+                    <img src={userAvatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
                   )
                 ) : (
                   <User size={22} />
