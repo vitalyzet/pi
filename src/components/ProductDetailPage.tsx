@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Share2, Heart, Shield, RotateCcw, Truck, MessageCircle, Phone, ArrowLeft, Star, Clock, MapPin, Search, Calendar, Gauge, Fuel, Type, Palette, User, Car, BedDouble, Bath, Maximize2, Layers, CheckCircle2, Home, Store, ShieldCheck, Flag, Settings, ShoppingBag } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Share2, Heart, Shield, RotateCcw, Truck, MessageCircle, Phone, ArrowLeft, Star, Clock, MapPin, Search, Calendar, Gauge, Fuel, Type, Palette, User, Car, BedDouble, Bath, Maximize2, Layers, CheckCircle2, Home, Store, ShieldCheck, Flag, Settings, ShoppingBag, Copy } from 'lucide-react';
 import { Product } from '../data/products';
 import { AvatarSelectionModal, AVATARS } from './AvatarSelectionModal';
 
@@ -165,35 +165,61 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
             </div>
           )}
 
-          {/* Imobiliare 3-column Specifications Grid */}
+          {/* Imobiliare Specifications Alternating List */}
           {isImobiliare && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px 24px', marginTop: '32px', marginBottom: '32px', paddingBottom: '32px', borderBottom: '1px solid #E2E8F0', alignItems: 'start' }}>
-              {[
-                { icon: <Store size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Categorie', value: product.design || 'Apartament' },
-                { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Regiune', value: product.location?.split(' ')[0] || 'București' },
-                { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Preț', value: `${product.price.toLocaleString('ro-RO')} €` },
-                { icon: <Home size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Zonă', value: product.specs?.length || '92 mp' },
-                { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Preț pe metru pătrat', value: `${Math.round(product.price / (parseInt(product.specs?.length || '92') || 1))} € / mp` },
-                { icon: <BedDouble size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Dormitoare', value: product.specs?.modelSize || '2 dormitoare' },
-                { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Sistem de încălzire', value: 'Încălzire centrală' },
-                { icon: <Bath size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Băi', value: product.specs?.bathrooms?.split(' ')[0] || '1' },
-                { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Camere de zi', value: '1' },
-                { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Bucătării', value: '1' },
-              ].map((item, idx) => (
-                <div key={idx} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                  <div style={{ flexShrink: 0, marginTop: '2px' }}>
-                    {item.icon}
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                    <div style={{ fontSize: '14px', color: '#64748B', fontWeight: 500 }}>
+            <div style={{ marginTop: '32px', marginBottom: '32px', paddingBottom: '32px', borderBottom: '1px solid #E2E8F0' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
+                <span style={{ fontSize: '18px', fontWeight: 700, color: '#0F172A' }}>Nr. anunț:</span>
+                <span style={{ fontSize: '18px', fontWeight: 700, color: '#3b82f6' }}>40024384</span>
+                <Copy size={18} color="#94A3B8" style={{ cursor: 'pointer' }} />
+              </div>
+
+              <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#0F172A', marginBottom: '16px' }}>Caracteristici</h2>
+
+              <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #F1F5F9' }}>
+                {[
+                  { label: 'Numărul anunțului', value: '40024384' },
+                  { label: 'Categorie', value: <span style={{ color: '#3b82f6', display: 'flex', alignItems: 'center', gap: '4px' }}>{product.design || 'Apartament'} <ArrowLeft size={16} style={{ transform: 'rotate(180deg)' }} /></span> },
+                  { label: 'Preț', value: `${product.price.toLocaleString('ro-RO')} €` },
+                  { label: 'Regiune', value: product.location || 'Salonic - municipalități suburbane » Ampelokipi » Philipou' },
+                  { label: 'Preț pe metru pătrat.', value: `${Math.round(product.price / (parseInt(product.specs?.length || '92') || 1))} € / mp` },
+                  { label: 'Zonă', value: product.specs?.length || '92 mp' },
+                  { label: 'Disponibil de la', value: '11/05/2026' },
+                  { label: 'Dormitoare', value: product.specs?.modelSize || '2 dormitoare' },
+                  { label: 'Podea', value: product.specs?.collection || 'Primul' },
+                  { label: 'Anul fabricației', value: product.specs?.style || '1993' },
+                ].map((item, idx) => (
+                  <div key={idx} style={{ 
+                    display: 'grid', 
+                    gridTemplateColumns: '1fr 2fr', 
+                    gap: '16px', 
+                    padding: '14px 20px', 
+                    backgroundColor: idx % 2 === 0 ? '#F8FAFC' : '#FFFFFF' 
+                  }}>
+                    <div style={{ fontSize: '15px', color: '#475569', fontWeight: 400 }}>
                       {item.label}
                     </div>
                     <div style={{ fontSize: '15px', color: '#0F172A', fontWeight: 700 }}>
                       {item.value}
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
+                <button style={{
+                  padding: '8px 24px',
+                  borderRadius: '6px',
+                  border: '1.5px solid #3b82f6',
+                  backgroundColor: '#FFFFFF',
+                  color: '#3b82f6',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  cursor: 'pointer'
+                }}>
+                  Mai mult
+                </button>
+              </div>
             </div>
           )}
 
