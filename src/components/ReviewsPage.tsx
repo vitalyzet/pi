@@ -116,9 +116,44 @@ const MOCK_REVIEWS = [
   }
 ];
 
+const MOCK_PLATFORM_REVIEWS = [
+  {
+    id: 101,
+    product: "Platforma Pi",
+    rating: 5,
+    date: '04/15/2026',
+    author: 'Elena G.',
+    verified: true,
+    title: 'Super experiență',
+    content: 'Platforma se mișcă foarte repede și am putut publica anunțul imediat. Foarte ușor de folosit!'
+  },
+  {
+    id: 102,
+    product: "Platforma Pi",
+    rating: 5,
+    date: '04/10/2026',
+    author: 'Marius Stan',
+    verified: true,
+    title: 'Foarte intuitiv',
+    content: 'Recomand cu încredere, designul este foarte modern și clean.'
+  },
+  {
+    id: 103,
+    product: "Platforma Pi",
+    rating: 4,
+    date: '04/02/2026',
+    author: 'Ioana R.',
+    verified: true,
+    title: 'Bravo echipa Pi',
+    content: 'O experiență plăcută de cumpărături, voi mai reveni.'
+  }
+];
+
 export const ReviewsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'produse' | 'magazin'>('produse');
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const displayedReviews = activeTab === 'produse' ? MOCK_REVIEWS : MOCK_PLATFORM_REVIEWS;
 
   return (
     <div style={{ backgroundColor: '#F8FAFC', minHeight: '100vh', paddingBottom: '60px' }}>
@@ -238,7 +273,7 @@ export const ReviewsPage: React.FC = () => {
           columnGap: '24px',
           width: '100%'
         }}>
-          {MOCK_REVIEWS.map((review, index) => (
+          {displayedReviews.map((review, index) => (
             <div key={review.id} style={{
               backgroundColor: '#fff',
               border: '1px solid #EBEBEB',
@@ -249,9 +284,11 @@ export const ReviewsPage: React.FC = () => {
               display: 'inline-block',
               width: '100%'
             }}>
-              <div style={{ fontSize: '13px', color: '#666', marginBottom: '12px' }}>
-                despre <span style={{ color: '#FEA742', textDecoration: 'underline', cursor: 'pointer' }}>{review.product}</span>
-              </div>
+              {activeTab === 'produse' && (
+                <div style={{ fontSize: '13px', color: '#666', marginBottom: '12px' }}>
+                  despre <span style={{ color: '#FEA742', textDecoration: 'underline', cursor: 'pointer' }}>{review.product}</span>
+                </div>
+              )}
               
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                 <div style={{ display: 'flex', gap: '2px' }}>
