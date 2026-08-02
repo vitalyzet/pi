@@ -146,14 +146,17 @@ export const Header: React.FC<HeaderProps> = ({
                 backgroundColor: isLoggedIn ? '#FFFDF0' : 'transparent',
                 border: isLoggedIn ? '1px solid var(--primary-yellow)' : 'none',
                 overflow: 'hidden',
-                padding: userAvatar !== 'initials' && isLoggedIn ? '0' : '8px'
+                padding: userAvatar !== 'initials' && isLoggedIn ? '4px' : '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
             >
               {isLoggedIn ? (
                 userAvatar === 'initials' ? (
                   <span style={{ fontSize: '12px', fontWeight: 800, color: '#222' }}>AB</span>
                 ) : (
-                  <img src={userAvatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <img src={userAvatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
                 )
               ) : (
                 <User size={22} />
