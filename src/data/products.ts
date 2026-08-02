@@ -25,6 +25,15 @@ export interface Product {
     modelName?: string;
     power?: string;
     owners?: string;
+    // Moda
+    material?: string;
+    type?: string;
+    details?: string;
+    length?: string;
+    style?: string;
+    color?: string;
+    modelSize?: string;
+    collection?: string;
   };
 }
 

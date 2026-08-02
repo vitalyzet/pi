@@ -56,6 +56,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   const allImages = Array.from(new Set([product.image, ...(product.images || [])]));
 
   const isAuto = product.category === 'Auto' || product.title.toLowerCase().includes('polo') || product.title.toLowerCase().includes('bmw');
+  const isModa = product.category === 'Modă';
 
   return (
     <div className="product-detail-page-container" style={{ maxWidth: '1280px', margin: '0 auto', padding: '24px 24px 60px 24px' }}>
@@ -387,6 +388,29 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     </div>
                   </div>
                 </div>
+              </div>
+            ) : isModa ? (
+              /* Moda Specifications Grid */
+              <div style={{ marginBottom: '28px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                {[
+                  { label: 'MATERIE', value: product.specs?.material || '100% Poliester' },
+                  { label: 'TIP', value: product.specs?.type || 'Dantelă' },
+                  { label: 'DETALII', value: product.specs?.details || 'Bretele' },
+                  { label: 'LUNGIME', value: product.specs?.length || 'Scurți' },
+                  { label: 'STIL', value: product.specs?.style || 'Sport - elegant' },
+                  { label: 'CULOARE', value: product.specs?.color || 'Alb, Negru' },
+                  { label: 'DIMENSIUNEA FOTOGRAFIEI MODELULUI', value: product.specs?.modelSize || 'XS' },
+                  { label: 'COLECȚIE', value: product.specs?.collection || 'COLECȚIA PRIMAVARA/ VARA 2026' },
+                ].map((row, idx) => (
+                  <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px' }}>
+                    <div style={{ backgroundColor: '#F0F0F0', padding: '16px 20px', fontSize: '14px', fontWeight: 400, color: '#333333', fontFamily: '"Times New Roman", Times, serif' }}>
+                      {row.label}
+                    </div>
+                    <div style={{ backgroundColor: '#F4F4F4', padding: '16px 20px', fontSize: '15px', fontWeight: 400, color: '#333333', fontFamily: '"Times New Roman", Times, serif' }}>
+                      {row.value}
+                    </div>
+                  </div>
+                ))}
               </div>
             ) : (
               /* Standard Product Features */
