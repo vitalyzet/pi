@@ -193,6 +193,41 @@ export const App: React.FC = () => {
       result.sort((a, b) => a.price - b.price);
     } else if (sortBy === 'Preț: Mare la Mic') {
       result.sort((a, b) => b.price - a.price);
+    } else if (sortBy === 'Cele mai noi') {
+      result.sort((a, b) => {
+        const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+        const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+        return timeB - timeA;
+      });
+    } else {
+      // Smart category grouping (Recomandate)
+      const grouped = result.reduce((acc, product) => {
+        if (!acc[product.category]) acc[product.category] = [];
+        acc[product.category].push(product);
+        return acc;
+      }, {} as Record<string, typeof result>);
+
+      const categoryLatestTimes: Record<string, number> = {};
+      Object.keys(grouped).forEach(cat => {
+        let maxTime = 0;
+        grouped[cat].forEach(p => {
+          const time = p.createdAt ? new Date(p.createdAt).getTime() : 0;
+          if (time > maxTime) maxTime = time;
+        });
+        categoryLatestTimes[cat] = maxTime;
+      });
+
+      const sortedCategories = Object.keys(grouped).sort((catA, catB) => {
+        return categoryLatestTimes[catB] - categoryLatestTimes[catA];
+      });
+
+      result = sortedCategories.flatMap(cat => {
+        return grouped[cat].sort((a, b) => {
+          const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+          const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+          return timeB - timeA;
+        });
+      });
     }
 
     return result;
