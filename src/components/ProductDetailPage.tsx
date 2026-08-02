@@ -247,9 +247,30 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               {/* Size Selector */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', fontFamily: '"Times New Roman", Times, serif', color: '#334155' }}>
                 <span style={{ fontSize: '14px', textTransform: 'uppercase' }}>MĂRIME</span>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '48px', cursor: 'pointer' }}>
-                  <span style={{ fontSize: '14px', textTransform: 'uppercase' }}>{product.specs?.modelSize || 'S'}</span>
-                  <span style={{ fontSize: '10px' }}>▼</span>
+                <div style={{ position: 'relative' }}>
+                  <select 
+                    defaultValue={product.specs?.modelSize || "S"}
+                    style={{ 
+                      appearance: 'none', 
+                      background: 'transparent', 
+                      border: 'none', 
+                      fontSize: '14px', 
+                      textTransform: 'uppercase', 
+                      fontFamily: '"Times New Roman", Times, serif', 
+                      color: '#334155', 
+                      paddingRight: '24px', 
+                      cursor: 'pointer',
+                      outline: 'none'
+                    }}
+                  >
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                  </select>
+                  <span style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', fontSize: '10px', pointerEvents: 'none', color: '#334155' }}>▼</span>
                 </div>
               </div>
 
