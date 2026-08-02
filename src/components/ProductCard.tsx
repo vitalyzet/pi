@@ -1,6 +1,12 @@
 import React from 'react';
 import { Product } from '../data/products';
 import { Heart, MapPin, Star, Clock } from 'lucide-react';
+import { AVATARS } from './AvatarSelectionModal';
+
+const getSellerAvatar = (product: Product) => {
+  const hash = product.title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return AVATARS[hash % AVATARS.length];
+};
 
 interface ProductCardProps {
   product: Product;
@@ -113,7 +119,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div className="product-card auto-card-new" onClick={() => onQuickView(product)}>
         <div className="auto-new-image-wrapper">
           <img src={product.image} alt={product.title} className="auto-new-image" loading="lazy" />
-          <div className="auto-new-p-badge">P</div>
+          <div className="auto-new-avatar-badge">
+            <img src={getSellerAvatar(product)} alt="Seller Avatar" />
+          </div>
         </div>
         
         <div className="auto-new-details">

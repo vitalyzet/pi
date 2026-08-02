@@ -1495,19 +1495,24 @@ body {
   object-fit: cover;
 }
 
-.auto-new-p-badge {
+.auto-new-avatar-badge {
   position: absolute;
   bottom: 0;
   right: 0;
   background: #FFFFFF;
-  color: #0056b3;
-  font-weight: 900;
-  font-size: 18px;
-  padding: 6px 14px;
-  border-top-left-radius: 8px;
+  padding: 4px;
+  border-top-left-radius: 12px;
   border-top: 1px solid #EBEBEB;
   border-left: 1px solid #EBEBEB;
   box-shadow: -2px -2px 6px rgba(0,0,0,0.05);
+}
+
+.auto-new-avatar-badge img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
 }
 
 .auto-new-details {
