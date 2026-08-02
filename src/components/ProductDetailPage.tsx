@@ -20,7 +20,11 @@ import {
   Flag,
   Clock,
   Settings,
-  Car
+  Car,
+  BedDouble,
+  Bath,
+  Maximize2,
+  Layers
 } from 'lucide-react';
 import { Product } from '../data/products';
 import { AvatarSelectionModal, AVATARS } from './AvatarSelectionModal';
@@ -543,6 +547,26 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            ) : isImobiliare ? (
+              /* Imobiliare Quick Features */
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginBottom: '28px', backgroundColor: '#F8FAFC', padding: '16px 20px', borderRadius: '16px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <BedDouble size={20} color="#3b82f6" />
+                  <span style={{ fontSize: '13px', fontWeight: 700, color: '#334155' }}>{product.specs?.modelSize || '2 dormitoare'}</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <Bath size={20} color="#3b82f6" />
+                  <span style={{ fontSize: '13px', fontWeight: 700, color: '#334155' }}>{product.specs?.bathrooms || '1 baie'}</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <Maximize2 size={20} color="#3b82f6" />
+                  <span style={{ fontSize: '13px', fontWeight: 700, color: '#334155' }}>{product.specs?.length || '92 mp'}</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <Layers size={20} color="#3b82f6" />
+                  <span style={{ fontSize: '13px', fontWeight: 700, color: '#334155' }}>Etajul {product.specs?.collection || '1'}</span>
                 </div>
               </div>
             ) : (
