@@ -370,6 +370,7 @@ export const App: React.FC = () => {
                   onGoToProfile={(sellerName) => {
                     setPublicProfileName(sellerName);
                     setCurrentView('public_profile');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                 />
               ))}
@@ -438,6 +439,7 @@ export const App: React.FC = () => {
                   onGoToProfile={(sellerName) => {
                     setPublicProfileName(sellerName);
                     setCurrentView('public_profile');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                 />
               ))}
