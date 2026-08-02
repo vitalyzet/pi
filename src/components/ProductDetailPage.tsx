@@ -187,6 +187,31 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               {product.description || 'Anunț verificat pe platforma PinPin. Produs păstrat în condiții excelente, livrat rapid oriunde în țară cu posibilitate de verificare.'}
             </p>
           </div>
+
+          {isModa && (
+            /* Moda Specifications Grid */
+            <div style={{ marginTop: '32px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              {[
+                { label: 'MATERIE', value: product.specs?.material || '100% Poliester' },
+                { label: 'TIP', value: product.specs?.type || 'Dantelă' },
+                { label: 'DETALII', value: product.specs?.details || 'Bretele' },
+                { label: 'LUNGIME', value: product.specs?.length || 'Scurți' },
+                { label: 'STIL', value: product.specs?.style || 'Sport - elegant' },
+                { label: 'CULOARE', value: product.specs?.color || 'Alb, Negru' },
+                { label: 'DIMENSIUNEA FOTOGRAFIEI MODELULUI', value: product.specs?.modelSize || 'XS' },
+                { label: 'COLECȚIE', value: product.specs?.collection || 'COLECȚIA PRIMAVARA/ VARA 2026' },
+              ].map((row, idx) => (
+                <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px' }}>
+                  <div style={{ backgroundColor: '#F0F0F0', padding: '16px 20px', fontSize: '14px', fontWeight: 400, color: '#333333', fontFamily: '"Times New Roman", Times, serif' }}>
+                    {row.label}
+                  </div>
+                  <div style={{ backgroundColor: '#F4F4F4', padding: '16px 20px', fontSize: '15px', fontWeight: 400, color: '#333333', fontFamily: '"Times New Roman", Times, serif' }}>
+                    {row.value}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Right Column: Title, Specs & Purchase Card */}
@@ -388,29 +413,6 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     </div>
                   </div>
                 </div>
-              </div>
-            ) : isModa ? (
-              /* Moda Specifications Grid */
-              <div style={{ marginBottom: '28px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                {[
-                  { label: 'MATERIE', value: product.specs?.material || '100% Poliester' },
-                  { label: 'TIP', value: product.specs?.type || 'Dantelă' },
-                  { label: 'DETALII', value: product.specs?.details || 'Bretele' },
-                  { label: 'LUNGIME', value: product.specs?.length || 'Scurți' },
-                  { label: 'STIL', value: product.specs?.style || 'Sport - elegant' },
-                  { label: 'CULOARE', value: product.specs?.color || 'Alb, Negru' },
-                  { label: 'DIMENSIUNEA FOTOGRAFIEI MODELULUI', value: product.specs?.modelSize || 'XS' },
-                  { label: 'COLECȚIE', value: product.specs?.collection || 'COLECȚIA PRIMAVARA/ VARA 2026' },
-                ].map((row, idx) => (
-                  <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px' }}>
-                    <div style={{ backgroundColor: '#F0F0F0', padding: '16px 20px', fontSize: '14px', fontWeight: 400, color: '#333333', fontFamily: '"Times New Roman", Times, serif' }}>
-                      {row.label}
-                    </div>
-                    <div style={{ backgroundColor: '#F4F4F4', padding: '16px 20px', fontSize: '15px', fontWeight: 400, color: '#333333', fontFamily: '"Times New Roman", Times, serif' }}>
-                      {row.value}
-                    </div>
-                  </div>
-                ))}
               </div>
             ) : (
               /* Standard Product Features */
