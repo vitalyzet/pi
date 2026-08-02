@@ -54,7 +54,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         />
         <div className="moda-classic-details">
           <h3 className="moda-classic-title">{product.title}</h3>
-          <div className="moda-classic-price">{product.price.toLocaleString('ro-RO')} lei</div>
+          
+          <div className="moda-price-container">
+            {product.originalPrice && (
+              <span className="moda-original-price">
+                {product.originalPrice}<span className="moda-superscript">,00</span> lei
+              </span>
+            )}
+            <span className="moda-current-price">
+              {product.price}<span className="moda-superscript">,00</span> lei
+            </span>
+          </div>
+
+          <div className="ad-star-rating small" style={{ '--rating': 4, '--rating-decimal': 0.8 } as any}></div>
         </div>
       </div>
     );
@@ -130,7 +142,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           
           <span className="auto-price">{product.price.toLocaleString('ro-RO')} €</span>
           <h3 className="auto-title">{product.title}</h3>
-          <div className="ad-star-rating" style={{ '--rating': 4, '--rating-decimal': 0.8, marginBottom: '8px', marginTop: '4px' } as any}></div>
         </div>
       </div>
     );
@@ -150,7 +161,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         
         <div className="classic-details">
           <h3 className="classic-title">{product.title}</h3>
-          <div className="ad-star-rating" style={{ '--rating': 4, '--rating-decimal': 0.8, marginBottom: '8px', marginTop: '4px' } as any}></div>
           
           <div className="classic-location-date">
             {product.location || 'Bucuresti, Sectorul 4'} - Reactualizat la {product.createdAt ? formatDateAuto(product.createdAt) : '30 iulie 2026'}
@@ -223,8 +233,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div className="card-details">
         <h3 className="product-title">{product.title}</h3>
         
-        <div className="ad-star-rating" style={{ '--rating': 4, '--rating-decimal': 0.8, marginBottom: '8px', marginTop: '4px' } as any}></div>
-
         <div className="price-container">
           {product.originalPrice && (
             <span className="original-price">{product.originalPrice} €</span>

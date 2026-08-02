@@ -1644,9 +1644,30 @@ body {
   letter-spacing: 0.5px;
 }
 
-.moda-classic-price {
-  font-size: 18px;
-  color: #333333;
+.moda-price-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.moda-original-price {
+  font-size: 16px;
+  color: #888;
+  text-decoration: line-through;
+  text-decoration-color: #E55B86;
+}
+
+.moda-current-price {
+  font-size: 22px;
+  color: #E55B86;
+  font-weight: 500;
+}
+
+.moda-superscript {
+  font-size: 60%;
+  vertical-align: super;
+  font-weight: 400;
 }
 
 .ad-star-rating {
@@ -1670,4 +1691,9 @@ body {
   background: linear-gradient(90deg, var(--primary-yellow) var(--percent), #E2E8F0 var(--percent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.ad-star-rating.small {
+  --font-size: 13px;
+  margin-top: 4px;
 }
