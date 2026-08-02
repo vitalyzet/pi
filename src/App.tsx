@@ -379,8 +379,8 @@ export const App: React.FC = () => {
 
           {/* Recommendations Section */}
           <section className="recommendations-section">
-            <h2 className="section-heading" style={{ textAlign: 'center', marginBottom: '40px' }}>
-              Recomandările noastre
+            <h2 className="line-heading section-heading" style={{ marginBottom: '40px' }}>
+              RECOMANDĂRI
             </h2>
             <div className="product-grid">
               {productList.slice(0, 4).map((product) => (

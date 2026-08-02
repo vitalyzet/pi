@@ -1574,3 +1574,29 @@ body {
   color: #94A3B8;
   font-weight: 500;
 }
+
+/* Line heading for recommendations */
+.line-heading {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #334155;
+  text-transform: uppercase;
+  font-size: 18px !important;
+  letter-spacing: 1px;
+}
+
+.line-heading::before,
+.line-heading::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.line-heading::before {
+  margin-right: 24px;
+}
+
+.line-heading::after {
+  margin-left: 24px;
+}

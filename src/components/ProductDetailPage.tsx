@@ -478,11 +478,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
       {/* Related / Similar Products Carousel */}
       {relatedProducts.length > 0 && (
         <section>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
-            <h3 style={{ fontSize: '22px', fontWeight: 800, color: '#0F172A', margin: 0 }}>
-              Anunțuri Similare Recomandate
+          <div style={{ marginBottom: '20px' }}>
+            <h3 className="line-heading" style={{ margin: 0, fontSize: '16px' }}>
+              ANUNȚURI SIMILARE RECOMANDATE
             </h3>
-            <span style={{ fontSize: '14px', color: '#64748B', fontWeight: 600 }}>Vezi mai multe</span>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
