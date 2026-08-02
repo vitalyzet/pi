@@ -1648,3 +1648,26 @@ body {
   font-size: 18px;
   color: #333333;
 }
+
+.ad-star-rating {
+  --rating: 5;
+  --rating-max: 5;
+  --rating-decimal: 0;
+  --font-size: 16px;
+  --letter-spacing: 2px;
+  
+  --percent: calc((var(--rating) / var(--rating-max) + var(--rating-decimal) * var(--font-size) / (var(--rating-max) * (var(--letter-spacing) + var(--font-size)))) * 100%);
+  
+  display: inline-block;
+  font-size: var(--font-size);
+  font-family: Arial, sans-serif;
+  line-height: 1;
+  letter-spacing: var(--letter-spacing);
+}
+
+.ad-star-rating::before {
+  content: '★★★★★';
+  background: linear-gradient(90deg, var(--primary-yellow) var(--percent), #E2E8F0 var(--percent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

@@ -130,6 +130,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           
           <span className="auto-price">{product.price.toLocaleString('ro-RO')} €</span>
           <h3 className="auto-title">{product.title}</h3>
+          <div className="ad-star-rating" style={{ '--rating': 4, '--rating-decimal': 0.8, marginBottom: '8px', marginTop: '4px' } as any}></div>
         </div>
       </div>
     );
@@ -149,6 +150,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         
         <div className="classic-details">
           <h3 className="classic-title">{product.title}</h3>
+          <div className="ad-star-rating" style={{ '--rating': 4, '--rating-decimal': 0.8, marginBottom: '8px', marginTop: '4px' } as any}></div>
           
           <div className="classic-location-date">
             {product.location || 'Bucuresti, Sectorul 4'} - Reactualizat la {product.createdAt ? formatDateAuto(product.createdAt) : '30 iulie 2026'}
@@ -220,6 +222,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
       <div className="card-details">
         <h3 className="product-title">{product.title}</h3>
+        
+        <div className="ad-star-rating" style={{ '--rating': 4, '--rating-decimal': 0.8, marginBottom: '8px', marginTop: '4px' } as any}></div>
+
         <div className="price-container">
           {product.originalPrice && (
             <span className="original-price">{product.originalPrice} €</span>
