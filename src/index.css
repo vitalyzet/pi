@@ -1691,6 +1691,7 @@ body {
   position: relative;
   border: 1px solid #E2E8F0;
   height: 100%;
+  grid-column: span 2;
 }
 
 .product-card.imobiliare-card:hover {
@@ -1701,7 +1702,7 @@ body {
 .imobiliare-image-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 4/3;
+  aspect-ratio: 16/9;
   background-color: #F5F5F5;
   border-radius: 8px 8px 0 0;
   overflow: hidden;
@@ -1721,10 +1722,10 @@ body {
 }
 
 .imobiliare-title {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 700;
   color: #1A1A1A;
-  margin: 0 0 8px 0;
+  margin: 0 0 10px 0;
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1733,10 +1734,10 @@ body {
 }
 
 .imobiliare-price {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 900;
   color: #000000;
-  margin: 0 0 16px 0;
+  margin: 0 0 20px 0;
 }
 
 .imobiliare-attributes {
