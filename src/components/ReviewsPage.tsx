@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Star, ChevronDown, CheckCircle } from 'lucide-react';
 import { WriteReviewModal } from './WriteReviewModal';
+import { AVATARS } from './AvatarSelectionModal';
 
 const MOCK_REVIEWS = [
   {
@@ -208,7 +209,7 @@ export const ReviewsPage: React.FC = () => {
                 borderRadius: '4px'
               }}
             >
-              Recenzii Produse (2179)
+              Recenzii Utilizatori (2179)
             </button>
             <button 
               onClick={() => setActiveTab('magazin')}
@@ -221,7 +222,7 @@ export const ReviewsPage: React.FC = () => {
                 borderRadius: '4px'
               }}
             >
-              Recenzii Magazin (47)
+              Recenzii Platforma Pi (47)
             </button>
           </div>
           
@@ -237,7 +238,7 @@ export const ReviewsPage: React.FC = () => {
           columnGap: '24px',
           width: '100%'
         }}>
-          {MOCK_REVIEWS.map(review => (
+          {MOCK_REVIEWS.map((review, index) => (
             <div key={review.id} style={{
               backgroundColor: '#fff',
               border: '1px solid #EBEBEB',
@@ -262,12 +263,10 @@ export const ReviewsPage: React.FC = () => {
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-                <div style={{ width: '36px', height: '36px', backgroundColor: '#F5F5F5', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FEA742', position: 'relative' }}>
-                  {/* Mock user avatar icon */}
-                  <div style={{ width: '16px', height: '16px', border: '2px solid #FEA742', borderRadius: '50%', position: 'absolute', top: '4px' }}></div>
-                  <div style={{ width: '24px', height: '12px', border: '2px solid #FEA742', borderRadius: '12px 12px 0 0', borderBottom: 'none', position: 'absolute', bottom: '4px' }}></div>
-                  <div style={{ position: 'absolute', bottom: '-4px', right: '-4px', backgroundColor: '#fff', borderRadius: '50%' }}>
-                    <CheckCircle size={14} color="#FEA742" fill="#FEA742" style={{ color: '#fff' }} />
+                <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#F5F5F5', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+                  <img src={AVATARS[index % AVATARS.length]} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <div style={{ position: 'absolute', bottom: '0', right: '0', backgroundColor: '#fff', borderRadius: '50%', width: '14px', height: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', transform: 'translate(25%, 25%)' }}>
+                    <CheckCircle size={12} color="#FEA742" fill="#FEA742" style={{ color: '#fff' }} />
                   </div>
                 </div>
                 <div>
