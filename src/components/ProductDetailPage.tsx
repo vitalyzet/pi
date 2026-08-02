@@ -529,9 +529,11 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
             )}
 
           </div>
+          </>
+        )}
 
           {/* Bottom Seller Card & Contact Buttons */}
-          <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '20px', border: '1px solid #E2E8F0' }}>
+          <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '20px', border: '1px solid #E2E8F0', marginTop: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div style={{ width: '44px', height: '44px', borderRadius: '50%', backgroundColor: '#FEF08A', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: '#0F172A' }}>
@@ -598,8 +600,6 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               </button>
             </div>
           </div>
-        </>
-      )}
     </div>
   </div>
 
