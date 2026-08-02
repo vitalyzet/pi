@@ -35,6 +35,7 @@ interface ProductDetailPageProps {
   onToggleFavorite?: (product: Product) => void;
   userAvatarIndex?: number;
   onAvatarChange?: (index: number) => void;
+  onShowReviews?: () => void;
 }
 
 export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
@@ -47,6 +48,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   onToggleFavorite,
   userAvatarIndex = 0,
   onAvatarChange,
+  onShowReviews,
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [showPhone, setShowPhone] = useState(false);
@@ -560,9 +562,24 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                 </div>
               </div>
 
-              <span style={{ fontSize: '12px', fontWeight: 800, color: '#059669', backgroundColor: '#ECFDF5', padding: '6px 12px', borderRadius: '8px' }}>
+              <button 
+                onClick={onShowReviews}
+                style={{ 
+                  fontSize: '12px', 
+                  fontWeight: 800, 
+                  color: '#059669', 
+                  backgroundColor: '#ECFDF5', 
+                  padding: '6px 12px', 
+                  borderRadius: '8px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'background-color 0.2s',
+                }}
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#D1FAE5'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#ECFDF5'}
+              >
                 ★ 4.9 Vânzător Top
-              </span>
+              </button>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>

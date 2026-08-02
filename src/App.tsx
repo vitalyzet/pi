@@ -303,6 +303,7 @@ export const App: React.FC = () => {
           )}
           userAvatarIndex={userAvatarIndex}
           onAvatarChange={handleAvatarChange}
+          onShowReviews={() => setCurrentView('reviews')}
         />
       ) : (
         <>
