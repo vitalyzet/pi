@@ -77,8 +77,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '40px',
+          gridTemplateColumns: '1.5fr 1fr',
+          gap: '48px',
           alignItems: 'start',
           backgroundColor: '#FFFFFF',
           borderRadius: '24px',
@@ -617,26 +617,26 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               </button>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
               <button
                 onClick={() => setShowPhone(!showPhone)}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '8px',
-                  padding: '14px',
-                  borderRadius: '14px',
+                  gap: '6px',
+                  padding: '12px',
+                  borderRadius: '12px',
                   border: '1.5px solid #059669',
                   backgroundColor: showPhone ? '#ECFDF5' : '#059669',
                   color: showPhone ? '#059669' : '#FFFFFF',
-                  fontSize: '14px',
+                  fontSize: '13px',
                   fontWeight: 800,
                   cursor: 'pointer',
                   transition: 'all 0.2s ease'
                 }}
               >
-                <Phone size={18} />
+                <Phone size={16} />
                 {showPhone ? '0745 123 456' : 'SUNĂ VÂNZĂTOR'}
               </button>
 
@@ -646,13 +646,13 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '8px',
-                  padding: '14px',
-                  borderRadius: '14px',
+                  gap: '6px',
+                  padding: '12px',
+                  borderRadius: '12px',
                   border: 'none',
                   backgroundColor: '#FEA742',
                   color: '#FFFFFF',
-                  fontSize: '14px',
+                  fontSize: '13px',
                   fontWeight: 800,
                   cursor: 'pointer',
                   boxShadow: '0 6px 16px rgba(254, 167, 66, 0.35)'
