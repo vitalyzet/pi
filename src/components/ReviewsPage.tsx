@@ -289,11 +289,15 @@ export const ReviewsPage: React.FC<ReviewsPageProps> = ({ sellerName }) => {
               display: 'inline-block',
               width: '100%'
             }}>
-              {(!sellerName && activeTab === 'produse') && (
+              {(!sellerName && activeTab === 'produse') ? (
                 <div style={{ fontSize: '13px', color: '#666', marginBottom: '12px' }}>
                   despre <span style={{ color: '#FEA742', textDecoration: 'underline', cursor: 'pointer' }}>{review.product}</span>
                 </div>
-              )}
+              ) : sellerName ? (
+                <div style={{ fontSize: '13px', color: '#666', marginBottom: '12px' }}>
+                  despre <span style={{ color: '#FEA742', textDecoration: 'underline', cursor: 'pointer' }}>{sellerName}</span>
+                </div>
+              ) : null}
               
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                 <div style={{ display: 'flex', gap: '2px' }}>
