@@ -143,7 +143,7 @@ interface ReviewsPageProps {
   sellerName?: string | null;
 }
 
-const generateSellerReviews = (sellerName: string) => [
+export const generateSellerReviews = (sellerName: string) => [
   { id: 201, product: "Diverse Produse", rating: 5, date: '04/12/2026', author: 'Mihai T.', verified: true, title: 'Vânzător de încredere', content: `Am colaborat excelent cu ${sellerName}. Recomand cu încredere.` },
   { id: 202, product: "Auto / Imobiliare", rating: 5, date: '03/25/2026', author: 'Andreea P.', verified: true, title: 'Super', content: 'Totul a decurs conform descrierii din anunț. Comunicare perfectă!' },
   { id: 203, product: "Anunț general", rating: 4, date: '02/10/2026', author: 'Ionel S.', verified: false, title: 'Ok', content: 'Tranzacție rapidă și fără probleme.' }

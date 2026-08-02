@@ -21,16 +21,17 @@ import { AutoDetailModal } from './components/AutoDetailModal';
 import { ProductDetailPage } from './components/ProductDetailPage';
 import { PublishListingPage } from './components/PublishListingPage';
 import { ReviewsPage } from './components/ReviewsPage';
+import { PublicUserProfilePage } from './components/PublicUserProfilePage';
 import { PRODUCTS, Product } from './data/products';
 import { saveListingToFirebase, fetchListingsFromFirebase } from './lib/firebase';
 import { AVATARS } from './components/AvatarSelectionModal';
 
 export const App: React.FC = () => {
-  // Page View Mode: 'store' | 'dashboard' | 'admin' | 'publish' | 'reviews'
-  const [currentView, setCurrentView] = useState<'store' | 'dashboard' | 'admin' | 'publish' | 'reviews'>('store');
+  // Page View Mode: 'store' | 'dashboard' | 'admin' | 'publish' | 'reviews' | 'public_profile'
+  const [currentView, setCurrentView] = useState<'store' | 'dashboard' | 'admin' | 'publish' | 'reviews' | 'public_profile'>('store');
 
   // Dynamic Store Settings
-  const [announcementText, setAnnouncementText] = useState('Livrare la Easybox');
+  const [announcementText, setAnnouncementText] = useState('Anunțurile tale sunt acum mult mai vizibile!');
   const [productList, setProductList] = useState<Product[]>(() => {
     const saved = localStorage.getItem('pinpin_products');
     if (saved) {
@@ -97,6 +98,7 @@ export const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [favorites, setFavorites] = useState<Product[]>([]);
+  const [publicProfileName, setPublicProfileName] = useState<string | null>(null);
   const [selectedSellerForReviews, setSelectedSellerForReviews] = useState<string | null>(null);
   const [userAvatarIndex, setUserAvatarIndex] = useState(() => {
     const saved = localStorage.getItem('pinpin_avatar_index');
@@ -290,6 +292,15 @@ export const App: React.FC = () => {
           onBackToStore={() => setCurrentView('store')}
           onPublishProduct={handlePublishProduct}
         />
+      ) : currentView === 'public_profile' && publicProfileName ? (
+        <PublicUserProfilePage
+          sellerName={publicProfileName}
+          userAds={productList.filter(p => p.id === 'AD-73911' || p.id === 'AD-22910' || p.id === 'AD-99120')} // Mocked list of ads for this public profile
+          onBack={() => setCurrentView('store')}
+          onViewProduct={(p) => setSelectedDetailProduct(p)}
+          favorites={favorites}
+          onToggleFavorite={handleToggleFavorite}
+        />
       ) : currentView === 'reviews' ? (
         <ReviewsPage sellerName={selectedSellerForReviews} />
       ) : selectedDetailProduct ? (
@@ -306,8 +317,8 @@ export const App: React.FC = () => {
           userAvatarIndex={userAvatarIndex}
           onAvatarChange={handleAvatarChange}
           onShowReviews={(sellerName) => {
-            setSelectedSellerForReviews(sellerName || 'Alexandru B.');
-            setCurrentView('reviews');
+            setPublicProfileName(sellerName || 'Alexandru B.');
+            setCurrentView('public_profile');
           }}
         />
       ) : (

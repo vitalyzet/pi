@@ -542,7 +542,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
           {/* Bottom Seller Card & Contact Buttons */}
           <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '20px', border: '1px solid #E2E8F0', marginTop: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div 
+                onClick={() => onShowReviews && onShowReviews('Alexandru B.')}
+                style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }}
+              >
                 <div 
                   style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#FCD34D', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: '#0F172A', fontSize: '20px', overflow: 'hidden' }}
                 >
