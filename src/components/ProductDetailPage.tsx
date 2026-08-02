@@ -23,6 +23,7 @@ import {
   Car
 } from 'lucide-react';
 import { Product } from '../data/products';
+import { AvatarSelectionModal, AVATARS } from './AvatarSelectionModal';
 
 interface ProductDetailPageProps {
   product: Product;
@@ -47,17 +48,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   const [showPhone, setShowPhone] = useState(false);
   const [activeImage, setActiveImage] = useState(product.image);
   const [currentAvatarIndex, setCurrentAvatarIndex] = useState(0);
-
-  const avatars = [
-    'initials',
-    '/an32.png', '/an53.png', '/an54.png', '/an55.png', '/an57.png', 
-    '/an61.png', '/an62.png', '/an70.png', '/an71-1.png', '/an71.png', 
-    '/an74.png', '/an75.png', '/an86.png', '/an87.png', '/an89.png', 
-    '/an91.png', '/an94.png', '/an95.png', '/an97.png'
-  ];
+  const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
 
   const handleAvatarClick = () => {
-    setCurrentAvatarIndex((prev) => (prev + 1) % avatars.length);
+    setIsAvatarModalOpen(true);
   };
 
   useEffect(() => {
@@ -553,10 +547,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   onClick={handleAvatarClick}
                   style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#FCD34D', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: '#0F172A', fontSize: '20px', cursor: 'pointer', overflow: 'hidden' }}
                 >
-                  {avatars[currentAvatarIndex] === 'initials' ? (
+                  {AVATARS[currentAvatarIndex] === 'initials' ? (
                     'AB'
                   ) : (
-                    <img src={avatars[currentAvatarIndex]} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={AVATARS[currentAvatarIndex]} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   )}
                 </div>
                 <div>
@@ -640,23 +634,28 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                 style={{
                   backgroundColor: '#FFFFFF',
                   borderRadius: '16px',
-                  overflow: 'hidden',
                   border: '1px solid #E2E8F0',
+                  overflow: 'hidden',
                   cursor: 'pointer',
-                  transition: 'transform 0.2s ease',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.04)'
+                  transition: 'all 0.2s',
+                  position: 'relative'
                 }}
               >
-                <img src={relProduct.image} alt={relProduct.title} style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
+                <div style={{ position: 'relative' }}>
+                  <img src={relProduct.image} alt={relProduct.title} style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
+                  <div style={{ position: 'absolute', top: '12px', right: '12px', background: '#FFFFFF', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+                    <Heart size={18} color="#64748B" />
+                  </div>
+                </div>
                 <div style={{ padding: '16px' }}>
-                  <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--pink-accent)', textTransform: 'uppercase' }}>
-                    {relProduct.category}
-                  </span>
-                  <h4 style={{ fontSize: '15px', fontWeight: 800, color: '#0F172A', margin: '4px 0 8px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#0F172A', fontWeight: 700, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {relProduct.title}
                   </h4>
-                  <div style={{ fontSize: '16px', fontWeight: 800, color: '#E55B86' }}>
+                  <div style={{ fontSize: '18px', fontWeight: 800, color: '#E55B86', marginBottom: '8px' }}>
                     {relProduct.price} €
+                  </div>
+                  <div style={{ fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <MapPin size={12} /> {relProduct.location || 'București'}
                   </div>
                 </div>
               </div>
@@ -664,6 +663,17 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
           </div>
         </section>
       )}
+
+      <AvatarSelectionModal 
+        isOpen={isAvatarModalOpen} 
+        onClose={() => setIsAvatarModalOpen(false)} 
+        currentAvatar={AVATARS[currentAvatarIndex]} 
+        onSelectAvatar={(avatarPath) => {
+          const newIndex = AVATARS.indexOf(avatarPath);
+          if (newIndex !== -1) setCurrentAvatarIndex(newIndex);
+          setIsAvatarModalOpen(false);
+        }} 
+      />
     </div>
   );
 };

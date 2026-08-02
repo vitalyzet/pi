@@ -13,9 +13,14 @@ import {
   Eye,
   TrendingUp,
   MapPin,
-  List
+  List,
+  ShoppingBag,
+  CreditCard,
+  User,
+  Image as ImageIcon
 } from 'lucide-react';
 import { Product, PRODUCTS } from '../data/products';
+import { AvatarSelectionModal, AVATARS } from './AvatarSelectionModal';
 
 interface MyAd {
   id: string;
@@ -93,17 +98,10 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
   const [activeTab, setActiveTab] = useState<'my_ads' | 'messages' | 'favorites' | 'wallet' | 'settings'>('my_ads');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [currentAvatarIndex, setCurrentAvatarIndex] = useState(0);
-
-  const avatars = [
-    'initials',
-    '/an32.png', '/an53.png', '/an54.png', '/an55.png', '/an57.png', 
-    '/an61.png', '/an62.png', '/an70.png', '/an71-1.png', '/an71.png', 
-    '/an74.png', '/an75.png', '/an86.png', '/an87.png', '/an89.png', 
-    '/an91.png', '/an94.png', '/an95.png', '/an97.png'
-  ];
+  const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
 
   const handleAvatarClick = () => {
-    setCurrentAvatarIndex((prev) => (prev + 1) % avatars.length);
+    setIsAvatarModalOpen(true);
   };
   
   const [userProfile] = useState({
@@ -165,10 +163,10 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                   onClick={handleAvatarClick}
                   style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'var(--primary-yellow)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0F172A', fontSize: '24px', fontWeight: 800, cursor: 'pointer', overflow: 'hidden' }}
                 >
-                  {avatars[currentAvatarIndex] === 'initials' ? (
+                  {AVATARS[currentAvatarIndex] === 'initials' ? (
                     userProfile.name.split(' ').map(n => n[0]).join('').substring(0, 2)
                   ) : (
-                    <img src={avatars[currentAvatarIndex]} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={AVATARS[currentAvatarIndex]} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   )}
                 </div>
                 <div>
@@ -499,6 +497,17 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
           </div>
         </div>
       </div>
+
+      <AvatarSelectionModal 
+        isOpen={isAvatarModalOpen} 
+        onClose={() => setIsAvatarModalOpen(false)} 
+        currentAvatar={AVATARS[currentAvatarIndex]} 
+        onSelectAvatar={(avatarPath) => {
+          const newIndex = AVATARS.indexOf(avatarPath);
+          if (newIndex !== -1) setCurrentAvatarIndex(newIndex);
+          setIsAvatarModalOpen(false);
+        }} 
+      />
     </div>
   );
 };
