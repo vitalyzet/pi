@@ -165,15 +165,15 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
             </div>
           )}
 
-          {/* Imobiliare 4-column Specifications Grid */}
+          {/* Imobiliare 3-column Specifications Grid */}
           {isImobiliare && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px 16px', marginTop: '32px', marginBottom: '32px', paddingBottom: '32px', borderBottom: '1px solid #E2E8F0', alignItems: 'start' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px 24px', marginTop: '32px', marginBottom: '32px', paddingBottom: '32px', borderBottom: '1px solid #E2E8F0', alignItems: 'start' }}>
               {[
                 { icon: <Store size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Categorie', value: product.design || 'Apartament' },
                 { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Regiune', value: product.location?.split(' ')[0] || 'București' },
                 { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Preț', value: `${product.price.toLocaleString('ro-RO')} €` },
                 { icon: <Home size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Zonă', value: product.specs?.length || '92 mp' },
-                { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Preț pe metru pătrat.', value: `${Math.round(product.price / (parseInt(product.specs?.length || '92') || 1))} € / mp` },
+                { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Preț pe metru pătrat', value: `${Math.round(product.price / (parseInt(product.specs?.length || '92') || 1))} € / mp` },
                 { icon: <BedDouble size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Dormitoare', value: product.specs?.modelSize || '2 dormitoare' },
                 { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Sistem de încălzire', value: 'Încălzire centrală' },
                 { icon: <Bath size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Băi', value: product.specs?.bathrooms?.split(' ')[0] || '1' },
