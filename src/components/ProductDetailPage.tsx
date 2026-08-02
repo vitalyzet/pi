@@ -46,6 +46,19 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   const [quantity, setQuantity] = useState(1);
   const [showPhone, setShowPhone] = useState(false);
   const [activeImage, setActiveImage] = useState(product.image);
+  const [currentAvatarIndex, setCurrentAvatarIndex] = useState(0);
+
+  const avatars = [
+    'initials',
+    '/an32.png', '/an53.png', '/an54.png', '/an55.png', '/an57.png', 
+    '/an61.png', '/an62.png', '/an70.png', '/an71-1.png', '/an71.png', 
+    '/an74.png', '/an75.png', '/an86.png', '/an87.png', '/an89.png', 
+    '/an91.png', '/an94.png', '/an95.png', '/an97.png'
+  ];
+
+  const handleAvatarClick = () => {
+    setCurrentAvatarIndex((prev) => (prev + 1) % avatars.length);
+  };
 
   useEffect(() => {
     setActiveImage(product.image);
@@ -536,15 +549,22 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
           <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '20px', border: '1px solid #E2E8F0', marginTop: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: '44px', height: '44px', borderRadius: '50%', backgroundColor: '#FEF08A', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: '#0F172A' }}>
-                  <User size={22} />
+                <div 
+                  onClick={handleAvatarClick}
+                  style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#FCD34D', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, color: '#0F172A', fontSize: '20px', cursor: 'pointer', overflow: 'hidden' }}
+                >
+                  {avatars[currentAvatarIndex] === 'initials' ? (
+                    'AB'
+                  ) : (
+                    <img src={avatars[currentAvatarIndex]} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  )}
                 </div>
                 <div>
-                  <div style={{ fontSize: '14px', fontWeight: 800, color: '#0F172A' }}>
-                    Alex M. <CheckCircle size={15} color="#059669" style={{ display: 'inline', verticalAlign: 'middle' }} />
+                  <div style={{ fontSize: '16px', fontWeight: 800, color: '#0F172A', marginBottom: '2px' }}>
+                    Alexandru B.
                   </div>
-                  <div style={{ fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <MapPin size={13} /> București / Oradea
+                  <div style={{ fontSize: '13px', color: '#059669', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 500 }}>
+                    <ShieldCheck size={14} color="#059669" /> Cont Verificat
                   </div>
                 </div>
               </div>
