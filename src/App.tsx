@@ -100,7 +100,22 @@ export const App: React.FC = () => {
   const [isAutoPublishOpen, setIsAutoPublishOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [favorites, setFavorites] = useState<Product[]>([]);
+  const [favorites, setFavorites] = useState<Product[]>(() => {
+    const saved = localStorage.getItem('pinpin_favorites');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        return [];
+      }
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('pinpin_favorites', JSON.stringify(favorites));
+  }, [favorites]);
+
   const [publicProfileName, setPublicProfileName] = useState<string | null>(null);
   const [selectedSellerForReviews, setSelectedSellerForReviews] = useState<string | null>(null);
   const [userAvatarIndex, setUserAvatarIndex] = useState(() => {
