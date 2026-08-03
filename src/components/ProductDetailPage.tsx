@@ -165,9 +165,41 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
             </div>
           )}
 
-          {/* Imobiliare Specifications Alternating List */}
+          {/* Imobiliare Specifications Grid & Alternating List */}
           {isImobiliare && (
             <div style={{ marginTop: '32px', marginBottom: '32px', paddingBottom: '32px', borderBottom: '1px solid #E2E8F0' }}>
+              {/* 3-column Grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px 24px', marginBottom: '40px' }}>
+                {[
+                  { icon: <Store size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Categorie', value: product.design || 'Apartament' },
+                  { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Regiune', value: product.location?.split(' ')[0] || 'București' },
+                  { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Preț', value: `${product.price.toLocaleString('ro-RO')} €` },
+                  { icon: <Home size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Zonă', value: product.specs?.length || '92 mp' },
+                  { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Preț pe metru pătrat', value: `${Math.round(product.price / (parseInt(product.specs?.length || '92') || 1))} € / mp` },
+                  { icon: <BedDouble size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Dormitoare', value: product.specs?.modelSize || '2 dormitoare' },
+                  { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Sistem de încălzire', value: 'Încălzire centrală' },
+                  { icon: <Bath size={24} color="#3b82f6" strokeWidth={1.5} />, label: 'Băi', value: product.specs?.bathrooms?.split(' ')[0] || '1' },
+                  { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Camere de zi', value: '1' },
+                  { icon: <CheckCircle2 size={22} color="#3b82f6" strokeWidth={1.5} />, label: 'Bucătării', value: '1' },
+                ].map((item, idx) => (
+                  <div key={idx} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                    <div style={{ flexShrink: 0, marginTop: '2px' }}>
+                      {item.icon}
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                      <div style={{ fontSize: '14px', color: '#64748B', fontWeight: 500 }}>
+                        {item.label}
+                      </div>
+                      <div style={{ fontSize: '15px', color: '#0F172A', fontWeight: 700 }}>
+                        {item.value}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Separator */}
+              <div style={{ height: '1px', backgroundColor: '#E2E8F0', marginBottom: '32px' }} />
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
                 <span style={{ fontSize: '18px', fontWeight: 700, color: '#0F172A' }}>Nr. anunț:</span>
                 <span style={{ fontSize: '18px', fontWeight: 700, color: '#3b82f6' }}>40024384</span>
