@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="12.681" viewBox="0 0 15 12.681">
+  <defs>
+    <clipPath id="diamond">
+      <path id="Path_217" data-name="Path 217" d="M0,0H15V12.681H0Z"/>
+    </clipPath>
+  </defs>
+  <g id="Page_1" data-name="Page 1" clip-path="url(#diamond)">
+    <path id="Path_1" data-name="Path 1" d="M300.692,154.04l-3.052,8.8,7.5-8.8Z" transform="translate(-290.136 -150.157)" fill="#ffe182"/>
+    <path id="Path_2" data-name="Path 2" d="M3.1.09,0,3.971H4.451Zm8.8,0L10.556,3.971h4.451ZM7.5.09,4.451,3.971h6.1Z" transform="translate(0 -0.088)" fill="#ffcd73"/>
+    <path id="Path_3" data-name="Path 3" d="M123.16.09l1.346,3.881L127.559.09Z" transform="translate(-120.055 -0.088)" fill="#ffaa64"/>
+    <path id="Path_4" data-name="Path 4" d="M297.64.09l3.052,3.881L302.039.09Z" transform="translate(-290.136 -0.088)" fill="#ffe182"/>
+    <path id="Path_5" data-name="Path 5" d="M176.57,154.04l3.052,8.8,3.052-8.8Z" transform="translate(-172.119 -150.157)" fill="#ffaa64"/>
+    <path id="Path_6" data-name="Path 6" d="M0,154.04l7.5,8.8-3.052-8.8Z" transform="translate(0 -150.157)" fill="#ff8c5a"/>
+  </g>
+</svg>

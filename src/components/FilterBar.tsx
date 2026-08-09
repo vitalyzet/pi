@@ -3,7 +3,8 @@ import {
   ChevronDown,
   ChevronUp,
   Grid2X2,
-  LayoutGrid
+  LayoutGrid,
+  List
 } from 'lucide-react';
 import { FEELINGS, DESIGNS, COLORS } from '../data/products';
 
@@ -14,13 +15,13 @@ interface FilterBarProps {
   selectedColor: string;
   sortBy: string;
   productCount: number;
-  viewMode: 'classic' | 'pro';
-  onSelectCategory: (val: string) => void;
-  onSelectFeeling: (val: string) => void;
-  onSelectDesign: (val: string) => void;
-  onSelectColor: (val: string) => void;
-  onSelectSort: (val: string) => void;
-  onToggleViewMode: (mode: 'classic' | 'pro') => void;
+  viewMode: 'classic' | 'pro' | 'list';
+  onSelectCategory: (category: string) => void;
+  onSelectFeeling: (feeling: string) => void;
+  onSelectDesign: (design: string) => void;
+  onSelectColor: (color: string) => void;
+  onSelectSort: (sort: string) => void;
+  onToggleViewMode: (mode: 'classic' | 'pro' | 'list') => void;
 }
 
 export const FilterBar: React.FC<FilterBarProps> = ({
@@ -157,10 +158,18 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             <button
               className={`mode-btn ${viewMode === 'pro' ? 'active' : ''}`}
               onClick={() => onToggleViewMode('pro')}
-              title="Mod Pro (5 carduri pe rând)"
+              title="Mod Pro (3 carduri pe rând)"
             >
               <LayoutGrid size={16} />
-              <span>PRO (5)</span>
+              <span>PRO (3)</span>
+            </button>
+            <button
+              className={`mode-btn ${viewMode === 'list' ? 'active' : ''}`}
+              onClick={() => onToggleViewMode('list')}
+              title="Mod Listă (1 pe rând)"
+            >
+              <List size={16} />
+              <span>LISTĂ</span>
             </button>
           </div>
 

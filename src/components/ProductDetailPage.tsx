@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Share2, Heart, Shield, RotateCcw, Truck, MessageCircle, Phone, ArrowLeft, Star, Clock, MapPin, Search, Calendar, Gauge, Fuel, Type, Palette, User, Car, BedDouble, Bath, Maximize2, Layers, CheckCircle2, Home, Store, ShieldCheck, Flag, Settings, ShoppingBag, Copy } from 'lucide-react';
 import { Product } from '../data/products';
 import { AvatarSelectionModal, AVATARS } from './AvatarSelectionModal';
+import { formatPrice } from '../lib/format';
 
 interface ProductDetailPageProps {
   product: Product;
@@ -30,7 +31,26 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [showPhone, setShowPhone] = useState(false);
+  const [showShareTooltip, setShowShareTooltip] = useState(false);
+  const thumbnailContainerRef = useRef<HTMLDivElement>(null);
   const [activeImage, setActiveImage] = useState(product.image);
+
+  const allImages = Array.from(new Set([product.image, ...(product.images || [])]));
+
+  // Auto-scroll thumbnails when active image changes
+  useEffect(() => {
+    if (thumbnailContainerRef.current) {
+      const activeIdx = allImages.findIndex(img => img === activeImage);
+      if (activeIdx !== -1) {
+        const container = thumbnailContainerRef.current;
+        const thumbnailNode = container.children[activeIdx] as HTMLElement;
+        if (thumbnailNode) {
+          const scrollLeft = thumbnailNode.offsetLeft - container.offsetWidth / 2 + thumbnailNode.offsetWidth / 2;
+          container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+        }
+      }
+    }
+  }, [activeImage, allImages]);
 
   useEffect(() => {
     setActiveImage(product.image);
@@ -38,7 +58,18 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   }, [product.image, product.id]);
 
   const isFavorite = favorites.some((p) => p.id === product.id);
-  const allImages = Array.from(new Set([product.image, ...(product.images || [])]));
+
+  const handlePrevImage = () => {
+    const currentIndex = allImages.indexOf(activeImage);
+    const prevIndex = (currentIndex - 1 + allImages.length) % allImages.length;
+    setActiveImage(allImages[prevIndex]);
+  };
+
+  const handleNextImage = () => {
+    const currentIndex = allImages.indexOf(activeImage);
+    const nextIndex = (currentIndex + 1) % allImages.length;
+    setActiveImage(allImages[nextIndex]);
+  };
 
   const isAuto = product.category === 'Auto' || product.title.toLowerCase().includes('polo') || product.title.toLowerCase().includes('bmw');
   const isModa = product.category === 'Modă';
@@ -89,13 +120,66 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
         }}
       >
         {/* Left Column: Gallery & Badges */}
-        <div>
+        <div style={{ minWidth: 0 }}>
           <div style={{ position: 'relative', borderRadius: '20px', overflow: 'hidden', backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0' }}>
             <img
               src={activeImage}
               alt={product.title}
               style={{ width: '100%', height: '480px', objectFit: 'cover' }}
             />
+
+            {allImages.length > 1 && (
+              <>
+                <button
+                  onClick={handlePrevImage}
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: 0,
+                    transform: 'translateY(-50%)',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    border: 'none',
+                    borderRadius: '0 12px 12px 0',
+                    width: '48px',
+                    height: '100px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    zIndex: 10,
+                    transition: 'background-color 0.2s'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'}
+                >
+                  <ChevronLeft size={32} color="#FFFFFF" />
+                </button>
+                <button
+                  onClick={handleNextImage}
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    right: 0,
+                    transform: 'translateY(-50%)',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    border: 'none',
+                    borderRadius: '12px 0 0 12px',
+                    width: '48px',
+                    height: '100px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    zIndex: 10,
+                    transition: 'background-color 0.2s'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'}
+                >
+                  <ChevronRight size={32} color="#FFFFFF" />
+                </button>
+              </>
+            )}
 
             {/* Discount Tag */}
             {product.discountPercentage && (
@@ -142,7 +226,10 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
           
           {/* Thumbnails Gallery */}
           {allImages.length > 1 && (
-            <div style={{ display: 'flex', gap: '12px', marginTop: '16px', overflowX: 'auto', paddingBottom: '8px' }}>
+            <div 
+              ref={thumbnailContainerRef}
+              style={{ display: 'flex', gap: '12px', marginTop: '16px', overflowX: 'auto', paddingBottom: '8px' }}
+            >
               {allImages.map((img, idx) => (
                 <img
                   key={idx}
@@ -304,7 +391,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               {/* Price */}
               <div style={{ marginBottom: '4px' }}>
                 <span style={{ fontSize: '26px', fontWeight: 800, color: '#0F172A' }}>
-                  {product.price} lei
+                  {formatPrice(product.price)} lei
                 </span>
               </div>
               <div style={{ fontSize: '13px', color: '#94A3B8', fontFamily: '"Times New Roman", Times, serif', marginBottom: '32px' }}>
@@ -473,11 +560,11 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
             {/* Pricing Section */}
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px', marginBottom: '24px' }}>
               <span style={{ fontSize: '36px', fontWeight: 800, color: '#E55B86' }}>
-                {product.price} €
+                {formatPrice(product.price)} €
               </span>
               {product.originalPrice && (
                 <span style={{ fontSize: '20px', color: '#94A3B8', textDecoration: 'line-through', fontWeight: 600 }}>
-                  {product.originalPrice} €
+                  {formatPrice(product.originalPrice)} €
                 </span>
               )}
             </div>
@@ -759,7 +846,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     {relProduct.title}
                   </h4>
                   <div style={{ fontSize: '18px', fontWeight: 800, color: '#E55B86', marginBottom: '8px' }}>
-                    {relProduct.price} €
+                    {formatPrice(relProduct.price)} €
                   </div>
                   <div style={{ fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '4px' }}>
                     <MapPin size={12} /> {relProduct.location || 'București'}

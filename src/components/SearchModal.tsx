@@ -6,23 +6,31 @@ interface SearchModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSelectProduct: (p: Product) => void;
+  onSearchSubmit: (query: string) => void;
+  onSearchCategorySubmit: (query: string, category: string) => void;
+  products: Product[];
 }
 
 export const SearchModal: React.FC<SearchModalProps> = ({
   isOpen,
   onClose,
   onSelectProduct,
+  onSearchSubmit,
+  onSearchCategorySubmit,
+  products,
 }) => {
   const [query, setQuery] = useState('');
 
   if (!isOpen) return null;
 
   const results = query.trim()
-    ? PRODUCTS.filter((p) =>
+    ? products.filter((p) =>
         p.title.toLowerCase().includes(query.toLowerCase()) ||
         p.category.toLowerCase().includes(query.toLowerCase())
       )
     : [];
+
+  const matchedCategories = Array.from(new Set(results.map(p => p.category)));
 
   return (
     <div className="modal-backdrop" onClick={onClose} style={{ alignItems: 'flex-start', paddingTop: '80px' }}>
@@ -44,6 +52,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             placeholder="Caută pinuri, animale, profesii..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && query.trim()) {
+                onSearchSubmit(query.trim());
+                onClose();
+              }
+            }}
             autoFocus
             style={{
               flex: 1,
@@ -63,35 +77,49 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           <div style={{ marginTop: '20px', maxHeight: '350px', overflowY: 'auto' }}>
             {results.length === 0 ? (
               <p style={{ color: '#888', textAlign: 'center', padding: '20px 0' }}>
-                Nu am găsit niciun produs pentru "{query}".
+                Nu am găsit nicio potrivire pentru "{query}".
               </p>
             ) : (
-              results.map((product) => (
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <div
-                  key={product.id}
                   onClick={() => {
-                    onSelectProduct(product);
+                    onSearchCategorySubmit(query.trim(), 'Toate');
                     onClose();
                   }}
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '16px',
-                    padding: '12px',
-                    borderRadius: '8px',
+                    padding: '16px 8px',
                     cursor: 'pointer',
+                    borderBottom: '1px dotted #D1D5DB',
+                    fontSize: '16px',
                     transition: 'background-color 0.15s ease'
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#F8F8F8')}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                 >
-                  <img src={product.image} alt={product.title} style={{ width: '48px', height: '48px', borderRadius: '6px', objectFit: 'cover' }} />
-                  <div>
-                    <h4 style={{ fontSize: '14px', fontWeight: 700 }}>{product.title}</h4>
-                    <span style={{ fontSize: '13px', color: 'var(--pink-accent)', fontWeight: 800 }}>{product.price} €</span>
-                  </div>
+                  <strong style={{ color: '#1A56A8', fontWeight: 700 }}>{query.trim()}</strong> <em style={{ color: '#4B5563', fontStyle: 'italic', margin: '0 4px' }}>în</em> <strong style={{ color: '#111827', fontWeight: 700 }}>toate categoriile</strong>
                 </div>
-              ))
+
+                {matchedCategories.map((cat, index) => (
+                  <div
+                    key={cat}
+                    onClick={() => {
+                      onSearchCategorySubmit(query.trim(), cat);
+                      onClose();
+                    }}
+                    style={{
+                      padding: '16px 8px',
+                      cursor: 'pointer',
+                      borderBottom: index === matchedCategories.length - 1 ? 'none' : '1px dotted #D1D5DB',
+                      fontSize: '16px',
+                      transition: 'background-color 0.15s ease'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#F8F8F8')}
+                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+                  >
+                    <strong style={{ color: '#1A56A8', fontWeight: 700 }}>{query.trim()}</strong> <em style={{ color: '#4B5563', fontStyle: 'italic', margin: '0 4px' }}>în</em> <strong style={{ color: '#111827', fontWeight: 700 }}>{cat}</strong>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
         )}

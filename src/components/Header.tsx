@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Search, User, ShoppingBag, Menu, X, Truck, RotateCcw, PackageCheck, Shield, PlusCircle, Heart } from 'lucide-react';
+import { Search, User, ShoppingBag, Menu, X, Truck, RotateCcw, PackageCheck, Shield, PlusCircle, Heart, Globe } from 'lucide-react';
+import { RegionLanguageModal, REGIONS } from './RegionLanguageModal';
 
 interface HeaderProps {
   cartCount: number;
@@ -10,11 +11,19 @@ interface HeaderProps {
   onOpenSearch: () => void;
   onOpenUser: () => void;
   onOpenAdmin: () => void;
+  onOpenSuperAdmin: () => void;
   onGoToStore: () => void;
   onOpenFavorites: () => void;
   onOpenPublish?: () => void;
   onOpenReviews?: () => void;
+  onOpenRegionLanguage?: () => void;
+  isRegionLanguageOpen?: boolean;
+  selectedRegion?: string;
+  onSelectRegion?: (r: string) => void;
+  selectedLanguage?: string;
+  onSelectLanguage?: (l: string) => void;
   userAvatar?: string;
+  showAnnouncementBar?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -26,31 +35,41 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSearch,
   onOpenUser,
   onOpenAdmin,
+  onOpenSuperAdmin,
   onGoToStore,
   onOpenFavorites,
   onOpenPublish,
   onOpenReviews,
+  onOpenRegionLanguage,
+  isRegionLanguageOpen,
+  selectedRegion,
+  onSelectRegion,
+  selectedLanguage,
+  onSelectLanguage,
   userAvatar = 'initials',
+  showAnnouncementBar = true,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <>
       {/* Announcement Bar */}
-      <div className="top-announcement-bar">
-        <div className="announcement-item">
-          <PackageCheck size={16} />
-          <span>{announcementText || 'Livrare la Easybox'}</span>
+      {showAnnouncementBar && (
+        <div className="top-announcement-bar">
+          <div className="announcement-item">
+            <PackageCheck size={16} />
+            <span>{announcementText || 'Livrare la Easybox'}</span>
+          </div>
+          <div className="announcement-item">
+            <Truck size={16} />
+            <span>Livrare gratuită de la 99 €</span>
+          </div>
+          <div className="announcement-item">
+            <RotateCcw size={16} />
+            <span>Retur gratuit</span>
+          </div>
         </div>
-        <div className="announcement-item">
-          <Truck size={16} />
-          <span>Livrare gratuită de la 99 €</span>
-        </div>
-        <div className="announcement-item">
-          <RotateCcw size={16} />
-          <span>Retur gratuit</span>
-        </div>
-      </div>
+      )}
 
       {/* Main Header */}
       <header className="main-header">
@@ -67,29 +86,14 @@ export const Header: React.FC<HeaderProps> = ({
           <nav>
             <ul className="nav-menu">
               <li>
-                <a href="#" className="nav-link">PERSONALIZATE</a>
-              </li>
-              <li>
-                <a href="#" onClick={(e) => { e.preventDefault(); onGoToStore(); }} className="nav-link active">PINURI</a>
-              </li>
-              <li>
-                <a href="#" className="nav-link">NOUTĂȚI</a>
-              </li>
-              <li>
-                <a href="#" className="nav-link">ÎMPACHETARE</a>
-              </li>
-              <li>
                 <a href="#" onClick={(e) => { e.preventDefault(); onOpenReviews?.(); }} className="nav-link">RECENZII</a>
               </li>
               <li>
-                <a href="#" className="nav-link">CONTACT</a>
-              </li>
-              <li>
                 <button
-                  onClick={onOpenAdmin}
+                  onClick={onOpenSuperAdmin}
                   style={{
-                    backgroundColor: '#222',
-                    color: 'var(--primary-yellow)',
+                    backgroundColor: '#8B0000',
+                    color: '#FFF',
                     border: 'none',
                     borderRadius: '4px',
                     padding: '6px 12px',
@@ -99,10 +103,11 @@ export const Header: React.FC<HeaderProps> = ({
                     display: 'flex',
                     alignItems: 'center',
                     gap: '4px',
-                    letterSpacing: '1px'
+                    letterSpacing: '1px',
+                    marginLeft: '8px'
                   }}
                 >
-                  <Shield size={14} /> ADMIN
+                  <Shield size={14} /> SUPER ADMIN
                 </button>
               </li>
             </ul>
@@ -136,39 +141,80 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
             )}
 
+            {onOpenRegionLanguage && (
+              <div style={{ position: 'relative' }}>
+                <button 
+                  className="icon-btn" 
+                  onClick={onOpenRegionLanguage} 
+                  title="Limbă și Regiune"
+                  style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '6px', 
+                    width: 'auto', 
+                    padding: '6px 12px',
+                    borderRadius: '20px',
+                    backgroundColor: '#F3F4F6',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.2s ease'
+                  }}
+                >
+                  {(() => {
+                    const currentRegionData = REGIONS.find(r => r.id === selectedRegion) || REGIONS[0];
+                    return (
+                      <>
+                        {currentRegionData.icon ? currentRegionData.icon : <span style={{ fontSize: '16px' }}>{currentRegionData.flag}</span>}
+                        <span style={{ fontSize: '13px', fontWeight: 600, color: '#111827' }}>{currentRegionData.id.toUpperCase()}</span>
+                      </>
+                    );
+                  })()}
+                </button>
+                {isRegionLanguageOpen && selectedRegion && onSelectRegion && selectedLanguage && onSelectLanguage && (
+                  <RegionLanguageModal
+                    isOpen={isRegionLanguageOpen}
+                    onClose={onOpenRegionLanguage}
+                    selectedRegion={selectedRegion}
+                    onSelectRegion={onSelectRegion}
+                    selectedLanguage={selectedLanguage}
+                    onSelectLanguage={onSelectLanguage}
+                  />
+                )}
+              </div>
+            )}
+
             <button className="icon-btn" onClick={onOpenSearch} title="Căutare">
               <Search size={22} />
             </button>
             
-            <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <button
-                className="icon-btn"
-                onClick={onOpenUser}
-                title={isLoggedIn ? 'Panou Cont Utilizator' : 'Autentificare'}
-                style={{
-                  backgroundColor: isLoggedIn ? '#FFFDF0' : 'transparent',
-                  border: isLoggedIn ? '1px solid var(--primary-yellow)' : 'none',
-                  overflow: 'hidden',
-                  padding: '2px',
-                  width: '40px',
-                  height: '40px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
+            <div 
+              onClick={onOpenUser}
+              title={isLoggedIn ? 'Contul Meu' : 'Autentificare'}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                cursor: 'pointer',
+                backgroundColor: isLoggedIn ? '#FFFDF0' : 'transparent',
+                border: isLoggedIn ? '1px solid var(--primary-yellow)' : '1px solid #E2E8F0',
+                borderRadius: '24px',
+                padding: '4px 12px',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <div style={{ width: '28px', height: '28px', borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#F1F5F9' }}>
                 {isLoggedIn ? (
                   userAvatar === 'initials' ? (
-                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#222' }}>AB</span>
+                    <span style={{ fontSize: '11px', fontWeight: 800, color: '#222' }}>AB</span>
                   ) : (
-                    <img src={userAvatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+                    <img src={userAvatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   )
                 ) : (
-                  <User size={22} />
+                  <User size={16} />
                 )}
-              </button>
-              <span style={{ position: 'absolute', bottom: '-16px', fontSize: '10px', fontWeight: 600, color: '#64748B', pointerEvents: 'none', whiteSpace: 'nowrap' }}>
-                Alexandru.B
+              </div>
+              <span style={{ fontSize: '13px', fontWeight: 800, color: '#0F172A' }}>
+                {isLoggedIn ? 'CONTUL MEU' : 'LOGIN'}
               </span>
             </div>
 

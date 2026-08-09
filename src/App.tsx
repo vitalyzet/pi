@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { PlusCircle } from 'lucide-react';
+import { PlusCircle, X, ArrowUp } from 'lucide-react';
 import { Header } from './components/Header';
 
 import { FilterBar } from './components/FilterBar';
@@ -13,11 +13,12 @@ import { QuickViewModal } from './components/QuickViewModal';
 import { SearchModal } from './components/SearchModal';
 import { LoginModal } from './components/LoginModal';
 import { UserDashboardPage } from './components/UserDashboardPage';
-import { AdminPanelPage } from './components/AdminPanelPage';
+import { SuperAdminPage } from './components/SuperAdminPage';
 import { BrandMarquee } from './components/BrandMarquee';
 import { PublishModal } from './components/PublishModal';
 import { AutoPublishModal } from './components/AutoPublishModal';
 import { AutoDetailModal } from './components/AutoDetailModal';
+import { SearchResultsView } from './components/SearchResultsView';
 import { ProductDetailPage } from './components/ProductDetailPage';
 import { PublishListingPage } from './components/PublishListingPage';
 import { ReviewsPage } from './components/ReviewsPage';
@@ -25,10 +26,12 @@ import { PublicUserProfilePage } from './components/PublicUserProfilePage';
 import { PRODUCTS, Product } from './data/products';
 import { saveListingToFirebase, fetchListingsFromFirebase } from './lib/firebase';
 import { AVATARS } from './components/AvatarSelectionModal';
+import { RegionLanguageModal } from './components/RegionLanguageModal';
 
 export const App: React.FC = () => {
-  // Page View Mode: 'store' | 'dashboard' | 'admin' | 'publish' | 'reviews' | 'public_profile'
-  const [currentView, setCurrentView] = useState<'store' | 'dashboard' | 'admin' | 'publish' | 'reviews' | 'public_profile'>('store');
+  // Page View Mode: 'store' | 'dashboard' | 'super_admin' | 'publish' | 'reviews' | 'public_profile'
+  const [currentView, setCurrentView] = useState<'store' | 'dashboard' | 'super_admin' | 'publish' | 'reviews' | 'public_profile'>('store');
+  const [initialDashboardTab, setInitialDashboardTab] = useState('my_ads');
 
   // Dynamic Store Settings
   const [announcementText, setAnnouncementText] = useState('Anunțurile tale sunt acum mult mai vizibile!');
@@ -66,13 +69,46 @@ export const App: React.FC = () => {
     });
   }, []);
 
-  // View Mode: 'classic' (4 cards) | 'pro' (5 cards)
-  const [viewMode, setViewMode] = useState<'classic' | 'pro'>(() => {
+  // View Mode: 'classic' (4 cards) | 'pro' (5 cards) | 'list'
+  const [viewMode, setViewMode] = useState<'classic' | 'pro' | 'list'>(() => {
     const saved = localStorage.getItem('pinpin_view_mode');
-    return (saved === 'pro' || saved === 'classic') ? saved : 'classic';
+    return (saved === 'pro' || saved === 'classic' || saved === 'list') ? saved : 'classic';
   });
 
-  const handleSetViewMode = (mode: 'classic' | 'pro') => {
+  const getRelatedProducts = (currentProduct: Product | null, allProducts: Product[]) => {
+    if (!currentProduct) return [];
+    
+    let related = allProducts.filter(p => p.id !== currentProduct.id && p.category === currentProduct.category);
+    
+    const isAuto = currentProduct.category === 'Auto' || currentProduct.category === 'Auto & Moto' || currentProduct.category === 'Vehicule';
+    
+    if (isAuto) {
+      const currentBrand = currentProduct.specs?.brand || currentProduct.title.split(' ')[0];
+      const currentLocation = currentProduct.location;
+  
+      related = related.sort((a, b) => {
+        let scoreA = 0;
+        let scoreB = 0;
+  
+        const aBrand = a.specs?.brand || a.title.split(' ')[0];
+        const bBrand = b.specs?.brand || b.title.split(' ')[0];
+  
+        if (aBrand.toLowerCase() === currentBrand.toLowerCase()) scoreA += 10;
+        if (bBrand.toLowerCase() === currentBrand.toLowerCase()) scoreB += 10;
+  
+        if (currentLocation) {
+          if (a.location === currentLocation) scoreA += 5;
+          if (b.location === currentLocation) scoreB += 5;
+        }
+  
+        return scoreB - scoreA;
+      });
+    }
+  
+    return related;
+  };
+
+  const handleSetViewMode = (mode: 'classic' | 'pro' | 'list') => {
     setViewMode(mode);
     localStorage.setItem('pinpin_view_mode', mode);
   };
@@ -95,9 +131,28 @@ export const App: React.FC = () => {
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const [selectedDetailProduct, setSelectedDetailProduct] = useState<Product | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState(() => {
+    const saved = localStorage.getItem('pinpin_region');
+    return (saved && saved !== 'global') ? saved : 'ro';
+  });
+  const [selectedLanguage, setSelectedLanguage] = useState(() => localStorage.getItem('pinpin_language') || 'ro');
+  
+  useEffect(() => {
+    localStorage.setItem('pinpin_region', selectedCountry);
+    setSelectedCity('Toate'); // Reset city when country changes
+  }, [selectedCountry]);
+
+  useEffect(() => {
+    localStorage.setItem('pinpin_language', selectedLanguage);
+  }, [selectedLanguage]);
+  const [selectedCity, setSelectedCity] = useState('Toate');
+  const [maxPrice, setMaxPrice] = useState('100000');
+  const [transactionType, setTransactionType] = useState('Toate');
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isPublishOpen, setIsPublishOpen] = useState(false);
   const [isAutoPublishOpen, setIsAutoPublishOpen] = useState(false);
+  const [isRegionLanguageOpen, setIsRegionLanguageOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [favorites, setFavorites] = useState<Product[]>(() => {
@@ -197,6 +252,13 @@ export const App: React.FC = () => {
     if (selectedCategory !== 'Toate') {
       result = result.filter((p) => p.category === selectedCategory);
     }
+    
+    if (searchQuery) {
+      result = result.filter((p) => 
+        p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        p.category.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
     if (selectedFeeling !== 'Toate') {
       result = result.filter((p) => p.feeling === selectedFeeling);
     }
@@ -205,6 +267,32 @@ export const App: React.FC = () => {
     }
     if (selectedColor !== 'Toate') {
       result = result.filter((p) => p.color === selectedColor);
+    }
+
+    if (selectedCountry === 'ro') {
+      result = result.filter(p => !p.location?.toUpperCase().includes('MADRID') && !p.location?.toUpperCase().includes('PARIS') && !p.location?.toUpperCase().includes('ROMA'));
+    } else if (selectedCountry === 'es') {
+      result = result.filter(p => p.location?.toUpperCase().includes('MADRID') || p.location?.toUpperCase().includes('BARCELONA') || p.location?.toUpperCase().includes('SPANIA'));
+    } else if (selectedCountry === 'it') {
+      result = result.filter(p => p.location?.toUpperCase().includes('ROMA') || p.location?.toUpperCase().includes('MILAN') || p.location?.toUpperCase().includes('ITALIA'));
+    } else if (selectedCountry === 'fr') {
+      result = result.filter(p => p.location?.toUpperCase().includes('PARIS') || p.location?.toUpperCase().includes('LYON') || p.location?.toUpperCase().includes('FRANȚA'));
+    } else if (selectedCountry === 'de') {
+      result = result.filter(p => p.location?.toUpperCase().includes('BERLIN') || p.location?.toUpperCase().includes('MUNCHEN') || p.location?.toUpperCase().includes('GERMANIA'));
+    } else if (selectedCountry === 'nl') {
+      result = result.filter(p => p.location?.toUpperCase().includes('AMSTERDAM') || p.location?.toUpperCase().includes('ROTTERDAM') || p.location?.toUpperCase().includes('OLANDA'));
+    }
+
+    if (selectedCity !== 'Toate') {
+      result = result.filter(p => p.location?.toLowerCase().includes(selectedCity.toLowerCase()));
+    }
+
+    if (maxPrice && maxPrice !== '100000') {
+      result = result.filter(p => p.price <= parseInt(maxPrice));
+    }
+
+    if (selectedCategory === 'Imobiliare' && transactionType !== 'Toate') {
+      result = result.filter(p => p.feeling === transactionType);
     }
 
     if (sortBy === 'Preț: Mic la Mare') {
@@ -249,7 +337,7 @@ export const App: React.FC = () => {
     }
 
     return result;
-  }, [productList, selectedCategory, selectedFeeling, selectedDesign, selectedColor, sortBy]);
+  }, [productList, selectedCategory, selectedFeeling, selectedDesign, selectedColor, sortBy, selectedCountry, selectedCity, searchQuery, maxPrice, transactionType]);
 
   const displayedProducts = filteredProducts.slice(0, visibleCount);
   const totalCount = 157 + (productList.length - PRODUCTS.length);
@@ -259,6 +347,7 @@ export const App: React.FC = () => {
 
   const handleUserClick = () => {
     if (isLoggedIn) {
+      setInitialDashboardTab('my_ads');
       setCurrentView('dashboard');
     } else {
       setIsLoginOpen(true);
@@ -291,6 +380,7 @@ export const App: React.FC = () => {
 
       {/* Header */}
       <Header
+        showAnnouncementBar={selectedCategory === 'Modă' || selectedCategory === 'Electronice'}
         cartCount={totalCartItemsCount}
         favoritesCount={favorites.length}
         isLoggedIn={isLoggedIn}
@@ -300,10 +390,26 @@ export const App: React.FC = () => {
         onOpenFavorites={() => setIsFavoritesOpen(true)}
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenUser={handleUserClick}
-        onOpenAdmin={() => setCurrentView('admin')}
+        onOpenAdmin={() => {
+          setInitialDashboardTab('admin_overview');
+          setCurrentView('dashboard');
+        }}
+        onOpenSuperAdmin={() => setCurrentView('super_admin')}
+        selectedRegion={selectedCountry}
+        onSelectRegion={setSelectedCountry}
+        selectedLanguage={selectedLanguage}
+        onSelectLanguage={setSelectedLanguage}
+        isRegionLanguageOpen={isRegionLanguageOpen}
+        onOpenRegionLanguage={() => setIsRegionLanguageOpen(!isRegionLanguageOpen)}
         onGoToStore={() => {
           setSelectedDetailProduct(null);
+          setSelectedCategory(null);
+          setSelectedFeeling(null);
+          setSelectedDesign(null);
+          setSelectedColor(null);
+          setSearchQuery('');
           setCurrentView('store');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         onOpenPublish={() => {
           setSelectedDetailProduct(null);
@@ -317,15 +423,17 @@ export const App: React.FC = () => {
       />
 
       {/* MAIN VIEW SWITCH */}
-      {currentView === 'admin' ? (
-        <AdminPanelPage
+      {currentView === 'super_admin' ? (
+        <SuperAdminPage 
           onBackToStore={() => setCurrentView('store')}
-          announcementText={announcementText}
-          onUpdateAnnouncement={(text) => setAnnouncementText(text)}
-          onAddProduct={(newProd) => setProductList([newProd, ...productList])}
+          productsList={productList}
         />
       ) : currentView === 'dashboard' ? (
         <UserDashboardPage
+          initialTab={initialDashboardTab}
+          announcementText={announcementText}
+          onUpdateAnnouncement={(text) => setAnnouncementText(text)}
+          onAddProduct={(newProd) => setProductList([newProd, ...productList])}
           onBackToStore={() => setCurrentView('store')}
           onLogout={() => {
             setIsLoggedIn(false);
@@ -365,9 +473,7 @@ export const App: React.FC = () => {
           onSelectProduct={(p) => setSelectedDetailProduct(p)}
           favorites={favorites}
           onToggleFavorite={handleToggleFavorite}
-          relatedProducts={productList.filter(
-            (p) => p.id !== selectedDetailProduct.id && p.category === selectedDetailProduct.category
-          )}
+          relatedProducts={getRelatedProducts(selectedDetailProduct, productList)}
           userAvatarIndex={userAvatarIndex}
           onAvatarChange={handleAvatarChange}
           onShowReviews={(sellerName) => {
@@ -375,8 +481,41 @@ export const App: React.FC = () => {
             setCurrentView('public_profile');
           }}
         />
+      ) : (searchQuery || selectedCategory !== 'Toate') ? (
+        <SearchResultsView
+          products={displayedProducts}
+          searchQuery={searchQuery}
+          onClearSearch={() => setSearchQuery('')}
+          selectedCategory={selectedCategory}
+          onSelectCategory={(val) => {
+            setSelectedCategory(val);
+            setVisibleCount(20);
+          }}
+          selectedCountry={selectedCountry}
+          onSelectCountry={setSelectedCountry}
+          selectedCity={selectedCity}
+          onSelectCity={setSelectedCity}
+          maxPrice={maxPrice}
+          onSetMaxPrice={setMaxPrice}
+          transactionType={transactionType}
+          onSetTransactionType={setTransactionType}
+          sortBy={sortBy}
+          onSelectSort={setSortBy}
+          viewMode={viewMode}
+          onToggleViewMode={handleSetViewMode}
+          favorites={favorites}
+          onToggleFavorite={handleToggleFavorite}
+          onAddToCart={(p) => handleAddToCart(p, 1)}
+          onQuickView={(p) => setSelectedDetailProduct(p)}
+          onGoToProfile={(sellerName) => {
+            setPublicProfileName(sellerName);
+            setCurrentView('public_profile');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
       ) : (
         <>
+
           {/* Category Header */}
           <section className="category-header-section" style={{ padding: '0 0 20px 0' }}>
             <ProCategoryBar
@@ -410,7 +549,7 @@ export const App: React.FC = () => {
 
           {/* Main Product Grid */}
           <main className="product-grid-container">
-            <div className={`product-grid ${viewMode === 'pro' ? 'pro-mode' : ''}`}>
+            <div className={`product-grid ${viewMode === 'pro' ? 'pro-mode' : ''} ${viewMode === 'list' ? 'list-mode' : ''}`}>
               {displayedProducts.map((product) => (
                 <ProductCard
                   key={product.id}
@@ -481,7 +620,7 @@ export const App: React.FC = () => {
               RECOMANDĂRI
             </h2>
             <div className="product-grid">
-              {productList.slice(0, 4).map((product) => (
+              {filteredProducts.slice(0, 4).map((product) => (
                 <ProductCard
                   key={`rec-${product.id}`}
                   product={product}
@@ -527,6 +666,7 @@ export const App: React.FC = () => {
           onAddToCart={(product, qty) => handleAddToCart(product, qty)}
           favorites={favorites}
           onToggleFavorite={handleToggleFavorite}
+          relatedProducts={getRelatedProducts(quickViewProduct, productList)}
         />
       ) : (
         <QuickViewModal
@@ -540,6 +680,12 @@ export const App: React.FC = () => {
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
         onSelectProduct={(p) => setSelectedDetailProduct(p)}
+        onSearchSubmit={(q) => setSearchQuery(q)}
+        onSearchCategorySubmit={(q, cat) => {
+          setSearchQuery(q);
+          setSelectedCategory(cat);
+        }}
+        products={productList}
       />
 
       <LoginModal
@@ -568,37 +714,42 @@ export const App: React.FC = () => {
         onPublishProduct={handlePublishProduct}
       />
 
-      {/* Floating Publish Button */}
+      {/* Floating Scroll to Top Button */}
       <button
         onClick={() => {
-          setSelectedDetailProduct(null);
-          setCurrentView('publish');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         style={{
           position: 'fixed',
           bottom: '28px',
           right: '28px',
-          backgroundColor: 'var(--primary-yellow)',
+          backgroundColor: '#FFFFFF',
           color: '#0F172A',
-          border: 'none',
-          borderRadius: '30px',
-          padding: '14px 22px',
-          fontSize: '14px',
-          fontWeight: 800,
-          letterSpacing: '0.5px',
+          border: '1px solid #E2E8F0',
+          borderRadius: '50%',
+          width: '50px',
+          height: '50px',
           display: 'flex',
           alignItems: 'center',
-          gap: '8px',
+          justifyContent: 'center',
           cursor: 'pointer',
-          boxShadow: '0 10px 25px rgba(248, 210, 71, 0.5)',
+          boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
           zIndex: 900,
-          transition: 'transform 0.2s ease'
+          transition: 'all 0.2s ease'
         }}
-        title="Publică un anunț nou"
+        title="Mergi sus"
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translateY(-3px)';
+          e.currentTarget.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.15)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
+        }}
       >
-        <PlusCircle size={20} color="#0F172A" />
-        <span>+ ADAUGĂ ANUNȚ</span>
+        <ArrowUp size={24} color="#0F172A" />
       </button>
+
     </div>
   );
 };

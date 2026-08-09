@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, ShoppingBag, Check } from 'lucide-react';
 import { Product } from '../data/products';
+import { formatPrice } from '../lib/format';
 
 interface QuickViewModalProps {
   product: Product | null;
@@ -75,8 +76,8 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
             </h2>
 
             <div className="price-container" style={{ marginBottom: '20px', fontSize: '18px' }}>
-              <span className="original-price" style={{ fontSize: '16px' }}>{product.originalPrice} €</span>
-              <span className="discounted-price" style={{ fontSize: '22px' }}>{product.price} €</span>
+              <span className="original-price" style={{ fontSize: '16px' }}>{formatPrice(product.originalPrice)} €</span>
+              <span className="discounted-price" style={{ fontSize: '22px' }}>{formatPrice(product.price)} €</span>
             </div>
 
             <p style={{ fontSize: '14px', color: '#555', lineHeight: '1.6', marginBottom: '24px' }}>

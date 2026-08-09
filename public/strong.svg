@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="109.429" height="111.186" viewBox="0 0 109.429 111.186">
+  <defs>
+    <clipPath id="strong">
+      <path id="Path_880" data-name="Path 880" d="M167.207,170.729a48.517,48.517,0,1,0,48.518-48.518,48.517,48.517,0,0,0-48.518,48.518" transform="translate(-167.207 -122.211)" fill="none" stroke="#000" stroke-width="1"/>
+    </clipPath>
+    <clipPath id="strong-2">
+      <path id="Path_880-2" data-name="Path 880" d="M167.207,170.712a48.5,48.5,0,1,0,48.5-48.5,48.5,48.5,0,0,0-48.5,48.5" transform="translate(-167.207 -122.211)" fill="none"/>
+    </clipPath>
+    <clipPath id="strong-3">
+      <path id="Path_882" data-name="Path 882" d="M174.005,173.08a44.07,44.07,0,1,0,44.071-44.07,44.071,44.071,0,0,0-44.071,44.07" transform="translate(-174.005 -129.01)" fill="none"/>
+    </clipPath>
+    <clipPath id="strong-4">
+      <path id="Path_883" data-name="Path 883" d="M227.654,155.07H243.18v-2.054H227.654Zm4.781-12.712c2.5,5.454-2.784,6.439-2.784,6.439-2.082-3.375.215-3.9.215-3.9-.9-3.375-4.95-2.026-4.95-2.026s2.737,5.054,2.737,8.934H243.18c0-3.88,2.737-8.934,2.737-8.934s-4.05-1.35-4.95,2.026c0,0,2.3.524.215,3.9,0,0-5.287-.985-2.784-6.439,0,0-.787-3.067-2.98-4.107-2.195,1.04-2.982,4.107-2.982,4.107" transform="translate(-224.917 -138.251)" fill="#ffbc00"/>
+    </clipPath>
+  </defs>
+  <g id="pro-strong" transform="translate(-613.351 -282.795)">
+    <path id="Path_879" data-name="Path 879" d="M267.128,167.419A54.715,54.715,0,1,1,212.414,112.7a54.715,54.715,0,0,1,54.714,54.715" transform="translate(455.652 170.091)" fill="rgba(0,0,0,0.08)"/>
+    <path id="Path_1005" data-name="Path 1005" d="M267.128,167.419A54.715,54.715,0,1,1,212.414,112.7a54.715,54.715,0,0,1,54.714,54.715" transform="translate(455.652 170.091)" fill="#484848"/>
+    <path id="Path_1006" data-name="Path 1006" d="M159.324,180.709a54.762,54.762,0,0,1,53.09-68.005,55.033,55.033,0,0,1,16.941,2.673" transform="translate(455.652 170.091)" fill="rgba(255,255,255,0.21)"/>
+    <g id="Group_625" data-name="Group 625" transform="translate(619.549 288.993)" clip-path="url(#strong)">
+      <path id="Path_893" data-name="Path 893" d="M31.751,27.589C50.82,8.52,87.644,11,106.646,30.581s20.18,56.259,1.112,75.327-58.384,20.526-77.385.946S12.683,46.657,31.751,27.589Z" transform="translate(-48.517 48.517) rotate(-45)" fill="#ffbc00"/>
+    </g>
+    <path id="Path_881" data-name="Path 881" d="M262.159,173.114a44.052,44.052,0,1,1-44.051-44.052,44.052,44.052,0,0,1,44.051,44.052" transform="translate(449.958 164.396)" fill="#fff"/>
+    <g id="Group_625-2" data-name="Group 625" transform="translate(619.566 289.009)" clip-path="url(#strong-2)">
+      <rect id="Rectangle_260" data-name="Rectangle 260" width="137.18" height="137.18" transform="translate(-48.501 48.501) rotate(-45)" fill="#ffbc00"/>
+    </g>
+    <path id="Path_887" data-name="Path 887" d="M262.129,173.1a44.037,44.037,0,1,1-44.036-44.037A44.037,44.037,0,0,1,262.129,173.1" transform="translate(450.007 164.378)" fill="#151515"/>
+    <g id="Group_629" data-name="Group 629" transform="translate(628.425 296.44)" clip-path="url(#strong-3)">
+      <text id="PRO" transform="translate(5.57 61.909)" fill="#fff" font-size="30.257999999999996" font-family="Arial-BoldMT, Arial" font-weight="700"><tspan x="0" y="0">PRO</tspan></text>
+    </g>
+    <g id="Group_631" data-name="Group 631" transform="translate(660 304.234)" clip-path="url(#strong-4)">
+      <rect id="Rectangle_262" data-name="Rectangle 262" width="26.742" height="26.742" transform="translate(-8.409 8.409) rotate(-45)" fill="#ffbc00"/>
+    </g>
+  </g>
+</svg>

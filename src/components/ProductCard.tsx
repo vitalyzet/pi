@@ -1,7 +1,8 @@
 import React from 'react';
 import { Product } from '../data/products';
-import { Heart, MapPin, Star, Clock, BedDouble, Maximize2, Layers, Hammer, Bath } from 'lucide-react';
+import { Heart, MapPin, Star, Clock, BedDouble, Maximize2, Layers, Hammer, Bath, Camera, Phone } from 'lucide-react';
 import { AVATARS } from './AvatarSelectionModal';
+import { formatPrice } from '../lib/format';
 
 const getSellerAvatar = (product: Product) => {
   const hash = product.title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
@@ -10,7 +11,7 @@ const getSellerAvatar = (product: Product) => {
 
 interface ProductCardProps {
   product: Product;
-  viewMode?: 'classic' | 'pro';
+  viewMode?: 'classic' | 'pro' | 'list';
   onAddToCart: (product: Product, e: React.MouseEvent) => void;
   onQuickView: (product: Product) => void;
   isFavorite?: boolean;
@@ -53,9 +54,75 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const isJob = product.category === 'Locuri de muncă' || product.category === 'Servicii';
   const isImobiliare = product.category === 'Imobiliare';
 
+  const isSale = product.title.toLowerCase().includes('vânzare') || product.feeling === 'Vânzare';
+  const isSeeking = product.feeling === 'Caut de muncă' || product.title.toLowerCase().includes('caut');
+
+  if (viewMode === 'list') {
+    return (
+      <div className="product-card auto-card-list" onClick={() => onQuickView(product)}>
+        <div className="auto-list-image-wrapper">
+          <img src={product.image} alt={product.title} className="auto-list-image" loading="lazy" />
+          <div className="auto-list-camera-badge">
+            <Camera size={14} /> {product.images ? product.images.length + 1 : 9}
+          </div>
+          <button 
+            className={`auto-list-favorite-btn ${isFavorite ? 'active' : ''}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleFavorite?.(product);
+            }}
+          >
+            <Heart size={20} fill={isFavorite ? 'currentColor' : 'none'} />
+          </button>
+          {product.discountPercentage && (
+            <div className="auto-list-promo-badge">Fereastra de afișare</div>
+          )}
+        </div>
+        
+        <div className="auto-list-details">
+          <div className="auto-list-header">
+            {(isImobiliare || isJob) && (
+              <div className={`job-badge ${isImobiliare ? (isSale ? 'seeking' : 'offering') : (isSeeking ? 'seeking' : 'offering')}`} style={{ marginBottom: '8px', display: 'inline-block' }}>
+                {isImobiliare ? (isSale ? 'VÂNZARE' : 'ÎNCHIRIERE') : (isSeeking ? 'Loc de muncă căutat' : 'Se caută muncitor')}
+              </div>
+            )}
+            <h3 className="auto-list-title">{product.title}</h3>
+            <div className="auto-list-price">{formatPrice(product.price)} {isModa ? 'lei' : '€'}</div>
+            <div className="auto-list-location">{product.location || 'Niscemi ( CL )'}</div>
+          </div>
+          
+          <div className="auto-list-specs">
+            {isAuto 
+              ? `Folosit • ${product.specs?.year || '05/2021'} • ${product.specs?.mileage || '90.000'} km • Hibrid ușor pe benzină • Manual • Euro 6`
+              : `${product.category} • ${product.createdAt ? timeAgo(product.createdAt) : 'Nou'}`
+            }
+          </div>
+          
+          <div className="auto-list-footer">
+            <div className="auto-list-dealer" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <img 
+                src={getSellerAvatar(product)} 
+                alt="Seller Avatar" 
+                style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover', border: '1px solid #E2E8F0' }} 
+              />
+              <span className="dealer-badge">{isAuto ? 'Revânzător' : 'Vânzător'}</span> 
+              <span style={{ fontSize: '13px', color: '#94A3B8', fontWeight: 500 }}>{product.seller?.name || (isAuto ? 'mg-motors.it' : 'Privat')}</span>
+            </div>
+            <button 
+              className="auto-list-phone"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Phone size={16} /> Afișați numărul
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+
   if (isImobiliare) {
     // Determine mock attributes if not provided. In a real app these would be on `product`.
-    const isSale = product.title.toLowerCase().includes('vânzare') || product.feeling === 'Vânzare';
     const surface = product.specs?.length || (isSale ? '92 mp' : '45 mp');
     const rooms = product.specs?.modelSize || '2 dormitoare';
     const floor = product.specs?.collection || 'Primul';
@@ -69,6 +136,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
         
         <div className="imobiliare-details">
+          <div className={`job-badge ${isSale ? 'seeking' : 'offering'}`}>{isSale ? 'VÂNZARE' : 'ÎNCHIRIERE'}</div>
           <h3 className="imobiliare-title">{product.title}</h3>
           
           <div className="imobiliare-price">
@@ -109,24 +177,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             </div>
             <div className="imobiliare-footer-right">
               <div 
-                className="imobiliare-icon-btn"
+                className="seller-avatar-container"
+                style={{ marginRight: '8px' }}
                 onClick={(e) => {
                   e.stopPropagation();
-                  onGoToProfile?.('Alexandru B.');
+                  onGoToProfile?.(product.seller?.name || 'Alexandru B.');
                 }}
                 title="Vezi profilul utilizatorului"
               >
-                P
-              </div>
-              <div 
-                className="imobiliare-icon-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onQuickView(product);
-                }}
-                title="Extinde"
-              >
-                <Maximize2 size={14} />
+                <div style={{ width: '28px', height: '28px', borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <img src={getSellerAvatar(product)} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.35)' }} />
+                </div>
+                <span className="seller-name">
+                  {product.seller?.name || 'Alexandru B.'}
+                </span>
               </div>
             </div>
           </div>
@@ -139,7 +203,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     // Determine badge type based on feeling/status or a generic rule. 
     // Usually "Caut loc de muncă" -> Loc de muncă căutat (blue). "Ofer loc de muncă" -> Se caută muncitor (red).
     // Let's use a simple fallback if no feeling is provided.
-    const isSeeking = product.feeling === 'Caut de muncă' || product.title.toLowerCase().includes('caut');
     const badgeClass = isSeeking ? 'seeking' : 'offering';
     const badgeText = isSeeking ? 'Loc de muncă căutat' : 'Se caută muncitor';
 
@@ -173,15 +236,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               </div>
             </div>
             <div 
-              className="job-p-badge"
+              className="seller-avatar-container"
               onClick={(e) => {
                 e.stopPropagation();
-                onGoToProfile?.('Alexandru B.');
+                onGoToProfile?.(product.seller?.name || 'Alexandru B.');
               }}
               title="Vezi profilul utilizatorului"
-              style={{ cursor: 'pointer' }}
             >
-              P
+              <div style={{ width: '28px', height: '28px', borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img src={getSellerAvatar(product)} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.35)' }} />
+              </div>
+              <span className="seller-name">
+                {product.seller?.name || 'Alexandru B.'}
+              </span>
             </div>
           </div>
         </div>
@@ -204,11 +271,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <div className="moda-price-container">
             {product.originalPrice && (
               <span className="moda-original-price">
-                {product.originalPrice}<span className="moda-superscript">,00</span> lei
+                {formatPrice(product.originalPrice)}<span className="moda-superscript">,00</span> lei
               </span>
             )}
             <span className="moda-current-price">
-              {product.price}<span className="moda-superscript">,00</span> lei
+              {formatPrice(product.price)}<span className="moda-superscript">,00</span> lei
             </span>
           </div>
 
@@ -243,7 +310,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
           <div className="turism-footer">
             <div className="turism-price">
-              {product.price} € <span className="turism-price-suffix">/ noapte</span>
+              {formatPrice(product.price)} € <span className="turism-price-suffix">/ noapte</span>
             </div>
             <div className="turism-location">
               <MapPin size={13} /> {product.location || 'București'}
@@ -292,6 +359,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
     );
   }
+
 
   return (
     <div className="product-card" onClick={() => onQuickView(product)}>
@@ -345,9 +413,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         
         <div className="price-container">
           {product.originalPrice && (
-            <span className="original-price">{product.originalPrice} €</span>
+            <span className="original-price">{formatPrice(product.originalPrice)} €</span>
           )}
-          <span className="discounted-price">{product.price} €</span>
+          <span className="discounted-price">{formatPrice(product.price)} €</span>
         </div>
         {(product.createdAt || product.location) && (
           <div style={{ fontSize: '12px', color: '#94A3B8', marginTop: '8px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>

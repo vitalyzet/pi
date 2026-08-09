@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="109.429" height="109.43" viewBox="0 0 109.429 109.43">
+  <defs>
+    <clipPath id="light">
+      <path id="Path_880" data-name="Path 880" d="M167.207,170.729a48.517,48.517,0,1,0,48.518-48.518,48.517,48.517,0,0,0-48.518,48.518" transform="translate(-167.207 -122.211)" fill="none" stroke="#000" stroke-width="1"/>
+    </clipPath>
+    <clipPath id="light-2">
+      <path id="Path_882" data-name="Path 882" d="M174.005,173.1a44.085,44.085,0,1,0,44.086-44.086A44.086,44.086,0,0,0,174.005,173.1" transform="translate(-174.005 -129.01)" fill="none"/>
+    </clipPath>
+    <clipPath id="light-3">
+      <path id="Path_883" data-name="Path 883" d="M227.758,155.706h16.113v-2.132H227.758Zm4.962-13.192c2.6,5.661-2.889,6.683-2.889,6.683-2.16-3.5.224-4.047.224-4.047-.934-3.5-5.137-2.1-5.137-2.1s2.841,5.245,2.841,9.272h16.113c0-4.027,2.841-9.272,2.841-9.272s-4.2-1.4-5.137,2.1c0,0,2.384.544.224,4.047,0,0-5.487-1.022-2.89-6.683,0,0-.817-3.183-3.093-4.263-2.278,1.079-3.1,4.263-3.1,4.263" transform="translate(-224.917 -138.251)" fill="rgba(255,188,0,0.5)"/>
+    </clipPath>
+  </defs>
+  <g id="VIP_CARD" data-name="VIP CARD" transform="translate(-131.244 -109.489)">
+    <g id="Group_624" data-name="Group 624" transform="translate(81.709 103.468)">
+      <g id="Group_832" data-name="Group 832">
+        <path id="Path_879" data-name="Path 879" d="M267.128,167.419A54.715,54.715,0,1,1,212.414,112.7a54.715,54.715,0,0,1,54.714,54.715" transform="translate(-108.164 -106.683)" fill="rgba(0,0,0,0.08)"/>
+        <path id="Path_894" data-name="Path 894" d="M159.324,180.709a54.762,54.762,0,0,1,53.09-68.005,55.033,55.033,0,0,1,16.941,2.673" transform="translate(-108.164 -106.683)" fill="rgba(0,0,0,0.05)"/>
+      </g>
+    </g>
+    <g id="Group_626" data-name="Group 626" transform="translate(137.442 115.686)">
+      <g id="Group_625" data-name="Group 625" transform="translate(0)" clip-path="url(#light)">
+        <path id="Path_893" data-name="Path 893" d="M29.8,29.8c19.7-19.7,58.445-20.2,78.132-.508s20.319,59.558.618,79.258-59.732,19.231-79.42-.457S10.1,49.5,29.8,29.8Z" transform="translate(-48.517 48.517) rotate(-45)" fill="rgba(255,188,0,0.5)"/>
+      </g>
+    </g>
+    <g id="Group_628" data-name="Group 628" transform="translate(81.709 103.468)">
+      <g id="Group_831" data-name="Group 831">
+        <path id="Path_881" data-name="Path 881" d="M262.159,173.114a44.052,44.052,0,1,1-44.051-44.052,44.052,44.052,0,0,1,44.051,44.052" transform="translate(-113.858 -112.378)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Group_630" data-name="Group 630" transform="translate(143.873 124.55)">
+      <g id="Group_629" data-name="Group 629" transform="translate(0)" clip-path="url(#light-2)">
+        <text id="VIP" transform="translate(7.585 59.585)" font-size="45" font-family="Arial-BoldMT, Arial" font-weight="700"><tspan x="0" y="0">VIP</tspan></text>
+      </g>
+    </g>
+    <g id="Group_632" data-name="Group 632" transform="translate(177.061 130.142)">
+      <g id="Group_631" data-name="Group 631" transform="translate(0 0)" clip-path="url(#light-3)">
+        <rect id="Rectangle_262" data-name="Rectangle 262" width="27.753" height="27.753" transform="translate(-8.727 8.727) rotate(-45)" fill="rgba(255,188,0,0.5)"/>
+      </g>
+    </g>
+  </g>
+</svg>
