@@ -43,7 +43,10 @@ export const App: React.FC = () => {
         const valid = parsed.filter(p => !['auto-1', 'auto-2', '1', '2', '3', '4', '5', '6', '7', '8'].includes(p.id));
         // Merge PRODUCTS to ensure demo items load even if cache exists
         const existingIds = new Set(valid.map(p => p.id));
-        const newDemos = PRODUCTS.filter(p => !existingIds.has(p.id));
+        const deletedSaved = localStorage.getItem('pinpin_deleted_products');
+        const deletedSet = deletedSaved ? new Set(JSON.parse(deletedSaved)) : new Set();
+        
+        const newDemos = PRODUCTS.filter(p => !existingIds.has(p.id) && !deletedSet.has(p.id));
         return [...newDemos, ...valid];
       } catch (e) {
         console.error(e);
@@ -212,7 +215,16 @@ export const App: React.FC = () => {
   const handleDeleteProduct = (productId: string) => {
     setProductList((prev) => prev.filter(p => p.id !== productId));
     setFavorites((prev) => prev.filter(p => p.id !== productId));
-    setToastMessage('Anunțul a fost șters.');
+    
+    // Save to deleted_products so it doesn't get re-merged on refresh
+    const deletedSaved = localStorage.getItem('pinpin_deleted_products');
+    const deletedList: string[] = deletedSaved ? JSON.parse(deletedSaved) : [];
+    if (!deletedList.includes(productId)) {
+      deletedList.push(productId);
+      localStorage.setItem('pinpin_deleted_products', JSON.stringify(deletedList));
+    }
+
+    setToastMessage('Anunțul a fost șters definitiv.');
     setTimeout(() => setToastMessage(null), 3000);
   };
 
