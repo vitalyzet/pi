@@ -249,7 +249,9 @@ export const App: React.FC = () => {
   const filteredProducts = useMemo(() => {
     let result = [...productList];
 
-    if (selectedCategory !== 'Toate') {
+    if (selectedCategory === 'Toate' && !searchQuery) {
+      result = result.filter(p => p.category === 'Imobiliare' || p.category === 'Auto' || p.category === 'Auto & Moto' || p.category === 'Vehicule');
+    } else if (selectedCategory !== 'Toate') {
       result = result.filter((p) => p.category === selectedCategory);
     }
     
