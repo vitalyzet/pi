@@ -10,7 +10,15 @@ interface RegionLanguageModalProps {
   onSelectLanguage: (lang: string) => void;
 }
 
-export const REGIONS = [
+export interface Region {
+  id: string;
+  name: string;
+  flag: string;
+  defaultLang: string;
+  icon?: React.ReactNode;
+}
+
+export const REGIONS: Region[] = [
   { id: 'ro', name: 'România', flag: '🇷🇴', defaultLang: 'ro' },
   { id: 'es', name: 'España', flag: '🇪🇸', defaultLang: 'es' },
   { id: 'it', name: 'Italia', flag: '🇮🇹', defaultLang: 'it' },

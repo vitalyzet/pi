@@ -403,10 +403,10 @@ export const App: React.FC = () => {
         onOpenRegionLanguage={() => setIsRegionLanguageOpen(!isRegionLanguageOpen)}
         onGoToStore={() => {
           setSelectedDetailProduct(null);
-          setSelectedCategory(null);
-          setSelectedFeeling(null);
-          setSelectedDesign(null);
-          setSelectedColor(null);
+          setSelectedCategory('');
+          setSelectedFeeling('');
+          setSelectedDesign('');
+          setSelectedColor('');
           setSearchQuery('');
           setCurrentView('store');
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -666,7 +666,6 @@ export const App: React.FC = () => {
           onAddToCart={(product, qty) => handleAddToCart(product, qty)}
           favorites={favorites}
           onToggleFavorite={handleToggleFavorite}
-          relatedProducts={getRelatedProducts(quickViewProduct, productList)}
         />
       ) : (
         <QuickViewModal

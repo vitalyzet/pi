@@ -19,10 +19,10 @@ interface SearchResultsViewProps {
   onSetTransactionType: (type: string) => void;
   sortBy: string;
   onSelectSort: (sort: string) => void;
-  viewMode: 'grid' | 'pro' | 'list';
-  onToggleViewMode: (mode: 'grid' | 'pro' | 'list') => void;
+  viewMode: 'classic' | 'pro' | 'list';
+  onToggleViewMode: (mode: 'classic' | 'pro' | 'list') => void;
   favorites: Product[];
-  onToggleFavorite: (id: string) => void;
+  onToggleFavorite: (product: Product) => void;
   onAddToCart: (product: Product) => void;
   onQuickView: (product: Product) => void;
   onGoToProfile: (sellerName: string) => void;
@@ -364,8 +364,8 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
                   padding: '6px',
                   borderRadius: '6px',
                   border: 'none',
-                  background: viewMode === 'pro' || viewMode === 'grid' ? '#049D88' : 'transparent',
-                  color: viewMode === 'pro' || viewMode === 'grid' ? '#fff' : '#64748B',
+                  background: viewMode === 'pro' || viewMode === 'classic' ? '#049D88' : 'transparent',
+                  color: viewMode === 'pro' || viewMode === 'classic' ? '#fff' : '#64748B',
                   cursor: 'pointer',
                   display: 'flex',
                   transition: 'all 0.2s'
@@ -395,7 +395,7 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
         </div>
 
         {/* Product Grid */}
-        <div className={`product-grid ${viewMode === 'pro' || viewMode === 'grid' ? 'pro-mode' : 'list-mode'}`} style={{ margin: 0, padding: 0 }}>
+        <div className={`product-grid ${viewMode === 'pro' || viewMode === 'classic' ? 'pro-mode' : 'list-mode'}`} style={{ margin: 0, padding: 0 }}>
           {products.length === 0 ? (
             <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '60px 20px', background: '#fff', borderRadius: '12px' }}>
               <Search size={48} color="#CBD5E1" style={{ marginBottom: '16px' }} />
@@ -407,7 +407,7 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
               <ProductCard
                 key={product.id}
                 product={product}
-                viewMode={viewMode === 'grid' ? 'pro' : viewMode}
+                viewMode={viewMode}
                 onAddToCart={(p) => onAddToCart(p)}
                 onQuickView={(p) => onQuickView(p)}
                 isFavorite={favorites.some((f) => f.id === product.id)}

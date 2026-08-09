@@ -25,6 +25,9 @@ export interface Product {
     modelName?: string;
     power?: string;
     owners?: string;
+    transmission?: string;
+    engine?: string;
+    model?: string;
     // Moda
     material?: string;
     type?: string;
@@ -35,6 +38,13 @@ export interface Product {
     modelSize?: string;
     collection?: string;
     bathrooms?: string;
+  };
+  seller?: {
+    name?: string;
+    avatar?: string;
+    rating?: number;
+    reviews?: number;
+    joined?: string;
   };
 }
 
