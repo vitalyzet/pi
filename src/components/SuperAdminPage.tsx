@@ -199,6 +199,12 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
     }
   };
 
+  const handleDeleteProduct = (productId: string) => {
+    if (window.confirm('Ești sigur că vrei să ștergi acest anunț? Această acțiune este ireversibilă.')) {
+      setModerationList(prev => prev.filter(p => p.id !== productId));
+    }
+  };
+
   const handleUpdateUserStatus = (userId: string, status: 'Activ' | 'Suspendat') => {
     setUsers(prev => 
       prev.map(u => u.id === userId ? { ...u, status } : u)
@@ -638,6 +644,13 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
                               style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 12px', borderRadius: '8px', border: '1px solid #86EFAC', backgroundColor: '#F0FDF4', color: '#16A34A', fontSize: '12px', fontWeight: 700, cursor: product.moderationStatus === 'Aprobat' ? 'not-allowed' : 'pointer', opacity: product.moderationStatus === 'Aprobat' ? 0.5 : 1 }}
                             >
                               <Check size={14} /> Aprobă
+                            </button>
+                            <button
+                              onClick={() => handleDeleteProduct(product.id)}
+                              style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 12px', borderRadius: '8px', border: '1px solid #E2E8F0', backgroundColor: '#FFF', color: '#EF4444', fontSize: '12px', fontWeight: 700, cursor: 'pointer' }}
+                              title="Șterge Anunț"
+                            >
+                              <Trash2 size={14} /> Șterge
                             </button>
                           </div>
                         </div>
@@ -1455,9 +1468,10 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
                               Vezi Produs
                             </button>
                             <button
-                              style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 12px', borderRadius: '8px', border: 'none', backgroundColor: '#EF4444', color: '#FFF', fontSize: '12px', fontWeight: 700, cursor: 'pointer' }}
+                              onClick={() => handleDeleteProduct(product.id)}
+                              style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 12px', borderRadius: '8px', border: '1px solid #E2E8F0', backgroundColor: '#FFF', color: '#EF4444', fontSize: '12px', fontWeight: 700, cursor: 'pointer' }}
                             >
-                              Șterge din Magazin
+                              <Trash2 size={14} /> Șterge din Magazin
                             </button>
                           </div>
                         </div>
