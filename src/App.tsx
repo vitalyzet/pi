@@ -209,6 +209,13 @@ export const App: React.FC = () => {
     setTimeout(() => setToastMessage(null), 3500);
   };
 
+  const handleDeleteProduct = (productId: string) => {
+    setProductList((prev) => prev.filter(p => p.id !== productId));
+    setFavorites((prev) => prev.filter(p => p.id !== productId));
+    setToastMessage('Anunțul a fost șters.');
+    setTimeout(() => setToastMessage(null), 3000);
+  };
+
   // Cart Action Handlers
   const handleAddToCart = (product: Product, quantity: number = 1) => {
     setCartItems((prev) => {
@@ -433,6 +440,7 @@ export const App: React.FC = () => {
         <SuperAdminPage 
           onBackToStore={() => setCurrentView('store')}
           productsList={productList}
+          onDeleteProduct={handleDeleteProduct}
         />
       ) : currentView === 'dashboard' ? (
         <UserDashboardPage

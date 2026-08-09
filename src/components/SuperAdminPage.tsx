@@ -90,12 +90,14 @@ export interface SuperAdminPageProps {
   onBackToStore: () => void;
   productsList: Product[];
   onUpdateProductStatus?: (productId: string, newStatus: string) => void;
+  onDeleteProduct?: (productId: string) => void;
 }
 
 export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
   onBackToStore,
   productsList,
-  onUpdateProductStatus
+  onUpdateProductStatus,
+  onDeleteProduct
 }) => {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'moderation' | 'users' | 'subscriptions' | 'accounting' | 'settings' | 'moda_dashboard' | 'moda_orders' | 'moda_products' | 'moda_customers' | 'moda_settings'>('dashboard');
   const [searchQuery, setSearchQuery] = useState('');
@@ -202,6 +204,7 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
   const handleDeleteProduct = (productId: string) => {
     if (window.confirm('Ești sigur că vrei să ștergi acest anunț? Această acțiune este ireversibilă.')) {
       setModerationList(prev => prev.filter(p => p.id !== productId));
+      if (onDeleteProduct) onDeleteProduct(productId);
     }
   };
 
