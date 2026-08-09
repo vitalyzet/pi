@@ -234,8 +234,14 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
       category: newPinCategory,
       feeling: 'Cute',
       design: 'Special',
-      color: 'Multicolor',
-      description: 'Pin nou adăugat din panoul de administrare PinPin.'
+      description: 'Pin nou adăugat din panoul de administrare PinPin.',
+      seller: {
+        name: ['Andrei Popescu', 'Maria Radu', 'Ionuț Dumitru', 'Elena Ionescu', 'Cristian Matei', 'Diana Stoica', 'Florin Tudor', 'Alina Marin', 'George Vasile', 'Ioana Mihai', 'Mihai Stan', 'Ana Georgescu', 'Răzvan Ilie', 'Gabriela Enache', 'Bogdan Toma', 'Simona Barbu'][Math.floor(Math.random() * 16)],
+        avatar: ['https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150', 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150', 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=150', 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150'][Math.floor(Math.random() * 4)],
+        rating: Number((4.5 + Math.random() * 0.5).toFixed(1)),
+        reviews: Math.floor(Math.random() * 50) + 1,
+        joined: '2026'
+      }
     };
 
     setProductsList([newProduct, ...productsList]);

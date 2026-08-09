@@ -167,6 +167,21 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
     const numericOriginalPrice = originalPrice ? parseFloat(originalPrice) : numericPrice * 1.2;
     const discount = Math.round(((numericOriginalPrice - numericPrice) / numericOriginalPrice) * 100);
 
+    const randomRomanianNames = [
+      'Andrei Popescu', 'Maria Radu', 'Ionuț Dumitru', 'Elena Ionescu',
+      'Cristian Matei', 'Diana Stoica', 'Florin Tudor', 'Alina Marin',
+      'George Vasile', 'Ioana Mihai', 'Mihai Stan', 'Ana Georgescu',
+      'Răzvan Ilie', 'Gabriela Enache', 'Bogdan Toma', 'Simona Barbu'
+    ];
+    const randomName = randomRomanianNames[Math.floor(Math.random() * randomRomanianNames.length)];
+    const avatars = [
+      'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150',
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150',
+      'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=150',
+      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150'
+    ];
+    const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
+
     const newProduct: Product = {
       id: `pub-${Date.now()}`,
       title: finalTitle,
@@ -188,6 +203,13 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
       location: city || 'București',
       createdAt: new Date().toISOString(),
       description: description || `Anunț publicat în ${city}. Contact: ${phone || 'Nespecificat'}`,
+      seller: {
+        name: randomName,
+        avatar: randomAvatar,
+        rating: Number((4.5 + Math.random() * 0.5).toFixed(1)),
+        reviews: Math.floor(Math.random() * 50) + 1,
+        joined: '2026'
+      },
       specs: (() => {
         switch (selectedCategory) {
           case 'Auto':
