@@ -275,10 +275,11 @@ export const App: React.FC = () => {
     }
     
     if (searchQuery) {
-      result = result.filter((p) => 
-        p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        p.category.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+      const searchTerms = searchQuery.toLowerCase().split(' ').filter(term => term.length > 0);
+      result = result.filter((p) => {
+        const searchableText = `${p.title} ${p.category} ${p.location || ''} ${p.description || ''}`.toLowerCase();
+        return searchTerms.every(term => searchableText.includes(term));
+      });
     }
     if (selectedFeeling !== 'Toate') {
       result = result.filter((p) => p.feeling === selectedFeeling);

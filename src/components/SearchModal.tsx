@@ -23,11 +23,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   if (!isOpen) return null;
 
-  const results = query.trim()
-    ? products.filter((p) =>
-        p.title.toLowerCase().includes(query.toLowerCase()) ||
-        p.category.toLowerCase().includes(query.toLowerCase())
-      )
+  const searchTerms = query.toLowerCase().split(' ').filter(term => term.length > 0);
+  const results = searchTerms.length > 0
+    ? products.filter((p) => {
+        const searchableText = `${p.title} ${p.category} ${p.location || ''} ${p.description || ''}`.toLowerCase();
+        return searchTerms.every(term => searchableText.includes(term));
+      })
     : [];
 
   const matchedCategories = Array.from(new Set(results.map(p => p.category)));
