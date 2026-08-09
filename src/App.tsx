@@ -403,10 +403,14 @@ export const App: React.FC = () => {
         onOpenRegionLanguage={() => setIsRegionLanguageOpen(!isRegionLanguageOpen)}
         onGoToStore={() => {
           setSelectedDetailProduct(null);
-          setSelectedCategory('');
-          setSelectedFeeling('');
-          setSelectedDesign('');
-          setSelectedColor('');
+          setSelectedCategory('Toate');
+          setSelectedFeeling('Toate');
+          setSelectedDesign('Toate');
+          setSelectedColor('Toate');
+          setSelectedCity('Toate');
+          setMaxPrice('100000');
+          setTransactionType('Toate');
+          setSortBy('Recomandate');
           setSearchQuery('');
           setCurrentView('store');
           window.scrollTo({ top: 0, behavior: 'smooth' });
