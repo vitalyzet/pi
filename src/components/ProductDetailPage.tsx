@@ -79,28 +79,92 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
     <div className="product-detail-page-container" style={{ maxWidth: '1280px', margin: '0 auto', padding: '24px 24px 60px 24px' }}>
       {/* Breadcrumb & Back Navigation */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
-        <button
-          onClick={onBack}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            background: '#F1F5F9',
-            border: '1px solid #CBD5E1',
-            borderRadius: '12px',
-            padding: '10px 18px',
-            fontSize: '14px',
-            fontWeight: 800,
-            color: '#0F172A',
-            cursor: 'pointer',
-            transition: 'all 0.2s ease'
-          }}
-        >
-          <ArrowLeft size={18} /> Înapoi la Magazin
-        </button>
+        
+        {/* Left Side: Back & Breadcrumb */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <button
+            onClick={onBack}
+            style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              border: '1px solid #E2E8F0',
+              backgroundColor: '#FFFFFF',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              color: '#64748B',
+              transition: 'all 0.2s ease',
+              boxShadow: '0 2px 5px rgba(0,0,0,0.02)'
+            }}
+            onMouseOver={(e) => { e.currentTarget.style.backgroundColor = '#F8FAFC'; e.currentTarget.style.color = '#0F172A'; }}
+            onMouseOut={(e) => { e.currentTarget.style.backgroundColor = '#FFFFFF'; e.currentTarget.style.color = '#64748B'; }}
+          >
+            <ChevronLeft size={20} strokeWidth={2.5} />
+          </button>
 
-        <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 600 }}>
-          <span>Acasă</span> &gt; <span style={{ color: '#0F172A', fontWeight: 700 }}>{product.category}</span> &gt; <span>{product.title}</span>
+          <div style={{ fontSize: '14px', color: '#64748B', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ color: '#64748B' }}>vindu24</span>
+            <span style={{ color: '#CBD5E1' }}>/</span>
+            <span style={{ color: '#64748B' }}>{product.category}</span>
+            <span style={{ color: '#CBD5E1' }}>/</span>
+            <span style={{ color: '#94A3B8' }}>{product.title}</span>
+          </div>
+        </div>
+
+        {/* Right Side: Actions */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <button
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '8px 16px',
+              borderRadius: '8px',
+              border: '1px solid #E2E8F0',
+              backgroundColor: '#FFFFFF',
+              color: '#475569',
+              fontSize: '14px',
+              fontWeight: 700,
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+            onMouseOver={(e) => { e.currentTarget.style.backgroundColor = '#F8FAFC'; }}
+            onMouseOut={(e) => { e.currentTarget.style.backgroundColor = '#FFFFFF'; }}
+            onClick={() => {
+              if (navigator.share) {
+                navigator.share({ title: product.title, url: window.location.href });
+              } else {
+                alert('Link copiat!');
+              }
+            }}
+          >
+            <Share2 size={16} /> Distribuie
+          </button>
+          
+          <button
+            onClick={() => onToggleFavorite?.(product)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '8px 16px',
+              borderRadius: '8px',
+              border: '1px solid #E2E8F0',
+              backgroundColor: '#FFFFFF',
+              color: isFavorite ? '#EF4444' : '#475569',
+              fontSize: '14px',
+              fontWeight: 700,
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+            onMouseOver={(e) => { e.currentTarget.style.backgroundColor = '#F8FAFC'; }}
+            onMouseOut={(e) => { e.currentTarget.style.backgroundColor = '#FFFFFF'; }}
+          >
+            <Heart size={16} fill={isFavorite ? '#EF4444' : 'none'} color={isFavorite ? '#EF4444' : 'currentColor'} /> 
+            {isFavorite ? 'Salvat' : 'Salvează'}
+          </button>
         </div>
       </div>
 
