@@ -168,6 +168,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               <span>{product.specs?.gearbox || 'Manuală'}</span>
               <span style={{ color: '#94A3B8' }}>•</span>
               <span>{product.specs?.mileage ? `${product.specs.mileage} km` : '153.694 km'}</span>
+              <span style={{ color: '#94A3B8' }}>•</span>
+              <span>{product.specs?.fuel || 'Benzină'}</span>
             </div>
           )}
 
