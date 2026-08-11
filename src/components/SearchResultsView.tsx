@@ -173,7 +173,8 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
               </select>
             </div>
           ) : selectedCategory === 'Auto' || selectedCategory === 'Auto & Moto' || selectedCategory === 'Vehicule' ? (
-            <div style={{ marginBottom: '24px' }}>
+            <>
+              <div style={{ marginBottom: '24px' }}>
               <h3 style={{ fontSize: '13px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px' }}>Stare Vehicul</h3>
               <select
                 style={{
@@ -226,6 +227,7 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
                 ))}
               </select>
             </div>
+            </>
           ) : (
             <div style={{ marginBottom: '24px' }}>
               <h3 style={{ fontSize: '13px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px' }}>Stare Produs</h3>
