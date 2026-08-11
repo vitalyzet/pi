@@ -160,9 +160,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               fontSize: '11px',
               fontWeight: 700,
               backdropFilter: 'blur(4px)',
-              textTransform: 'uppercase'
+              textTransform: 'uppercase',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
             }}>
-              {product.specs?.gearbox || 'Manuală'}
+              <span>{product.specs?.gearbox || 'Manuală'}</span>
+              <span style={{ color: '#94A3B8' }}>•</span>
+              <span>{product.specs?.mileage ? `${product.specs.mileage} km` : '153.694 km'}</span>
             </div>
           )}
 
