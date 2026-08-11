@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProductCard } from './ProductCard';
-import { Product, CATEGORIES } from '../data/products';
+import { Product, CATEGORIES, AUTO_COLORS } from '../data/products';
 import { Filter, Search, X, LayoutGrid, List, RefreshCw } from 'lucide-react';
 
 interface SearchResultsViewProps {
@@ -13,6 +13,8 @@ interface SearchResultsViewProps {
   onSelectCountry: (country: string) => void;
   selectedCity: string;
   onSelectCity: (city: string) => void;
+  selectedColor: string;
+  onSelectColor: (color: string) => void;
   maxPrice: string;
   onSetMaxPrice: (price: string) => void;
   transactionType: string;
@@ -39,6 +41,8 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
   onSelectCountry,
   selectedCity,
   onSelectCity,
+  selectedColor,
+  onSelectColor,
   maxPrice,
   onSetMaxPrice,
   transactionType,
@@ -70,6 +74,7 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
             <button 
               onClick={() => {
                 onSelectCategory('Toate');
+                onSelectColor('Toate');
                 onSetMaxPrice('100000');
                 onSetTransactionType('Toate');
                 onSelectCountry('Toate');
@@ -191,6 +196,34 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
                 <option value="Toate">Toate stările</option>
                 <option value="Nou">Nou</option>
                 <option value="Rulat">Rulat</option>
+              </select>
+            </div>
+            
+            <div style={{ marginBottom: '24px' }}>
+              <h3 style={{ fontSize: '13px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px' }}>Culoare</h3>
+              <select
+                value={selectedColor}
+                onChange={(e) => onSelectColor(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  borderRadius: '8px',
+                  border: '1px solid #E5E7EB',
+                  outline: 'none',
+                  background: '#fff',
+                  fontSize: '15px',
+                  color: '#111827',
+                  cursor: 'pointer',
+                  appearance: 'none',
+                  backgroundImage: 'url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23111827%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'right 12px top 50%',
+                  backgroundSize: '10px auto',
+                }}
+              >
+                {AUTO_COLORS.map(color => (
+                  <option key={color} value={color}>{color === 'Toate' ? 'Toate culorile' : color}</option>
+                ))}
               </select>
             </div>
           ) : (

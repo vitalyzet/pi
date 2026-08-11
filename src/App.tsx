@@ -547,6 +547,8 @@ export const App: React.FC = () => {
           onSelectCountry={setSelectedCountry}
           selectedCity={selectedCity}
           onSelectCity={setSelectedCity}
+          selectedColor={selectedColor}
+          onSelectColor={setSelectedColor}
           maxPrice={maxPrice}
           onSetMaxPrice={setMaxPrice}
           transactionType={transactionType}
