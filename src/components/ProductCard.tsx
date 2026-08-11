@@ -120,6 +120,58 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     );
   }
 
+  if (viewMode === 'pro') {
+    return (
+      <div
+        onClick={() => onQuickView(product)}
+        style={{
+          backgroundColor: '#FFFFFF',
+          borderRadius: '16px',
+          border: '1px solid #E2E8F0',
+          overflow: 'hidden',
+          cursor: 'pointer',
+          transition: 'all 0.2s',
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100%'
+        }}
+        onMouseOver={(e) => {
+          e.currentTarget.style.transform = 'translateY(-4px)';
+          e.currentTarget.style.boxShadow = '0 12px 24px rgba(0,0,0,0.08)';
+        }}
+        onMouseOut={(e) => {
+          e.currentTarget.style.transform = 'none';
+          e.currentTarget.style.boxShadow = 'none';
+        }}
+      >
+        <div style={{ position: 'relative' }}>
+          <img src={product.image} alt={product.title} style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
+          <div 
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleFavorite?.(product);
+            }}
+            style={{ position: 'absolute', top: '12px', right: '12px', background: '#FFFFFF', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', cursor: 'pointer' }}
+          >
+            <Heart size={18} fill={isFavorite ? '#E55B86' : 'none'} color={isFavorite ? '#E55B86' : '#64748B'} />
+          </div>
+        </div>
+        <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+          <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#0F172A', fontWeight: 700, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+            {product.title}
+          </h4>
+          <div style={{ fontSize: '18px', fontWeight: 800, color: '#E55B86', marginBottom: '8px' }}>
+            {formatPrice(product.price)} {isModa ? 'lei' : '€'}
+          </div>
+          <div style={{ fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '4px', marginTop: 'auto' }}>
+            <MapPin size={12} /> {product.location || 'București'}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
 
   if (isImobiliare) {
     // Determine mock attributes if not provided. In a real app these would be on `product`.
