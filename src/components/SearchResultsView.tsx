@@ -36,6 +36,87 @@ interface SearchResultsViewProps {
   onGoToProfile: (sellerName: string) => void;
 }
 
+const CarBodyIcon = ({ type, color = 'currentColor' }: { type: string, color?: string }) => {
+  const svgProps = { viewBox: "0 0 24 24", fill: "none", stroke: color, strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round", width: "24px", height: "24px" } as any;
+  switch (type) {
+    case 'Sedan':
+      return (
+        <svg {...svgProps}>
+          <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+          <circle cx="7" cy="17" r="2" />
+          <path d="M9 17h6" />
+          <circle cx="17" cy="17" r="2" />
+        </svg>
+      );
+    case 'SUV':
+      return (
+        <svg {...svgProps}>
+          <path d="M19 17h2c.6 0 1-.4 1-1v-4c0-.9-.7-1.7-1.5-1.9C18.7 9.6 16 9 16 9s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+          <circle cx="7" cy="17" r="2" />
+          <path d="M9 17h6" />
+          <circle cx="17" cy="17" r="2" />
+        </svg>
+      );
+    case 'Hatchback':
+      return (
+        <svg {...svgProps}>
+          <path d="M19 17h2c.6 0 1-.4 1-1v-4c0-.9-.7-1.7-1.5-1.9L16 7c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+          <circle cx="7" cy="17" r="2" />
+          <path d="M9 17h6" />
+          <circle cx="17" cy="17" r="2" />
+        </svg>
+      );
+    case 'Break':
+      return (
+        <svg {...svgProps}>
+          <path d="M20 17h1c.6 0 1-.4 1-1v-4c0-.9-.7-1.7-1.5-1.9C19.7 9.6 18 9 18 9H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+          <circle cx="7" cy="17" r="2" />
+          <path d="M9 17h6" />
+          <circle cx="17" cy="17" r="2" />
+        </svg>
+      );
+    case 'Coupe':
+      return (
+        <svg {...svgProps}>
+          <path d="M19 17h2c.6 0 1-.4 1-1v-2c0-.9-.7-1.7-1.5-1.9C18.7 11.6 15 11 15 11s-2-2.4-3-3.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+          <circle cx="7" cy="17" r="2" />
+          <path d="M9 17h6" />
+          <circle cx="17" cy="17" r="2" />
+        </svg>
+      );
+    case 'Cabrio':
+      return (
+        <svg {...svgProps}>
+          <path d="M19 17h2c.6 0 1-.4 1-1v-2c0-.9-.7-1.7-1.5-1.9C18.7 11.6 16 12 16 12M5 12c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+          <circle cx="7" cy="17" r="2" />
+          <path d="M9 17h6" />
+          <circle cx="17" cy="17" r="2" />
+        </svg>
+      );
+    case 'Monovolum':
+      return (
+        <svg {...svgProps}>
+          <path d="M21 17h1c.6 0 1-.4 1-1V9c0-.9-.7-1.7-1.5-1.9C19.7 6.6 18 6 18 6H8c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 4 12v4c0 .6.4 1 1 1h2" />
+          <circle cx="9" cy="17" r="2" />
+          <path d="M11 17h6" />
+          <circle cx="19" cy="17" r="2" />
+        </svg>
+      );
+    case 'Pickup':
+      return (
+        <svg {...svgProps}>
+          <path d="M14 17h2c.6 0 1-.4 1-1v-4H21v4c0 .6-.4 1-1 1h-1" />
+          <path d="M14 12V8H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+          <circle cx="7" cy="17" r="2" />
+          <path d="M9 17h3" />
+          <circle cx="18" cy="17" r="2" />
+        </svg>
+      );
+    default:
+      return <LayoutGrid size={24} color={color} strokeWidth={1.5} />;
+  }
+};
+
 
 export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
   products,
@@ -295,30 +376,34 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
 
             <div style={{ marginBottom: '24px' }}>
               <h3 style={{ fontSize: '13px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px' }}>Caroserie</h3>
-              <select
-                value={selectedBody}
-                onChange={(e) => onSelectBody(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '10px 12px',
-                  borderRadius: '8px',
-                  border: '1px solid #E5E7EB',
-                  outline: 'none',
-                  background: '#fff',
-                  fontSize: '15px',
-                  color: '#111827',
-                  cursor: 'pointer',
-                  appearance: 'none',
-                  backgroundImage: 'url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23111827%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'right 12px top 50%',
-                  backgroundSize: '10px auto',
-                }}
-              >
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
                 {BODY_TYPES.map(b => (
-                  <option key={b} value={b}>{b}</option>
+                  <button
+                    key={b}
+                    onClick={() => onSelectBody(b)}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      padding: '10px 4px',
+                      borderRadius: '8px',
+                      border: selectedBody === b ? '2px solid #FF3B5C' : '1px solid #E5E7EB',
+                      backgroundColor: selectedBody === b ? '#FFF1F2' : '#FFFFFF',
+                      cursor: 'pointer',
+                      fontSize: '11px',
+                      fontWeight: 600,
+                      color: selectedBody === b ? '#FF3B5C' : '#4B5563',
+                      transition: 'all 0.2s',
+                      width: '100%'
+                    }}
+                  >
+                    <CarBodyIcon type={b} color={selectedBody === b ? '#FF3B5C' : '#6B7280'} />
+                    {b}
+                  </button>
                 ))}
-              </select>
+              </div>
             </div>
 
             <div style={{ marginBottom: '24px' }}>
