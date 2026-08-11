@@ -15,6 +15,8 @@ interface ProductDetailPageProps {
   userAvatarIndex?: number;
   onAvatarChange?: (index: number) => void;
   onShowReviews?: (sellerName: string) => void;
+  onHomeClick?: () => void;
+  onCategoryClick?: (category: string) => void;
 }
 
 export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
@@ -28,6 +30,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   userAvatarIndex = 0,
   onAvatarChange,
   onShowReviews,
+  onHomeClick,
+  onCategoryClick,
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [showPhone, setShowPhone] = useState(false);
@@ -90,9 +94,19 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
           </button>
 
           <div style={{ fontSize: '14px', color: '#64748B', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ color: '#64748B' }}>vindu24</span>
+            <span 
+              className="breadcrumb-link"
+              onClick={onHomeClick || onBack}
+            >
+              vindu24
+            </span>
             <span style={{ color: '#CBD5E1' }}>/</span>
-            <span style={{ color: '#64748B' }}>{product.category}</span>
+            <span 
+              className="breadcrumb-link"
+              onClick={() => onCategoryClick ? onCategoryClick(product.category) : onBack()}
+            >
+              {product.category}
+            </span>
             <span style={{ color: '#CBD5E1' }}>/</span>
             <span style={{ color: '#94A3B8' }}>{product.title}</span>
           </div>

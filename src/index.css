@@ -2318,3 +2318,30 @@ body {
 .back-btn-circle:hover svg {
   transform: translateX(-3px);
 }
+
+/* Breadcrumb Links */
+.breadcrumb-link {
+  color: #64748B;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1.5px;
+  bottom: -2px;
+  left: 0;
+  background-color: #FACC15;
+  transition: width 0.25s ease-in-out;
+}
+
+.breadcrumb-link:hover {
+  color: #0F172A;
+}
+
+.breadcrumb-link:hover::after {
+  width: 100%;
+}

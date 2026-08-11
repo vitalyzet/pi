@@ -524,6 +524,14 @@ export const App: React.FC = () => {
             setPublicProfileName(sellerName || 'Alexandru B.');
             setCurrentView('public_profile');
           }}
+          onHomeClick={() => {
+            setSelectedCategory('Toate');
+            setSelectedDetailProduct(null);
+          }}
+          onCategoryClick={(cat) => {
+            setSelectedCategory(cat);
+            setSelectedDetailProduct(null);
+          }}
         />
       ) : (searchQuery || selectedCategory !== 'Toate') ? (
         <SearchResultsView
