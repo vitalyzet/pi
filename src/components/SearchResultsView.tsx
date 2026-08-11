@@ -322,12 +322,12 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
                         gap: '6px',
                         padding: '6px 12px',
                         borderRadius: '20px',
-                        border: selectedColor === color ? '2px solid #FF3B5C' : '1px solid #E5E7EB',
-                        backgroundColor: selectedColor === color ? '#FFF1F2' : '#FFFFFF',
+                        border: selectedColor === color ? '2px solid var(--primary-yellow)' : '1px solid #E5E7EB',
+                        backgroundColor: selectedColor === color ? 'var(--primary-yellow)' : '#FFFFFF',
                         cursor: 'pointer',
                         fontSize: '13px',
                         fontWeight: 600,
-                        color: selectedColor === color ? '#FF3B5C' : '#4B5563',
+                        color: selectedColor === color ? '#0F172A' : '#4B5563',
                         transition: 'all 0.2s'
                       }}
                     >
@@ -372,17 +372,17 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
                         gap: '8px',
                         padding: '10px 4px',
                         borderRadius: '8px',
-                        border: selectedFuel === f ? '2px solid #FF3B5C' : '1px solid #E5E7EB',
-                        backgroundColor: selectedFuel === f ? '#FFF1F2' : '#FFFFFF',
+                        border: selectedFuel === f ? '2px solid var(--primary-yellow)' : '1px solid #E5E7EB',
+                        backgroundColor: selectedFuel === f ? 'var(--primary-yellow)' : '#FFFFFF',
                         cursor: 'pointer',
                         fontSize: '11px',
                         fontWeight: 600,
-                        color: selectedFuel === f ? '#FF3B5C' : '#4B5563',
+                        color: selectedFuel === f ? '#0F172A' : '#4B5563',
                         transition: 'all 0.2s',
                         width: '100%'
                       }}
                     >
-                      {getFuelIcon(f, selectedFuel === f ? '#FF3B5C' : '#6B7280')}
+                      {getFuelIcon(f, selectedFuel === f ? '#0F172A' : '#6B7280')}
                       {f}
                     </button>
                   );
@@ -405,17 +405,17 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
                       gap: '8px',
                       padding: '10px 4px',
                       borderRadius: '8px',
-                      border: selectedBody === b ? '2px solid #FF3B5C' : '1px solid #E5E7EB',
-                      backgroundColor: selectedBody === b ? '#FFF1F2' : '#FFFFFF',
+                      border: selectedBody === b ? '2px solid var(--primary-yellow)' : '1px solid #E5E7EB',
+                      backgroundColor: selectedBody === b ? 'var(--primary-yellow)' : '#FFFFFF',
                       cursor: 'pointer',
                       fontSize: '11px',
                       fontWeight: 600,
-                      color: selectedBody === b ? '#FF3B5C' : '#4B5563',
+                      color: selectedBody === b ? '#0F172A' : '#4B5563',
                       transition: 'all 0.2s',
                       width: '100%'
                     }}
                   >
-                    <CarBodyIcon type={b} color={selectedBody === b ? '#FF3B5C' : '#6B7280'} />
+                    <CarBodyIcon type={b} color={selectedBody === b ? '#0F172A' : '#6B7280'} />
                     {b}
                   </button>
                 ))}
@@ -445,17 +445,17 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
                         gap: '8px',
                         padding: '10px 4px',
                         borderRadius: '8px',
-                        border: selectedTransmission === t ? '2px solid #FF3B5C' : '1px solid #E5E7EB',
-                        backgroundColor: selectedTransmission === t ? '#FFF1F2' : '#FFFFFF',
+                        border: selectedTransmission === t ? '2px solid var(--primary-yellow)' : '1px solid #E5E7EB',
+                        backgroundColor: selectedTransmission === t ? 'var(--primary-yellow)' : '#FFFFFF',
                         cursor: 'pointer',
                         fontSize: '11px',
                         fontWeight: 600,
-                        color: selectedTransmission === t ? '#FF3B5C' : '#4B5563',
+                        color: selectedTransmission === t ? '#0F172A' : '#4B5563',
                         transition: 'all 0.2s',
                         width: '100%'
                       }}
                     >
-                      {getTransmissionIcon(t, selectedTransmission === t ? '#FF3B5C' : '#6B7280')}
+                      {getTransmissionIcon(t, selectedTransmission === t ? '#0F172A' : '#6B7280')}
                       {t}
                     </button>
                   );
