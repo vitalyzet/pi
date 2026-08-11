@@ -83,33 +83,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
         {/* Left Side: Back & Breadcrumb */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <button
+            className="back-btn-circle"
             onClick={onBack}
-            style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: '50%',
-              border: '1px solid #E2E8F0',
-              backgroundColor: '#FFFFFF',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              color: '#64748B',
-              transition: 'all 0.2s ease',
-              boxShadow: '0 2px 5px rgba(0,0,0,0.02)'
-            }}
-            onMouseOver={(e) => { 
-              e.currentTarget.style.backgroundColor = '#FACC15'; 
-              e.currentTarget.style.color = '#0F172A';
-              e.currentTarget.style.borderColor = '#FACC15';
-              e.currentTarget.style.transform = 'scale(1.05)';
-            }}
-            onMouseOut={(e) => { 
-              e.currentTarget.style.backgroundColor = '#FFFFFF'; 
-              e.currentTarget.style.color = '#64748B'; 
-              e.currentTarget.style.borderColor = '#E2E8F0';
-              e.currentTarget.style.transform = 'scale(1)';
-            }}
           >
             <ChevronLeft size={20} strokeWidth={2.5} />
           </button>

@@ -2287,3 +2287,34 @@ body {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* Circular Back Button */
+.back-btn-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #E2E8F0;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #64748B;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.back-btn-circle svg {
+  transition: transform 0.2s ease;
+}
+
+.back-btn-circle:hover {
+  background-color: #FACC15 !important;
+  color: #0F172A !important;
+  border-color: #FACC15 !important;
+  transform: scale(1.05);
+}
+
+.back-btn-circle:hover svg {
+  transform: translateX(-3px);
+}
