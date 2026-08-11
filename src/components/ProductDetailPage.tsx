@@ -79,6 +79,17 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   const isModa = product.category === 'Modă';
   const isImobiliare = product.category === 'Imobiliare';
 
+  // Generate consistent 8-digit ad number based on product id
+  const getAdNumber = (id: string) => {
+    let hash = 0;
+    for (let i = 0; i < id.length; i++) {
+      hash = (hash << 5) - hash + id.charCodeAt(i);
+      hash |= 0;
+    }
+    return Math.abs(hash).toString().padStart(8, '400').substring(0, 8);
+  };
+  const adNumber = getAdNumber(product.id);
+
   return (
     <div className="product-detail-page-container" style={{ maxWidth: '1280px', margin: '0 auto', padding: '24px 24px 60px 24px' }}>
       {/* Breadcrumb & Back Navigation */}
@@ -870,6 +881,12 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                 {isModa ? 'ADAUGĂ ÎN COȘ' : 'MESAJ'}
               </button>
             </div>
+          </div>
+
+          {/* Ad Number */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#F8FAFC', padding: '16px 20px', borderRadius: '16px', marginTop: '16px', border: '1px solid #E2E8F0' }}>
+            <span style={{ color: '#475569', fontSize: '15px' }}>Numărul anunțului</span>
+            <span style={{ color: '#0F172A', fontSize: '16px', fontWeight: 800 }}>{adNumber}</span>
           </div>
     </div>
   </div>
