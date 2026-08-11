@@ -147,6 +147,25 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       >
         <div style={{ position: 'relative' }}>
           <img src={product.image} alt={product.title} style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
+          
+          {isAuto && (
+            <div style={{
+              position: 'absolute',
+              bottom: '12px',
+              left: '12px',
+              backgroundColor: 'rgba(15, 23, 42, 0.75)',
+              color: '#FFFFFF',
+              padding: '4px 8px',
+              borderRadius: '6px',
+              fontSize: '11px',
+              fontWeight: 700,
+              backdropFilter: 'blur(4px)',
+              textTransform: 'uppercase'
+            }}>
+              {product.specs?.gearbox || 'Manuală'}
+            </div>
+          )}
+
           <div 
             onClick={(e) => {
               e.stopPropagation();
