@@ -148,31 +148,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <div style={{ position: 'relative' }}>
           <img src={product.image} alt={product.title} style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
           
-          {isAuto && (
-            <div style={{
-              position: 'absolute',
-              bottom: '12px',
-              left: '12px',
-              backgroundColor: 'rgba(15, 23, 42, 0.75)',
-              color: '#FFFFFF',
-              padding: '4px 8px',
-              borderRadius: '6px',
-              fontSize: '11px',
-              fontWeight: 700,
-              backdropFilter: 'blur(4px)',
-              textTransform: 'uppercase',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px'
-            }}>
-              <span>{product.specs?.gearbox || 'Manuală'}</span>
-              <span style={{ color: '#94A3B8' }}>•</span>
-              <span>{product.specs?.mileage ? `${product.specs.mileage} km` : '153.694 km'}</span>
-              <span style={{ color: '#94A3B8' }}>•</span>
-              <span>{product.specs?.fuel || 'Benzină'}</span>
-            </div>
-          )}
-
           <div 
             onClick={(e) => {
               e.stopPropagation();
@@ -190,6 +165,27 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <div style={{ fontSize: '18px', fontWeight: 800, color: '#E55B86', marginBottom: '8px' }}>
             {formatPrice(product.price)} {isModa ? 'lei' : '€'}
           </div>
+          
+          {isAuto && (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '6px',
+              fontSize: '11px',
+              color: '#64748B',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              marginBottom: '12px'
+            }}>
+              <span>{product.specs?.gearbox || 'Manuală'}</span>
+              <span style={{ color: '#CBD5E1' }}>•</span>
+              <span>{product.specs?.mileage ? `${product.specs.mileage} km` : '153.694 km'}</span>
+              <span style={{ color: '#CBD5E1' }}>•</span>
+              <span>{product.specs?.fuel || 'Benzină'}</span>
+            </div>
+          )}
+
           <div style={{ fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '4px', marginTop: 'auto' }}>
             <MapPin size={12} /> {product.location || 'București'}
           </div>
