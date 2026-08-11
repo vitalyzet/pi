@@ -182,3 +182,6 @@ export const FEELINGS = ["Toate", "Cute", "Mood", "Love", "Work", "Surprise", "S
 export const DESIGNS = ["Toate", "Special", "Cute", "Moon", "Medical", "Heart", "Dino", "Flask", "Funny"];
 export const COLORS = ["Toate", "Multicolor", "Alb/Negru", "Galben/Negru", "Mov", "Roșu", "Roz", "Portocaliu"];
 export const AUTO_COLORS = ["Toate", "Alb", "Negru", "Gri", "Argintiu", "Albastru", "Roșu", "Verde"];
+export const FUELS = ["Orice", "Benzină", "Diesel", "Electric", "Hibrid", "GPL"];
+export const BODY_TYPES = ["Orice", "Sedan", "SUV", "Hatchback", "Break", "Coupe", "Cabrio", "Monovolum", "Pickup"];
+export const TRANSMISSIONS = ["Orice", "Manuală", "Automată"];

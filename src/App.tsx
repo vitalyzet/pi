@@ -152,6 +152,9 @@ export const App: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState('Toate');
   const [maxPrice, setMaxPrice] = useState('100000');
   const [transactionType, setTransactionType] = useState('Toate');
+  const [selectedFuel, setSelectedFuel] = useState('Orice');
+  const [selectedBody, setSelectedBody] = useState('Orice');
+  const [selectedTransmission, setSelectedTransmission] = useState('Orice');
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isPublishOpen, setIsPublishOpen] = useState(false);
   const [isAutoPublishOpen, setIsAutoPublishOpen] = useState(false);
@@ -326,6 +329,16 @@ export const App: React.FC = () => {
     if (selectedCategory === 'Imobiliare' && transactionType !== 'Toate') {
       result = result.filter(p => p.feeling === transactionType);
     }
+    
+    if (selectedFuel !== 'Orice') {
+      result = result.filter(p => p.specs?.fuel === selectedFuel);
+    }
+    if (selectedBody !== 'Orice') {
+      result = result.filter(p => p.specs?.caroserie === selectedBody);
+    }
+    if (selectedTransmission !== 'Orice') {
+      result = result.filter(p => p.specs?.transmission === selectedTransmission);
+    }
 
     if (sortBy === 'Preț: Mic la Mare') {
       result.sort((a, b) => a.price - b.price);
@@ -369,7 +382,7 @@ export const App: React.FC = () => {
     }
 
     return result;
-  }, [productList, selectedCategory, selectedFeeling, selectedDesign, selectedColor, sortBy, selectedCountry, selectedCity, searchQuery, maxPrice, transactionType]);
+  }, [productList, selectedCategory, selectedFeeling, selectedDesign, selectedColor, sortBy, selectedCountry, selectedCity, searchQuery, maxPrice, transactionType, selectedFuel, selectedBody, selectedTransmission]);
 
   const displayedProducts = filteredProducts.slice(0, visibleCount);
   const totalCount = 157 + (productList.length - PRODUCTS.length);
@@ -449,6 +462,9 @@ export const App: React.FC = () => {
           setSelectedCity('Toate');
           setMaxPrice('100000');
           setTransactionType('Toate');
+          setSelectedFuel('Orice');
+          setSelectedBody('Orice');
+          setSelectedTransmission('Orice');
           setSortBy('Recomandate');
           setSearchQuery('');
           setCurrentView('store');
@@ -553,6 +569,12 @@ export const App: React.FC = () => {
           onSetMaxPrice={setMaxPrice}
           transactionType={transactionType}
           onSetTransactionType={setTransactionType}
+          selectedFuel={selectedFuel}
+          onSelectFuel={setSelectedFuel}
+          selectedBody={selectedBody}
+          onSelectBody={setSelectedBody}
+          selectedTransmission={selectedTransmission}
+          onSelectTransmission={setSelectedTransmission}
           sortBy={sortBy}
           onSelectSort={setSortBy}
           viewMode={viewMode}
