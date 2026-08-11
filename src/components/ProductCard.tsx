@@ -169,14 +169,33 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 className="image-nav-btn prev"
                 onClick={handlePrevImage}
               >
-                <ChevronLeft size={20} />
+                <ChevronLeft size={24} />
               </button>
               <button 
                 className="image-nav-btn next"
                 onClick={handleNextImage}
               >
-                <ChevronRight size={20} />
+                <ChevronRight size={24} />
               </button>
+              <div style={{
+                position: 'absolute',
+                bottom: '12px',
+                right: '12px',
+                backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                color: '#FFFFFF',
+                padding: '4px 8px',
+                borderRadius: '6px',
+                fontSize: '11px',
+                fontWeight: 700,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                backdropFilter: 'blur(4px)',
+                zIndex: 2
+              }}>
+                <Camera size={12} />
+                +{allImages.length - 1}
+              </div>
             </>
           )}
 

@@ -2351,24 +2351,22 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0.4);
   border: none;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.2s ease, background-color 0.2s ease;
-  color: #0F172A;
+  color: #FFFFFF;
   z-index: 3;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .pro-card-image-wrapper .image-nav-btn:hover {
-  background-color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .pro-card-image-wrapper:hover .image-nav-btn {
@@ -2376,9 +2374,11 @@ body {
 }
 
 .pro-card-image-wrapper .image-nav-btn.prev {
-  left: 8px;
+  left: 0;
+  border-radius: 0 8px 8px 0;
 }
 
 .pro-card-image-wrapper .image-nav-btn.next {
-  right: 8px;
+  right: 0;
+  border-radius: 8px 0 0 8px;
 }
