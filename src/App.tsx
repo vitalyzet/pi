@@ -158,6 +158,16 @@ export const App: React.FC = () => {
   const [isRegionLanguageOpen, setIsRegionLanguageOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  
+  const [isGlobalLoading, setIsGlobalLoading] = useState(false);
+  useEffect(() => {
+    setIsGlobalLoading(true);
+    const timer = setTimeout(() => {
+      setIsGlobalLoading(false);
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [selectedCategory, searchQuery, selectedCountry, selectedCity, sortBy, maxPrice, transactionType]);
+
   const [favorites, setFavorites] = useState<Product[]>(() => {
     const saved = localStorage.getItem('pinpin_favorites');
     if (saved) {
@@ -397,6 +407,13 @@ export const App: React.FC = () => {
           }}
         >
           ✓ {toastMessage}
+        </div>
+      )}
+
+      {/* Global Loader Overlay */}
+      {isGlobalLoading && (
+        <div className="global-loader-overlay">
+          <div className="loading-circle"></div>
         </div>
       )}
 
