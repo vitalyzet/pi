@@ -6,7 +6,7 @@ import {
   LayoutGrid,
   List
 } from 'lucide-react';
-import { FEELINGS, DESIGNS, COLORS } from '../data/products';
+import { FEELINGS, DESIGNS, COLORS, AUTO_COLORS } from '../data/products';
 
 interface FilterBarProps {
   selectedCategory: string;
@@ -119,7 +119,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             </button>
             {activeDropdown === 'color' && (
               <div className="filter-dropdown-menu">
-                {COLORS.map((item) => (
+                {(selectedCategory === 'Auto' ? AUTO_COLORS : COLORS).map((item) => (
                   <button
                     key={item}
                     className={`dropdown-item ${selectedColor === item ? 'selected' : ''}`}

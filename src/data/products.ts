@@ -80,7 +80,7 @@ export const PRODUCTS: Product[] = [
     category: 'Auto',
     feeling: 'Vânzare',
     design: 'Toate',
-    color: 'Toate',
+    color: 'Albastru',
     location: 'Cluj-Napoca, România',
     description: 'Stare impecabilă, carte service, un singur proprietar.',
     createdAt: new Date(Date.now() - 3600000).toISOString(),
@@ -181,3 +181,4 @@ export const CATEGORIES = [
 export const FEELINGS = ["Toate", "Cute", "Mood", "Love", "Work", "Surprise", "Science"];
 export const DESIGNS = ["Toate", "Special", "Cute", "Moon", "Medical", "Heart", "Dino", "Flask", "Funny"];
 export const COLORS = ["Toate", "Multicolor", "Alb/Negru", "Galben/Negru", "Mov", "Roșu", "Roz", "Portocaliu"];
+export const AUTO_COLORS = ["Toate", "Alb", "Negru", "Gri", "Argintiu", "Albastru", "Roșu", "Verde"];
