@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Product } from '../data/products';
-import { Heart, MapPin, Star, Clock, BedDouble, Maximize2, Layers, Hammer, Bath, Camera, Phone } from 'lucide-react';
+import { Heart, MapPin, Star, Clock, BedDouble, Maximize2, Layers, Hammer, Bath, Camera, Phone, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AVATARS } from './AvatarSelectionModal';
 import { formatPrice } from '../lib/format';
 
@@ -56,6 +56,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   const isSale = product.title.toLowerCase().includes('vânzare') || product.feeling === 'Vânzare';
   const isSeeking = product.feeling === 'Caut de muncă' || product.title.toLowerCase().includes('caut');
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const allImages = [product.image, ...(product.images || [])];
+
+  const handlePrevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const prevIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+    setCurrentImageIndex(prevIndex);
+  };
+
+  const handleNextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const nextIndex = (currentImageIndex + 1) % allImages.length;
+    setCurrentImageIndex(nextIndex);
+  };
 
   if (viewMode === 'list') {
     return (
@@ -145,9 +160,26 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           e.currentTarget.style.boxShadow = 'none';
         }}
       >
-        <div style={{ position: 'relative' }}>
-          <img src={product.image} alt={product.title} style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
+        <div style={{ position: 'relative' }} className="pro-card-image-wrapper">
+          <img src={allImages[currentImageIndex]} alt={product.title} style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
           
+          {allImages.length > 1 && (
+            <>
+              <button 
+                className="image-nav-btn prev"
+                onClick={handlePrevImage}
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button 
+                className="image-nav-btn next"
+                onClick={handleNextImage}
+              >
+                <ChevronRight size={20} />
+              </button>
+            </>
+          )}
+
           <div 
             onClick={(e) => {
               e.stopPropagation();
