@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { X, User, Lock, Mail, UserPlus } from 'lucide-react';
+import { auth } from '../lib/firebase';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLoginSuccess: (userData?: { id?: string, name: string, email: string, type: string }) => void;
+  onLoginSuccess: (userData: any) => void;
 }
 
 export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess }) => {
@@ -13,26 +15,61 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [accountType, setAccountType] = useState('Persoană Fizică');
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (mode === 'register') {
-      onLoginSuccess({ name, email, type: accountType });
-    } else {
-      const savedUsers = localStorage.getItem('pinpin_registered_users');
-      const parsedUsers = savedUsers ? JSON.parse(savedUsers) : [];
-      const existingUser = parsedUsers.find((u: any) => u.email === email);
-      
-      if (existingUser) {
-        onLoginSuccess({ id: existingUser.id, name: existingUser.name, email: existingUser.email, type: existingUser.type || 'Persoană Fizică' });
+    setIsLoading(true);
+    setErrorMsg('');
+
+    try {
+      if (mode === 'register') {
+        if (password.length < 6) {
+          throw new Error('Parola trebuie să aibă minim 6 caractere!');
+        }
+        
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const fbUser = userCredential.user;
+        
+        onLoginSuccess({ id: fbUser.uid, name, email, type: accountType });
       } else {
-        // Fallback for new/unregistered users trying to login without registering first
-        onLoginSuccess({ name: email.split('@')[0], email, type: 'Persoană Fizică' });
+        try {
+          const userCredential = await signInWithEmailAndPassword(auth, email, password);
+          const fbUser = userCredential.user;
+          
+          const savedUsers = localStorage.getItem('pinpin_registered_users');
+          const parsedUsers = savedUsers ? JSON.parse(savedUsers) : [];
+          const existingUser = parsedUsers.find((u: any) => u.email === email);
+          
+          onLoginSuccess({ 
+            id: fbUser.uid, 
+            name: existingUser ? existingUser.name : email.split('@')[0], 
+            email, 
+            type: existingUser ? (existingUser.type || 'Persoană Fizică') : 'Persoană Fizică' 
+          });
+        } catch (err: any) {
+          console.warn('Firebase login failed, attempting local fallback', err);
+          const savedUsers = localStorage.getItem('pinpin_registered_users');
+          const parsedUsers = savedUsers ? JSON.parse(savedUsers) : [];
+          const existingUser = parsedUsers.find((u: any) => u.email === email);
+          
+          if (existingUser) {
+            onLoginSuccess({ id: existingUser.id, name: existingUser.name, email: existingUser.email, type: existingUser.type || 'Persoană Fizică' });
+          } else {
+            throw err;
+          }
+        }
       }
+      onClose();
+    } catch (error: any) {
+      console.error(error);
+      setErrorMsg(error.message || 'A apărut o eroare la conectare.');
+    } finally {
+      setIsLoading(false);
     }
-    onClose();
   };
 
   const resetAndClose = () => {
@@ -40,6 +77,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin
     setName('');
     setEmail('');
     setPassword('');
+    setErrorMsg('');
     onClose();
   };
 
@@ -87,6 +125,12 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin
             {mode === 'login' ? 'Intră în contul tău PinPin' : 'Alătură-te comunității PinPin'}
           </p>
         </div>
+
+        {errorMsg && (
+          <div style={{ background: '#FEE2E2', color: '#EF4444', padding: '12px', borderRadius: '12px', fontSize: '13px', fontWeight: 600, marginBottom: '16px', textAlign: 'center' }}>
+            {errorMsg}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {mode === 'register' && (

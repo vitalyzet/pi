@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
 import { getFirestore, collection, addDoc, getDocs, query, orderBy, setDoc, doc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { getAuth } from "firebase/auth";
 import { Product } from "../data/products";
 
 // Your web app's Firebase configuration
@@ -21,6 +22,7 @@ export const app = initializeApp(firebaseConfig);
 // Initialize Firestore & Storage
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+export const auth = getAuth(app);
 
 // Initialize Analytics conditionally
 export const analyticsPromise = isSupported().then(yes => yes ? getAnalytics(app) : null);
