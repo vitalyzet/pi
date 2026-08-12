@@ -814,6 +814,7 @@ export const App: React.FC = () => {
             
             if (userExists) {
                localStorage.setItem('pinpin_registered_users', JSON.stringify(updatedUsers));
+               window.dispatchEvent(new Event('pinpin_users_updated'));
             }
             
             if (!userExists) {
@@ -828,6 +829,7 @@ export const App: React.FC = () => {
                 status: 'Activ'
               };
               localStorage.setItem('pinpin_registered_users', JSON.stringify([newUser, ...parsedUsers]));
+              window.dispatchEvent(new Event('pinpin_users_updated'));
             }
             
             setToastMessage('Te-ai autentificat cu succes!');

@@ -138,15 +138,17 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
       loadUsers();
     }
 
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'pinpin_registered_users') {
+    const handleStorageChange = (e: Event) => {
+      if (e.type === 'pinpin_users_updated' || (e as StorageEvent).key === 'pinpin_registered_users') {
         loadUsers();
       }
     };
     window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('pinpin_users_updated', handleStorageChange);
     
     return () => {
       window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('pinpin_users_updated', handleStorageChange);
     };
   }, [activeTab]);
   const [isEditingBilling, setIsEditingBilling] = useState(false);
