@@ -435,81 +435,83 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                 </button>
 
                 {/* MODA ADMIN SECTION */}
-                <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #F1F5F9' }}>
-                  <div style={{ fontSize: '11px', fontWeight: 800, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px', paddingLeft: '16px' }}>
-                    Magazin Modă
+                {currentUser?.email === 'alexandruzet29@gmail.com' && (
+                  <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #F1F5F9' }}>
+                    <div style={{ fontSize: '11px', fontWeight: 800, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px', paddingLeft: '16px' }}>
+                      Magazin Modă
+                    </div>
+                    
+                    <button
+                      onClick={() => setActiveTab('admin_overview')}
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
+                        backgroundColor: activeTab === 'admin_overview' ? 'var(--primary-yellow)' : 'transparent',
+                        color: activeTab === 'admin_overview' ? '#0F172A' : '#64748B',
+                        fontWeight: activeTab === 'admin_overview' ? 800 : 600,
+                        fontSize: '15px', transition: 'all 0.2s', width: '100%'
+                      }}
+                    >
+                      <LayoutDashboard size={20} color={activeTab === 'admin_overview' ? '#0F172A' : '#94A3B8'} />
+                      Tablou Comandă
+                    </button>
+
+                    <button
+                      onClick={() => setActiveTab('admin_orders')}
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
+                        backgroundColor: activeTab === 'admin_orders' ? 'var(--primary-yellow)' : 'transparent',
+                        color: activeTab === 'admin_orders' ? '#0F172A' : '#64748B',
+                        fontWeight: activeTab === 'admin_orders' ? 800 : 600,
+                        fontSize: '15px', transition: 'all 0.2s', width: '100%'
+                      }}
+                    >
+                      <ShoppingBag size={20} color={activeTab === 'admin_orders' ? '#0F172A' : '#94A3B8'} />
+                      Comenzi <span style={{ marginLeft: 'auto', fontSize: '12px' }}>({orders.length})</span>
+                    </button>
+
+                    <button
+                      onClick={() => setActiveTab('admin_products')}
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
+                        backgroundColor: activeTab === 'admin_products' ? 'var(--primary-yellow)' : 'transparent',
+                        color: activeTab === 'admin_products' ? '#0F172A' : '#64748B',
+                        fontWeight: activeTab === 'admin_products' ? 800 : 600,
+                        fontSize: '15px', transition: 'all 0.2s', width: '100%'
+                      }}
+                    >
+                      <Package size={20} color={activeTab === 'admin_products' ? '#0F172A' : '#94A3B8'} />
+                      Produse <span style={{ marginLeft: 'auto', fontSize: '12px' }}>({productsList.length})</span>
+                    </button>
+
+                    <button
+                      onClick={() => setActiveTab('admin_customers')}
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
+                        backgroundColor: activeTab === 'admin_customers' ? 'var(--primary-yellow)' : 'transparent',
+                        color: activeTab === 'admin_customers' ? '#0F172A' : '#64748B',
+                        fontWeight: activeTab === 'admin_customers' ? 800 : 600,
+                        fontSize: '15px', transition: 'all 0.2s', width: '100%'
+                      }}
+                    >
+                      <Users size={20} color={activeTab === 'admin_customers' ? '#0F172A' : '#94A3B8'} />
+                      Clienți
+                    </button>
+
+                    <button
+                      onClick={() => setActiveTab('admin_settings')}
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
+                        backgroundColor: activeTab === 'admin_settings' ? 'var(--primary-yellow)' : 'transparent',
+                        color: activeTab === 'admin_settings' ? '#0F172A' : '#64748B',
+                        fontWeight: activeTab === 'admin_settings' ? 800 : 600,
+                        fontSize: '15px', transition: 'all 0.2s', width: '100%'
+                      }}
+                    >
+                      <Settings size={20} color={activeTab === 'admin_settings' ? '#0F172A' : '#94A3B8'} />
+                      Setări Magazin
+                    </button>
                   </div>
-                  
-                  <button
-                    onClick={() => setActiveTab('admin_overview')}
-                    style={{
-                      display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
-                      backgroundColor: activeTab === 'admin_overview' ? 'var(--primary-yellow)' : 'transparent',
-                      color: activeTab === 'admin_overview' ? '#0F172A' : '#64748B',
-                      fontWeight: activeTab === 'admin_overview' ? 800 : 600,
-                      fontSize: '15px', transition: 'all 0.2s', width: '100%'
-                    }}
-                  >
-                    <LayoutDashboard size={20} color={activeTab === 'admin_overview' ? '#0F172A' : '#94A3B8'} />
-                    Tablou Comandă
-                  </button>
-
-                  <button
-                    onClick={() => setActiveTab('admin_orders')}
-                    style={{
-                      display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
-                      backgroundColor: activeTab === 'admin_orders' ? 'var(--primary-yellow)' : 'transparent',
-                      color: activeTab === 'admin_orders' ? '#0F172A' : '#64748B',
-                      fontWeight: activeTab === 'admin_orders' ? 800 : 600,
-                      fontSize: '15px', transition: 'all 0.2s', width: '100%'
-                    }}
-                  >
-                    <ShoppingBag size={20} color={activeTab === 'admin_orders' ? '#0F172A' : '#94A3B8'} />
-                    Comenzi <span style={{ marginLeft: 'auto', fontSize: '12px' }}>({orders.length})</span>
-                  </button>
-
-                  <button
-                    onClick={() => setActiveTab('admin_products')}
-                    style={{
-                      display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
-                      backgroundColor: activeTab === 'admin_products' ? 'var(--primary-yellow)' : 'transparent',
-                      color: activeTab === 'admin_products' ? '#0F172A' : '#64748B',
-                      fontWeight: activeTab === 'admin_products' ? 800 : 600,
-                      fontSize: '15px', transition: 'all 0.2s', width: '100%'
-                    }}
-                  >
-                    <Package size={20} color={activeTab === 'admin_products' ? '#0F172A' : '#94A3B8'} />
-                    Produse <span style={{ marginLeft: 'auto', fontSize: '12px' }}>({productsList.length})</span>
-                  </button>
-
-                  <button
-                    onClick={() => setActiveTab('admin_customers')}
-                    style={{
-                      display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
-                      backgroundColor: activeTab === 'admin_customers' ? 'var(--primary-yellow)' : 'transparent',
-                      color: activeTab === 'admin_customers' ? '#0F172A' : '#64748B',
-                      fontWeight: activeTab === 'admin_customers' ? 800 : 600,
-                      fontSize: '15px', transition: 'all 0.2s', width: '100%'
-                    }}
-                  >
-                    <Users size={20} color={activeTab === 'admin_customers' ? '#0F172A' : '#94A3B8'} />
-                    Clienți
-                  </button>
-
-                  <button
-                    onClick={() => setActiveTab('admin_settings')}
-                    style={{
-                      display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
-                      backgroundColor: activeTab === 'admin_settings' ? 'var(--primary-yellow)' : 'transparent',
-                      color: activeTab === 'admin_settings' ? '#0F172A' : '#64748B',
-                      fontWeight: activeTab === 'admin_settings' ? 800 : 600,
-                      fontSize: '15px', transition: 'all 0.2s', width: '100%'
-                    }}
-                  >
-                    <Settings size={20} color={activeTab === 'admin_settings' ? '#0F172A' : '#94A3B8'} />
-                    Setări Magazin
-                  </button>
-                </div>
+                )}
               </div>
             </div>
 

@@ -90,28 +90,30 @@ export const Header: React.FC<HeaderProps> = ({
               <li>
                 <a href="#" onClick={(e) => { e.preventDefault(); onOpenReviews?.(); }} className="nav-link">RECENZII</a>
               </li>
-              <li>
-                <button
-                  onClick={onOpenSuperAdmin}
-                  style={{
-                    backgroundColor: '#8B0000',
-                    color: '#FFF',
-                    border: 'none',
-                    borderRadius: '4px',
-                    padding: '6px 12px',
-                    fontSize: '12px',
-                    fontWeight: 800,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    letterSpacing: '1px',
-                    marginLeft: '8px'
-                  }}
-                >
-                  <Shield size={14} /> SUPER ADMIN
-                </button>
-              </li>
+              {currentUser?.email === 'alexandruzet29@gmail.com' && (
+                <li>
+                  <button
+                    onClick={onOpenSuperAdmin}
+                    style={{
+                      backgroundColor: '#8B0000',
+                      color: '#FFF',
+                      border: 'none',
+                      borderRadius: '4px',
+                      padding: '6px 12px',
+                      fontSize: '12px',
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      letterSpacing: '1px',
+                      marginLeft: '8px'
+                    }}
+                  >
+                    <Shield size={14} /> SUPER ADMIN
+                  </button>
+                </li>
+              )}
             </ul>
           </nav>
 
