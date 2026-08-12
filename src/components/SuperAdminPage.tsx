@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   LayoutDashboard,
   Users,
@@ -128,6 +128,20 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
   const [selectedUser, setSelectedUser] = useState<PlatformUser | null>(null);
   const [selectedInvoice, setSelectedInvoice] = useState<SubscriptionPayment | null>(null);
   const [selectedVipPlan, setSelectedVipPlan] = useState<'1_luna' | '3_luni' | '12_luni' | null>(null);
+
+  useEffect(() => {
+    if (activeTab === 'users') {
+      const saved = localStorage.getItem('pinpin_registered_users');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          setUsers([...parsed, ...MOCK_USERS]);
+        } catch (e) {
+          setUsers(MOCK_USERS);
+        }
+      }
+    }
+  }, [activeTab]);
   const [isEditingBilling, setIsEditingBilling] = useState(false);
   const [billingType, setBillingType] = useState<'fizica' | 'juridica'>('fizica');
   const [showAddBillingModal, setShowAddBillingModal] = useState(false);
