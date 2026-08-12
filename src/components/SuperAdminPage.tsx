@@ -722,6 +722,7 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
                   <thead>
                     <tr style={{ borderBottom: '2px solid #E2E8F0', fontSize: '12px', color: '#64748B', textTransform: 'uppercase' }}>
                       <th style={{ padding: '12px' }}>Utilizator / Nume</th>
+                      <th style={{ padding: '12px' }}>ID Utilizator</th>
                       <th style={{ padding: '12px' }}>Tip Cont</th>
                       <th style={{ padding: '12px' }}>Abonament</th>
                       <th style={{ padding: '12px' }}>Anunțuri Active</th>
@@ -747,7 +748,9 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
                             {user.name}
                           </div>
                           <div style={{ fontSize: '12px', color: '#64748B' }}>{user.email}</div>
-                          <div style={{ fontSize: '11px', color: '#94A3B8', marginTop: '4px', fontWeight: 700 }}>ID: #{user.id}</div>
+                        </td>
+                        <td style={{ padding: '16px 12px', fontWeight: 700, color: '#64748B' }}>
+                          #{user.id}
                         </td>
                         <td style={{ padding: '16px 12px' }}>
                           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 700, color: user.type === 'Firmă' ? '#8B5CF6' : '#3B82F6', backgroundColor: user.type === 'Firmă' ? '#F5F3FF' : '#EFF6FF', padding: '4px 10px', borderRadius: '12px' }}>
