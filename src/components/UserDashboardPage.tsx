@@ -111,23 +111,25 @@ const INITIAL_ADMIN_ORDERS: AdminOrder[] = [
 ];
 
 interface UserDashboardPageProps {
+  currentUser?: { name: string, email: string, type: string } | null;
   onBackToStore: () => void;
   onLogout: () => void;
-  onViewProduct?: (product: Product) => void;
   userAds?: Product[];
   favorites?: Product[];
   onToggleFavorite?: (product: Product) => void;
+  onViewProduct?: (product: Product) => void;
+  onUpdateAnnouncement?: (text: string) => void;
+  announcementText?: string;
+  onAddProduct?: (product: Product) => void;
   userAvatarIndex?: number;
   onAvatarChange?: (index: number) => void;
   initialTab?: string;
-  announcementText?: string;
-  onUpdateAnnouncement?: (text: string) => void;
-  onAddProduct?: (product: Product) => void;
 }
 
 type TabType = 'my_ads' | 'messages' | 'favorites' | 'wallet' | 'settings' | 'vip' | 'admin_overview' | 'admin_orders' | 'admin_products' | 'admin_customers' | 'admin_settings';
 
 export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
+  currentUser,
   onBackToStore,
   onLogout,
   onViewProduct,
@@ -151,7 +153,10 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
 
   // Admin states
-  const [orders, setOrders] = useState<AdminOrder[]>(INITIAL_ADMIN_ORDERS);
+  const currentUserNameForOrders = currentUser?.name || 'Andrei Popescu';
+  const [orders, setOrders] = useState<AdminOrder[]>(
+    currentUserNameForOrders === 'Andrei Popescu' ? INITIAL_ADMIN_ORDERS : []
+  );
   const [productsList, setProductsList] = useState<Product[]>(PRODUCTS);
   const [searchQuery, setSearchQuery] = useState('');
   const [newAnnouncement, setNewAnnouncement] = useState(announcementText);
@@ -203,13 +208,13 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
     setIsAvatarModalOpen(true);
   };
   
-  const [userProfile] = useState({
-    name: 'Alexandru B.',
-    email: 'alexandru.b@pinpin.ro',
+  const userProfile = {
+    name: currentUser?.name || 'Andrei Popescu',
+    email: currentUser?.email || 'andrei.popescu@exemplu.ro',
     phone: '+40 722 123 456',
-    joined: 'Aprilie 2026',
-    credits: 150
-  });
+    memberSince: '14 Mai 2026',
+    credits: 1500
+  };
 
   const removeFromWishlist = (product: Product) => {
     if (onToggleFavorite) onToggleFavorite(product);
@@ -256,19 +261,27 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
     (o) => o.id.toLowerCase().includes(searchQuery.toLowerCase()) || o.customer.toLowerCase().includes(searchQuery.toLowerCase()) || o.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const myAds: MyAd[] = userAds.length > 0 ? userAds.map(p => ({
-    id: p.id,
-    title: p.title,
-    price: p.price,
-    category: p.category,
-    image: p.image,
-    status: 'Activ',
-    views: Math.floor(Math.random() * 500) + 10,
-    favorites: Math.floor(Math.random() * 50) + 1,
-    messages: Math.floor(Math.random() * 10),
-    dateAdded: 'Astăzi',
-    isPromoted: !!p.isPopular
-  })) : MOCK_MY_ADS;
+  const currentUserName = currentUser?.name || 'Alexandru B.';
+  const myAds: MyAd[] = userAds
+    .filter(p => p.seller?.name === currentUserName)
+    .map(p => ({
+      id: p.id,
+      title: p.title,
+      price: p.price,
+      category: p.category,
+      image: p.image,
+      status: 'Activ',
+      views: Math.floor(Math.random() * 500) + 10,
+      favorites: Math.floor(Math.random() * 50) + 1,
+      messages: Math.floor(Math.random() * 10),
+      dateAdded: 'Astăzi',
+      isPromoted: !!p.isPopular
+    }));
+
+  // Show MOCK_MY_ADS only if it's the default mock user
+  if (myAds.length === 0 && currentUserName === 'Alexandru B.') {
+    myAds.push(...MOCK_MY_ADS);
+  }
 
   const getBreadcrumbName = () => {
     switch (activeTab) {

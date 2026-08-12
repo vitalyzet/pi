@@ -6,6 +6,7 @@ interface HeaderProps {
   cartCount: number;
   favoritesCount: number;
   isLoggedIn: boolean;
+  currentUser?: { name: string, email: string, type: string } | null;
   announcementText?: string;
   onOpenCart: () => void;
   onOpenSearch: () => void;
@@ -30,6 +31,7 @@ export const Header: React.FC<HeaderProps> = ({
   cartCount,
   favoritesCount,
   isLoggedIn,
+  currentUser,
   announcementText,
   onOpenCart,
   onOpenSearch,
@@ -205,7 +207,9 @@ export const Header: React.FC<HeaderProps> = ({
               <div style={{ width: '28px', height: '28px', borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#F1F5F9' }}>
                 {isLoggedIn ? (
                   userAvatar === 'initials' ? (
-                    <span style={{ fontSize: '11px', fontWeight: 800, color: '#222' }}>AB</span>
+                    <span style={{ fontSize: '11px', fontWeight: 800, color: '#222' }}>
+                      {currentUser?.name ? currentUser.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'AB'}
+                    </span>
                   ) : (
                     <img src={userAvatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   )
@@ -213,8 +217,8 @@ export const Header: React.FC<HeaderProps> = ({
                   <User size={16} />
                 )}
               </div>
-              <span style={{ fontSize: '13px', fontWeight: 800, color: '#0F172A' }}>
-                {isLoggedIn ? 'CONTUL MEU' : 'LOGIN'}
+              <span style={{ fontSize: '13px', fontWeight: 800, color: '#0F172A', maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {isLoggedIn ? (currentUser?.name ? currentUser.name.split(' ')[0].toUpperCase() : 'CONTUL MEU') : 'LOGIN'}
               </span>
             </div>
 

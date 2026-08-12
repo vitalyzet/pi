@@ -159,6 +159,10 @@ export const App: React.FC = () => {
   const [isPublishOpen, setIsPublishOpen] = useState(false);
   const [isAutoPublishOpen, setIsAutoPublishOpen] = useState(false);
   const [isRegionLanguageOpen, setIsRegionLanguageOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<{name: string, email: string, type: string} | null>(() => {
+    const saved = localStorage.getItem('pinpin_current_user');
+    return saved ? JSON.parse(saved) : { name: 'Andrei Popescu', email: 'andrei.popescu@exemplu.ro', type: 'Persoană Fizică' };
+  });
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   
@@ -490,6 +494,7 @@ export const App: React.FC = () => {
         />
       ) : currentView === 'dashboard' ? (
         <UserDashboardPage
+          currentUser={currentUser}
           initialTab={initialDashboardTab}
           announcementText={announcementText}
           onUpdateAnnouncement={(text) => setAnnouncementText(text)}
@@ -497,6 +502,8 @@ export const App: React.FC = () => {
           onBackToStore={() => setCurrentView('store')}
           onLogout={() => {
             setIsLoggedIn(false);
+            setCurrentUser(null);
+            localStorage.removeItem('pinpin_current_user');
             setCurrentView('store');
             setToastMessage('Te-ai deconectat cu succes.');
             setTimeout(() => setToastMessage(null), 3000);
@@ -510,6 +517,7 @@ export const App: React.FC = () => {
         />
       ) : currentView === 'publish' ? (
         <PublishListingPage
+          currentUser={currentUser}
           onBackToStore={() => setCurrentView('store')}
           onPublishProduct={handlePublishProduct}
         />
@@ -770,13 +778,20 @@ export const App: React.FC = () => {
           setIsLoggedIn(true);
           
           if (userData) {
+            const userType = (userData as any).type || 'Persoană Fizică';
+            
+            // Set current user session
+            const newCurrentUser = { name: userData.name, email: userData.email, type: userType };
+            setCurrentUser(newCurrentUser);
+            localStorage.setItem('pinpin_current_user', JSON.stringify(newCurrentUser));
+
             const savedUsers = localStorage.getItem('pinpin_registered_users');
             const parsedUsers = savedUsers ? JSON.parse(savedUsers) : [];
             const newUser = {
               id: `user-${Date.now()}`,
               name: userData.name,
               email: userData.email,
-              type: (userData as any).type || 'Persoană Fizică',
+              type: userType,
               isPro: false,
               adsCount: 0,
               joined: new Date().toLocaleDateString('ro-RO', { day: 'numeric', month: 'short', year: 'numeric' }),

@@ -34,6 +34,7 @@ import { Product } from '../data/products';
 import { uploadImageFile } from '../lib/storage';
 
 interface PublishListingPageProps {
+  currentUser?: { name: string, email: string, type: string } | null;
   onBackToStore: () => void;
   onPublishProduct: (product: Product) => void;
 }
@@ -57,10 +58,7 @@ const CATEGORIES_GRID = [
   { id: 'Gaming', label: 'Gaming', icon: <Gamepad2 size={22} color="#94A3B8" />, isDisabled: true }
 ];
 
-export const PublishListingPage: React.FC<PublishListingPageProps> = ({
-  onBackToStore,
-  onPublishProduct
-}) => {
+export const PublishListingPage: React.FC<PublishListingPageProps> = ({ currentUser, onBackToStore, onPublishProduct }) => {
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1);
   const [selectedCategory, setSelectedCategory] = useState<string>('Auto');
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
@@ -204,8 +202,8 @@ export const PublishListingPage: React.FC<PublishListingPageProps> = ({
       createdAt: new Date().toISOString(),
       description: description || `Anunț publicat în ${city}. Contact: ${phone || 'Nespecificat'}`,
       seller: {
-        name: randomName,
-        avatar: randomAvatar,
+        name: currentUser?.name || randomName,
+        avatar: currentUser ? 'initials' : randomAvatar,
         rating: Number((4.5 + Math.random() * 0.5).toFixed(1)),
         reviews: Math.floor(Math.random() * 50) + 1,
         joined: '2026'
