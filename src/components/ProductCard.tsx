@@ -160,8 +160,41 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           e.currentTarget.style.boxShadow = 'none';
         }}
       >
-        <div style={{ position: 'relative' }} className="pro-card-image-wrapper">
-          <img src={allImages[currentImageIndex]} alt={product.title} style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
+        <div style={{ position: 'relative', overflow: 'hidden' }} className="pro-card-image-wrapper">
+          <div style={{
+            display: 'flex',
+            transition: 'transform 0.3s ease-in-out',
+            transform: `translateX(-${currentImageIndex * 100}%)`,
+            height: '180px',
+            width: '100%'
+          }}>
+            {allImages.map((img, idx) => (
+              <img 
+                key={idx} 
+                src={img} 
+                alt={`${product.title} ${idx + 1}`} 
+                style={{ width: '100%', height: '100%', objectFit: 'cover', flexShrink: 0 }} 
+                loading="lazy" 
+              />
+            ))}
+          </div>
+          
+          {allImages.length > 1 && (
+            <div style={{ position: 'absolute', bottom: '12px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '4px', zIndex: 2 }}>
+              {allImages.map((_, idx) => (
+                <div 
+                  key={idx} 
+                  style={{ 
+                    width: currentImageIndex === idx ? '12px' : '6px', 
+                    height: '6px', 
+                    borderRadius: '3px', 
+                    backgroundColor: currentImageIndex === idx ? '#FFFFFF' : 'rgba(255, 255, 255, 0.5)',
+                    transition: 'all 0.2s ease-in-out'
+                  }} 
+                />
+              ))}
+            </div>
+          )}
           
           {allImages.length > 1 && (
             <>
