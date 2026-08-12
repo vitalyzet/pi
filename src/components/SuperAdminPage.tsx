@@ -30,6 +30,7 @@ import {
   Diamond
 } from 'lucide-react';
 import { Product } from '../data/products';
+import { fetchUsersFromFirebase } from '../lib/firebase';
 
 interface PlatformUser {
   id: string;
@@ -113,18 +114,26 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
 
   const [users, setUsers] = useState<PlatformUser[]>([]);
 
-  const loadUsers = () => {
+  const loadUsers = async () => {
+    // 1. Fetch from Local Storage for local mock state
+    let localParsed: any[] = [];
     const saved = localStorage.getItem('pinpin_registered_users');
     if (saved) {
       try {
-        const parsed = JSON.parse(saved);
-        setUsers([...parsed, ...MOCK_USERS]);
+        localParsed = JSON.parse(saved);
       } catch (e) {
-        setUsers(MOCK_USERS);
+        // ignore
       }
-    } else {
-      setUsers(MOCK_USERS);
     }
+    
+    // 2. Fetch from Firebase Firestore for synced state
+    const fbUsers = await fetchUsersFromFirebase();
+    
+    // 3. Merge them, prioritizing Firebase users by email
+    const fbEmails = new Set(fbUsers.map(u => u.email));
+    const uniqueLocal = localParsed.filter(u => !fbEmails.has(u.email));
+    
+    setUsers([...fbUsers, ...uniqueLocal, ...MOCK_USERS]);
   };
 
   const [modaOrders, setModaOrders] = useState<AdminOrder[]>(MOCK_MODA_ORDERS);
@@ -745,9 +754,9 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
                   <thead>
                     <tr>
                       <td colSpan={8}>
-                        <div style={{ background: '#FFFBEB', border: '1px solid #FDE68A', padding: '12px', borderRadius: '8px', marginBottom: '16px', fontSize: '12px', fontFamily: 'monospace' }}>
-                          <strong>DEBUG RAW USERS FROM MEMORY ({users.length} total, {users.length - 5} non-mock):</strong><br/>
-                          {users.map(u => u.email).join(', ')}
+                        <div style={{ background: '#FEF3C7', border: '1px solid #FCD34D', padding: '12px', borderRadius: '8px', marginBottom: '16px', fontSize: '13px', color: '#92400E', fontFamily: 'monospace' }}>
+                          <strong>DEBUG LIVE DATA ({users.length} total, {users.length - 5} non-mock):</strong><br />
+                          {users.filter(u => !['Autobavaria SRL', 'Imobiliare Expert', 'Alexandru B.', 'Elena Popescu', 'TechStore Romania'].includes(u.name)).map(u => u.email).join(', ')}
                         </div>
                       </td>
                     </tr>
