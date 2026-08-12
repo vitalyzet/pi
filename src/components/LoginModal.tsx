@@ -21,7 +21,16 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin
     if (mode === 'register') {
       onLoginSuccess({ name, email, type: accountType });
     } else {
-      onLoginSuccess();
+      const savedUsers = localStorage.getItem('pinpin_registered_users');
+      const parsedUsers = savedUsers ? JSON.parse(savedUsers) : [];
+      const existingUser = parsedUsers.find((u: any) => u.email === email);
+      
+      if (existingUser) {
+        onLoginSuccess({ name: existingUser.name, email: existingUser.email, type: existingUser.type || 'Persoană Fizică' });
+      } else {
+        // Fallback for new/unregistered users trying to login without registering first
+        onLoginSuccess({ name: email.split('@')[0], email, type: 'Persoană Fizică' });
+      }
     }
     onClose();
   };
