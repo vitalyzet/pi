@@ -342,7 +342,7 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                   </div>
                   {currentUser?.email === 'alexandruzet29@gmail.com' || currentUser?.id ? (
                     <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 600 }}>
-                      ID: #{currentUser?.email === 'alexandruzet29@gmail.com' ? '0001' : currentUser?.id}
+                      ID: {currentUser?.email === 'alexandruzet29@gmail.com' ? '0001' : currentUser?.id}
                     </div>
                   ) : null}
                 </div>
