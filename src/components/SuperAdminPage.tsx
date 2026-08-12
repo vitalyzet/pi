@@ -130,7 +130,7 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
   const [selectedVipPlan, setSelectedVipPlan] = useState<'1_luna' | '3_luni' | '12_luni' | null>(null);
 
   useEffect(() => {
-    if (activeTab === 'users') {
+    const loadUsers = () => {
       const saved = localStorage.getItem('pinpin_registered_users');
       if (saved) {
         try {
@@ -140,7 +140,22 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
           setUsers(MOCK_USERS);
         }
       }
+    };
+
+    if (activeTab === 'users') {
+      loadUsers();
     }
+
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'pinpin_registered_users') {
+        loadUsers();
+      }
+    };
+    window.addEventListener('storage', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, [activeTab]);
   const [isEditingBilling, setIsEditingBilling] = useState(false);
   const [billingType, setBillingType] = useState<'fizica' | 'juridica'>('fizica');
