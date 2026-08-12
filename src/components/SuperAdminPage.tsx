@@ -124,6 +124,7 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
     return MOCK_USERS;
   });
   const [modaOrders, setModaOrders] = useState<AdminOrder[]>(MOCK_MODA_ORDERS);
+  const [userTypeFilter, setUserTypeFilter] = useState<'Toate' | 'Persoană Fizică' | 'Firmă'>('Toate');
   const [selectedUser, setSelectedUser] = useState<PlatformUser | null>(null);
   const [selectedInvoice, setSelectedInvoice] = useState<SubscriptionPayment | null>(null);
   const [selectedVipPlan, setSelectedVipPlan] = useState<'1_luna' | '3_luni' | '12_luni' | null>(null);
@@ -683,15 +684,37 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
                     <h3 style={{ fontSize: '20px', fontWeight: 900, margin: '0 0 4px 0' }}>Gestiune Utilizatori</h3>
                     <p style={{ fontSize: '13px', color: '#64748B', margin: 0 }}>Toate firmele și persoanele fizice înregistrate care au listat anunțuri.</p>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', background: '#F8FAFC', padding: '8px 14px', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
-                    <Search size={16} color="#64748B" />
-                    <input
-                      type="text"
-                      placeholder="Căutare utilizator/tip..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      style={{ border: 'none', background: 'transparent', outline: 'none', fontSize: '13px', width: '200px' }}
-                    />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    <div style={{ display: 'flex', backgroundColor: '#F1F5F9', borderRadius: '8px', padding: '4px' }}>
+                      <button
+                        onClick={() => setUserTypeFilter('Toate')}
+                        style={{ padding: '6px 12px', borderRadius: '6px', border: 'none', fontSize: '12px', fontWeight: 700, cursor: 'pointer', backgroundColor: userTypeFilter === 'Toate' ? '#FFF' : 'transparent', color: userTypeFilter === 'Toate' ? '#0F172A' : '#64748B', boxShadow: userTypeFilter === 'Toate' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}
+                      >
+                        Toate
+                      </button>
+                      <button
+                        onClick={() => setUserTypeFilter('Persoană Fizică')}
+                        style={{ padding: '6px 12px', borderRadius: '6px', border: 'none', fontSize: '12px', fontWeight: 700, cursor: 'pointer', backgroundColor: userTypeFilter === 'Persoană Fizică' ? '#FFF' : 'transparent', color: userTypeFilter === 'Persoană Fizică' ? '#3B82F6' : '#64748B', boxShadow: userTypeFilter === 'Persoană Fizică' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}
+                      >
+                        Persoane Fizice
+                      </button>
+                      <button
+                        onClick={() => setUserTypeFilter('Firmă')}
+                        style={{ padding: '6px 12px', borderRadius: '6px', border: 'none', fontSize: '12px', fontWeight: 700, cursor: 'pointer', backgroundColor: userTypeFilter === 'Firmă' ? '#FFF' : 'transparent', color: userTypeFilter === 'Firmă' ? '#8B5CF6' : '#64748B', boxShadow: userTypeFilter === 'Firmă' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none' }}
+                      >
+                        Firme
+                      </button>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', background: '#F8FAFC', padding: '8px 14px', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
+                      <Search size={16} color="#64748B" />
+                      <input
+                        type="text"
+                        placeholder="Căutare utilizator/tip..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        style={{ border: 'none', background: 'transparent', outline: 'none', fontSize: '13px', width: '200px' }}
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -708,7 +731,11 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
                     </tr>
                   </thead>
                   <tbody>
-                    {users.filter(u => u.name.toLowerCase().includes(searchQuery.toLowerCase()) || u.type.toLowerCase().includes(searchQuery.toLowerCase())).map((user) => (
+                    {users.filter(u => {
+                      const matchesSearch = u.name.toLowerCase().includes(searchQuery.toLowerCase()) || u.type.toLowerCase().includes(searchQuery.toLowerCase());
+                      const matchesType = userTypeFilter === 'Toate' ? true : u.type === userTypeFilter || (userTypeFilter === 'Persoană Fizică' && u.type === 'Fizică');
+                      return matchesSearch && matchesType;
+                    }).map((user) => (
                       <tr key={user.id} style={{ borderBottom: '1px solid #F1F5F9', fontSize: '14px' }}>
                         <td style={{ padding: '16px 12px' }}>
                           <div 
