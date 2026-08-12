@@ -180,7 +180,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
           
           {allImages.length > 1 && (
-            <div style={{ position: 'absolute', bottom: '12px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '4px', zIndex: 2 }}>
+            <div className="pro-carousel-indicators" style={{ position: 'absolute', bottom: '12px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '4px', zIndex: 2 }}>
               {allImages.map((_, idx) => (
                 <div 
                   key={idx} 

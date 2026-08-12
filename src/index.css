@@ -2369,8 +2369,14 @@ body {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.pro-card-image-wrapper:hover .image-nav-btn {
+.pro-card-image-wrapper:hover .image-nav-btn,
+.pro-card-image-wrapper:hover .pro-carousel-indicators {
   opacity: 1;
+}
+
+.pro-card-image-wrapper .pro-carousel-indicators {
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 .pro-card-image-wrapper .image-nav-btn.prev {
