@@ -111,7 +111,18 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
     }))
   );
 
-  const [users, setUsers] = useState<PlatformUser[]>(MOCK_USERS);
+  const [users, setUsers] = useState<PlatformUser[]>(() => {
+    const saved = localStorage.getItem('pinpin_registered_users');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        return [...parsed, ...MOCK_USERS];
+      } catch (e) {
+        return MOCK_USERS;
+      }
+    }
+    return MOCK_USERS;
+  });
   const [modaOrders, setModaOrders] = useState<AdminOrder[]>(MOCK_MODA_ORDERS);
   const [selectedUser, setSelectedUser] = useState<PlatformUser | null>(null);
   const [selectedInvoice, setSelectedInvoice] = useState<SubscriptionPayment | null>(null);

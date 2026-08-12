@@ -766,9 +766,28 @@ export const App: React.FC = () => {
       <LoginModal
         isOpen={isLoginOpen}
         onClose={() => setIsLoginOpen(false)}
-        onLoginSuccess={() => {
+        onLoginSuccess={(userData) => {
           setIsLoggedIn(true);
-          setToastMessage('Te-ai autentificat cu succes!');
+          
+          if (userData) {
+            const savedUsers = localStorage.getItem('pinpin_registered_users');
+            const parsedUsers = savedUsers ? JSON.parse(savedUsers) : [];
+            const newUser = {
+              id: `user-${Date.now()}`,
+              name: userData.name,
+              email: userData.email,
+              type: 'Persoană Fizică',
+              isPro: false,
+              adsCount: 0,
+              joined: new Date().toLocaleDateString('ro-RO', { day: 'numeric', month: 'short', year: 'numeric' }),
+              status: 'Activ'
+            };
+            localStorage.setItem('pinpin_registered_users', JSON.stringify([newUser, ...parsedUsers]));
+            setToastMessage('Te-ai înregistrat și autentificat cu succes!');
+          } else {
+            setToastMessage('Te-ai autentificat cu succes!');
+          }
+          
           setTimeout(() => setToastMessage(null), 3000);
         }}
       />

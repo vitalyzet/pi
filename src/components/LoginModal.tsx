@@ -4,7 +4,7 @@ import { X, User, Lock, Mail, UserPlus } from 'lucide-react';
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLoginSuccess: () => void;
+  onLoginSuccess: (userData?: { name: string, email: string }) => void;
 }
 
 export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess }) => {
@@ -17,7 +17,11 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onLoginSuccess();
+    if (mode === 'register') {
+      onLoginSuccess({ name, email });
+    } else {
+      onLoginSuccess();
+    }
     onClose();
   };
 
