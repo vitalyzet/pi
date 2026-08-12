@@ -436,12 +436,12 @@ export const App: React.FC = () => {
         </div>
       )}
 
-      {/* Header */}
       <Header
         showAnnouncementBar={selectedCategory === 'Modă' || selectedCategory === 'Electronice'}
         cartCount={totalCartItemsCount}
         favoritesCount={favorites.length}
         isLoggedIn={isLoggedIn}
+        currentUser={currentUser}
         announcementText={announcementText}
         userAvatar={AVATARS[userAvatarIndex]}
         onOpenCart={() => setIsCartOpen(true)}
