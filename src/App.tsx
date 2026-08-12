@@ -159,7 +159,7 @@ export const App: React.FC = () => {
   const [isPublishOpen, setIsPublishOpen] = useState(false);
   const [isAutoPublishOpen, setIsAutoPublishOpen] = useState(false);
   const [isRegionLanguageOpen, setIsRegionLanguageOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState<{name: string, email: string, type: string} | null>(() => {
+  const [currentUser, setCurrentUser] = useState<{id?: string, name: string, email: string, type: string} | null>(() => {
     const saved = localStorage.getItem('pinpin_current_user');
     return saved ? JSON.parse(saved) : null;
   });
@@ -781,26 +781,32 @@ export const App: React.FC = () => {
           
           if (userData) {
             const userType = (userData as any).type || 'Persoană Fizică';
+            const userId = userData.id || `U-${Math.floor(Math.random() * 1000000)}`;
             
             // Set current user session
-            const newCurrentUser = { name: userData.name, email: userData.email, type: userType };
+            const newCurrentUser = { id: userId, name: userData.name, email: userData.email, type: userType };
             setCurrentUser(newCurrentUser);
             localStorage.setItem('pinpin_current_user', JSON.stringify(newCurrentUser));
 
             const savedUsers = localStorage.getItem('pinpin_registered_users');
             const parsedUsers = savedUsers ? JSON.parse(savedUsers) : [];
-            const newUser = {
-              id: `user-${Date.now()}`,
-              name: userData.name,
-              email: userData.email,
-              type: userType,
-              isPro: false,
-              adsCount: 0,
-              joined: new Date().toLocaleDateString('ro-RO', { day: 'numeric', month: 'short', year: 'numeric' }),
-              status: 'Activ'
-            };
-            localStorage.setItem('pinpin_registered_users', JSON.stringify([newUser, ...parsedUsers]));
-            setToastMessage('Te-ai înregistrat și autentificat cu succes!');
+            const userExists = parsedUsers.some((u: any) => u.email === userData.email);
+            
+            if (!userExists) {
+              const newUser = {
+                id: userId,
+                name: userData.name,
+                email: userData.email,
+                type: userType,
+                isPro: false,
+                adsCount: 0,
+                joined: new Date().toLocaleDateString('ro-RO', { day: 'numeric', month: 'short', year: 'numeric' }),
+                status: 'Activ'
+              };
+              localStorage.setItem('pinpin_registered_users', JSON.stringify([newUser, ...parsedUsers]));
+            }
+            
+            setToastMessage('Te-ai autentificat cu succes!');
           } else {
             setToastMessage('Te-ai autentificat cu succes!');
           }

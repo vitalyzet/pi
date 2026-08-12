@@ -4,7 +4,7 @@ import { X, User, Lock, Mail, UserPlus } from 'lucide-react';
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLoginSuccess: (userData?: { name: string, email: string, type: string }) => void;
+  onLoginSuccess: (userData?: { id?: string, name: string, email: string, type: string }) => void;
 }
 
 export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess }) => {
@@ -26,10 +26,10 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin
       const existingUser = parsedUsers.find((u: any) => u.email === email);
       
       if (existingUser) {
-        onLoginSuccess({ name: existingUser.name, email: existingUser.email, type: existingUser.type || 'Persoană Fizică' });
+        onLoginSuccess({ id: existingUser.id, name: existingUser.name, email: existingUser.email, type: existingUser.type || 'Persoană Fizică' });
       } else {
         // Fallback for new/unregistered users trying to login without registering first
-        onLoginSuccess({ name: email.split('@')[0], email, type: 'Persoană Fizică' });
+        onLoginSuccess({ id: `U-${Math.floor(Math.random() * 1000000)}`, name: email.split('@')[0], email, type: 'Persoană Fizică' });
       }
     }
     onClose();

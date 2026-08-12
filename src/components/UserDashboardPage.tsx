@@ -111,7 +111,7 @@ const INITIAL_ADMIN_ORDERS: AdminOrder[] = [
 ];
 
 interface UserDashboardPageProps {
-  currentUser?: { name: string, email: string, type: string } | null;
+  currentUser?: { id?: string, name: string, email: string, type: string } | null;
   onBackToStore: () => void;
   onLogout: () => void;
   userAds?: Product[];
@@ -336,10 +336,15 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                 </div>
                 <div>
                   <h3 style={{ margin: '0 0 4px 0', fontSize: '18px', fontWeight: 800, color: '#0F172A' }}>{userProfile.name}</h3>
-                  <div style={{ fontSize: '13px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <div style={{ fontSize: '13px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '4px' }}>
                     <ShieldCheck size={14} color="#10B981" />
                     Cont Verificat
                   </div>
+                  {currentUser?.id && (
+                    <div style={{ fontSize: '12px', color: '#94A3B8', fontWeight: 600 }}>
+                      ID: #{currentUser.id}
+                    </div>
+                  )}
                 </div>
               </div>
 
