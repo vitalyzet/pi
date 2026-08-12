@@ -133,7 +133,7 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
     const fbEmails = new Set(fbUsers.map(u => u.email));
     const uniqueLocal = localParsed.filter(u => !fbEmails.has(u.email));
     
-    setUsers([...fbUsers, ...uniqueLocal, ...MOCK_USERS]);
+    setUsers([...fbUsers, ...uniqueLocal]);
   };
 
   const [modaOrders, setModaOrders] = useState<AdminOrder[]>(MOCK_MODA_ORDERS);
@@ -752,14 +752,6 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
 
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                   <thead>
-                    <tr>
-                      <td colSpan={8}>
-                        <div style={{ background: '#FEF3C7', border: '1px solid #FCD34D', padding: '12px', borderRadius: '8px', marginBottom: '16px', fontSize: '13px', color: '#92400E', fontFamily: 'monospace' }}>
-                          <strong>DEBUG LIVE DATA ({users.length} total, {users.length - 5} non-mock):</strong><br />
-                          {users.filter(u => !['Autobavaria SRL', 'Imobiliare Expert', 'Alexandru B.', 'Elena Popescu', 'TechStore Romania'].includes(u.name)).map(u => u.email).join(', ')}
-                        </div>
-                      </td>
-                    </tr>
                     <tr style={{ borderBottom: '2px solid #E2E8F0', fontSize: '12px', color: '#64748B', textTransform: 'uppercase' }}>
                       <th style={{ padding: '12px' }}>Utilizator / Nume</th>
                       <th style={{ padding: '12px' }}>ID Utilizator</th>
