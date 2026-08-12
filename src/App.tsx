@@ -161,9 +161,11 @@ export const App: React.FC = () => {
   const [isRegionLanguageOpen, setIsRegionLanguageOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState<{name: string, email: string, type: string} | null>(() => {
     const saved = localStorage.getItem('pinpin_current_user');
-    return saved ? JSON.parse(saved) : { name: 'Andrei Popescu', email: 'andrei.popescu@exemplu.ro', type: 'Persoană Fizică' };
+    return saved ? JSON.parse(saved) : null;
   });
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return localStorage.getItem('pinpin_current_user') !== null;
+  });
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   
   const [isGlobalLoading, setIsGlobalLoading] = useState(false);
