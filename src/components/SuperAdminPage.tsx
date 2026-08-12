@@ -111,18 +111,22 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
     }))
   );
 
-  const [users, setUsers] = useState<PlatformUser[]>(() => {
+  const [users, setUsers] = useState<PlatformUser[]>([]);
+
+  const loadUsers = () => {
     const saved = localStorage.getItem('pinpin_registered_users');
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        return [...parsed, ...MOCK_USERS];
+        setUsers([...parsed, ...MOCK_USERS]);
       } catch (e) {
-        return MOCK_USERS;
+        setUsers(MOCK_USERS);
       }
+    } else {
+      setUsers(MOCK_USERS);
     }
-    return MOCK_USERS;
-  });
+  };
+
   const [modaOrders, setModaOrders] = useState<AdminOrder[]>(MOCK_MODA_ORDERS);
   const [userTypeFilter, setUserTypeFilter] = useState<'Toate' | 'Persoană Fizică' | 'Firmă'>('Toate');
   const [selectedUser, setSelectedUser] = useState<PlatformUser | null>(null);
@@ -130,18 +134,6 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
   const [selectedVipPlan, setSelectedVipPlan] = useState<'1_luna' | '3_luni' | '12_luni' | null>(null);
 
   useEffect(() => {
-    const loadUsers = () => {
-      const saved = localStorage.getItem('pinpin_registered_users');
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          setUsers([...parsed, ...MOCK_USERS]);
-        } catch (e) {
-          setUsers(MOCK_USERS);
-        }
-      }
-    };
-
     if (activeTab === 'users') {
       loadUsers();
     }
@@ -749,6 +741,14 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
 
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                   <thead>
+                    <tr>
+                      <td colSpan={8}>
+                        <div style={{ background: '#FFFBEB', border: '1px solid #FDE68A', padding: '12px', borderRadius: '8px', marginBottom: '16px', fontSize: '12px', fontFamily: 'monospace' }}>
+                          <strong>DEBUG RAW USERS FROM MEMORY ({users.length} total, {users.length - 5} non-mock):</strong><br/>
+                          {users.map(u => u.email).join(', ')}
+                        </div>
+                      </td>
+                    </tr>
                     <tr style={{ borderBottom: '2px solid #E2E8F0', fontSize: '12px', color: '#64748B', textTransform: 'uppercase' }}>
                       <th style={{ padding: '12px' }}>Utilizator / Nume</th>
                       <th style={{ padding: '12px' }}>ID Utilizator</th>
