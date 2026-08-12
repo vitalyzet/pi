@@ -95,7 +95,7 @@ export const Header: React.FC<HeaderProps> = ({
                   <button
                     onClick={onOpenSuperAdmin}
                     style={{
-                      backgroundColor: '#8B0000',
+                      backgroundColor: '#10B981',
                       color: '#FFF',
                       border: 'none',
                       borderRadius: '4px',
@@ -110,7 +110,7 @@ export const Header: React.FC<HeaderProps> = ({
                       marginLeft: '8px'
                     }}
                   >
-                    <Shield size={14} /> SUPER ADMIN
+                    <Shield size={14} /> ADMIN
                   </button>
                 </li>
               )}
