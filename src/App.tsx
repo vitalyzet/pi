@@ -785,8 +785,15 @@ export const App: React.FC = () => {
             const savedUsers = localStorage.getItem('pinpin_registered_users');
             const parsedUsers = savedUsers ? JSON.parse(savedUsers) : [];
             
-            // Generate a sequential ID: U-1000, U-1001, etc. (+5 to account for mock users)
-            const generatedId = `U-${1000 + parsedUsers.length + 5}`;
+            // Generate a sequential ID
+            let generatedId = '';
+            if (userData.email === 'alexandruzet29@gmail.com') {
+              generatedId = '0001';
+            } else {
+              const nextNum = parsedUsers.length + 7;
+              generatedId = String(nextNum).padStart(4, '0');
+            }
+            
             const userId = userData.id || generatedId;
             
             // Set current user session

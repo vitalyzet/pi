@@ -44,11 +44,11 @@ interface PlatformUser {
 }
 
 const MOCK_USERS: PlatformUser[] = [
-  { id: 'U-1029', name: 'AutoBavaria SRL', email: 'contact@autobavaria.ro', type: 'Firmă', adsCount: 45, joined: '12 Ian 2026', status: 'Activ', modaSales: 0, isPro: true },
-  { id: 'U-9921', name: 'Imobiliare Expert', email: 'office@imoexpert.ro', type: 'Firmă', adsCount: 112, joined: '04 Mar 2026', status: 'Activ', modaSales: 0, isPro: true },
-  { id: 'U-2210', name: 'Alexandru B.', email: 'alex@yahoo.com', type: 'Fizică', adsCount: 3, joined: '15 Mai 2026', status: 'Activ', modaSales: 120, isPro: false },
-  { id: 'U-4552', name: 'Elena Popescu', email: 'elena.p@gmail.com', type: 'Fizică', adsCount: 1, joined: '20 Iul 2026', status: 'Suspendat', modaSales: 0, isPro: false },
-  { id: 'U-8821', name: 'TechStore Romania', email: 'sales@techstore.ro', type: 'Firmă', adsCount: 89, joined: '10 Apr 2026', status: 'Activ', modaSales: 4580, isPro: true },
+  { id: '0002', name: 'AutoBavaria SRL', email: 'contact@autobavaria.ro', type: 'Firmă', adsCount: 45, joined: '12 Ian 2026', status: 'Activ', modaSales: 0, isPro: true },
+  { id: '0003', name: 'Imobiliare Expert', email: 'office@imoexpert.ro', type: 'Firmă', adsCount: 112, joined: '04 Mar 2026', status: 'Activ', modaSales: 0, isPro: true },
+  { id: '0004', name: 'Alexandru B.', email: 'alex@yahoo.com', type: 'Fizică', adsCount: 3, joined: '15 Mai 2026', status: 'Activ', modaSales: 120, isPro: false },
+  { id: '0005', name: 'Elena Popescu', email: 'elena.p@gmail.com', type: 'Fizică', adsCount: 1, joined: '20 Iul 2026', status: 'Suspendat', modaSales: 0, isPro: false },
+  { id: '0006', name: 'TechStore Romania', email: 'sales@techstore.ro', type: 'Firmă', adsCount: 89, joined: '10 Apr 2026', status: 'Activ', modaSales: 4580, isPro: true },
 ];
 
 interface AdminOrder {
