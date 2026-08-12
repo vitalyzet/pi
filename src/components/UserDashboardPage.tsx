@@ -340,11 +340,11 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
                     <ShieldCheck size={14} color="#10B981" />
                     Cont Verificat
                   </div>
-                  {currentUser?.id && (
-                    <div style={{ fontSize: '12px', color: '#94A3B8', fontWeight: 600 }}>
-                      ID: #{currentUser.id}
+                  {currentUser?.email === 'alexandruzet29@gmail.com' || currentUser?.id ? (
+                    <div style={{ fontSize: '13px', color: '#64748B', fontWeight: 600 }}>
+                      ID: #{currentUser?.email === 'alexandruzet29@gmail.com' ? '0001' : currentUser?.id}
                     </div>
-                  )}
+                  ) : null}
                 </div>
               </div>
 
