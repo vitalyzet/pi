@@ -376,6 +376,11 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
                 onClick={() => { setActiveTab('users'); setSearchQuery(''); }}
               >
                 <Users size={18} /> Gestiune Utilizatori
+                {users.length > 0 && (
+                  <span style={{ marginLeft: 'auto', backgroundColor: '#EF4444', color: '#FFF', padding: '2px 8px', borderRadius: '12px', fontSize: '11px', fontWeight: 800 }}>
+                    {users.length}
+                  </span>
+                )}
               </button>
 
               <button
