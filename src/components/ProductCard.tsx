@@ -502,7 +502,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <div className="auto-new-price">{product.price.toLocaleString('ro-RO')} €</div>
           
           <div className="auto-new-specs">
-            {product.specs?.modelSize || product.specs?.year || '2018'} • {product.specs?.mileage || '150.000'} km
+            {product.specs?.modelSize || product.specs?.year || '2018'} • {product.specs?.mileage || '150.000'} km • {product.specs?.fuel || 'Benzină'}
           </div>
           
           <div className="auto-new-footer">
