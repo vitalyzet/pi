@@ -794,14 +794,27 @@ export const App: React.FC = () => {
               generatedId = String(nextNum).padStart(4, '0');
             }
             
-            const userId = userData.id || generatedId;
+            // Force 0001 for admin, otherwise use existing ID or generated
+            const userId = userData.email === 'alexandruzet29@gmail.com' ? '0001' : (userData.id && !userData.id.startsWith('user-') ? userData.id : generatedId);
             
             // Set current user session
             const newCurrentUser = { id: userId, name: userData.name, email: userData.email, type: userType };
             setCurrentUser(newCurrentUser);
             localStorage.setItem('pinpin_current_user', JSON.stringify(newCurrentUser));
-
-            const userExists = parsedUsers.some((u: any) => u.email === userData.email);
+            
+            // Cleanup existing old IDs in localStorage for the user
+            let userExists = false;
+            const updatedUsers = parsedUsers.map((u: any) => {
+              if (u.email === userData.email) {
+                userExists = true;
+                return { ...u, id: userId };
+              }
+              return u;
+            });
+            
+            if (userExists) {
+               localStorage.setItem('pinpin_registered_users', JSON.stringify(updatedUsers));
+            }
             
             if (!userExists) {
               const newUser = {
