@@ -150,6 +150,17 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
   onQuickView,
   onGoToProfile,
 }) => {
+  const hasActiveFilters = searchQuery || selectedCategory !== 'Toate' || selectedColor !== 'Toate' || selectedFuel !== 'Orice' || selectedBody !== 'Orice' || selectedTransmission !== 'Orice' || (maxPrice && maxPrice !== '100000') || selectedCountry !== 'Toate' || selectedCity !== 'Toate' || transactionType !== 'Toate';
+
+  const FilterPill = ({ label, value, onRemove }: { label: string, value: string, onRemove: () => void }) => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#FFFDF0', padding: '6px 12px', borderRadius: '20px', border: '1px solid var(--primary-yellow)' }}>
+      <span style={{ fontSize: '13px', color: '#64748B', fontWeight: 600 }}>{label}:</span>
+      <strong style={{ fontSize: '14px', color: '#0F172A' }}>{value}</strong>
+      <button onClick={onRemove} style={{ display: 'flex', background: 'var(--primary-yellow)', border: 'none', borderRadius: '50%', padding: '2px', cursor: 'pointer', color: '#0F172A' }}>
+        <X size={12} />
+      </button>
+    </div>
+  );
 
   return (
     <div className="search-results-layout" style={{ display: 'flex', gap: '24px', padding: '24px', maxWidth: '1280px', margin: '0 auto', background: '#F8F9FA' }}>
@@ -573,29 +584,22 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({
               <span style={{ fontSize: '16px', fontWeight: 600, color: '#334155' }}>rezultate</span>
             </div>
             
-            {(searchQuery || selectedCategory !== 'Toate') && (
+            {hasActiveFilters && (
               <>
                 <div style={{ width: '1px', height: '24px', background: '#E2E8F0' }}></div>
                 
-                {searchQuery && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#F8FAFC', padding: '6px 12px', borderRadius: '20px', border: '1px solid #E2E8F0' }}>
-                    <span style={{ fontSize: '13px', color: '#64748B', fontWeight: 600 }}>Căutare:</span>
-                    <strong style={{ fontSize: '14px', color: '#0F172A' }}>{searchQuery}</strong>
-                    <button onClick={onClearSearch} style={{ display: 'flex', background: '#E2E8F0', border: 'none', borderRadius: '50%', padding: '2px', cursor: 'pointer', color: '#64748B' }}>
-                      <X size={12} />
-                    </button>
-                  </div>
-                )}
-                
-                {selectedCategory !== 'Toate' && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#FFFDF0', padding: '6px 12px', borderRadius: '20px', border: '1px solid var(--primary-yellow)' }}>
-                    <span style={{ fontSize: '13px', color: '#64748B', fontWeight: 600 }}>Categorie:</span>
-                    <strong style={{ fontSize: '14px', color: '#0F172A' }}>{selectedCategory}</strong>
-                    <button onClick={() => onSelectCategory('Toate')} style={{ display: 'flex', background: 'var(--primary-yellow)', border: 'none', borderRadius: '50%', padding: '2px', cursor: 'pointer', color: '#0F172A' }}>
-                      <X size={12} />
-                    </button>
-                  </div>
-                )}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  {searchQuery && <FilterPill label="Căutare" value={searchQuery} onRemove={onClearSearch} />}
+                  {selectedCategory !== 'Toate' && <FilterPill label="Categorie" value={selectedCategory} onRemove={() => onSelectCategory('Toate')} />}
+                  {selectedColor !== 'Toate' && <FilterPill label="Culoare" value={selectedColor} onRemove={() => onSelectColor('Toate')} />}
+                  {selectedFuel !== 'Orice' && <FilterPill label="Combustibil" value={selectedFuel} onRemove={() => onSelectFuel('Orice')} />}
+                  {selectedBody !== 'Orice' && <FilterPill label="Caroserie" value={selectedBody} onRemove={() => onSelectBody('Orice')} />}
+                  {selectedTransmission !== 'Orice' && <FilterPill label="Transmisie" value={selectedTransmission} onRemove={() => onSelectTransmission('Orice')} />}
+                  {maxPrice && maxPrice !== '100000' && <FilterPill label="Preț Max" value={`${maxPrice}€`} onRemove={() => onSetMaxPrice('100000')} />}
+                  {transactionType !== 'Toate' && <FilterPill label="Tranzacție" value={transactionType} onRemove={() => onSetTransactionType('Toate')} />}
+                  {selectedCountry !== 'Toate' && <FilterPill label="Țară" value={selectedCountry} onRemove={() => onSelectCountry('Toate')} />}
+                  {selectedCity !== 'Toate' && <FilterPill label="Oraș" value={selectedCity} onRemove={() => onSelectCity('Toate')} />}
+                </div>
               </>
             )}
           </div>

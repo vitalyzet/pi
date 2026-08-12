@@ -231,9 +231,10 @@ export const UserDashboardPage: React.FC<UserDashboardPageProps> = ({
       discountPercentage: Number(newPinDiscount),
       badges: [`${newPinDiscount}%`],
       image: '/images/mystery_pins.png',
-      category: newPinCategory,
-      feeling: 'Cute',
-      design: 'Special',
+      category: 'Auto',
+      color: 'Roșu',
+      feeling: 'Sporty',
+      design: 'Modern',
       description: 'Pin nou adăugat din panoul de administrare PinPin.',
       seller: {
         name: ['Andrei Popescu', 'Maria Radu', 'Ionuț Dumitru', 'Elena Ionescu', 'Cristian Matei', 'Diana Stoica', 'Florin Tudor', 'Alina Marin', 'George Vasile', 'Ioana Mihai', 'Mihai Stan', 'Ana Georgescu', 'Răzvan Ilie', 'Gabriela Enache', 'Bogdan Toma', 'Simona Barbu'][Math.floor(Math.random() * 16)],
