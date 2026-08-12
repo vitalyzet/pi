@@ -58,6 +58,12 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Announcement Bar */}
       {showAnnouncementBar && (
         <div className="top-announcement-bar">
+          <button 
+            onClick={() => window.location.reload()}
+            style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', background: '#EF4444', color: 'white', border: 'none', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}
+          >
+            REFRESH OBLIGATORIU
+          </button>
           <div className="announcement-item">
             <PackageCheck size={16} />
             <span>{announcementText || 'Livrare la Easybox'}</span>
