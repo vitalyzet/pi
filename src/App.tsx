@@ -781,15 +781,19 @@ export const App: React.FC = () => {
           
           if (userData) {
             const userType = (userData as any).type || 'Persoană Fizică';
-            const userId = userData.id || `U-${Math.floor(Math.random() * 1000000)}`;
+            
+            const savedUsers = localStorage.getItem('pinpin_registered_users');
+            const parsedUsers = savedUsers ? JSON.parse(savedUsers) : [];
+            
+            // Generate a sequential ID: U-1000, U-1001, etc. (+5 to account for mock users)
+            const generatedId = `U-${1000 + parsedUsers.length + 5}`;
+            const userId = userData.id || generatedId;
             
             // Set current user session
             const newCurrentUser = { id: userId, name: userData.name, email: userData.email, type: userType };
             setCurrentUser(newCurrentUser);
             localStorage.setItem('pinpin_current_user', JSON.stringify(newCurrentUser));
 
-            const savedUsers = localStorage.getItem('pinpin_registered_users');
-            const parsedUsers = savedUsers ? JSON.parse(savedUsers) : [];
             const userExists = parsedUsers.some((u: any) => u.email === userData.email);
             
             if (!userExists) {

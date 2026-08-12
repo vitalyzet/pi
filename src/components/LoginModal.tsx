@@ -29,7 +29,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin
         onLoginSuccess({ id: existingUser.id, name: existingUser.name, email: existingUser.email, type: existingUser.type || 'Persoană Fizică' });
       } else {
         // Fallback for new/unregistered users trying to login without registering first
-        onLoginSuccess({ id: `U-${Math.floor(Math.random() * 1000000)}`, name: email.split('@')[0], email, type: 'Persoană Fizică' });
+        onLoginSuccess({ name: email.split('@')[0], email, type: 'Persoană Fizică' });
       }
     }
     onClose();
