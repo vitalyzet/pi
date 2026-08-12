@@ -750,7 +750,7 @@ export const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
                           <div style={{ fontSize: '12px', color: '#64748B' }}>{user.email}</div>
                         </td>
                         <td style={{ padding: '16px 12px', fontWeight: 700, color: '#64748B' }}>
-                          {user.id}
+                          {user.email === 'alexandruzet29@gmail.com' ? '0001' : (user.id && user.id.startsWith('user-') ? '0007' : user.id)}
                         </td>
                         <td style={{ padding: '16px 12px' }}>
                           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 700, color: user.type === 'Firmă' ? '#8B5CF6' : '#3B82F6', backgroundColor: user.type === 'Firmă' ? '#F5F3FF' : '#EFF6FF', padding: '4px 10px', borderRadius: '12px' }}>
