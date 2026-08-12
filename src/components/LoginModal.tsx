@@ -4,7 +4,7 @@ import { X, User, Lock, Mail, UserPlus } from 'lucide-react';
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLoginSuccess: (userData?: { name: string, email: string }) => void;
+  onLoginSuccess: (userData?: { name: string, email: string, type: string }) => void;
 }
 
 export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess }) => {
@@ -12,13 +12,14 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [accountType, setAccountType] = useState('Persoană Fizică');
 
   if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (mode === 'register') {
-      onLoginSuccess({ name, email });
+      onLoginSuccess({ name, email, type: accountType });
     } else {
       onLoginSuccess();
     }
@@ -80,22 +81,40 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {mode === 'register' && (
-            <div>
-              <label style={{ fontSize: '12px', fontWeight: 800, color: '#475569', marginBottom: '8px', display: 'block' }}>NUME COMPLET</label>
-              <div style={{ position: 'relative' }}>
-                <User size={18} color="#94A3B8" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)' }} />
-                <input
-                  type="text"
-                  required
-                  placeholder="Ion Popescu"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  style={{ width: '100%', padding: '14px 16px 14px 44px', borderRadius: '12px', border: '2px solid #F1F5F9', backgroundColor: '#F8FAFC', fontSize: '15px', fontWeight: 600, color: '#0F172A', outline: 'none', transition: 'border-color 0.2s' }}
-                  onFocus={(e) => e.target.style.borderColor = 'var(--primary-yellow)'}
-                  onBlur={(e) => e.target.style.borderColor = '#F1F5F9'}
-                />
+            <>
+              <div>
+                <label style={{ fontSize: '12px', fontWeight: 800, color: '#475569', marginBottom: '8px', display: 'block' }}>TIP CONT</label>
+                <div style={{ position: 'relative' }}>
+                  <UserPlus size={18} color="#94A3B8" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)' }} />
+                  <select
+                    value={accountType}
+                    onChange={(e) => setAccountType(e.target.value)}
+                    style={{ width: '100%', padding: '14px 16px 14px 44px', borderRadius: '12px', border: '2px solid #F1F5F9', backgroundColor: '#F8FAFC', fontSize: '15px', fontWeight: 600, color: '#0F172A', outline: 'none', transition: 'border-color 0.2s', appearance: 'none' }}
+                    onFocus={(e) => e.target.style.borderColor = 'var(--primary-yellow)'}
+                    onBlur={(e) => e.target.style.borderColor = '#F1F5F9'}
+                  >
+                    <option value="Persoană Fizică">Persoană Fizică</option>
+                    <option value="Firmă">Firmă</option>
+                  </select>
+                </div>
               </div>
-            </div>
+              <div>
+                <label style={{ fontSize: '12px', fontWeight: 800, color: '#475569', marginBottom: '8px', display: 'block' }}>NUME COMPLET / COMPANIE</label>
+                <div style={{ position: 'relative' }}>
+                  <User size={18} color="#94A3B8" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)' }} />
+                  <input
+                    type="text"
+                    required
+                    placeholder={accountType === 'Firmă' ? 'Numele firmei' : 'Ion Popescu'}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    style={{ width: '100%', padding: '14px 16px 14px 44px', borderRadius: '12px', border: '2px solid #F1F5F9', backgroundColor: '#F8FAFC', fontSize: '15px', fontWeight: 600, color: '#0F172A', outline: 'none', transition: 'border-color 0.2s' }}
+                    onFocus={(e) => e.target.style.borderColor = 'var(--primary-yellow)'}
+                    onBlur={(e) => e.target.style.borderColor = '#F1F5F9'}
+                  />
+                </div>
+              </div>
+            </>
           )}
 
           <div>

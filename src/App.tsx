@@ -776,7 +776,7 @@ export const App: React.FC = () => {
               id: `user-${Date.now()}`,
               name: userData.name,
               email: userData.email,
-              type: 'Persoană Fizică',
+              type: (userData as any).type || 'Persoană Fizică',
               isPro: false,
               adsCount: 0,
               joined: new Date().toLocaleDateString('ro-RO', { day: 'numeric', month: 'short', year: 'numeric' }),
